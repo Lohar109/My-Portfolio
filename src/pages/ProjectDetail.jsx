@@ -22,7 +22,7 @@ function ProjectDetail() {
             to="/"
             className="mt-8 inline-flex rounded-full border border-stone-700 px-5 py-3 text-sm font-semibold text-stone-100 transition hover:border-stone-500"
           >
-            Back to Home
+            &lt;- Back
           </Link>
         </div>
       </main>
@@ -37,7 +37,7 @@ function ProjectDetail() {
           to="/"
           className="inline-flex rounded-full border border-stone-700 bg-white/5 px-5 py-3 text-sm font-semibold text-stone-100 transition hover:border-stone-500 hover:bg-white/10"
         >
-          Back to Home
+          &lt;- Back
         </Link>
 
         <section className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">

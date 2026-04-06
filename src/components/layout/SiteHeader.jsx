@@ -10,10 +10,10 @@ function SiteHeader({ isDetailPage = false }) {
           </span>
           <div>
             <p className="text-sm font-semibold tracking-[0.2em] text-stone-950 uppercase">
-              Vaibhav Dev
+              Vaibhav Lohar
             </p>
             <p className="text-xs text-stone-600">
-              React Developer Portfolio
+              Full Stack Developer
             </p>
           </div>
         </Link>

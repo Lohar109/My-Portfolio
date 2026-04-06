@@ -70,7 +70,7 @@ function ProjectsSection() {
                 </p>
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="rounded-full bg-stone-950 px-4 py-2 text-sm font-semibold text-stone-50 transition hover:bg-stone-800"
+                  className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
                 >
                   Case Study
                 </Link>

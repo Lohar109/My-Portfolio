@@ -28,7 +28,7 @@ function FooterSection() {
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/8 px-6 py-3 text-sm font-semibold text-stone-50 transition hover:bg-white/14"
+                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
               >
                 View Projects Again
               </a>

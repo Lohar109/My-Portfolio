@@ -1,0 +1,65 @@
+import { Link } from 'react-router-dom'
+
+function SiteHeader({ isDetailPage = false }) {
+  return (
+    <header className="sticky top-0 z-30 border-b border-stone-300/70 bg-[#f4efe7]/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:px-16">
+        <Link to="/" className="flex items-center gap-3">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-stone-950 text-sm font-semibold text-stone-50">
+            VD
+          </span>
+          <div>
+            <p className="text-sm font-semibold tracking-[0.2em] text-stone-950 uppercase">
+              Vaibhav Dev
+            </p>
+            <p className="text-xs text-stone-600">
+              React Developer Portfolio
+            </p>
+          </div>
+        </Link>
+
+        <nav className="flex items-center gap-2 text-sm font-medium text-stone-700">
+          {isDetailPage ? (
+            <>
+              <Link
+                to="/"
+                className="rounded-full px-4 py-2 transition hover:bg-white/70 hover:text-stone-950"
+              >
+                Home
+              </Link>
+              <a
+                href="#case-study"
+                className="rounded-full px-4 py-2 transition hover:bg-white/70 hover:text-stone-950"
+              >
+                Case Study
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="#skills"
+                className="rounded-full px-4 py-2 transition hover:bg-white/70 hover:text-stone-950"
+              >
+                Skills
+              </a>
+              <a
+                href="#projects"
+                className="rounded-full px-4 py-2 transition hover:bg-white/70 hover:text-stone-950"
+              >
+                Projects
+              </a>
+              <a
+                href="#contact"
+                className="rounded-full px-4 py-2 transition hover:bg-white/70 hover:text-stone-950"
+              >
+                Contact
+              </a>
+            </>
+          )}
+        </nav>
+      </div>
+    </header>
+  )
+}
+
+export default SiteHeader

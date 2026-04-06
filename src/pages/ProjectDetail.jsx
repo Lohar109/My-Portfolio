@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
 import VideoFrame from '../components/ui/VideoFrame.jsx'
 import { projects } from '../data/projects.js'
@@ -29,8 +30,9 @@ function ProjectDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,#0c0a09_0%,#1c1917_44%,#292524_100%)] px-6 py-16 text-stone-100 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-6xl">
+    <main className="min-h-screen bg-[linear-gradient(180deg,#0c0a09_0%,#1c1917_44%,#292524_100%)] text-stone-100">
+      <SiteHeader isDetailPage />
+      <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 lg:px-16">
         <Link
           to="/"
           className="inline-flex rounded-full border border-stone-700 bg-white/5 px-5 py-3 text-sm font-semibold text-stone-100 transition hover:border-stone-500 hover:bg-white/10"
@@ -116,7 +118,7 @@ function ProjectDetail() {
           ))}
         </section>
 
-        <section className="mt-16 grid gap-6">
+        <section id="case-study" className="mt-16 grid gap-6">
           <CaseStudySection eyebrow="Case Study" title="Overview">
             <p>{project.caseStudy.overview}</p>
           </CaseStudySection>

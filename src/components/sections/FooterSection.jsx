@@ -22,13 +22,13 @@ function FooterSection() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
                 href="mailto:hello@vaibhav.dev"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
+                className="bg-black text-white font-semibold rounded-full px-6 py-3 transition hover:bg-gray-800 shadow-sm"
               >
                 hello@vaibhav.dev
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
+                className="bg-black text-white font-semibold rounded-full px-6 py-3 transition hover:bg-gray-800 shadow-sm"
               >
                 View Projects Again
               </a>

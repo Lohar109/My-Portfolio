@@ -104,13 +104,10 @@ function SkillPill({ skill }) {
 
 function SkillsSection() {
   return (
-    <section id="skills" className="bg-[#FBFBFB] px-6 py-24 sm:px-10 lg:px-16">
+    <section id="skills" className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-gray-500">
-            Core Skills
-          </p>
-          <h2 className="mt-4 text-3xl font-bold text-gray-900 tracking-tight leading-tight">
+          <h2 className="text-3xl font-bold text-gray-900 tracking-tight leading-tight">
             The tools I use to build what matters.
           </h2>
 

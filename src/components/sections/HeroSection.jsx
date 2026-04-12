@@ -7,7 +7,7 @@ function HeroSection() {
 
       <div className="mx-auto grid max-w-6xl items-start gap-16 lg:grid-cols-[1fr_0.95fr] lg:gap-24">
         <div className="max-w-3xl">
-          <h1 className="max-w-2xl text-3xl font-semibold leading-[1.05] tracking-tight text-gray-900">
+          <h1 className="max-w-2xl text-3xl font-bold text-gray-900 tracking-tight leading-tight">
             Turning complex ideas into clean, functional reality.
           </h1>
 

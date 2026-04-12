@@ -104,17 +104,17 @@ function SkillPill({ skill }) {
 
 function SkillsSection() {
   return (
-    <section id="skills" className="bg-[#FBFBFB] px-6 py-16 sm:px-10 lg:px-16">
+    <section id="skills" className="bg-[#FBFBFB] px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-gray-500">
             Core Skills
           </p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-bold text-gray-900 tracking-tight leading-tight">
             The tools I use to build what matters.
           </h2>
 
-          <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
+          <p className="mt-7 max-w-2xl text-base leading-7 text-gray-600">
             I&apos;ve spent thousands of hours refining these tools to build
             products that scale. From the first pixel to the final deployment, I
             handle the full lifecycle.

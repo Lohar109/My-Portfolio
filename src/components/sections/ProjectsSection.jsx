@@ -7,20 +7,14 @@ function ProjectsSection() {
       id="projects"
       className="mx-auto max-w-6xl px-6 py-16 pb-24 sm:px-10 lg:px-16"
     >
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-amber-700">
-            Featured Projects
-          </p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl">
-            Selected work with strong visuals and clear product thinking.
-          </h2>
-        </div>
+      <div className="max-w-2xl">
+        <h2 className="text-3xl font-bold text-gray-900 tracking-tight leading-tight">
+          Projects I&apos;ve built from the ground up.
+        </h2>
 
-        <p className="max-w-xl text-base leading-7 text-stone-700">
-          Each card previews the project story. In the next phase, we can link
-          these cards to dedicated project detail pages with video and case
-          study content.
+        <p className="mt-7 max-w-2xl text-base leading-7 text-gray-600">
+          A collection of web applications where I solved real problems with
+          clean code and thoughtful design.
         </p>
       </div>
 
@@ -28,7 +22,7 @@ function ProjectsSection() {
         {projects.map((project) => (
           <article
             key={project.slug}
-            className="overflow-hidden rounded-[2rem] border border-stone-300/80 bg-white/80 shadow-[0_22px_55px_rgba(120,53,15,0.09)] backdrop-blur"
+            className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm"
           >
             <div className={`p-8 ${project.previewTone}`}>
               <div className="rounded-[1.5rem] border border-white/30 bg-white/10 p-6 text-white backdrop-blur-sm">
@@ -57,20 +51,17 @@ function ProjectsSection() {
                 {project.stack.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-stone-300 bg-stone-50 px-4 py-2 text-sm font-medium text-stone-800"
+                    className="rounded-full border border-gray-100 bg-white px-3 py-1 text-xs font-medium text-gray-800"
                   >
                     {item}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-8 flex items-center justify-between gap-4 border-t border-stone-200 pt-6">
-                <p className="text-sm text-stone-500">
-                  Open route: `/projects/{project.slug}`
-                </p>
+              <div className="mt-8 flex items-center justify-end gap-4 border-t border-gray-100 pt-6">
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="bg-black !text-white font-semibold rounded-full px-6 py-3 text-center transition hover:bg-gray-800"
+                  className="rounded-full bg-black px-6 py-3 text-center font-semibold !text-white transition hover:bg-gray-800"
                 >
                   Case Study
                 </Link>

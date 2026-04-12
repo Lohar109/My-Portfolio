@@ -22,11 +22,11 @@ function ProjectsSection() {
         {projects.map((project) => (
           <article
             key={project.slug}
-            className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+            className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
           >
             <div className="aspect-video bg-gray-100 p-4">
               <div className="flex h-full items-center justify-center rounded-[1.25rem] border border-gray-200 bg-white text-sm font-medium text-gray-400">
-                Project thumbnail
+                Project video
               </div>
             </div>
 
@@ -42,7 +42,7 @@ function ProjectsSection() {
               <div className="mt-6 flex justify-end">
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="rounded-full bg-black px-6 py-3 text-center font-semibold !text-white transition hover:bg-gray-800"
+                  className="rounded-full bg-black px-6 py-2 text-center font-semibold !text-white transition hover:bg-gray-800"
                 >
                   Case Study
                 </Link>

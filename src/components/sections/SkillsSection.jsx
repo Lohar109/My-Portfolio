@@ -84,7 +84,7 @@ function TechIcon({ icon }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className={`h-4 w-4 shrink-0 ${techIcon?.color ?? 'text-gray-700'}`}
+      className={`h-6 w-6 shrink-0 ${techIcon?.color ?? 'text-gray-700'}`}
       fill="currentColor"
       aria-hidden="true"
     >
@@ -95,7 +95,7 @@ function TechIcon({ icon }) {
 
 function SkillPill({ skill }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm transition-all hover:shadow-md">
+    <span className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-5 py-2.5 text-sm font-medium text-gray-800 shadow-sm transition-all hover:shadow-md">
       <TechIcon icon={skill.icon} />
       {skill.name}
     </span>
@@ -106,7 +106,6 @@ function SkillsSection() {
   return (
     <section id="skills" className="bg-[#FBFBFB] px-6 py-16 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-gray-500">
             Core Skills
@@ -114,13 +113,12 @@ function SkillsSection() {
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             The tools I use to build what matters.
           </h2>
-        </div>
 
-        <p className="max-w-xl text-base leading-7 text-gray-600">
-          I&apos;ve spent thousands of hours refining these tools to build products
-          that scale. From the first pixel to the final deployment, I handle the
-          full lifecycle.
-        </p>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
+            I&apos;ve spent thousands of hours refining these tools to build
+            products that scale. From the first pixel to the final deployment, I
+            handle the full lifecycle.
+          </p>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">

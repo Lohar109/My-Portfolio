@@ -22,43 +22,24 @@ function ProjectsSection() {
         {projects.map((project) => (
           <article
             key={project.slug}
-            className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm"
+            className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
           >
-            <div className={`p-8 ${project.previewTone}`}>
-              <div className="rounded-[1.5rem] border border-white/30 bg-white/10 p-6 text-white backdrop-blur-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/75">
-                  {project.category}
-                </p>
-                <h3 className="mt-4 text-3xl font-semibold tracking-tight">
-                  {project.title}
-                </h3>
-                <p className="mt-4 max-w-md text-sm leading-6 text-white/80">
-                  {project.previewText}
-                </p>
+            <div className="aspect-video bg-gray-100 p-4">
+              <div className="flex h-full items-center justify-center rounded-[1.25rem] border border-gray-200 bg-white text-sm font-medium text-gray-400">
+                Project thumbnail
               </div>
             </div>
 
-            <div className="p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-amber-700">
-                {project.role}
-              </p>
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-gray-900">
+                {project.title}
+              </h3>
 
-              <p className="mt-4 text-base leading-7 text-stone-700">
+              <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">
                 {project.summary}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                {project.stack.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-gray-100 bg-white px-3 py-1 text-xs font-medium text-gray-800"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-8 flex items-center justify-end gap-4 border-t border-gray-100 pt-6">
+              <div className="mt-6 flex justify-end">
                 <Link
                   to={`/projects/${project.slug}`}
                   className="rounded-full bg-black px-6 py-3 text-center font-semibold !text-white transition hover:bg-gray-800"

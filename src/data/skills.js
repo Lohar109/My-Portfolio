@@ -4,24 +4,37 @@ export const skills = [
     description:
       'Interfaces that feel polished, responsive, and easy to use across devices.',
     items: [
-      'HTML',
-      'CSS',
-      'Tailwind CSS',
-      'React',
-      'JavaScript',
-      'Responsive Design',
+      { name: 'HTML5', icon: 'html5' },
+      { name: 'CSS3', icon: 'css3' },
+      { name: 'Tailwind CSS', icon: 'tailwind' },
+      { name: 'React', icon: 'react' },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'Responsive Design', icon: 'responsive' },
     ],
   },
   {
     title: 'Backend',
     description:
       'Reliable application logic, API integration, and practical data handling.',
-    items: ['Node.js', 'Express', 'REST APIs', 'MongoDB', 'MySQL', 'PostgreSQL'],
+    items: [
+      { name: 'Node.js', icon: 'nodejs' },
+      { name: 'Express', icon: 'express' },
+      { name: 'REST APIs', icon: 'api' },
+      { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'MySQL', icon: 'mysql' },
+      { name: 'PostgreSQL', icon: 'postgresql' },
+    ],
   },
   {
     title: 'Workflow',
     description:
       'A product mindset that values maintainability, deployment, and collaboration.',
-    items: ['Git', 'GitHub', 'Vite', 'Netlify', 'Render'],
+    items: [
+      { name: 'Git', icon: 'git' },
+      { name: 'GitHub', icon: 'github' },
+      { name: 'Vite', icon: 'vite' },
+      { name: 'Netlify', icon: 'netlify' },
+      { name: 'Render', icon: 'render' },
+    ],
   },
 ]

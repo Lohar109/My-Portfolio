@@ -1,5 +1,6 @@
 import { Check, Copy, Mail, Send } from 'lucide-react'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const emailAddress = 'vaibhavlohar109@gmail.com'
 
@@ -102,7 +103,14 @@ function FooterSection() {
   }
 
   return (
-    <footer id="contact" className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16">
+    <motion.footer
+      id="contact"
+      className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
       <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[1fr_0.95fr] lg:gap-24">
         <div className="max-w-3xl">
           <h2 className="max-w-2xl text-3xl font-bold text-gray-900 tracking-tight leading-tight">
@@ -117,7 +125,11 @@ function FooterSection() {
         </div>
 
         <div className="space-y-5">
-          <article className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm">
+          <motion.article
+            className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
             <div className="flex items-center gap-3">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
                 <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
@@ -129,11 +141,11 @@ function FooterSection() {
 
             <p className="mt-5 text-base font-medium text-gray-800">{emailAddress}</p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap gap-3">
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-gray-800"
+                className="inline-flex w-20 items-center justify-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-gray-800"
               >
                 {isCopied ? (
                   <Check size={14} aria-hidden="true" />
@@ -145,15 +157,19 @@ function FooterSection() {
 
               <a
                 href={`mailto:${emailAddress}`}
-                className="inline-flex items-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-semibold !text-white transition hover:bg-gray-800"
+                className="inline-flex w-20 items-center justify-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-semibold !text-white transition hover:bg-gray-800"
               >
                 <Send size={14} aria-hidden="true" />
                 Send
               </a>
             </div>
-          </article>
+          </motion.article>
 
-          <article className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm">
+          <motion.article
+            className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
               Socials
             </p>
@@ -172,14 +188,11 @@ function FooterSection() {
                 </a>
               ))}
             </div>
-          </article>
+          </motion.article>
         </div>
       </div>
 
-      <p className="mt-10 text-center text-[10px] uppercase tracking-widest text-gray-400">
-        Built with passion by Vaibhav Lohar © 2026
-      </p>
-    </footer>
+    </motion.footer>
   )
 }
 

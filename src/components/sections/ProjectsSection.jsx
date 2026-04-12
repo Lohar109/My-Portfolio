@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects.js'
+import { motion } from 'framer-motion'
 
 function ProjectsSection() {
   return (
-    <section
+    <motion.section
       id="projects"
       className="mx-auto max-w-6xl px-6 py-16 pb-24 sm:px-10 lg:px-16"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div className="max-w-2xl">
         <h2 className="text-3xl font-bold text-gray-900 tracking-tight leading-tight">
@@ -20,9 +25,11 @@ function ProjectsSection() {
 
       <div className="mt-12 grid gap-8 lg:grid-cols-2">
         {projects.map((project) => (
-          <article
+          <motion.article
             key={project.slug}
             className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="aspect-video bg-gray-100 p-4">
               <div className="flex h-full items-center justify-center rounded-[1.25rem] border border-gray-200 bg-white text-sm font-medium text-gray-400">
@@ -48,10 +55,10 @@ function ProjectsSection() {
                 </Link>
               </div>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }
 

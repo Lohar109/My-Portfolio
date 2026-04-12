@@ -1,5 +1,6 @@
-import { GitBranch, Monitor, Server } from 'lucide-react'
+import { GitBranch, Monitor, Server, Sparkles } from 'lucide-react'
 import { skills } from '../../data/skills.js'
+import { motion } from 'framer-motion'
 
 const categoryIcons = {
   Frontend: Monitor,
@@ -104,7 +105,14 @@ function SkillPill({ skill }) {
 
 function SkillsSection() {
   return (
-    <section id="skills" className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16">
+    <motion.section
+      id="skills"
+      className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-bold text-gray-900 tracking-tight leading-tight">
@@ -149,8 +157,15 @@ function SkillsSection() {
           )
         })}
         </div>
+
+        <div className="mt-10">
+          <p className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/50 px-4 py-2 text-xs font-medium tracking-wide text-blue-900">
+            <Sparkles size={14} strokeWidth={1.9} aria-hidden="true" />
+            Currently diving deep into Generative AI, LLMs, and DevOps.
+          </p>
+        </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

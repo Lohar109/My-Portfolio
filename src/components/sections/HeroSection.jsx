@@ -1,8 +1,15 @@
 import VideoFrame from '../ui/VideoFrame.jsx'
+import { motion } from 'framer-motion'
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+    <motion.section
+      className="relative overflow-hidden px-6 py-20 sm:px-10 lg:px-16 lg:py-28"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
       <div className="absolute inset-x-0 top-0 -z-10 h-64 bg-[radial-gradient(circle_at_top,rgba(229,231,235,0.72),transparent_70%)]" />
 
       <div className="mx-auto grid max-w-6xl items-start gap-16 lg:grid-cols-[1fr_0.95fr] lg:gap-24">
@@ -47,7 +54,7 @@ function HeroSection() {
           />
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

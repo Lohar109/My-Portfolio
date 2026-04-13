@@ -1,4 +1,4 @@
-import { Check, Copy, Mail, Send } from 'lucide-react'
+import { Check, Copy, Mail, MessageCircle, Send } from 'lucide-react'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
@@ -24,11 +24,6 @@ const socialLinks = [
     label: 'Resume',
     href: '/resume.pdf',
     icon: 'resume',
-  },
-  {
-    label: 'WhatsApp',
-    href: 'https://wa.me/9172491660',
-    icon: 'whatsapp',
   },
 ]
 
@@ -91,7 +86,9 @@ function SocialIcon({ icon }) {
 
 function FooterSection() {
   const [isCopied, setIsCopied] = useState(false)
-
+  const emailButtonClass =
+    'inline-flex h-8.5 w-24 items-center justify-center gap-2 rounded-full bg-black px-4 text-[16px] !text-white !no-underline transition-all hover:bg-gray-800 active:scale-95'
+  
   async function handleCopyEmail() {
     try {
       await navigator.clipboard.writeText(emailAddress)
@@ -122,6 +119,35 @@ function FooterSection() {
             to discuss or need a reliable developer to ship it, I&apos;d love to
             connect.
           </p>
+
+          <motion.article
+            className="mt-8 rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+                <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
+              </span>
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
+                DIRECT MESSAGE
+              </p>
+            </div>
+
+            <p className="mt-5 text-base font-normal leading-relaxed text-gray-700">
+              Looking for a more direct line of communication? Whether it’s a project inquiry, a freelance opportunity, or a professional collaboration, I’m typically available for a quick chat via WhatsApp.
+            </p>
+
+            <a
+              href="https://wa.me/9172491660"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-gray-100 bg-white px-5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition hover:-translate-y-0.5 hover:text-green-600 hover:shadow-md"
+            >
+              <SocialIcon icon="whatsapp" />
+              Message on WhatsApp
+            </a>
+          </motion.article>
         </div>
 
         <div className="space-y-5">
@@ -145,22 +171,18 @@ function FooterSection() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex w-20 items-center justify-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-gray-800"
+                className={emailButtonClass}
               >
-                {isCopied ? (
-                  <Check size={14} aria-hidden="true" />
-                ) : (
-                  <Copy size={14} aria-hidden="true" />
-                )}
-                {isCopied ? 'Copied' : 'Copy'}
+                {isCopied ? <Check size={14} className="shrink-0" /> : <Copy size={14} className="shrink-0" />}
+                <span>{isCopied ? 'Copied' : 'Copy'}</span>
               </button>
 
               <a
                 href={`mailto:${emailAddress}`}
-                className="inline-flex w-20 items-center justify-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-semibold !text-white transition hover:bg-gray-800"
+                className={emailButtonClass}
               >
-                <Send size={14} aria-hidden="true" />
-                Send
+                <Send size={14} className="shrink-0" />
+                <span>Send</span>
               </a>
             </div>
           </motion.article>

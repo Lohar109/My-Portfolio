@@ -176,33 +176,38 @@ function FooterSection() {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
-            <div className="flex items-center gap-3">
+            <div className="mb-6 flex items-center gap-3">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
                 <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
               </span>
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                Email
+                EMAIL
               </p>
             </div>
 
-            <div className="mt-5 flex items-center justify-start">
-              <p className="text-base font-medium text-gray-800 break-all">
-                {emailAddress}&nbsp;&nbsp;
+            <div className="mt-2">
+              <div className="flex items-center">
+                <p className="break-all text-lg font-semibold text-gray-900">
+                  {emailAddress}
+                </p>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="ml-3 rounded text-gray-400 transition-all hover:text-gray-900"
+                  aria-label="Copy email address"
+                  title="Copy email"
+                >
+                  {isCopied ? <Check size={16} strokeWidth={2} className="text-green-600" /> : <Copy size={16} strokeWidth={2} />}
+                </button>
+              </div>
+              <p className="mt-5 text-base font-normal leading-relaxed text-gray-700">
+                Ready to join your team and start building. Reach out for job opportunities or project inquiries.
               </p>
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="rounded text-gray-400 transition-all hover:text-gray-900"
-                aria-label="Copy email address"
-                title="Copy email"
-              >
-                {isCopied ? <Check size={18} strokeWidth={2} className="text-green-600" /> : <Copy size={18} strokeWidth={2} />}
-              </button>
             </div>
 
             <div className="mt-auto pt-6">
               <a
-                href={`mailto:${emailAddress}`}
+                href={`mailto:${emailAddress}?subject=${encodeURIComponent('Job Opportunity: [Your Company Name] x Vaibhav')}`}
                 className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
               >
                 <SocialIcon icon="mail" />
@@ -268,11 +273,20 @@ function FooterSection() {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-              Socials
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+                <Send size={18} strokeWidth={1.8} aria-hidden="true" />
+              </span>
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
+                SOCIALS
+              </p>
+            </div>
+
+            <p className="mb-6 mt-5 text-base font-normal leading-relaxed text-gray-700">
+              Find my detailed resume, latest projects, and professional background on these platforms.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-auto flex flex-wrap gap-3">
               {socialLinks.map(({ label, href, icon }) => (
                 <a
                   key={label}

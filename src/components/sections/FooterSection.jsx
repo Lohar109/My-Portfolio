@@ -73,6 +73,34 @@ function SocialIcon({ icon }) {
     )
   }
 
+  if (icon === 'mail') {
+    return (
+      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+        <defs>
+          <linearGradient id="mail-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#8b5cf6" />
+          </linearGradient>
+        </defs>
+        <path
+          fill="url(#mail-gradient)"
+          d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z"
+        />
+      </svg>
+    )
+  }
+
+  if (icon === 'resume') {
+    return (
+      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+        <path
+          fill="#EF4444"
+          d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-8v-2h8v2zm0-4h-8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+        />
+      </svg>
+    )
+  }
+
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
       <path
@@ -131,18 +159,62 @@ function FooterSection() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');`}</style>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent opacity-80" />
 
-      <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[1fr_0.95fr] lg:gap-24">
-        <div className="max-w-3xl">
-          <h2 className="max-w-2xl text-3xl font-bold text-gray-900 tracking-tight leading-tight">
-            Let’s build products that people actually love.
-          </h2>
+      <div className="mx-auto grid max-w-6xl items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="flex flex-col gap-8 w-full h-full">
+          <div className="max-w-3xl">
+            <h2 className="max-w-2xl text-3xl font-bold text-gray-900 tracking-tight leading-tight">
+              Let’s build products that people actually love.
+            </h2>
 
-          <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-700">
-            As a recent graduate with a passion for web development, I focus on building clean, interactive, and user-friendly interfaces. I'm currently expanding my toolkit with DevOps and AI, looking for my first professional role where I can contribute and grow with a great team.
-          </p>
+            <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-700">
+              As a recent graduate with a passion for web development, I focus on building clean, interactive, and user-friendly interfaces. I'm currently expanding my toolkit with DevOps and AI, looking for my first professional role where I can contribute and grow with a great team.
+            </p>
+          </div>
 
           <motion.article
-            className="mt-8 rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm"
+            className="flex w-full flex-1 flex-col rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm sm:p-8"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+                <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
+              </span>
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
+                Email
+              </p>
+            </div>
+
+            <div className="mt-5 flex items-center justify-start">
+              <p className="text-base font-medium text-gray-800 break-all">
+                {emailAddress}&nbsp;&nbsp;
+              </p>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="rounded text-gray-400 transition-all hover:text-gray-900"
+                aria-label="Copy email address"
+                title="Copy email"
+              >
+                {isCopied ? <Check size={18} strokeWidth={2} className="text-green-600" /> : <Copy size={18} strokeWidth={2} />}
+              </button>
+            </div>
+
+            <div className="mt-auto pt-6">
+              <a
+                href={`mailto:${emailAddress}`}
+                className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
+              >
+                <SocialIcon icon="mail" />
+                Send Email
+              </a>
+            </div>
+          </motion.article>
+        </div>
+
+        <div className="flex flex-col gap-8 w-full h-full">
+          <motion.article
+            className="flex w-full flex-col rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm sm:p-8"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
@@ -190,47 +262,9 @@ function FooterSection() {
               Message on WhatsApp
             </a>
           </motion.article>
-        </div>
-
-        <div className="space-y-5">
-          <motion.article
-            className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
-                <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
-              </span>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                Email
-              </p>
-            </div>
-
-            <p className="mt-5 text-base font-medium text-gray-800">{emailAddress}</p>
-
-            <div className="mt-4 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className={emailButtonClass}
-              >
-                {isCopied ? <Check size={14} className="shrink-0" /> : <Copy size={14} className="shrink-0" />}
-                <span>{isCopied ? 'Copied' : 'Copy'}</span>
-              </button>
-
-              <a
-                href={`mailto:${emailAddress}`}
-                className={emailButtonClass}
-              >
-                <Send size={14} className="shrink-0" />
-                <span>Send</span>
-              </a>
-            </div>
-          </motion.article>
 
           <motion.article
-            className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm"
+            className="flex w-full flex-1 flex-col rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm sm:p-8"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >

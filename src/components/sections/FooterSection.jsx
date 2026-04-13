@@ -1,5 +1,5 @@
 import { Check, Copy, Mail, MessageCircle, Send } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const emailAddress = 'vaibhavlohar109@gmail.com'
@@ -86,6 +86,26 @@ function SocialIcon({ icon }) {
 
 function FooterSection() {
   const [isCopied, setIsCopied] = useState(false)
+  const [isActive, setIsActive] = useState(true)
+
+  useEffect(() => {
+    const checkActiveStatus = () => {
+      const hour = parseInt(
+        new Date().toLocaleTimeString('en-US', {
+          hour12: false,
+          hour: 'numeric',
+          timeZone: 'Asia/Kolkata',
+        }),
+        10
+      )
+      setIsActive(hour >= 7 && hour < 23)
+    }
+
+    checkActiveStatus()
+    const timer = setInterval(checkActiveStatus, 60000)
+    return () => clearInterval(timer)
+  }, [])
+
   const emailButtonClass =
     'inline-flex h-8.5 w-24 items-center justify-center gap-2 rounded-full bg-black px-4 text-[16px] !text-white !no-underline transition-all hover:bg-gray-800 active:scale-95'
   
@@ -102,22 +122,23 @@ function FooterSection() {
   return (
     <motion.footer
       id="contact"
-      className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16"
+      className="relative overflow-hidden bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');`}</style>
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent opacity-80" />
+
       <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[1fr_0.95fr] lg:gap-24">
         <div className="max-w-3xl">
           <h2 className="max-w-2xl text-3xl font-bold text-gray-900 tracking-tight leading-tight">
-            Let&apos;s build something great together.
+            Let’s build products that people actually love.
           </h2>
 
           <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-700">
-            I&apos;m currently available for new projects. Whether you have an idea
-            to discuss or need a reliable developer to ship it, I&apos;d love to
-            connect.
+            As a recent graduate with a passion for web development, I focus on building clean, interactive, and user-friendly interfaces. I'm currently expanding my toolkit with DevOps and AI, looking for my first professional role where I can contribute and grow with a great team.
           </p>
 
           <motion.article
@@ -125,17 +146,38 @@ function FooterSection() {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
-                <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
-              </span>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                DIRECT MESSAGE
-              </p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+                  <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
+                </span>
+                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
+                  DIRECT MESSAGE
+                </p>
+              </div>
+              <div
+                className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                  isActive ? 'bg-green-50 text-green-500' : 'bg-red-50 text-red-500'
+                }`}
+              >
+                <span className="relative flex h-2 w-2 items-center justify-center">
+                  <span
+                    className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${
+                      isActive ? 'bg-green-400' : 'bg-red-400'
+                    }`}
+                  ></span>
+                  <span
+                    className={`relative inline-flex h-1.5 w-1.5 rounded-full ${
+                      isActive ? 'bg-green-500' : 'bg-red-500'
+                    }`}
+                  ></span>
+                </span>
+                {isActive ? 'Active Now' : 'Away / Responding Soon'}
+              </div>
             </div>
 
             <p className="mt-5 text-base font-normal leading-relaxed text-gray-700">
-              Looking for a more direct line of communication? Whether it’s a project inquiry, a freelance opportunity, or a professional collaboration, I’m typically available for a quick chat via WhatsApp.
+              Want to talk about a potential role or just discuss tech? I'm always open to connecting with new teams and professionals. WhatsApp is the fastest way to reach me for a quick conversation.
             </p>
 
             <a

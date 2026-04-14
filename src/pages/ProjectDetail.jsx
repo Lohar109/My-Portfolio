@@ -19,7 +19,7 @@ function ProjectDetail() {
             This case study does not exist yet.
           </h1>
           <Link
-            to="/"
+            to="/#projects"
             className="mt-8 inline-flex rounded-full border border-stone-700 px-5 py-3 text-sm font-semibold text-gray-900 transition hover:border-gray-400"
           >
             &lt;- Back
@@ -34,7 +34,7 @@ function ProjectDetail() {
       <SiteHeader isDetailPage />
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 lg:px-16">
         <Link
-          to="/"
+          to="/#projects"
           className="inline-flex rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-gray-50"
         >
           &lt;- Back

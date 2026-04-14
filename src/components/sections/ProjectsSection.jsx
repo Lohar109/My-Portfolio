@@ -7,19 +7,19 @@ import { SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si
 function getTechIcon(tech) {
   switch (tech.toLowerCase()) {
     case 'react':
-      return <FaReact className="w-3.5 h-3.5 text-[#61DAFB]" />
+      return <FaReact className="w-4 h-4 text-[#61DAFB]" />
     case 'tailwind css':
-      return <SiTailwindcss className="w-3.5 h-3.5 text-[#06B6D4]" />
+      return <SiTailwindcss className="w-4 h-4 text-[#06B6D4]" />
     case 'node.js':
-      return <SiNodedotjs className="w-3.5 h-3.5 text-[#339933]" />
+      return <SiNodedotjs className="w-4 h-4 text-[#339933]" />
     case 'express':
-      return <SiExpress className="w-3.5 h-3.5 text-gray-900" />
+      return <SiExpress className="w-4 h-4 text-gray-900" />
     case 'mongodb':
-      return <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" />
+      return <SiMongodb className="w-4 h-4 text-[#47A248]" />
     case 'charts':
-      return <FaChartLine className="w-3.5 h-3.5 text-indigo-500" />
+      return <FaChartLine className="w-4 h-4 text-indigo-500" />
     case 'api integration':
-      return <FaNetworkWired className="w-3.5 h-3.5 text-blue-500" />
+      return <FaNetworkWired className="w-4 h-4 text-blue-500" />
     default:
       return null
   }
@@ -67,7 +67,7 @@ function ProjectsSection() {
                 {project.stack?.map((tech) => (
                   <span
                     key={tech}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-100 rounded-full text-xs font-medium text-gray-700 shadow-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 rounded-full text-sm font-semibold text-gray-700 shadow-sm"  
                   >
                     {getTechIcon(tech)}
                     {tech}

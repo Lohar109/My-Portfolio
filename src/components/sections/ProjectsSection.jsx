@@ -1,6 +1,29 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects.js'
 import { motion } from 'framer-motion'
+import { FaReact, FaChartLine, FaNetworkWired } from 'react-icons/fa'
+import { SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si'
+
+function getTechIcon(tech) {
+  switch (tech.toLowerCase()) {
+    case 'react':
+      return <FaReact className="w-3.5 h-3.5 text-[#61DAFB]" />
+    case 'tailwind css':
+      return <SiTailwindcss className="w-3.5 h-3.5 text-[#06B6D4]" />
+    case 'node.js':
+      return <SiNodedotjs className="w-3.5 h-3.5 text-[#339933]" />
+    case 'express':
+      return <SiExpress className="w-3.5 h-3.5 text-gray-900" />
+    case 'mongodb':
+      return <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" />
+    case 'charts':
+      return <FaChartLine className="w-3.5 h-3.5 text-indigo-500" />
+    case 'api integration':
+      return <FaNetworkWired className="w-3.5 h-3.5 text-blue-500" />
+    default:
+      return null
+  }
+}
 
 function ProjectsSection() {
   return (
@@ -40,13 +63,14 @@ function ProjectsSection() {
                 {project.summary}
               </p>
 
-              <div className="mb-8 flex flex-wrap">
+              <div className="mb-6 flex flex-wrap gap-2">
                 {project.stack?.map((tech) => (
                   <span
                     key={tech}
-                    className="mb-2 mr-2 inline-block rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-medium text-gray-500"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-100 rounded-full text-xs font-medium text-gray-700 shadow-sm"
                   >
-                    [{tech}]
+                    {getTechIcon(tech)}
+                    {tech}
                   </span>
                 ))}
               </div>
@@ -54,7 +78,7 @@ function ProjectsSection() {
 
             <div className="mt-auto flex justify-start">
               <Link
-                to={/projects/ + project.slug}
+                to={'/projects/' + project.slug}
                 className="rounded-full bg-black px-6 py-2 text-center font-semibold !text-white transition hover:bg-gray-800"
               >
                 Case Study

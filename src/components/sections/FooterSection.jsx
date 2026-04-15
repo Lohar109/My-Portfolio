@@ -166,7 +166,7 @@ function FooterSection() {
               Let’s build products that people actually love.
             </h2>
 
-            <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-600">
+            <p className="mt-4 max-w-2xl text-lg font-normal leading-8 text-gray-600">
               As a recent graduate with a passion for web development, I focus on building clean, interactive, and user-friendly interfaces. I'm currently expanding my toolkit with DevOps and AI, looking for my first professional role where I can contribute and grow with a great team.
             </p>
           </div>
@@ -176,7 +176,7 @@ function FooterSection() {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
-            <div className="mb-6 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-3">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
                 <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
               </span>
@@ -185,7 +185,7 @@ function FooterSection() {
               </p>
             </div>
 
-            <div className="mt-2">
+            <div className="mt-0">
               <div className="flex items-center">
                 <p className="break-all text-lg font-semibold text-gray-900">
                   {emailAddress}
@@ -204,12 +204,12 @@ function FooterSection() {
                   </div>
                 </button>
               </div>
-              <p className="mt-5 text-base font-normal leading-relaxed text-gray-600">
+              <p className="mt-2 text-base font-normal leading-relaxed text-gray-600">
                 Ready to join your team and start building. Reach out for job opportunities or project inquiries.
               </p>
             </div>
 
-            <div className="mt-auto pt-6">
+            <div className="mt-auto pt-4">
               <a
                 href={`mailto:${emailAddress}?subject=${encodeURIComponent('Job Opportunity: [Your Company Name] x Vaibhav')}`}
                 className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
@@ -257,7 +257,7 @@ function FooterSection() {
               </div>
             </div>
 
-            <p className="mt-5 text-base font-normal leading-relaxed text-gray-600">
+            <p className="mt-2 text-base font-normal leading-relaxed text-gray-600">
               Want to talk about a potential role or just discuss tech? I'm always open to connecting with new teams and professionals. WhatsApp is the fastest way to reach me for a quick conversation.
             </p>
 
@@ -286,7 +286,7 @@ function FooterSection() {
               </p>
             </div>
 
-            <p className="mb-6 mt-5 text-base font-normal leading-relaxed text-gray-600">
+            <p className="mb-4 mt-3 text-base font-normal leading-relaxed text-gray-600">
               Find my detailed resume, latest projects, and professional background on these platforms.
             </p>
 

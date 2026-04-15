@@ -119,14 +119,14 @@ function SkillsSection() {
             The tools I use to build what matters.
           </h2>
 
-          <p className="mt-7 max-w-2xl text-base leading-7 text-gray-600">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
             I&apos;ve spent thousands of hours refining these tools to build
             products that scale. From the first pixel to the final deployment, I
             handle the full lifecycle.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
         {skills.map((group) => {
           const Icon = categoryIcons[group.title]
 
@@ -144,11 +144,11 @@ function SkillsSection() {
                 </p>
               </div>
 
-              <p className="mt-5 text-sm leading-6 text-gray-600">
+              <p className="mt-3 text-sm leading-6 text-gray-600">
                 {group.description}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-4 flex flex-wrap gap-3">
                 {group.items.map((item) => (
                   <SkillPill key={item.name} skill={item} />
                 ))}
@@ -158,10 +158,10 @@ function SkillsSection() {
         })}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-8">
           <p className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/50 px-4 py-2 text-xs font-medium tracking-wide text-blue-900">
             <Sparkles size={14} strokeWidth={1.9} aria-hidden="true" />
-            Currently diving deep into Generative AI, LLMs, and DevOps.
+            Currently learning GenAI System Design and DevOps through a course.
           </p>
         </div>
       </div>

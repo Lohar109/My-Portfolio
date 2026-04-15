@@ -40,13 +40,13 @@ function ProjectsSection() {
           Projects I've built from the ground up.
         </h2>
 
-        <p className="mt-7 max-w-2xl text-base leading-7 text-gray-600">
+        <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
           A collection of web applications where I solved real problems with
           clean code and thoughtful design.
         </p>
       </div>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
+      <div className="mt-10 grid gap-8 lg:grid-cols-2">
         {projects.map((project) => (
           <motion.article
             key={project.slug}
@@ -55,15 +55,15 @@ function ProjectsSection() {
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div>
-              <h3 className="mb-3 text-2xl font-bold text-gray-900">
+              <h3 className="mb-2 text-2xl font-bold text-gray-900">
                 {project.title}
               </h3>
 
-              <p className="mb-6 leading-relaxed text-gray-600">
+              <p className="mb-5 leading-relaxed text-gray-600">
                 {project.summary}
               </p>
 
-              <div className="mb-6 flex flex-wrap gap-2">
+              <div className="mb-8 flex flex-wrap gap-2">
                 {project.stack?.map((tech) => (
                   <span
                     key={tech}

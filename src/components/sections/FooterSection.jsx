@@ -150,7 +150,7 @@ function FooterSection() {
   return (
     <motion.footer
       id="contact"
-      className="relative overflow-hidden bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16"
+      className="relative overflow-hidden px-6 py-24 sm:px-10 lg:px-16"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -166,18 +166,18 @@ function FooterSection() {
               Let’s build products that people actually love.
             </h2>
 
-            <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-700">
+            <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-600">
               As a recent graduate with a passion for web development, I focus on building clean, interactive, and user-friendly interfaces. I'm currently expanding my toolkit with DevOps and AI, looking for my first professional role where I can contribute and grow with a great team.
             </p>
           </div>
 
           <motion.article
-            className="flex w-full flex-1 flex-col rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm sm:p-8"
+            className="flex w-full flex-1 flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="mb-6 flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
                 <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
               </span>
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
@@ -200,7 +200,7 @@ function FooterSection() {
                   {isCopied ? <Check size={16} strokeWidth={2} className="text-green-600" /> : <Copy size={16} strokeWidth={2} />}
                 </button>
               </div>
-              <p className="mt-5 text-base font-normal leading-relaxed text-gray-700">
+              <p className="mt-5 text-base font-normal leading-relaxed text-gray-600">
                 Ready to join your team and start building. Reach out for job opportunities or project inquiries.
               </p>
             </div>
@@ -208,7 +208,7 @@ function FooterSection() {
             <div className="mt-auto pt-6">
               <a
                 href={`mailto:${emailAddress}?subject=${encodeURIComponent('Job Opportunity: [Your Company Name] x Vaibhav')}`}
-                className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
+                className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
               >
                 <SocialIcon icon="mail" />
                 Send Email
@@ -219,13 +219,13 @@ function FooterSection() {
 
         <div className="flex flex-col gap-8 w-full h-full">
           <motion.article
-            className="flex w-full flex-col rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm sm:p-8"
+            className="flex w-full flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
                   <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
@@ -253,7 +253,7 @@ function FooterSection() {
               </div>
             </div>
 
-            <p className="mt-5 text-base font-normal leading-relaxed text-gray-700">
+            <p className="mt-5 text-base font-normal leading-relaxed text-gray-600">
               Want to talk about a potential role or just discuss tech? I'm always open to connecting with new teams and professionals. WhatsApp is the fastest way to reach me for a quick conversation.
             </p>
 
@@ -261,7 +261,7 @@ function FooterSection() {
               href="https://wa.me/9172491660"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-gray-100 bg-white px-5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition hover:-translate-y-0.5 hover:text-green-600 hover:shadow-md"
+              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition hover:-translate-y-0.5 hover:text-green-600 hover:shadow-md"
             >
               <SocialIcon icon="whatsapp" />
               Message on WhatsApp
@@ -269,12 +269,12 @@ function FooterSection() {
           </motion.article>
 
           <motion.article
-            className="flex w-full flex-1 flex-col rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm sm:p-8"
+            className="flex w-full flex-1 flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
                 <Send size={18} strokeWidth={1.8} aria-hidden="true" />
               </span>
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
@@ -282,7 +282,7 @@ function FooterSection() {
               </p>
             </div>
 
-            <p className="mb-6 mt-5 text-base font-normal leading-relaxed text-gray-700">
+            <p className="mb-6 mt-5 text-base font-normal leading-relaxed text-gray-600">
               Find my detailed resume, latest projects, and professional background on these platforms.
             </p>
 
@@ -293,7 +293,7 @@ function FooterSection() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
                 >
                   <SocialIcon icon={icon} />
                   {label}

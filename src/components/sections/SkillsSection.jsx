@@ -96,7 +96,7 @@ function TechIcon({ icon }) {
 
 function SkillPill({ skill }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-5 py-2.5 text-sm font-medium text-gray-800 shadow-sm transition-all hover:shadow-md">
+    <span className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-5 py-2.5 text-sm font-medium text-gray-800 shadow-sm transition-all hover:shadow-md">
       <TechIcon icon={skill.icon} />
       {skill.name}
     </span>
@@ -107,7 +107,7 @@ function SkillsSection() {
   return (
     <motion.section
       id="skills"
-      className="bg-[#F9F9FB] px-6 py-24 sm:px-10 lg:px-16"
+      className="px-6 py-24 sm:px-10 lg:px-16"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -133,10 +133,10 @@ function SkillsSection() {
           return (
             <article
               key={group.title}
-              className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-gray-50 text-gray-700">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
                   <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">

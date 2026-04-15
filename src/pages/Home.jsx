@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 function Home() {
   return (
     <motion.main
-      className="min-h-screen bg-[#F9F9FB] text-gray-900"
+      className="min-h-screen text-gray-900"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}

@@ -18,7 +18,7 @@ function HeroSection() {
             Turning complex ideas into clean, functional reality.
           </h1>
 
-          <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-700">
+          <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-600">
             I enjoy the challenge of building something from scratch. My goal
             is simple: write clean code and create designs that don&apos;t need an
             explanation.
@@ -49,7 +49,7 @@ function HeroSection() {
             caption="Replace this with your showreel or welcome clip"
             title="Portfolio intro video goes here"
             description="Later we can replace this placeholder with an actual video using a file from `public/videos/intro/`."
-            toneClass="bg-[linear-gradient(160deg,#1c1917_0%,#292524_45%,#0c0a09_100%)]"
+            toneClass="bg-[#0a0a0a]"
             aspectClass="aspect-[4/5] sm:aspect-video"
           />
         </div>

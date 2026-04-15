@@ -10,7 +10,7 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <main className="min-h-screen bg-gray-50 px-6 py-20 text-gray-900">
+      <main className="min-h-screen px-6 py-20 text-gray-900">
         <div className="mx-auto max-w-5xl">
           <p className="text-sm uppercase tracking-[0.3em] text-gray-500">
             Project Not Found
@@ -30,12 +30,12 @@ function ProjectDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900">
+    <main className="min-h-screen text-gray-900">
       <SiteHeader isDetailPage />
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 lg:px-16">
         <Link
           to="/#projects"
-          className="inline-flex rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-gray-50"
+          className="inline-flex rounded-full border border-gray-200/50 bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-gray-50"
         >
           &lt;- Back
         </Link>
@@ -56,7 +56,7 @@ function ProjectDetail() {
               {project.stack.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
+                  className="rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
                 >
                   {item}
                 </span>
@@ -69,12 +69,12 @@ function ProjectDetail() {
             caption="Placeholder for the project demo or walkthrough"
             title="Project video placeholder"
             description="Later we can replace this area with a real video sourced from `public/videos/projects/`."
-            toneClass='bg-stone-950'
+            toneClass="bg-[#0a0a0a]"
           />
         </section>
 
         <section className="mt-16 grid gap-6 lg:grid-cols-3">
-          <article className="rounded-3xl border border-gray-100 bg-white p-7 shadow-sm">
+          <article className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">
               Role
             </p>
@@ -83,7 +83,7 @@ function ProjectDetail() {
             </p>
           </article>
 
-          <article className="rounded-3xl border border-gray-100 bg-white p-7 shadow-sm">
+          <article className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">
               Challenge
             </p>
@@ -92,7 +92,7 @@ function ProjectDetail() {
             </p>
           </article>
 
-          <article className="rounded-3xl border border-gray-100 bg-white p-7 shadow-sm">
+          <article className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">
               Outcome
             </p>
@@ -106,7 +106,7 @@ function ProjectDetail() {
           {project.stats.map((stat) => (
             <article
               key={stat.label}
-              className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"
+              className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">
                 {stat.label}

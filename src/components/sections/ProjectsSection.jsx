@@ -50,7 +50,7 @@ function ProjectsSection() {
         {projects.map((project) => (
           <motion.article
             key={project.slug}
-            className="flex flex-col justify-between overflow-hidden bg-white border border-gray-100 rounded-3xl shadow-sm p-8 transition-shadow duration-300 hover:shadow-md"
+            className="flex flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-md"
             whileHover={{ y: -4, scale: 1.01 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
@@ -67,7 +67,7 @@ function ProjectsSection() {
                 {project.stack?.map((tech) => (
                   <span
                     key={tech}
-                    className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 rounded-full text-sm font-semibold text-gray-700 shadow-sm"  
+                    className="flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm"
                   >
                     {getTechIcon(tech)}
                     {tech}

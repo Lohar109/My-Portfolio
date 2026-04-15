@@ -6,7 +6,7 @@ function SiteHeader({ isDetailPage = false }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:px-16">
         <Link to="/" className="flex items-center gap-3">
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-stone-950 text-sm font-semibold text-stone-50">
-            VD
+            VL
           </span>
           <div className="space-y-1">
             <p className="text-sm font-semibold tracking-[0.2em] text-stone-950 uppercase">
@@ -17,8 +17,8 @@ function SiteHeader({ isDetailPage = false }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <p className="text-xs text-gray-400">
-                Available for new projects
+              <p className="text-[11px] font-medium text-gray-500">
+                Full Stack Developer • AI Engineer
               </p>
             </div>
           </div>

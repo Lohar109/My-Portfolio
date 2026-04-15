@@ -18,13 +18,25 @@ function HeroSection() {
             Turning complex ideas into clean, functional reality.
           </h1>
 
-          <p className="mt-7 max-w-2xl text-lg font-normal leading-8 text-gray-600">
+          <p className="mt-7 max-w-2xl text-lg font-normal leading-relaxed text-gray-600">
             I enjoy the challenge of building something from scratch. My goal
             is simple: write clean code and create designs that don&apos;t need an
             explanation.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-6 mb-8 flex flex-wrap gap-3 font-sans">
+            <span className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-gray-700 shadow-sm">
+              MCA Final Year
+            </span>
+            <span className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-gray-700 shadow-sm">
+              GenAI & Node.js
+            </span>
+            <span className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-gray-700 shadow-sm">
+              AI Integration
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-4 sm:flex-row">
             <a
               href="#projects"
               className="bg-black !text-white font-semibold rounded-full px-6 py-3 transition hover:bg-gray-800"

@@ -172,7 +172,7 @@ function FooterSection() {
           </div>
 
           <motion.article
-            className="flex w-full flex-1 flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
+            className="flex h-fit w-full self-start flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
@@ -193,11 +193,15 @@ function FooterSection() {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="ml-3 rounded text-gray-400 transition-all hover:text-gray-900"
+                  className="relative group ml-3 flex items-center justify-center rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
                   aria-label="Copy email address"
-                  title="Copy email"
                 >
                   {isCopied ? <Check size={16} strokeWidth={2} className="text-green-600" /> : <Copy size={16} strokeWidth={2} />}
+                  <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2.5 py-1 text-[10px] font-medium tracking-wide text-white opacity-0 shadow-sm transition-all duration-200 group-hover:opacity-100">
+                    Copy
+                    {/* The small triangle arrow pointing down */}
+                    <div className="absolute left-1/2 top-full -translate-x-1/2 border-[4px] border-transparent border-t-gray-900"></div>
+                  </div>
                 </button>
               </div>
               <p className="mt-5 text-base font-normal leading-relaxed text-gray-600">

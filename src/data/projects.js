@@ -39,39 +39,39 @@ export const projects = [
   },
   {
     slug: 'marketpulse',
-    title: 'MarketPulse Analytics',
-    category: 'Data Platform',
-    role: 'Full-Stack Development',
+    title: 'Loading Optimisation Software',
+    category: 'Logistics Platform',
+    role: 'Desktop Application Development',
     year: '2026',
     summary:
-      'An analytics experience for campaign reporting that turns raw ad performance into executive-friendly insights, benchmarks, and recommendations.',
+      'A professional Qt-based desktop application designed for logistics and supply chain efficiency. It implements 3D space-optimization algorithms to maximize product loading capacity in trucks, trains, and warehouses, significantly reducing resource wastage.',
     previewText:
-      'Built to translate dense marketing data into a cleaner story for teams and stakeholders.',
+      'Built to optimize loading capacity and reduce resource wastage across logistics operations.',
     detailIntro:
-      'MarketPulse reframes campaign data into a reporting experience that supports decision-making instead of overwhelming users with tables.',
+      'Loading Optimisation Software helps logistics teams calculate efficient product arrangements for trucks, trains, and warehouses using 3D space-optimization logic.',
     challenge:
-      'The biggest constraint was presenting multiple metrics and time comparisons without making the interface feel noisy or overbuilt.',
+      'The biggest challenge was translating real-world loading constraints into a desktop interface that remains practical, fast, and clear for operations teams.',
     outcome:
-      'The project direction focuses on storytelling with data, helping teams move from raw numbers to action more quickly.',
+      'The application improves loading capacity planning and supports better resource utilization across logistics workflows.',
     stats: [
-      { label: 'Use Case', value: 'Campaign reporting' },
-      { label: 'Audience', value: 'Marketing teams' },
-      { label: 'Primary Goal', value: 'Clearer decision-making' },
+      { label: 'Use Case', value: 'Load optimization' },
+      { label: 'Audience', value: 'Logistics teams' },
+      { label: 'Primary Goal', value: 'Reduce wastage' },
     ],
     caseStudy: {
       overview:
-        'MarketPulse was shaped as a reporting and analytics product for teams that need quick performance insight without spending half their time cleaning spreadsheets or screenshots for presentations.',
+        'Loading Optimisation Software was designed as a professional desktop tool for logistics and supply chain planning. It focuses on turning available loading space into more efficient, measurable capacity.',
       problem:
-        'Campaign data is often available, but not presented in a way that makes trends obvious. Users needed context, benchmarks, and structure, not just a larger pile of numbers.',
+        'Loading decisions often waste valuable space because teams need to account for dimensions, stacking limits, and available volume under time pressure.',
       approach: [
-        'Prioritized narrative reporting over raw metric density so the interface guides users toward what changed and why it matters.',
-        'Balanced summary views with drill-down points to keep both managers and hands-on marketers supported.',
-        'Kept the visual system restrained so the data, not decoration, carries the strongest signal.',
+        'Built the application around a Qt desktop interface so operational users can work in a focused, reliable environment.',
+        'Modeled product dimensions and available container space with optimization logic to improve loading recommendations.',
+        'Kept the interface practical and direct so teams can understand outcomes without unnecessary visual complexity.',
       ],
       result:
-        'The case study direction turns analytics into a more readable product experience. Instead of forcing interpretation, it frames the most important signals and makes next steps easier to discuss.',
+        'The result is a focused logistics tool that supports better capacity planning, reduces wasted space, and improves resource efficiency.',
     },
-    stack: ['React', 'Node.js', 'Express', 'MongoDB'],
+    stack: ['C++', 'Qt Framework', 'Logistics Tech', 'Optimization Algorithms'],
     previewTone:
       'bg-[linear-gradient(135deg,#3f3f46_0%,#7c2d12_48%,#f59e0b_100%)]',
   },

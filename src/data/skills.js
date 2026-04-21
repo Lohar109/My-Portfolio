@@ -40,4 +40,17 @@ export const skills = [
       { name: 'GitHub Copilot', icon: 'copilot' },
     ],
   },
+  {
+    title: 'AI & Machine Learning',
+    description:
+      'Building intelligent systems using Large Language Models and multimodal AI integration.',
+    items: [
+      { name: 'OpenAI & Gemini', icon: 'openaiGemini' },
+      { name: 'LangChain', icon: 'langchain' },
+      { name: 'Groq', icon: 'groq' },
+      { name: 'Vercel AI SDK', icon: 'vercelAi' },
+      { name: 'Pinecone', icon: 'pinecone' },
+      { name: 'RAG & Prompt Engineering', icon: 'ragPrompt' },
+    ],
+  },
 ]

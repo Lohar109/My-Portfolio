@@ -1,5 +1,21 @@
-import { GitBranch, Monitor, Server, Sparkles } from 'lucide-react'
-import { SiGithubcopilot, SiSupabase, SiVercel } from 'react-icons/si'
+import {
+  Bolt,
+  BrainCircuit,
+  Cone,
+  GitBranch,
+  Link2,
+  Monitor,
+  Server,
+  Sparkles,
+  Terminal,
+} from 'lucide-react'
+import {
+  SiGithubcopilot,
+  SiGooglegemini,
+  SiOpenai,
+  SiSupabase,
+  SiVercel,
+} from 'react-icons/si'
 import { skills } from '../../data/skills.js'
 import { motion } from 'framer-motion'
 
@@ -7,6 +23,7 @@ const categoryIcons = {
   Frontend: Monitor,
   Backend: Server,
   Workflow: GitBranch,
+  'AI & Machine Learning': BrainCircuit,
 }
 
 const techIcons = {
@@ -91,6 +108,40 @@ function TechIcon({ icon }) {
 
   if (icon === 'copilot') {
     return <SiGithubcopilot className="h-6 w-6 shrink-0 text-gray-900" aria-hidden="true" />
+  }
+
+  if (icon === 'openaiGemini') {
+    return (
+      <span className="inline-flex shrink-0 items-center gap-1" aria-hidden="true">
+        <SiOpenai className="h-4 w-4 text-gray-900" />
+        <SiGooglegemini className="h-4 w-4 text-violet-600" />
+      </span>
+    )
+  }
+
+  if (icon === 'langchain') {
+    return <Link2 className="h-6 w-6 shrink-0 text-indigo-600" aria-hidden="true" />
+  }
+
+  if (icon === 'groq') {
+    return <Bolt className="h-6 w-6 shrink-0 text-amber-600" aria-hidden="true" />
+  }
+
+  if (icon === 'vercelAi') {
+    return <SiVercel className="h-6 w-6 shrink-0 text-black" aria-hidden="true" />
+  }
+
+  if (icon === 'pinecone') {
+    return <Cone className="h-6 w-6 shrink-0 text-emerald-600" aria-hidden="true" />
+  }
+
+  if (icon === 'ragPrompt') {
+    return (
+      <span className="inline-flex shrink-0 items-center gap-1" aria-hidden="true">
+        <BrainCircuit className="h-4 w-4 text-sky-600" />
+        <Terminal className="h-4 w-4 text-gray-700" />
+      </span>
+    )
   }
 
   const techIcon = techIcons[icon]

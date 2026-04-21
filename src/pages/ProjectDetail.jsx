@@ -62,16 +62,19 @@ function ProjectDetail() {
   return (
     <main className="min-h-screen text-gray-900">
       <SiteHeader isDetailPage />
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 lg:px-16">
+      <div className="px-4 pt-8 sm:px-6 lg:px-8">
         <Link
           to="/#projects"
-          className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-gray-50"
+          className="inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-sm font-semibold !text-white shadow-sm transition hover:bg-gray-800"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Back
         </Link>
+      </div>
 
-        <section className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div className="mx-auto max-w-6xl px-6 pb-10 pt-6 sm:px-10 lg:px-16 lg:pb-12">
+
+        <section className="mt-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
               {project.title}
@@ -140,7 +143,7 @@ function ProjectDetail() {
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900">
                 {stat.label}
               </p>
-              <p className="mt-3 text-lg font-semibold text-gray-900">
+              <p className="mt-3 text-lg font-normal text-gray-600">
                 {stat.value}
               </p>
             </article>

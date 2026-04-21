@@ -1,7 +1,7 @@
 function CaseStudySection({ eyebrow, title, children }) {
   return (
     <section className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8">
-      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">
+      <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
         {eyebrow}
       </p>
       {title ? (

@@ -137,7 +137,7 @@ function ProjectDetail() {
               key={stat.label}
               className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900">
+              <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
                 {stat.label}
               </p>
               <p className="mt-3 text-lg font-normal text-gray-600">

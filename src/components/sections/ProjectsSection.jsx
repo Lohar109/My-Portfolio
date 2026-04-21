@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects.js'
 import { motion } from 'framer-motion'
+import { Box, BrainCircuit, Cuboid, PackageCheck, Truck } from 'lucide-react'
 import { FaReact, FaChartLine, FaNetworkWired } from 'react-icons/fa'
-import { SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si'
+import { SiCplusplus, SiQt, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si'
 
 function getTechIcon(tech) {
   switch (tech.toLowerCase()) {
@@ -20,6 +21,20 @@ function getTechIcon(tech) {
       return <FaChartLine className="w-4 h-4 text-indigo-500" />
     case 'api integration':
       return <FaNetworkWired className="w-4 h-4 text-blue-500" />
+    case 'c++':
+      return <SiCplusplus className="w-4 h-4 text-[#00599C]" />
+    case 'qt framework':
+      return <SiQt className="w-4 h-4 text-[#41CD52]" />
+    case 'qt 3d':
+      return <Cuboid className="w-4 h-4 text-violet-500" />
+    case 'qt render':
+      return <Box className="w-4 h-4 text-sky-500" />
+    case 'logistics tech':
+      return <Truck className="w-4 h-4 text-emerald-600" />
+    case 'optimization algos':
+      return <BrainCircuit className="w-4 h-4 text-amber-600" />
+    case 'optimization algorithms':
+      return <PackageCheck className="w-4 h-4 text-amber-600" />
     default:
       return null
   }

@@ -71,7 +71,14 @@ export const projects = [
       result:
         'The result is a focused logistics tool that supports better capacity planning, reduces wasted space, and improves resource efficiency.',
     },
-    stack: ['C++', 'Qt Framework', 'Logistics Tech', 'Optimization Algorithms'],
+    stack: [
+      'C++',
+      'Qt Framework',
+      'Qt 3D',
+      'Qt Render',
+      'Logistics Tech',
+      'Optimization Algos',
+    ],
     previewTone:
       'bg-[linear-gradient(135deg,#3f3f46_0%,#7c2d12_48%,#f59e0b_100%)]',
   },

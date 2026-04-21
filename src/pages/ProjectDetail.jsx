@@ -62,7 +62,7 @@ function ProjectDetail() {
   return (
     <main className="min-h-screen text-gray-900">
       <SiteHeader isDetailPage />
-      <div className="px-4 pt-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-6 pb-10 pt-8 sm:px-10 lg:px-16 lg:pb-12">
         <Link
           to="/#projects"
           className="inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-sm font-semibold !text-white shadow-sm transition hover:bg-gray-800"
@@ -70,11 +70,8 @@ function ProjectDetail() {
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Back
         </Link>
-      </div>
 
-      <div className="mx-auto max-w-6xl px-6 pb-10 pt-6 sm:px-10 lg:px-16 lg:pb-12">
-
-        <section className="mt-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
               {project.title}

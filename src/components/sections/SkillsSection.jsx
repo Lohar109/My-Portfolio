@@ -1,4 +1,5 @@
 import { GitBranch, Monitor, Server, Sparkles } from 'lucide-react'
+import { SiGithubcopilot, SiSupabase, SiVercel } from 'react-icons/si'
 import { skills } from '../../data/skills.js'
 import { motion } from 'framer-motion'
 
@@ -80,6 +81,18 @@ const techIcons = {
 }
 
 function TechIcon({ icon }) {
+  if (icon === 'supabase') {
+    return <SiSupabase className="h-6 w-6 shrink-0 text-[#3ECF8E]" aria-hidden="true" />
+  }
+
+  if (icon === 'vercel') {
+    return <SiVercel className="h-6 w-6 shrink-0 text-black" aria-hidden="true" />
+  }
+
+  if (icon === 'copilot') {
+    return <SiGithubcopilot className="h-6 w-6 shrink-0 text-gray-900" aria-hidden="true" />
+  }
+
   const techIcon = techIcons[icon]
 
   return (

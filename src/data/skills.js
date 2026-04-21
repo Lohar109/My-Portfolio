@@ -23,6 +23,7 @@ export const skills = [
       { name: 'MongoDB', icon: 'mongodb' },
       { name: 'MySQL', icon: 'mysql' },
       { name: 'PostgreSQL', icon: 'postgresql' },
+      { name: 'Supabase', icon: 'supabase' },
     ],
   },
   {
@@ -35,6 +36,8 @@ export const skills = [
       { name: 'Vite', icon: 'vite' },
       { name: 'Netlify', icon: 'netlify' },
       { name: 'Render', icon: 'render' },
+      { name: 'Vercel', icon: 'vercel' },
+      { name: 'GitHub Copilot', icon: 'copilot' },
     ],
   },
 ]

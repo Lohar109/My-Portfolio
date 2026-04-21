@@ -156,7 +156,7 @@ function ProjectDetail() {
               <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
                 {stat.label}
               </p>
-              <p className="mt-3 text-lg font-normal text-gray-600">
+              <p className="mt-4 text-base leading-7 text-gray-600">
                 {stat.value}
               </p>
             </article>
@@ -172,7 +172,10 @@ function ProjectDetail() {
             <p>{project.caseStudy.problem}</p>
           </CaseStudySection>
 
-          <CaseStudySection eyebrow="Approach" contentClassName="space-y-3">
+          <CaseStudySection
+            eyebrow="Approach"
+            contentClassName="space-y-2 [&>p]:m-0"
+          >
             {project.caseStudy.approach.map((step) => (
               <p key={step}>{step}</p>
             ))}

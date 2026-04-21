@@ -156,7 +156,7 @@ function ProjectDetail() {
             <p>{project.caseStudy.problem}</p>
           </CaseStudySection>
 
-          <CaseStudySection eyebrow="Approach">
+          <CaseStudySection eyebrow="Approach" contentClassName="space-y-3">
             {project.caseStudy.approach.map((step) => (
               <p key={step}>{step}</p>
             ))}

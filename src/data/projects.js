@@ -60,16 +60,14 @@ export const projects = [
     ],
     caseStudy: {
       overview:
-        'Loading Optimisation Software was designed as a professional desktop tool for logistics and supply chain planning. It focuses on turning available loading space into more efficient, measurable capacity.',
+        'Loading Optimisation Software is a high-performance C++ desktop application engineered to streamline supply chain logistics. By utilizing advanced spatial algorithms and the Qt Framework, it transforms manual, error-prone loading processes into a precise, automated science, maximizing capacity across trucks, trains, and warehouses.',
       problem:
-        'Loading decisions often waste valuable space because teams need to account for dimensions, stacking limits, and available volume under time pressure.',
+        'Logistics operations frequently suffer from sub-optimal space utilization. Load planners must manually calculate complex 3D stacking arrangements under strict time constraints, accounting for weight limits, fragility, and container dimensions. This reliance on manual estimation leads to wasted cargo space, increased transportation costs, and delayed shipping schedules.',
       approach: [
-        'Built the application around a Qt desktop interface so operational users can work in a focused, reliable environment.',
-        'Modeled product dimensions and available container space with optimization logic to improve loading recommendations.',
-        'Kept the interface practical and direct so teams can understand outcomes without unnecessary visual complexity.',
+        'I architected a robust desktop solution using C++ for high-speed algorithmic processing and Qt for a responsive UI. The core engine implements a custom 3D bin-packing algorithm that instantly calculates the most efficient cargo arrangement. To make the data actionable, I integrated Qt 3D and Qt Render to generate interactive, real-time 3D visualizations, allowing teams to verify loading plans before physical execution.',
       ],
       result:
-        'The result is a focused logistics tool that supports better capacity planning, reduces wasted space, and improves resource efficiency.',
+        'The software drastically reduces planning time from hours to seconds while significantly increasing average container fill rates. By maximizing spatial efficiency, the tool helps logistics companies reduce the number of required trips, directly cutting down operational costs and their carbon footprint through an intuitive desktop interface.',
     },
     stack: [
       'C++',

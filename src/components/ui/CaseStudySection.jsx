@@ -4,10 +4,12 @@ function CaseStudySection({ eyebrow, title, children }) {
       <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">
         {eyebrow}
       </p>
-      <h2 className="mt-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-        {title}
-      </h2>
-      <div className="mt-5 space-y-4 text-base leading-7 text-gray-600">
+      {title ? (
+        <h2 className="mt-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          {title}
+        </h2>
+      ) : null}
+      <div className={`${title ? 'mt-5' : 'mt-4'} space-y-4 text-base leading-7 text-gray-600`}>
         {children}
       </div>
     </section>

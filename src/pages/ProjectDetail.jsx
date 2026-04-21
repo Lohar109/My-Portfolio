@@ -73,7 +73,7 @@ function ProjectDetail() {
 
         <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
+            <h1 className="text-2xl font-medium tracking-tight text-gray-900 md:text-3xl">
               {project.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
@@ -148,21 +148,21 @@ function ProjectDetail() {
         </section>
 
         <section id="case-study" className="mt-16 grid gap-6">
-          <CaseStudySection eyebrow="Case Study" title="Overview">
+          <CaseStudySection eyebrow="Case Study">
             <p>{project.caseStudy.overview}</p>
           </CaseStudySection>
 
-          <CaseStudySection eyebrow="Problem" title="What Needed To Improve">
+          <CaseStudySection eyebrow="Problem">
             <p>{project.caseStudy.problem}</p>
           </CaseStudySection>
 
-          <CaseStudySection eyebrow="Approach" title="How The Product Was Shaped">
+          <CaseStudySection eyebrow="Approach">
             {project.caseStudy.approach.map((step) => (
               <p key={step}>{step}</p>
             ))}
           </CaseStudySection>
 
-          <CaseStudySection eyebrow="Result" title="What The Direction Achieved">
+          <CaseStudySection eyebrow="Result">
             <p>{project.caseStudy.result}</p>
           </CaseStudySection>
         </section>

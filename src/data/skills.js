@@ -11,6 +11,7 @@ export const skills = [
       { name: 'HTML5', icon: 'html5' },
       { name: 'CSS3', icon: 'css' },
       { name: 'JavaScript', icon: 'javascript' },
+      { name: 'TypeScript', icon: 'typescript' },
     ],
   },
   {
@@ -22,7 +23,9 @@ export const skills = [
       { name: 'Express', icon: 'express' },
       { name: 'Supabase', icon: 'supabase' },
       { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'PostgreSQL', icon: 'postgresql' },
       { name: 'SQL', icon: 'sql' },
+      { name: 'DSA', icon: 'dsa' },
     ],
   },
   {

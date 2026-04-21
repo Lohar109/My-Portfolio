@@ -3,35 +3,40 @@ export const projects = [
     slug: 'studioflow',
     title: 'ShopEase Intelligent Commerce Suite',
     category: 'SaaS Product',
-    role: 'Frontend + Product Design',
+    role: 'Full Stack & AI Integration',
     year: '2026',
     summary:
       'An enterprise-ready e-commerce platform that unifies storefront and backend services on a scalable Node.js architecture. It features an intelligent inventory management workflow utilizing multimodal GenAI pipelines for audio transcription, vision-driven product understanding, and structured JSON data extraction to automate merchandising at scale.',
     previewText:
       'Designed to feel calm, data-rich, and client-ready with strong hierarchy and fast scanning.',
     detailIntro:
-      'StudioFlow brings project planning, reviews, and stakeholder communication into one focused workspace for creative operations teams.',
+      'ShopEase is an enterprise-ready e-commerce platform that unifies storefront, admin operations, and backend services on a scalable Node.js architecture. It incorporates multimodal GenAI to automate product categorization and intelligent inventory management.',
     challenge:
-      'The main challenge was turning a dense internal workflow into an interface that still felt light, readable, and client-friendly.',
+      'Automated Inventory & GenAI Pipelines',
     outcome:
-      'The final concept emphasizes clarity, visual rhythm, and faster team alignment through stronger information hierarchy.',
+      'Scale merchandising & eliminate manual data entry',
+    topInfoCards: [
+      { label: 'Role', value: 'Full Stack & AI Integration' },
+      { label: 'Core Focus', value: 'Automated Inventory & GenAI Pipelines' },
+      { label: 'Primary Goal', value: 'Scale merchandising & eliminate manual data entry' },
+    ],
     stats: [
-      { label: 'Team Context', value: '8 designers + PMs' },
-      { label: 'Core Focus', value: 'Planning and approvals' },
-      { label: 'Primary Goal', value: 'Reduce workflow friction' },
+      { label: 'Use Case', value: 'Enterprise commerce operations' },
+      { label: 'Audience', value: 'Retail and merchandising teams' },
+      { label: 'Primary Goal', value: 'Automate catalog onboarding' },
     ],
     caseStudy: {
       overview:
-        'StudioFlow was imagined as an internal platform for creative teams managing multiple client projects at once. The product needed to support fast daily coordination while still feeling polished enough for stakeholder reviews.',
+        'ShopEase was architected to solve the manual bottlenecks in modern e-commerce operations. By unifying the storefront with an AI-powered backend, the platform enables rapid onboarding of products using multimodal models, making scalable inventory management effortless for retail teams.',
       problem:
-        'Most operations dashboards become cluttered as soon as timelines, feedback, ownership, and status all compete for attention. The interface risked becoming technically complete but mentally exhausting.',
+        'Managing massive e-commerce catalogs is traditionally manual and error-prone. Merchants spend countless hours typing product details, categorizing items, and mapping inventory variants. This friction slows down time-to-market and leads to inconsistent data and operational exhaustion.',
       approach: [
-        'Organized the layout around the most time-sensitive actions first, so the page feels useful at a glance.',
-        'Used card grouping and spacing to separate planning, review, and delivery states without overloading the screen.',
-        'Designed the visual language to feel premium and calm, helping the product support client-facing moments too.',
+        'Developed a robust Node.js backend with Express and PostgreSQL to handle complex relational product and inventory data.',
+        'Integrated multimodal GenAI pipelines, using Vision APIs to automatically tag product images and Audio models for quick voice-based inventory updates.',
+        'Built a responsive React/Vite admin dashboard that leverages structured JSON extraction to instantly convert raw inputs into organized catalog entries.',
       ],
       result:
-        'The final direction presents project complexity in a way that still feels composed. It gives teams a central place to review progress, unblock work, and communicate status with less friction.',
+        'The intelligent suite drastically reduces the time required to list new products and manage stock. By automating data entry with generative AI, the platform ensures catalog accuracy and allows operational teams to focus on strategy and sales rather than tedious manual inputs.',
     },
     stack: [
       'Node.js',

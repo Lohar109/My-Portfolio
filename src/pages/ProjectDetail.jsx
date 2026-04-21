@@ -1,6 +1,22 @@
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, BrainCircuit, Boxes, Cuboid, Layers3, Truck } from 'lucide-react'
-import { SiCplusplus, SiQt, SiReact, SiTailwindcss } from 'react-icons/si'
+import {
+  ArrowLeft,
+  AudioLines,
+  BrainCircuit,
+  Boxes,
+  Cuboid,
+  Eye,
+  Layers3,
+  Truck,
+} from 'lucide-react'
+import {
+  SiCplusplus,
+  SiNodedotjs,
+  SiPostgresql,
+  SiQt,
+  SiReact,
+  SiTailwindcss,
+} from 'react-icons/si'
 import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
@@ -23,6 +39,14 @@ function getStackIcon(item) {
       return <BrainCircuit className="h-4 w-4 text-amber-600" />
     case 'react':
       return <SiReact className="h-4 w-4 text-[#61DAFB]" />
+    case 'node.js':
+      return <SiNodedotjs className="h-4 w-4 text-[#339933]" />
+    case 'postgresql':
+      return <SiPostgresql className="h-4 w-4 text-[#336791]" />
+    case 'vision api':
+      return <Eye className="h-4 w-4 text-sky-500" />
+    case 'audio transcription':
+      return <AudioLines className="h-4 w-4 text-violet-500" />
     case 'tailwind css':
       return <SiTailwindcss className="h-4 w-4 text-[#06B6D4]" />
     case 'charts':
@@ -37,6 +61,11 @@ function getStackIcon(item) {
 function ProjectDetail() {
   const { slug } = useParams()
   const project = projects.find((entry) => entry.slug === slug)
+  const topInfoCards = project?.topInfoCards ?? [
+    { label: 'Role', value: project?.role },
+    { label: 'Challenge', value: project?.challenge },
+    { label: 'Outcome', value: project?.outcome },
+  ]
 
   if (!project) {
     return (
@@ -103,32 +132,19 @@ function ProjectDetail() {
         </section>
 
         <section className="mt-16 grid gap-6 lg:grid-cols-3">
-          <article className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm">
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
-              Role
-            </p>
-            <p className="mt-4 text-base leading-7 text-gray-600">
-              {project.role}
-            </p>
-          </article>
-
-          <article className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm">
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
-              Challenge
-            </p>
-            <p className="mt-4 text-base leading-7 text-gray-600">
-              {project.challenge}
-            </p>
-          </article>
-
-          <article className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm">
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
-              Outcome
-            </p>
-            <p className="mt-4 text-base leading-7 text-gray-600">
-              {project.outcome}
-            </p>
-          </article>
+          {topInfoCards.map((item) => (
+            <article
+              key={item.label}
+              className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm"
+            >
+              <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
+                {item.label}
+              </p>
+              <p className="mt-4 text-base leading-7 text-gray-600">
+                {item.value}
+              </p>
+            </article>
+          ))}
         </section>
 
         <section className="mt-8 grid gap-4 sm:grid-cols-3">

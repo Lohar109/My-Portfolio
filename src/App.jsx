@@ -3,12 +3,10 @@ import Home from './pages/Home.jsx'
 import ProjectDetail from './pages/ProjectDetail.jsx'
 import ScrollToTop from './components/layout/ScrollToTop.jsx'
 import SiteFooter from './components/layout/SiteFooter.jsx'
-import DigitalDataTrace from './components/layout/DigitalDataTrace.jsx'
 
 function App() {
   return (
     <div className="flex min-h-screen flex-col bg-[#f5f5f7] text-gray-900">
-      <DigitalDataTrace />
       <ScrollToTop />
       <div className="flex-1">
         <Routes>

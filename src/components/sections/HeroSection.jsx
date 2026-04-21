@@ -19,20 +19,21 @@ function HeroSection() {
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg font-normal leading-relaxed text-gray-600">
-            I enjoy the challenge of building something from scratch. My goal
-            is simple: write clean code and create designs that don&apos;t need an
-            explanation.
+            I engineer scalable web applications and integrate cutting-edge
+            GenAI models. My focus is straightforward: write highly-optimized
+            backend code in Node.js and design modern, minimalist frontend
+            interfaces that make complex systems feel effortless.
           </p>
 
           <div className="mt-6 mb-8 flex flex-wrap gap-3 font-sans">
             <span className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-gray-700 shadow-sm">
-              MCA Final Year
+              Full Stack Development
             </span>
             <span className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-gray-700 shadow-sm">
               GenAI & Node.js
             </span>
             <span className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-gray-700 shadow-sm">
-              AI Integration
+              Modern Web Apps
             </span>
           </div>
 

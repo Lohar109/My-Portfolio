@@ -50,7 +50,6 @@ export const skills = [
       { name: 'Render', icon: 'render' },
       { name: 'Docker', icon: 'docker' },
       { name: 'Postman', icon: 'postman' },
-      { name: 'NPM / PNPM', icon: 'npmPnpm' },
     ],
   },
 ]

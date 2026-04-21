@@ -22,9 +22,7 @@ import {
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
-  SiNpm,
   SiOpenai,
-  SiPnpm,
   SiPostman,
   SiReact,
   SiRender,
@@ -64,7 +62,7 @@ const techIcons = {
   whisper: { icon: AudioWaveform, className: 'text-cyan-300' },
   git: { icon: SiGit, className: 'text-orange-400' },
   github: { icon: SiGithub, className: 'text-gray-900' },
-  copilot: { icon: SiGithubcopilot, className: 'text-violet-300' },
+  copilot: { icon: SiGithubcopilot, className: 'text-gray-900' },
   vercel: { icon: SiVercel, className: 'text-gray-900' },
   render: { icon: SiRender, className: 'text-blue-300' },
   docker: { icon: SiDocker, className: 'text-sky-400' },
@@ -72,15 +70,6 @@ const techIcons = {
 }
 
 function TechIcon({ icon }) {
-  if (icon === 'npmPnpm') {
-    return (
-      <span className="inline-flex items-center gap-1.5" aria-hidden="true">
-        <SiNpm className="h-4 w-4 text-rose-500" />
-        <SiPnpm className="h-4 w-4 text-amber-500" />
-      </span>
-    )
-  }
-
   const iconConfig = techIcons[icon]
   const IconComponent = iconConfig?.icon ?? Sparkles
 

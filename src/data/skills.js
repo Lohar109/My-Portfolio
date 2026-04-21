@@ -27,6 +27,21 @@ export const skills = [
     ],
   },
   {
+    title: 'AI & Machine Learning',
+    description:
+      'Building intelligent systems using Large Language Models and multimodal AI integration.',
+    items: [
+      { name: 'OpenAI', icon: 'openai' },
+      { name: 'Gemini', icon: 'gemini' },
+      { name: 'LangChain', icon: 'langchain' },
+      { name: 'Groq', icon: 'groq' },
+      { name: 'Vercel AI SDK', icon: 'vercelAi' },
+      { name: 'Pinecone', icon: 'pinecone' },
+      { name: 'RAG', icon: 'rag' },
+      { name: 'Prompt Eng.', icon: 'prompt' },
+    ],
+  },
+  {
     title: 'Workflow',
     description:
       'A product mindset that values maintainability, deployment, and collaboration.',
@@ -38,19 +53,6 @@ export const skills = [
       { name: 'Render', icon: 'render' },
       { name: 'Vercel', icon: 'vercel' },
       { name: 'GitHub Copilot', icon: 'copilot' },
-    ],
-  },
-  {
-    title: 'AI & Machine Learning',
-    description:
-      'Building intelligent systems using Large Language Models and multimodal AI integration.',
-    items: [
-      { name: 'OpenAI & Gemini', icon: 'openaiGemini' },
-      { name: 'LangChain', icon: 'langchain' },
-      { name: 'Groq', icon: 'groq' },
-      { name: 'Vercel AI SDK', icon: 'vercelAi' },
-      { name: 'Pinecone', icon: 'pinecone' },
-      { name: 'RAG & Prompt Engineering', icon: 'ragPrompt' },
     ],
   },
 ]

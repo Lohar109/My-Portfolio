@@ -110,13 +110,12 @@ function TechIcon({ icon }) {
     return <SiGithubcopilot className="h-6 w-6 shrink-0 text-gray-900" aria-hidden="true" />
   }
 
-  if (icon === 'openaiGemini') {
-    return (
-      <span className="inline-flex shrink-0 items-center gap-1" aria-hidden="true">
-        <SiOpenai className="h-4 w-4 text-gray-900" />
-        <SiGooglegemini className="h-4 w-4 text-violet-600" />
-      </span>
-    )
+  if (icon === 'openai') {
+    return <SiOpenai className="h-6 w-6 shrink-0 text-gray-900" aria-hidden="true" />
+  }
+
+  if (icon === 'gemini') {
+    return <SiGooglegemini className="h-6 w-6 shrink-0 text-violet-600" aria-hidden="true" />
   }
 
   if (icon === 'langchain') {
@@ -135,13 +134,12 @@ function TechIcon({ icon }) {
     return <Cone className="h-6 w-6 shrink-0 text-emerald-600" aria-hidden="true" />
   }
 
-  if (icon === 'ragPrompt') {
-    return (
-      <span className="inline-flex shrink-0 items-center gap-1" aria-hidden="true">
-        <BrainCircuit className="h-4 w-4 text-sky-600" />
-        <Terminal className="h-4 w-4 text-gray-700" />
-      </span>
-    )
+  if (icon === 'rag') {
+    return <BrainCircuit className="h-6 w-6 shrink-0 text-sky-600" aria-hidden="true" />
+  }
+
+  if (icon === 'prompt') {
+    return <Terminal className="h-6 w-6 shrink-0 text-gray-700" aria-hidden="true" />
   }
 
   const techIcon = techIcons[icon]
@@ -190,36 +188,36 @@ function SkillsSection() {
           </p>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-        {skills.map((group) => {
-          const Icon = categoryIcons[group.title]
+        <div className="mt-8 flex snap-x snap-mandatory flex-nowrap gap-6 overflow-x-auto pb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {skills.map((group) => {
+            const Icon = categoryIcons[group.title]
 
-          return (
-            <article
-              key={group.title}
-              className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-            >
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
-                  <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
-                </span>
-                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                  {group.title}
+            return (
+              <article
+                key={group.title}
+                className="min-w-[300px] snap-start rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:min-w-[350px]"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
+                    <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                  </span>
+                  <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
+                    {group.title}
+                  </p>
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-gray-600">
+                  {group.description}
                 </p>
-              </div>
 
-              <p className="mt-3 text-sm leading-6 text-gray-600">
-                {group.description}
-              </p>
-
-              <div className="mt-4 flex flex-wrap gap-3">
-                {group.items.map((item) => (
-                  <SkillPill key={item.name} skill={item} />
-                ))}
-              </div>
-            </article>
-          )
-        })}
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {group.items.map((item) => (
+                    <SkillPill key={item.name} skill={item} />
+                  ))}
+                </div>
+              </article>
+            )
+          })}
         </div>
 
         <div className="mt-8">

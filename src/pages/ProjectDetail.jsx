@@ -1,8 +1,38 @@
 import { Link, useParams } from 'react-router-dom'
+import { BrainCircuit, Boxes, Cuboid, Layers3, Truck } from 'lucide-react'
+import { SiCplusplus, SiQt, SiReact, SiTailwindcss } from 'react-icons/si'
+import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
 import VideoFrame from '../components/ui/VideoFrame.jsx'
 import { projects } from '../data/projects.js'
+
+function getStackIcon(item) {
+  switch (item.toLowerCase()) {
+    case 'c++':
+      return <SiCplusplus className="h-4 w-4 text-[#00599C]" />
+    case 'qt framework':
+      return <SiQt className="h-4 w-4 text-[#41CD52]" />
+    case 'qt 3d':
+      return <Cuboid className="h-4 w-4 text-violet-500" />
+    case 'qt render':
+      return <Layers3 className="h-4 w-4 text-sky-500" />
+    case 'logistics tech':
+      return <Truck className="h-4 w-4 text-emerald-600" />
+    case 'optimization algos':
+      return <BrainCircuit className="h-4 w-4 text-amber-600" />
+    case 'react':
+      return <SiReact className="h-4 w-4 text-[#61DAFB]" />
+    case 'tailwind css':
+      return <SiTailwindcss className="h-4 w-4 text-[#06B6D4]" />
+    case 'charts':
+      return <FaChartLine className="h-4 w-4 text-indigo-500" />
+    case 'api integration':
+      return <FaNetworkWired className="h-4 w-4 text-blue-500" />
+    default:
+      return <Boxes className="h-4 w-4 text-gray-500" />
+  }
+}
 
 function ProjectDetail() {
   const { slug } = useParams()
@@ -42,10 +72,7 @@ function ProjectDetail() {
 
         <section className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p className="text-sm uppercase tracking-[0.32em] text-gray-500">
-              {project.category} / {project.year}
-            </p>
-            <h1 className="mt-5 text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
               {project.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
@@ -56,8 +83,9 @@ function ProjectDetail() {
               {project.stack.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
                 >
+                  {getStackIcon(item)}
                   {item}
                 </span>
               ))}

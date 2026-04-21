@@ -1,9 +1,26 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects.js'
 import { motion } from 'framer-motion'
-import { Box, BrainCircuit, Cuboid, PackageCheck, Truck } from 'lucide-react'
+import {
+  AudioLines,
+  Box,
+  BrainCircuit,
+  Cuboid,
+  Eye,
+  PackageCheck,
+  Sparkles,
+  Truck,
+} from 'lucide-react'
 import { FaReact, FaChartLine, FaNetworkWired } from 'react-icons/fa'
-import { SiCplusplus, SiQt, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si'
+import {
+  SiCplusplus,
+  SiQt,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiPostgresql,
+} from 'react-icons/si'
 
 function getTechIcon(tech) {
   switch (tech.toLowerCase()) {
@@ -17,6 +34,8 @@ function getTechIcon(tech) {
       return <SiExpress className="w-4 h-4 text-gray-900" />
     case 'mongodb':
       return <SiMongodb className="w-4 h-4 text-[#47A248]" />
+    case 'postgresql':
+      return <SiPostgresql className="w-4 h-4 text-[#336791]" />
     case 'charts':
       return <FaChartLine className="w-4 h-4 text-indigo-500" />
     case 'api integration':
@@ -35,6 +54,12 @@ function getTechIcon(tech) {
       return <BrainCircuit className="w-4 h-4 text-amber-600" />
     case 'optimization algorithms':
       return <PackageCheck className="w-4 h-4 text-amber-600" />
+    case 'genai integration':
+      return <Sparkles className="w-4 h-4 text-fuchsia-500" />
+    case 'vision api':
+      return <Eye className="w-4 h-4 text-sky-500" />
+    case 'audio transcription':
+      return <AudioLines className="w-4 h-4 text-violet-500" />
     default:
       return null
   }

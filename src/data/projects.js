@@ -1,12 +1,12 @@
 export const projects = [
   {
     slug: 'studioflow',
-    title: 'StudioFlow Dashboard',
+    title: 'ShopEase Intelligent Commerce Suite',
     category: 'SaaS Product',
     role: 'Frontend + Product Design',
     year: '2026',
     summary:
-      'A project operations dashboard for creative teams with timeline tracking, approvals, and progress visibility across multiple client accounts.',
+      'An enterprise-ready e-commerce platform that unifies storefront and backend services on a scalable Node.js architecture. It features an intelligent inventory management workflow utilizing multimodal GenAI pipelines for audio transcription, vision-driven product understanding, and structured JSON data extraction to automate merchandising at scale.',
     previewText:
       'Designed to feel calm, data-rich, and client-ready with strong hierarchy and fast scanning.',
     detailIntro:
@@ -33,7 +33,13 @@ export const projects = [
       result:
         'The final direction presents project complexity in a way that still feels composed. It gives teams a central place to review progress, unblock work, and communicate status with less friction.',
     },
-    stack: ['React', 'Tailwind CSS', 'Charts', 'API Integration'],
+    stack: [
+      'Node.js',
+      'React',
+      'PostgreSQL',
+      'Vision API',
+      'Audio Transcription',
+    ],
     previewTone:
       'bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_52%,#38bdf8_100%)]',
   },

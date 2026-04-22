@@ -105,7 +105,7 @@ function ProjectsSection() {
         {featuredProjects.map((project) => (
           <motion.article
             key={project.slug}
-            className={`group flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gray-300 hover:shadow-2xl ${
+            className={`group flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-gray-300 hover:shadow-2xl ${
               project.slug === 'studioflow' ? 'lg:col-span-2' : ''
             }`}
             transition={{ duration: 0.2, ease: 'easeOut' }}
@@ -150,7 +150,7 @@ function ProjectsSection() {
         {moreProjects.map((project) => (
           <article
             key={project.slug}
-            className="group cursor-pointer rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gray-300 hover:shadow-2xl"
+            className="group cursor-pointer rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-gray-300 hover:shadow-2xl"
           >
             <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
 

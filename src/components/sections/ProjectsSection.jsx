@@ -101,11 +101,13 @@ function ProjectsSection() {
         </p>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
         {featuredProjects.map((project) => (
           <motion.article
             key={project.slug}
-            className="group flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gray-300 hover:shadow-2xl"
+            className={`group flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gray-300 hover:shadow-2xl ${
+              project.slug === 'studioflow' ? 'lg:col-span-2' : ''
+            }`}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div>

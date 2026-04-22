@@ -80,24 +80,28 @@ function getTechIcon(tech) {
 const moreProjectPlaceholders = [
   {
     title: 'Campus Connect Portal',
+    path: '/projects/campus-connect',
     description:
       'A unified student portal that streamlines attendance, notices, and assignment tracking in one dashboard.',
     tags: ['React', 'Node.js', 'PostgreSQL'],
   },
   {
     title: 'InsightBoard Analytics',
+    path: '/projects/insight-board',
     description:
       'A lightweight KPI dashboard that turns daily operations data into clear, real-time team insights.',
     tags: ['React', 'Supabase', 'Vercel'],
   },
   {
     title: 'SupportFlow Assistant',
+    path: '/projects/support-flow',
     description:
       'An AI-first helpdesk companion that auto-classifies tickets and drafts context-aware response suggestions.',
     tags: ['Node.js', 'Render', 'Cloudinary'],
   },
   {
     title: 'MediaOps Studio',
+    path: '/projects/media-ops',
     description:
       'A media management workspace that automates file ingestion, tagging, and optimized cloud delivery.',
     tags: ['Cloudinary', 'React', 'Supabase'],
@@ -193,12 +197,12 @@ function ProjectsSection() {
               ))}
             </div>
 
-            <a
-              href="#"
-              className="mt-4 inline-block text-sm font-semibold text-gray-900 transition hover:text-gray-600"
+            <Link
+              to={project.path}
+              className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-sm font-medium !text-white transition-colors hover:bg-gray-800"
             >
               Case Study -&gt;
-            </a>
+            </Link>
           </article>
         ))}
       </div>

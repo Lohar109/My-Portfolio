@@ -105,8 +105,7 @@ function ProjectsSection() {
         {featuredProjects.map((project) => (
           <motion.article
             key={project.slug}
-            className="flex flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-md"
-            whileHover={{ y: -4, scale: 1.01 }}
+            className="group flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gray-300 hover:shadow-2xl"
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div>
@@ -134,7 +133,7 @@ function ProjectsSection() {
             <div className="mt-auto flex justify-start">
               <Link
                 to={'/projects/' + project.slug}
-                className="rounded-full bg-black px-6 py-2 text-center font-semibold !text-white transition hover:bg-gray-800"
+                className="rounded-full bg-black px-6 py-2 text-center font-semibold !text-white transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-gray-800 hover:bg-gray-800"
               >
                 Case Study
               </Link>
@@ -149,7 +148,7 @@ function ProjectsSection() {
         {moreProjects.map((project) => (
           <article
             key={project.slug}
-            className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+            className="group cursor-pointer rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-gray-300 hover:shadow-2xl"
           >
             <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
 
@@ -169,7 +168,7 @@ function ProjectsSection() {
 
             <Link
               to={'/projects/' + project.slug}
-              className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-center text-sm font-medium !text-white transition-colors hover:bg-gray-800"
+              className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-center text-sm font-medium !text-white transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-gray-800 hover:bg-gray-800"
             >
               Case Study
             </Link>

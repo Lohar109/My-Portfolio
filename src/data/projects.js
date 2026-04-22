@@ -18,12 +18,12 @@ export const projects = [
     topInfoCards: [
       { label: 'Role', value: 'Full Stack & AI Integration' },
       { label: 'Core Focus', value: 'Automated Inventory & GenAI Pipelines' },
-      { label: 'Primary Goal', value: 'Scale merchandising & eliminate manual data entry' },
+      { label: 'Outcome', value: 'Scale merchandising & eliminate manual data entry' },
     ],
     stats: [
       { label: 'Use Case', value: 'Enterprise commerce operations' },
       { label: 'Audience', value: 'Retail and merchandising teams' },
-      { label: 'Outcome', value: 'Automate catalog onboarding' },
+      { label: 'Primary Goal', value: 'Automate catalog onboarding' },
     ],
     caseStudy: {
       overview:

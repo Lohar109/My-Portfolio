@@ -73,11 +73,48 @@ function getStackIcon(item) {
 function ProjectDetail() {
   const { slug } = useParams()
   const project = projects.find((entry) => entry.slug === slug)
-  const topInfoCards = project?.topInfoCards ?? [
-    { label: 'Role', value: project?.role },
-    { label: 'Challenge', value: project?.challenge },
-    { label: 'Outcome', value: project?.outcome },
-  ]
+  const stackItems = project?.stack?.length
+    ? project.stack
+    : ['React', 'Node.js', 'PostgreSQL']
+
+  const topInfoCards = project?.topInfoCards?.length
+    ? project.topInfoCards
+    : [
+        { label: 'Role', value: project?.role ?? 'Full Stack Development' },
+        {
+          label: 'Core Focus',
+          value: project?.challenge ?? 'Product architecture and implementation',
+        },
+        { label: 'Outcome', value: project?.outcome ?? 'Improved workflow outcomes' },
+      ]
+
+  const statsCards = project?.stats?.length
+    ? project.stats
+    : [
+        { label: 'Use Case', value: 'Business workflow optimization' },
+        { label: 'Audience', value: 'Cross-functional product teams' },
+        { label: 'Primary Goal', value: 'Ship a reliable and scalable experience' },
+      ]
+
+  const caseStudy = {
+    overview:
+      project?.caseStudy?.overview ??
+      'This project was designed to solve a practical product problem with a clear architecture and polished user experience.',
+    problem:
+      project?.caseStudy?.problem ??
+      'The team needed a dependable implementation that reduced operational friction and improved execution quality.',
+    approach:
+      project?.caseStudy?.approach?.length
+        ? project.caseStudy.approach
+        : [
+            'Planned a modular architecture to keep implementation maintainable as features evolve.',
+            'Implemented a focused front-end and API workflow with clear state and data boundaries.',
+            'Validated behavior through iterative testing and quality checks before release.',
+          ],
+    result:
+      project?.caseStudy?.result ??
+      'The delivered solution improved usability, reduced repetitive manual work, and created a strong base for future iterations.',
+  }
 
   if (!project) {
     return (
@@ -118,11 +155,11 @@ function ProjectDetail() {
               {project.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              {project.detailIntro}
+              {project.detailIntro ?? project.summary}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              {project.stack.map((item) => (
+              {stackItems.map((item) => (
                 <span
                   key={item}
                   className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
@@ -160,7 +197,7 @@ function ProjectDetail() {
         </section>
 
         <section className="mt-8 grid gap-4 sm:grid-cols-3">
-          {project.stats.map((stat) => (
+          {statsCards.map((stat) => (
             <article
               key={stat.label}
               className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm"
@@ -177,24 +214,24 @@ function ProjectDetail() {
 
         <section id="case-study" className="mt-16 grid gap-6">
           <CaseStudySection eyebrow="Case Study">
-            <p>{project.caseStudy.overview}</p>
+            <p>{caseStudy.overview}</p>
           </CaseStudySection>
 
           <CaseStudySection eyebrow="Problem">
-            <p>{project.caseStudy.problem}</p>
+            <p>{caseStudy.problem}</p>
           </CaseStudySection>
 
           <CaseStudySection
             eyebrow="Approach"
             contentClassName="space-y-2 [&>p]:m-0"
           >
-            {project.caseStudy.approach.map((step) => (
+            {caseStudy.approach.map((step) => (
               <p key={step}>{step}</p>
             ))}
           </CaseStudySection>
 
           <CaseStudySection eyebrow="Result">
-            <p>{project.caseStudy.result}</p>
+            <p>{caseStudy.result}</p>
           </CaseStudySection>
         </section>
       </div>

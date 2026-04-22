@@ -77,39 +77,9 @@ function getTechIcon(tech) {
   }
 }
 
-const moreProjectPlaceholders = [
-  {
-    title: 'Campus Connect Portal',
-    path: '/projects/campus-connect',
-    description:
-      'A unified student portal that streamlines attendance, notices, and assignment tracking in one dashboard.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-  },
-  {
-    title: 'InsightBoard Analytics',
-    path: '/projects/insight-board',
-    description:
-      'A lightweight KPI dashboard that turns daily operations data into clear, real-time team insights.',
-    tags: ['React', 'Supabase', 'Vercel'],
-  },
-  {
-    title: 'SupportFlow Assistant',
-    path: '/projects/support-flow',
-    description:
-      'An AI-first helpdesk companion that auto-classifies tickets and drafts context-aware response suggestions.',
-    tags: ['Node.js', 'Render', 'Cloudinary'],
-  },
-  {
-    title: 'MediaOps Studio',
-    path: '/projects/media-ops',
-    description:
-      'A media management workspace that automates file ingestion, tagging, and optimized cloud delivery.',
-    tags: ['Cloudinary', 'React', 'Supabase'],
-  },
-]
-
 function ProjectsSection() {
-  const featuredProjects = projects.slice(0, 2)
+  const featuredProjects = projects.filter((project) => project.isFeatured)
+  const moreProjects = projects.filter((project) => !project.isFeatured)
 
   return (
     <motion.section
@@ -176,17 +146,17 @@ function ProjectsSection() {
       <h3 className="mt-16 mb-6 text-xl font-bold text-gray-900">More Projects</h3>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {moreProjectPlaceholders.map((project) => (
+        {moreProjects.map((project) => (
           <article
-            key={project.title}
+            key={project.slug}
             className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
           >
             <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
 
-            <p className="mt-3 text-sm text-gray-500">{project.description}</p>
+            <p className="mt-3 text-sm text-gray-500">{project.summary}</p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              {project.tags.map((tech) => (
+              {project.stack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
                   className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700"
@@ -198,10 +168,10 @@ function ProjectsSection() {
             </div>
 
             <Link
-              to={project.path}
-              className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-sm font-medium !text-white transition-colors hover:bg-gray-800"
+              to={'/projects/' + project.slug}
+              className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-center text-sm font-medium !text-white transition-colors hover:bg-gray-800"
             >
-              Case Study -&gt;
+              Case Study
             </Link>
           </article>
         ))}

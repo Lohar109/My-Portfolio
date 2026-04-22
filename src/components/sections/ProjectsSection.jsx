@@ -101,7 +101,7 @@ function ProjectsSection() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+      <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
         {featuredProjects.map((project) => (
           <motion.article
             key={project.slug}

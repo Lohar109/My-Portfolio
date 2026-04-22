@@ -54,6 +54,62 @@ export const projectsData = [
       'bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_52%,#38bdf8_100%)]',
   },
   {
+    slug: 'portfolio',
+    isFeatured: true,
+    title: 'GenAI-Powered Portfolio & Agent',
+    category: 'Developer Platform',
+    role: 'Full Stack + AI System Design',
+    year: '2026',
+    summary:
+      'A self-aware developer showcase featuring a custom-built GenAI agent. It implements a specialized RAG (Retrieval-Augmented Generation) pipeline to answer queries about my technical journey, projects, and expertise in real-time.',
+    previewText:
+      'Built as an interactive portfolio where content and AI reasoning work together in a single product experience.',
+    detailIntro:
+      'This project combines a polished portfolio interface with an embedded AI agent that can reason over my profile, projects, and skill history using a focused RAG architecture.',
+    challenge:
+      'Making portfolio content queryable with reliable context retrieval and grounded responses.',
+    outcome:
+      'Delivered a live, self-describing portfolio that answers technical questions with high relevance.',
+    topInfoCards: [
+      { label: 'Role', value: 'Full Stack + AI System Design' },
+      {
+        label: 'Core Focus',
+        value: 'RAG-powered portfolio intelligence and real-time context retrieval',
+      },
+      {
+        label: 'Outcome',
+        value: 'Context-aware responses about projects, skills, and engineering journey',
+      },
+    ],
+    stats: [
+      { label: 'Use Case', value: 'Interactive developer portfolio assistant' },
+      { label: 'Audience', value: 'Recruiters, founders, and engineering teams' },
+      { label: 'Primary Goal', value: 'Provide instant, accurate profile intelligence' },
+    ],
+    caseStudy: {
+      overview:
+        'The GenAI portfolio was designed to move beyond static storytelling by introducing an intelligent assistant that can answer targeted questions about my work. It pairs curated content with retrieval and response generation to create a practical, interview-ready experience.',
+      problem:
+        'Traditional portfolio sites are easy to browse but hard to query. Visitors often need deeper, context-specific answers about architecture choices, project tradeoffs, and technology depth that static pages cannot provide efficiently.',
+      approach: [
+        'Designed a structured portfolio data layer so projects, skills, and milestones could be indexed consistently for retrieval.',
+        'Implemented a LangChain-based RAG pipeline with vector search to ground responses in relevant portfolio content.',
+        'Integrated OpenAI/Groq model routing with response guardrails to keep answers concise, factual, and context-aware.',
+      ],
+      result:
+        'The final product delivers a premium portfolio experience where visitors can explore visually and also ask direct technical questions, receiving grounded answers in real-time.',
+    },
+    stack: [
+      'Node.js',
+      'LangChain',
+      'OpenAI/Groq',
+      'RAG Architecture',
+      'Vector DB',
+    ],
+    previewTone:
+      'bg-[linear-gradient(135deg,#0b1220_0%,#1f2937_50%,#0ea5e9_100%)]',
+  },
+  {
     slug: 'marketpulse',
     isFeatured: true,
     title: 'Loading Optimisation Software',

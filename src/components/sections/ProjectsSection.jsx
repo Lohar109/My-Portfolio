@@ -5,6 +5,7 @@ import {
   AudioLines,
   Box,
   BrainCircuit,
+  Cloud,
   Cuboid,
   Eye,
   PackageCheck,
@@ -20,6 +21,9 @@ import {
   SiExpress,
   SiMongodb,
   SiPostgresql,
+  SiSupabase,
+  SiVercel,
+  SiRender,
 } from 'react-icons/si'
 
 function getTechIcon(tech) {
@@ -36,6 +40,14 @@ function getTechIcon(tech) {
       return <SiMongodb className="w-4 h-4 text-[#47A248]" />
     case 'postgresql':
       return <SiPostgresql className="w-4 h-4 text-[#336791]" />
+    case 'supabase':
+      return <SiSupabase className="w-4 h-4 text-emerald-500" />
+    case 'render':
+      return <SiRender className="w-4 h-4 text-blue-400" />
+    case 'vercel':
+      return <SiVercel className="w-4 h-4 text-gray-900" />
+    case 'cloudinary':
+      return <Cloud className="w-4 h-4 text-sky-500" />
     case 'charts':
       return <FaChartLine className="w-4 h-4 text-indigo-500" />
     case 'api integration':

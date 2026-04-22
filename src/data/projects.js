@@ -6,7 +6,7 @@ export const projects = [
     role: 'Full Stack & AI Integration',
     year: '2026',
     summary:
-      'An enterprise-ready e-commerce platform that unifies storefront and backend services on a scalable Node.js architecture. It features an intelligent inventory management workflow utilizing multimodal GenAI pipelines for audio transcription, vision-driven product understanding, and structured JSON data extraction to automate merchandising at scale.',
+      'An AI-powered e-commerce platform built on a scalable Node.js architecture. It uses multimodal GenAI (Vision & Audio) and structured JSON extraction to automate product onboarding and streamline inventory management.',
     previewText:
       'Designed to feel calm, data-rich, and client-ready with strong hierarchy and fast scanning.',
     detailIntro:
@@ -23,7 +23,7 @@ export const projects = [
     stats: [
       { label: 'Use Case', value: 'Enterprise commerce operations' },
       { label: 'Audience', value: 'Retail and merchandising teams' },
-      { label: 'Primary Goal', value: 'Automate catalog onboarding' },
+      { label: 'Outcome', value: 'Automate catalog onboarding' },
     ],
     caseStudy: {
       overview:
@@ -44,6 +44,10 @@ export const projects = [
       'PostgreSQL',
       'Vision API',
       'Audio Transcription',
+      'Supabase',
+      'Render',
+      'Vercel',
+      'Cloudinary',
     ],
     previewTone:
       'bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_52%,#38bdf8_100%)]',

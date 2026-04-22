@@ -3,6 +3,7 @@ import { projects } from '../../data/projects.js'
 import { motion } from 'framer-motion'
 import {
   AudioLines,
+  ArrowUpRight,
   Box,
   BrainCircuit,
   Cloud,
@@ -77,7 +78,36 @@ function getTechIcon(tech) {
   }
 }
 
+const moreProjectPlaceholders = [
+  {
+    title: 'Campus Connect Portal',
+    description:
+      'A unified student portal that streamlines attendance, notices, and assignment tracking in one dashboard.',
+    tags: ['React', 'Node.js', 'PostgreSQL'],
+  },
+  {
+    title: 'InsightBoard Analytics',
+    description:
+      'A lightweight KPI dashboard that turns daily operations data into clear, real-time team insights.',
+    tags: ['React', 'Supabase', 'Vercel'],
+  },
+  {
+    title: 'SupportFlow Assistant',
+    description:
+      'An AI-first helpdesk companion that auto-classifies tickets and drafts context-aware response suggestions.',
+    tags: ['Node.js', 'Render', 'Cloudinary'],
+  },
+  {
+    title: 'MediaOps Studio',
+    description:
+      'A media management workspace that automates file ingestion, tagging, and optimized cloud delivery.',
+    tags: ['Cloudinary', 'React', 'Supabase'],
+  },
+]
+
 function ProjectsSection() {
+  const featuredProjects = projects.slice(0, 2)
+
   return (
     <motion.section
       id="projects"
@@ -98,8 +128,10 @@ function ProjectsSection() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
-        {projects.map((project) => (
+      <h3 className="mt-10 mb-6 text-xl font-bold text-gray-900">Featured Work</h3>
+
+      <div className="grid gap-8 lg:grid-cols-2">
+        {featuredProjects.map((project) => (
           <motion.article
             key={project.slug}
             className="flex flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-md"
@@ -137,6 +169,36 @@ function ProjectsSection() {
               </Link>
             </div>
           </motion.article>
+        ))}
+      </div>
+
+      <h3 className="mt-16 mb-6 text-xl font-bold text-gray-900">More Projects</h3>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {moreProjectPlaceholders.map((project) => (
+          <article
+            key={project.title}
+            className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
+              <ArrowUpRight className="mt-0.5 h-4 w-4 text-gray-500" aria-hidden="true" />
+            </div>
+
+            <p className="mt-3 text-sm text-gray-500">{project.description}</p>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.tags.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700"
+                >
+                  {getTechIcon(tech)}
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </article>
         ))}
       </div>
     </motion.section>

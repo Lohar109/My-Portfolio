@@ -11,11 +11,15 @@ import {
 } from 'lucide-react'
 import {
   SiCplusplus,
+  SiCloudinary,
   SiNodedotjs,
   SiPostgresql,
   SiQt,
   SiReact,
+  SiRender,
+  SiSupabase,
   SiTailwindcss,
+  SiVercel,
 } from 'react-icons/si'
 import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
@@ -47,6 +51,14 @@ function getStackIcon(item) {
       return <Eye className="h-4 w-4 text-sky-500" />
     case 'audio transcription':
       return <AudioLines className="h-4 w-4 text-violet-500" />
+    case 'supabase':
+      return <SiSupabase className="h-4 w-4 text-emerald-500" />
+    case 'render':
+      return <SiRender className="h-4 w-4 text-blue-400" />
+    case 'vercel':
+      return <SiVercel className="h-4 w-4 text-gray-900" />
+    case 'cloudinary':
+      return <SiCloudinary className="h-4 w-4 text-sky-500" />
     case 'tailwind css':
       return <SiTailwindcss className="h-4 w-4 text-[#06B6D4]" />
     case 'charts':

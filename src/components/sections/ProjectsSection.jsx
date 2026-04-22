@@ -3,7 +3,6 @@ import { projects } from '../../data/projects.js'
 import { motion } from 'framer-motion'
 import {
   AudioLines,
-  ArrowUpRight,
   Box,
   BrainCircuit,
   Cloud,
@@ -117,20 +116,18 @@ function ProjectsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <div className="max-w-2xl">
+      <div className="max-w-3xl">
         <h2 className="text-3xl font-bold text-gray-900 tracking-tight leading-tight">
           Projects I've built from the ground up.
         </h2>
 
-        <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
+        <p className="mt-5 max-w-3xl text-base leading-7 text-gray-600">
           A collection of web applications where I solved real problems with
           clean code and thoughtful design.
         </p>
       </div>
 
-      <h3 className="mt-10 mb-6 text-xl font-bold text-gray-900">Featured Work</h3>
-
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="mt-10 grid gap-8 lg:grid-cols-2">
         {featuredProjects.map((project) => (
           <motion.article
             key={project.slug}
@@ -180,10 +177,7 @@ function ProjectsSection() {
             key={project.title}
             className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
           >
-            <div className="flex items-start justify-between gap-3">
-              <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
-              <ArrowUpRight className="mt-0.5 h-4 w-4 text-gray-500" aria-hidden="true" />
-            </div>
+            <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
 
             <p className="mt-3 text-sm text-gray-500">{project.description}</p>
 
@@ -198,6 +192,13 @@ function ProjectsSection() {
                 </span>
               ))}
             </div>
+
+            <a
+              href="#"
+              className="mt-4 inline-block text-sm font-semibold text-gray-900 transition hover:text-gray-600"
+            >
+              Case Study -&gt;
+            </a>
           </article>
         ))}
       </div>

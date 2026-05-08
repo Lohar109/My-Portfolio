@@ -200,6 +200,10 @@
 }
 .metallic-pill img {
   display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  transition: transform 700ms cubic-bezier(.2,.9,.2,1);
+  transform-origin: center center;
 }
 
 /* Sweep shine */
@@ -226,5 +230,24 @@
 
 .metallic-pill .pill-text { /* ensure crisp text */
   color: #0f172a; /* text-slate-900 */
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Larger star, rotation on hover, subtle gold outer glow */
+.metallic-pill {
+  filter: drop-shadow(0 0 8px rgba(251,191,36,0.18));
+}
+.metallic-pill .star-icon {
+  width: 1.25rem; /* 20px */
+  height: 1.25rem;
+  display: inline-block;
+}
+.metallic-pill:hover .star-icon {
+  transform: rotate(360deg);
+}
+
+/* Slightly darken pill on hover to indicate interactivity */
+.metallic-pill:hover {
+  filter: brightness(0.96) drop-shadow(0 0 10px rgba(251,191,36,0.22));
 }

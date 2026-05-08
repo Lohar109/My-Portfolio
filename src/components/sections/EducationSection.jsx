@@ -24,7 +24,7 @@ const educationItems = [
 ]
 
 const metallicPillClass =
-  'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold metallic-pill'
+  'inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-bold metallic-pill'
 
 function EducationSection() {
   return (
@@ -93,7 +93,7 @@ function EducationSection() {
 
                     <div className="flex justify-start">
                       <span className={metallicPillClass}>
-                        <img src={starGold} alt="star" className="h-3 w-3" aria-hidden="true" />
+                        <img src={starGold} alt="star" className="star-icon" aria-hidden="true" />
                         <span className="pill-text">{item.performance}</span>
                       </span>
                     </div>
@@ -103,10 +103,13 @@ function EducationSection() {
                 {item.grade !== 'Ongoing' && (
                   <div className="mt-3 flex flex-wrap items-center gap-2">
                     <span className={metallicPillClass}>
-                      <img src={starGold} alt="star" className="h-3 w-3" aria-hidden="true" />
+                      <img src={starGold} alt="star" className="star-icon" aria-hidden="true" />
                       <span className="pill-text">{item.performance}</span>
                     </span>
-                    <span className={`${metallicPillClass} px-4`}>{item.grade}</span>
+                    <span className={`${metallicPillClass} px-4`}>
+                      <img src={starGold} alt="star" className="star-icon" aria-hidden="true" />
+                      <span className="pill-text">{item.grade}</span>
+                    </span>
                   </div>
                 )}
               </motion.article>

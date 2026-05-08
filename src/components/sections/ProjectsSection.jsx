@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects.js'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   AudioLines,
   Box,
@@ -8,6 +9,7 @@ import {
   Cloud,
   Cuboid,
   Eye,
+  ChevronDown,
   PackageCheck,
   Sparkles,
   Truck,
@@ -80,6 +82,7 @@ function getTechIcon(tech) {
 function ProjectsSection() {
   const featuredProjects = projects.filter((project) => project.isFeatured)
   const moreProjects = projects.filter((project) => !project.isFeatured)
+  const [showProjects, setShowProjects] = useState(false)
 
   return (
     <motion.section
@@ -144,39 +147,69 @@ function ProjectsSection() {
         ))}
       </div>
 
-      <h3 className="mt-16 mb-6 text-xl font-bold text-gray-900">More Projects</h3>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {moreProjects.map((project) => (
-          <article
-            key={project.slug}
-            className="group cursor-pointer rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-gray-300 hover:shadow-2xl"
+      <div className="mt-14 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setShowProjects((current) => !current)}
+          className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-100 hover:text-gray-900 hover:shadow-md"
+          aria-expanded={showProjects}
+          aria-controls="more-projects-panel"
+        >
+          <span>{showProjects ? 'Show Less' : 'More Projects'}</span>
+          <motion.span
+            animate={{ rotate: showProjects ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="inline-flex"
           >
-            <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
+            <ChevronDown className="h-4 w-4" />
+          </motion.span>
+        </button>
+      </div>
 
-            <p className="mt-3 text-sm text-gray-500">{project.summary}</p>
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {project.stack.slice(0, 3).map((tech) => (
-                <span
-                  key={tech}
-                  className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700"
+      <AnimatePresence initial={false}>
+        {showProjects && (
+          <motion.div
+            id="more-projects-panel"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {moreProjects.map((project) => (
+                <article
+                  key={project.slug}
+                  className="group cursor-pointer rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-gray-300 hover:shadow-2xl"
                 >
-                  {getTechIcon(tech)}
-                  {tech}
-                </span>
+                  <h4 className="text-lg font-semibold text-gray-900">{project.title}</h4>
+
+                  <p className="mt-3 text-sm text-gray-500">{project.summary}</p>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.stack.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700"
+                      >
+                        {getTechIcon(tech)}
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link
+                    to={'/projects/' + project.slug}
+                    className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-center text-sm font-medium !text-white transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-gray-800 hover:bg-gray-800"
+                  >
+                    Case Study
+                  </Link>
+                </article>
               ))}
             </div>
-
-            <Link
-              to={'/projects/' + project.slug}
-              className="mt-4 inline-block rounded-full bg-black px-4 py-2 text-center text-sm font-medium !text-white transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-gray-800 hover:bg-gray-800"
-            >
-              Case Study
-            </Link>
-          </article>
-        ))}
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.section>
   )
 }

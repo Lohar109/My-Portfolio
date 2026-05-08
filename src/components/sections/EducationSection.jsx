@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Building2, CalendarDays, GraduationCap, Star } from 'lucide-react'
+import { Building2, CalendarDays, GraduationCap } from 'lucide-react'
+import starGold from '../../assets/star-gold.svg'
 
 const educationItems = [
   {
@@ -22,8 +23,8 @@ const educationItems = [
   },
 ]
 
-const ghostPillClass =
-  'inline-flex items-center gap-1.5 rounded-full border border-gray-100 bg-gray-50 px-3.5 py-1.5 text-xs font-semibold text-black'
+const metallicPillClass =
+  'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold metallic-pill'
 
 function EducationSection() {
   return (
@@ -91,9 +92,9 @@ function EducationSection() {
                     </p>
 
                     <div className="flex justify-start">
-                      <span className={ghostPillClass}>
-                        <Star size={12} className="text-gray-900" aria-hidden="true" />
-                        {item.performance}
+                      <span className={metallicPillClass}>
+                        <img src={starGold} alt="star" className="h-3 w-3" aria-hidden="true" />
+                        <span className="pill-text">{item.performance}</span>
                       </span>
                     </div>
                   </div>
@@ -101,13 +102,11 @@ function EducationSection() {
 
                 {item.grade !== 'Ongoing' && (
                   <div className="mt-3 flex flex-wrap items-center gap-2">
-                    <span className={ghostPillClass}>
-                      <Star size={12} className="text-gray-900" aria-hidden="true" />
-                      {item.performance}
+                    <span className={metallicPillClass}>
+                      <img src={starGold} alt="star" className="h-3 w-3" aria-hidden="true" />
+                      <span className="pill-text">{item.performance}</span>
                     </span>
-                    <span className={ghostPillClass}>
-                      {item.grade}
-                    </span>
+                    <span className={`${metallicPillClass} px-4`}>{item.grade}</span>
                   </div>
                 )}
               </motion.article>

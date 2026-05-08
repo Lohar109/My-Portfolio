@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
-function NavLink({ label, href, onClick }) {
+function NavLink({ label, onClick }) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -10,15 +10,15 @@ function NavLink({ label, href, onClick }) {
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative px-1 py-2 text-sm font-medium text-gray-700 tracking-wide transition-colors hover:text-gray-900"
+      className="relative px-2 py-1 text-sm font-medium text-gray-500 transition-colors duration-300 hover:text-black"
     >
       {label}
       <motion.div
-        className="absolute bottom-0 left-0 h-px bg-gray-900"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-        style={{ originX: 0 }}
+        className="absolute bottom-0 left-1/2 h-px w-0 bg-black"
+        initial={{ scaleX: 0, x: '-50%' }}
+        animate={{ scaleX: isHovered ? 1 : 0, x: isHovered ? '-50%' : '-50%' }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        style={{ transformOrigin: 'center' }}
       />
     </button>
   )
@@ -31,7 +31,6 @@ function SiteHeader() {
     { label: 'Home', href: '/#hero' },
     { label: 'Skills', href: '/#skills' },
     { label: 'Projects', href: '/#projects' },
-    { label: 'Contact', href: '/#contact' },
   ]
 
   const handleNavClick = (href) => {
@@ -44,21 +43,18 @@ function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200/30 bg-[#f5f5f7]/95 backdrop-blur-md">
-      <div className="flex max-w-full items-center justify-between px-6 py-5 md:px-8">
+    <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-lg">
+      <div className="flex max-w-full items-center justify-between px-8 py-4">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gray-900">
-              <span className="text-sm font-bold text-white">V</span>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black/5 border border-gray-200/50">
+              <span className="text-sm font-semibold text-black">V</span>
             </div>
-            <span className="hidden font-medium tracking-tight text-gray-900 sm:inline text-sm">
-              Vaibhav
-            </span>
           </Link>
         </motion.div>
 
@@ -67,59 +63,81 @@ function SiteHeader() {
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-          className="hidden gap-8 md:flex"
+          className="hidden items-center gap-x-10 md:flex"
         >
           {navItems.map((item) => (
             <NavLink
               key={item.label}
               label={item.label}
-              href={item.href}
               onClick={() => handleNavClick(item.href)}
             />
           ))}
         </motion.nav>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col gap-1.5"
-          aria-label="Toggle menu"
-        >
-          <motion.span
-            animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
-            className="block h-0.5 w-5 bg-gray-900 transition-all"
-          />
-          <motion.span
-            animate={{ opacity: isOpen ? 0 : 1 }}
-            className="block h-0.5 w-5 bg-gray-900 transition-all"
-          />
-          <motion.span
-            animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
-            className="block h-0.5 w-5 bg-gray-900 transition-all"
-          />
-        </motion.button>
+        {/* Contact Button + Mobile Menu */}
+        <div className="flex items-center gap-4">
+          {/* Contact Button - Desktop */}
+          <motion.button
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.2, ease: 'easeOut' }}
+            onClick={() => handleNavClick('/#contact')}
+            className="hidden md:block px-6 py-2 rounded-full bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
+          >
+            Contact
+          </motion.button>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden flex flex-col gap-1.5"
+            aria-label="Toggle menu"
+          >
+            <motion.span
+              animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
+              className="block h-0.5 w-5 bg-black transition-all duration-300"
+            />
+            <motion.span
+              animate={{ opacity: isOpen ? 0 : 1 }}
+              className="block h-0.5 w-5 bg-black transition-all duration-300"
+            />
+            <motion.span
+              animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
+              className="block h-0.5 w-5 bg-black transition-all duration-300"
+            />
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
       <motion.div
         initial={false}
         animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden border-t border-gray-200/30 md:hidden"
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        className="overflow-hidden border-t border-gray-100 md:hidden"
       >
-        <nav className="flex flex-col gap-4 px-6 py-5">
+        <nav className="flex flex-col gap-4 px-8 py-6 bg-white/95">
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => handleNavClick(item.href)}
-              className="text-left text-sm font-medium text-gray-700 tracking-wide transition-colors hover:text-gray-900"
+              className="text-left text-sm font-medium text-gray-600 transition-colors duration-300 hover:text-black"
             >
               {item.label}
             </button>
           ))}
+          <button
+            onClick={() => {
+              handleNavClick('/#contact')
+              setIsOpen(false)
+            }}
+            className="mt-2 w-full px-4 py-2 rounded-full bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-black/85"
+          >
+            Contact
+          </button>
         </nav>
       </motion.div>
     </header>

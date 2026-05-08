@@ -3,22 +3,13 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 function NavLink({ label, onClick }) {
-  const [isHovered, setIsHovered] = useState(false)
-
   return (
     <button
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative px-0.5 py-2 text-sm font-medium text-gray-500 transition-colors duration-300 hover:text-black"
+      className="group relative px-0.5 py-2 text-sm font-medium tracking-wide text-gray-500 transition-colors duration-300 hover:text-black"
     >
       {label}
-      <motion.div
-        className="absolute bottom-0 left-1/2 h-0.5 bg-black"
-        initial={{ width: 0, x: '-50%' }}
-        animate={{ width: isHovered ? '100%' : 0, x: '-50%' }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-      />
+      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-black transition-all duration-300 ease-out group-hover:w-full" />
     </button>
   )
 }

@@ -24,13 +24,7 @@ const FloatingAssistant = () => {
         </div>
       </div>
 
-      <div
-        className="absolute -inset-2 rounded-full blur-3xl opacity-70 transition-opacity duration-700 group-hover:opacity-95"
-        style={{ boxShadow: '0 0 50px -12px rgba(30,58,138,0.5)' }}
-        aria-hidden="true"
-      />
-
-      <div className="relative bg-slate-950/50 backdrop-blur-2xl rounded-full p-1 border border-white/10 shadow-2xl cursor-pointer hover:scale-110 transition-transform duration-500 overflow-hidden">
+      <div className="relative cursor-pointer hover:scale-110 transition-transform duration-500">
         {View}
       </div>
     </div>

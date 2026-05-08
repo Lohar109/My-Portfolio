@@ -254,13 +254,13 @@
 
 /* Floating Assistant pulse ring */
 .assistant-pulse {
-  background: radial-gradient(circle at center, rgba(16, 81, 186, 0.2), rgba(8,145,178,0.08) 40%, transparent 60%);
-  animation: assistantPulse 2.6s infinite ease-out;
+  background: radial-gradient(circle at center, rgba(30,58,138,0.28), rgba(6,95,165,0.12) 40%, transparent 60%);
+  animation: assistantPulse 4s infinite ease-out;
   z-index: 0;
 }
 
 @keyframes assistantPulse {
-  0% { transform: scale(0.9); opacity: 0.85 }
-  50% { transform: scale(1.18); opacity: 0.45 }
-  100% { transform: scale(0.9); opacity: 0.85 }
+  0% { transform: scale(0.92); opacity: 0.9 }
+  50% { transform: scale(1.08); opacity: 0.6 }
+  100% { transform: scale(0.92); opacity: 0.9 }
 }

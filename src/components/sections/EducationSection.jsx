@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Building2, CalendarDays, GraduationCap } from 'lucide-react'
+import { Building2, CalendarDays, GraduationCap, Star } from 'lucide-react'
 
 const educationItems = [
   {
@@ -10,8 +10,6 @@ const educationItems = [
     performance: '9.30 CGPA',
     grade: 'Ongoing',
     icon: GraduationCap,
-    performanceClass:
-      'border-pink-200/70 bg-pink-50 text-pink-700 shadow-[0_0_0_1px_rgba(244,114,182,0.12)]',
   },
   {
     degree: 'Bachelor of Science (Computer Science)',
@@ -21,9 +19,11 @@ const educationItems = [
     performance: '9.08 CGPA',
     grade: 'A+ Grade',
     icon: Building2,
-    performanceClass: 'border-gray-200/70 bg-gray-50 text-gray-700',
   },
 ]
+
+const ghostPillClass =
+  'inline-flex items-center gap-1.5 rounded-full border border-gray-100 bg-gray-50 px-3.5 py-1.5 text-xs font-semibold text-black'
 
 function EducationSection() {
   return (
@@ -76,7 +76,7 @@ function EducationSection() {
                 </p>
 
                 <p
-                  className={`mt-3 text-sm text-gray-500 ${
+                  className={`mt-6 text-sm text-gray-500 ${
                     item.grade === 'Ongoing' ? 'font-semibold text-gray-700' : 'font-medium'
                   }`}
                 >
@@ -84,30 +84,28 @@ function EducationSection() {
                 </p>
 
                 {item.grade === 'Ongoing' && (
-                  <p className="mt-1 inline-flex items-center gap-1.5 text-[10px] font-medium tracking-wide text-gray-500">
-                    <CalendarDays size={12} className="text-slate-600" aria-hidden="true" />
-                    Expected Graduation: June 2026
-                  </p>
-                )}
+                  <div className="mt-2 space-y-3">
+                    <p className="inline-flex items-center gap-1.5 text-xs font-medium tracking-wide text-slate-600">
+                      <CalendarDays size={13} className="text-slate-600" aria-hidden="true" />
+                      Expected Graduation: June 2026
+                    </p>
 
-                {item.grade === 'Ongoing' && (
-                  <div className="mt-8 flex justify-end">
-                    <span
-                      className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
-                    >
-                      {item.performance}
-                    </span>
+                    <div className="flex justify-start">
+                      <span className={ghostPillClass}>
+                        <Star size={12} className="text-gray-900" aria-hidden="true" />
+                        {item.performance}
+                      </span>
+                    </div>
                   </div>
                 )}
 
                 {item.grade !== 'Ongoing' && (
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
-                    <span
-                      className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
-                    >
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className={ghostPillClass}>
+                      <Star size={12} className="text-gray-900" aria-hidden="true" />
                       {item.performance}
                     </span>
-                    <span className="inline-flex items-center rounded-full border border-gray-200/70 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-600">
+                    <span className={ghostPillClass}>
                       {item.grade}
                     </span>
                   </div>

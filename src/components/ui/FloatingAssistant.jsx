@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
-import { resetVaibhavAgentSession, sendMessageToVaibhavAgent } from '../../services/aiService';
+import { sendMessageToVaibhavAgent } from '../../services/aiService';
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
 const FloatingAssistant = () => {
@@ -57,7 +57,6 @@ const FloatingAssistant = () => {
     setMessages([]);
     setInputValue('');
     setIsThinking(true);
-    resetVaibhavAgentSession();
 
     clearTimeout(thinkingTimeoutRef.current);
     clearInterval(typingIntervalRef.current);

@@ -82,8 +82,8 @@ function SiteHeader({ isDetailPage = false }) {
 
           if (dist < 120) {
             const opacity = 1 - dist / 120
-            ctx.strokeStyle = `rgba(0, 212, 255, ${opacity * 0.3})`
-            ctx.lineWidth = 0.8
+            ctx.strokeStyle = `rgba(0,212,255,${0.4 * opacity})`
+            ctx.lineWidth = 0.9
             ctx.beginPath()
             ctx.moveTo(n1.x, n1.y)
             ctx.lineTo(n2.x, n2.y)
@@ -94,7 +94,7 @@ function SiteHeader({ isDetailPage = false }) {
 
       for (let i = 0; i < nodes.length; i += 1) {
         const n = nodes[i]
-        ctx.fillStyle = 'rgba(0, 212, 255, 0.65)'
+        ctx.fillStyle = 'rgba(0,212,255,0.4)'
         ctx.beginPath()
         ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2)
         ctx.fill()
@@ -160,10 +160,10 @@ function SiteHeader({ isDetailPage = false }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
       style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, sans-serif' }}
-      className="fixed inset-x-0 top-0 z-40 overflow-hidden border-b border-[#00D4FF]/20"
+      className="fixed inset-x-0 top-0 z-40 overflow-hidden border-b border-[#00D4FF]/20 bg-black"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,0)_100%)]" />
-      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 -z-20" />
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-black" />
+      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 -z-10" />
 
       <AnimatePresence>
         {stream && (

@@ -1,67 +1,37 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from 'react'
+import { useLottie } from 'lottie-react'
+import animationData from '../../assets/lottie/AI Assistent.json'
 
-export default function FloatingAssistant() {
-  const [open, setOpen] = useState(false)
+const FloatingAssistant = () => {
+  const { View } = useLottie(
+    {
+      animationData,
+      loop: true,
+      autoplay: true,
+    },
+    {
+      width: 85,
+      height: 85,
+    }
+  )
 
   return (
-    <>
-      <AnimatePresence>
-        <motion.button
-          key="fab"
-          onClick={() => setOpen(true)}
-          initial={{ scale: 0 }}
-          animate={{ scale: 1, y: [0, -6, 0] }}
-          transition={{ duration: 2.8, repeat: Infinity, repeatType: 'loop', ease: 'easeInOut' }}
-          whileHover={{ scale: 1.08, boxShadow: '0 8px 30px rgba(236,72,153,0.12)' }}
-          className="fixed bottom-10 right-10 z-50 flex h-16 w-16 items-center justify-center rounded-full border border-transparent backdrop-blur-md bg-gradient-to-br from-[#ff7aa2]/70 to-[#ff6b81]/65 p-1 shadow-md"
-          aria-label="Open assistant"
-        >
-          <span className="absolute -inset-1 rounded-full opacity-30 assistant-pulse" aria-hidden="true" />
+    <div className="fixed bottom-8 right-8 z-[9999] group">
+      <div className="absolute right-20 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-xl border border-pink-100 whitespace-nowrap">
+          <p className="text-sm font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+            Hi! I'm Vaibhav's AI ✨
+          </p>
+        </div>
+      </div>
 
-          <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2l1.8 3.8L18 7l-3 2.6L15.6 13 12 11l-3.6 2 0.6-3.4L6 7l4.2-1.2L12 2z" fill="white" opacity="0.95"/>
-          </svg>
-        </motion.button>
-      </AnimatePresence>
+      <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full blur-xl opacity-40 group-hover:opacity-80 animate-pulse transition-opacity duration-500"></div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.aside
-            key="chat"
-            initial={{ x: 360, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 360, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed right-6 bottom-24 z-50 w-80 max-w-xs rounded-2xl bg-white/95 backdrop-blur-sm border border-gray-100 shadow-2xl"
-          >
-            <div className="flex items-center justify-between gap-2 p-4">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 flex-none rounded-lg bg-gradient-to-br from-[#ff7aa2] to-[#ff6b81] flex items-center justify-center text-white font-semibold">AI</div>
-                <div>
-                  <div className="text-sm font-semibold text-gray-900">Assistant</div>
-                  <div className="text-xs text-gray-500">How can I help you today?</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <button onClick={() => setOpen(false)} aria-label="Close chat" className="text-sm text-gray-500 hover:text-gray-700">Close</button>
-              </div>
-            </div>
-
-            <div className="h-64 overflow-y-auto border-t border-gray-100 p-4 text-sm text-gray-700">
-              <div className="space-y-3">
-                <div className="rounded-lg bg-gray-50 p-3">Hello — I can help with portfolio edits, code, or copy.</div>
-                <div className="rounded-lg bg-[#fff7ed] p-3">Try: "Show more projects" or "Upgrade header"</div>
-              </div>
-            </div>
-
-            <form className="flex items-center gap-2 p-3 border-t border-gray-100">
-              <input placeholder="Type a message..." className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none" />
-              <button type="button" className="rounded-lg bg-[#ff6b81] px-3 py-2 text-sm font-semibold text-white">Send</button>
-            </form>
-          </motion.aside>
-        )}
-      </AnimatePresence>
-    </>
+      <div className="relative bg-white/10 backdrop-blur-xl rounded-full p-1 border border-white/30 shadow-2xl cursor-pointer hover:scale-110 transition-transform duration-500 overflow-hidden">
+        {View}
+      </div>
+    </div>
   )
 }
+
+export default FloatingAssistant

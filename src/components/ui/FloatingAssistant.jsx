@@ -17,15 +17,15 @@ const FloatingAssistant = () => {
 
   return (
     <div className="fixed bottom-8 right-8 z-[9999] group">
-      <div className="absolute right-20 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-        <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-xl border border-pink-100 whitespace-nowrap">
-          <p className="text-sm font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+      <div className="pointer-events-none absolute bottom-full left-1/2 mb-4 -translate-x-1/2 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="whitespace-nowrap rounded-2xl border border-blue-100 bg-white/90 px-4 py-2 shadow-xl backdrop-blur-md">
+          <p className="bg-gradient-to-r from-blue-900 to-cyan-900 bg-clip-text text-sm font-bold text-transparent">
             Hi! I'm Vaibhav's AI ✨
           </p>
         </div>
       </div>
 
-      <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full blur-xl opacity-40 group-hover:opacity-80 animate-pulse transition-opacity duration-500"></div>
+      <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue-500/30 to-cyan-600/30 blur-xl opacity-50 transition-opacity duration-500 group-hover:opacity-85 animate-pulse"></div>
 
       <div className="relative bg-white/10 backdrop-blur-xl rounded-full p-1 border border-white/30 shadow-2xl cursor-pointer hover:scale-110 transition-transform duration-500 overflow-hidden">
         {View}

@@ -254,7 +254,7 @@
 
 /* Floating Assistant pulse ring */
 .assistant-pulse {
-  background: radial-gradient(circle at center, rgba(255,107,129,0.18), rgba(255,107,129,0.06) 40%, transparent 60%);
+  background: radial-gradient(circle at center, rgba(16, 81, 186, 0.2), rgba(8,145,178,0.08) 40%, transparent 60%);
   animation: assistantPulse 2.6s infinite ease-out;
   z-index: 0;
 }

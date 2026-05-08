@@ -67,8 +67,11 @@ function EducationSection() {
 
                 {item.grade === 'Ongoing' ? (
                   <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-700">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    Live
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                    </span>
+                    Status: Live
                   </span>
                 ) : (
                   <p className="text-xs font-semibold tracking-[0.24em] text-gray-500">
@@ -93,34 +96,47 @@ function EducationSection() {
                 </p>
 
                 {item.grade === 'Ongoing' && (
-                  <div className="mt-4 max-w-sm space-y-2">
-                    <div className="flex items-center gap-3">
-                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100">
-                        <motion.div
-                          className="h-full rounded-full bg-pink-500"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '90%' }}
-                          viewport={{ once: true, amount: 0.6 }}
-                          transition={{ duration: 0.8, ease: 'easeInOut' }}
-                        />
-                      </div>
-                      <span className="text-xs font-medium text-gray-500">Completing soon</span>
+                  <div className="mt-4 max-w-md space-y-2">
+                    <p className="text-[11px] font-medium tracking-wide text-gray-500">
+                      Final Sprint to Graduation
+                    </p>
+
+                    <div className="h-1.5 overflow-hidden rounded-full bg-gray-100/80">
+                      <motion.div
+                        className="h-full rounded-full bg-pink-500"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '92%' }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ duration: 0.9, ease: 'easeInOut' }}
+                      />
+                    </div>
+
+                    <div className="mt-5 flex items-end justify-between gap-3">
+                      <p className="text-xs italic text-gray-500">
+                        Expected Graduation: June 2026
+                      </p>
+
+                      <span
+                        className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
+                      >
+                        {item.performance}
+                      </span>
                     </div>
                   </div>
                 )}
 
-                <div className="mt-5 flex flex-wrap items-center gap-2">
-                  <span
-                    className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
-                  >
-                    {item.performance}
-                  </span>
-                  {item.grade !== 'Ongoing' && (
+                {item.grade !== 'Ongoing' && (
+                  <div className="mt-5 flex flex-wrap items-center gap-2">
+                    <span
+                      className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
+                    >
+                      {item.performance}
+                    </span>
                     <span className="inline-flex items-center rounded-full border border-gray-200/70 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-600">
                       {item.grade}
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
               </motion.article>
             )
           })}

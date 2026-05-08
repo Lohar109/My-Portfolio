@@ -65,23 +65,8 @@ function EducationSection() {
                   <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
 
-                {item.grade === 'Ongoing' ? (
-                  <div className="absolute left-6 top-6 flex items-center">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/70 bg-slate-50/80 px-3 py-1 text-[11px] font-medium tracking-wide text-gray-600">
-                      <CalendarDays size={13} className="text-slate-600" aria-hidden="true" />
-                      Expected Graduation: June 2026
-                    </span>
-                  </div>
-                ) : (
-                  <p className="text-xs font-semibold tracking-[0.24em] text-gray-500">
-                    {item.grade}
-                  </p>
-                )}
-
                 <h3
-                  className={`pr-14 text-xl font-bold leading-tight text-gray-900 ${
-                    item.grade === 'Ongoing' ? 'mt-14' : 'mt-4'
-                  }`}
+                  className="mt-4 pr-14 text-xl font-bold leading-tight text-gray-900"
                 >
                   {item.degree}
                 </h3>
@@ -99,7 +84,14 @@ function EducationSection() {
                 </p>
 
                 {item.grade === 'Ongoing' && (
-                  <div className="mt-10 flex justify-end">
+                  <p className="mt-1 inline-flex items-center gap-1.5 text-[10px] font-medium tracking-wide text-gray-500">
+                    <CalendarDays size={12} className="text-slate-600" aria-hidden="true" />
+                    Expected Graduation: June 2026
+                  </p>
+                )}
+
+                {item.grade === 'Ongoing' && (
+                  <div className="mt-8 flex justify-end">
                     <span
                       className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
                     >

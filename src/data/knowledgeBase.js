@@ -1,9 +1,9 @@
 export const VAIBHAV_KNOWLEDGE = {
   personal: {
-    fullName: "Lohar Vaibhav Prakash", // [cite: 10, 36, 59, 119]
-    motherName: "Surekha", // [cite: 11, 39, 132]
-    DOF: "1st October 1999", // [cite: 12, 40, 133]
-    focus: "Full Stack Web Development & GenAI Integration" 
+    name: "Vaibhav Prakash Lohar", // [cite: 10, 36, 59, 80, 102, 119, 132]
+    dob: "1999-10-01", // Year-Month-Day format for easier calculation
+    location: "Jalgaon/Pune, India", //
+    role: "Full Stack Web Developer" //
   },
   
   academics: {

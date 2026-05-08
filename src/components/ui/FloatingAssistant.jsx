@@ -22,6 +22,21 @@ const FloatingAssistant = () => {
   const thinkingTimeoutRef = useRef(null);
   const messagesEndRef = useRef(null);
 
+  const calculateAge = (dobString) => {
+    const birthDate = new Date(dobString);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    const dayDifference = today.getDate() - birthDate.getDate();
+
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+      age -= 1;
+    }
+
+    return age;
+  };
+
   useEffect(() => {
     if (!isHovering || isOpen) {
       setTypedText('');
@@ -76,8 +91,15 @@ const FloatingAssistant = () => {
     const normalizedQuery = query.toLowerCase();
     const { academics, technicalSkills, personal } = VAIBHAV_KNOWLEDGE;
 
+    if (/how old|age|old are you/.test(normalizedQuery)) {
+      const calculatedAge = calculateAge(personal.dob);
+      return `Vaibhav is currently ${calculatedAge} years old.`;
+    }
+
     if (/education|academics|cgpa|mca|bsc|college|study|degree/.test(normalizedQuery)) {
-      return `Verified from official marksheets, Vaibhav's academic record shows a 9.30 CGPA in ${academics.postGraduation.degree} and a 9.08 CGPA in ${academics.graduation.degree}. This reflects strong academic consistency and technical excellence.`;
+      const bScSubjects = academics.graduation.keySubjects.join(', ');
+
+      return `Verified from official marksheets, Vaibhav's academic record shows a 9.30 CGPA in ${academics.postGraduation.degree} and a 9.08 CGPA in ${academics.graduation.degree}. His B.Sc. subjects include ${bScSubjects}. This reflects strong academic consistency and technical excellence.`;
     }
 
     if (/project|projects|shopease|work|built|portfolio/.test(normalizedQuery)) {
@@ -87,6 +109,19 @@ const FloatingAssistant = () => {
     if (/stack|tech|skills|react|node|tailwind|framer|developer|web development/.test(normalizedQuery)) {
       const skillList = [...technicalSkills.languages, ...technicalSkills.technologies].join(', ');
       return `Verified from official marksheets, Vaibhav's technical skill set includes ${skillList}. He specializes in premium UI/UX and GenAI integrations as part of his full stack web development profile.`;
+    }
+
+    if (/subject|subjects|syllabus|topics/.test(normalizedQuery)) {
+      const mcaTopics = [
+        academics.postGraduation.degree,
+        `CGPA ${academics.postGraduation.currentCGPA}`,
+        academics.postGraduation.semesterPerformance.sem1,
+        academics.postGraduation.semesterPerformance.sem2,
+        academics.postGraduation.semesterPerformance.sem3,
+      ].join(', ');
+      const bScSubjects = academics.graduation.keySubjects.join(', ');
+
+      return `Verified from official marksheets, the available academic details show M.C.A. progress through ${mcaTopics}, while the B.Sc. subjects listed are ${bScSubjects}.`;
     }
 
     if (/who are you|about vaibhav|vaibhav lohar|introduce|profile/.test(normalizedQuery)) {

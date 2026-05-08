@@ -1,4 +1,5 @@
 import HeroSection from '../components/sections/HeroSection.jsx'
+import EducationSection from '../components/sections/EducationSection.jsx'
 import FooterSection from '../components/sections/FooterSection.jsx'
 import ProjectsSection from '../components/sections/ProjectsSection.jsx'
 import SkillsSection from '../components/sections/SkillsSection.jsx'
@@ -13,6 +14,7 @@ function Home() {
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       <HeroSection />
+      <EducationSection />
       <SkillsSection />
       <ProjectsSection />
       <FooterSection />

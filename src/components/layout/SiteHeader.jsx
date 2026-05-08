@@ -10,15 +10,14 @@ function NavLink({ label, onClick }) {
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative px-2 py-1 text-sm font-medium text-gray-500 transition-colors duration-300 hover:text-black"
+      className="relative px-0.5 py-2 text-sm font-medium text-gray-500 transition-colors duration-300 hover:text-black"
     >
       {label}
       <motion.div
-        className="absolute bottom-0 left-1/2 h-px w-0 bg-black"
-        initial={{ scaleX: 0, x: '-50%' }}
-        animate={{ scaleX: isHovered ? 1 : 0, x: isHovered ? '-50%' : '-50%' }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        style={{ transformOrigin: 'center' }}
+        className="absolute bottom-0 left-1/2 h-0.5 bg-black"
+        initial={{ width: 0, x: '-50%' }}
+        animate={{ width: isHovered ? '100%' : 0, x: '-50%' }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
       />
     </button>
   )
@@ -31,6 +30,7 @@ function SiteHeader() {
     { label: 'Home', href: '#' },
     { label: 'Skills', href: '/#skills' },
     { label: 'Projects', href: '/#projects' },
+    { label: 'Contact', href: '/#contact' },
   ]
 
   const handleNavClick = (href) => {
@@ -70,7 +70,7 @@ function SiteHeader() {
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-          className="hidden items-center gap-x-10 md:flex"
+          className="hidden items-center gap-x-12 md:flex"
         >
           {navItems.map((item) => (
             <NavLink
@@ -81,42 +81,28 @@ function SiteHeader() {
           ))}
         </motion.nav>
 
-        {/* Contact Button + Mobile Menu */}
-        <div className="flex items-center gap-4">
-          {/* Contact Button - Desktop */}
-          <motion.button
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.2, ease: 'easeOut' }}
-            onClick={() => handleNavClick('/#contact')}
-            className="hidden md:block px-6 py-2 rounded-full bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
-          >
-            Contact
-          </motion.button>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden flex flex-col gap-1.5"
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
-              className="block h-0.5 w-5 bg-black transition-all duration-300"
-            />
-            <motion.span
-              animate={{ opacity: isOpen ? 0 : 1 }}
-              className="block h-0.5 w-5 bg-black transition-all duration-300"
-            />
-            <motion.span
-              animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
-              className="block h-0.5 w-5 bg-black transition-all duration-300"
-            />
-          </motion.button>
-        </div>
+        {/* Mobile Menu Button */}
+        <motion.button
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden flex flex-col gap-1.5"
+          aria-label="Toggle menu"
+        >
+          <motion.span
+            animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
+            className="block h-0.5 w-5 bg-black transition-all duration-300"
+          />
+          <motion.span
+            animate={{ opacity: isOpen ? 0 : 1 }}
+            className="block h-0.5 w-5 bg-black transition-all duration-300"
+          />
+          <motion.span
+            animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
+            className="block h-0.5 w-5 bg-black transition-all duration-300"
+          />
+        </motion.button>
       </div>
 
       {/* Mobile Navigation */}
@@ -131,20 +117,11 @@ function SiteHeader() {
             <button
               key={item.label}
               onClick={() => handleNavClick(item.href)}
-              className="text-left text-sm font-medium text-gray-600 transition-colors duration-300 hover:text-black"
+              className="relative text-left text-sm font-medium text-gray-500 transition-colors duration-300 hover:text-black"
             >
               {item.label}
             </button>
           ))}
-          <button
-            onClick={() => {
-              handleNavClick('/#contact')
-              setIsOpen(false)
-            }}
-            className="mt-2 w-full px-4 py-2 rounded-full bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-black/85"
-          >
-            Contact
-          </button>
         </nav>
       </motion.div>
     </header>

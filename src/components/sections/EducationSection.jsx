@@ -65,9 +65,16 @@ function EducationSection() {
                   <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
 
-                <p className="text-xs font-semibold tracking-[0.24em] text-gray-500">
-                  {item.grade}
-                </p>
+                {item.grade === 'Ongoing' ? (
+                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-700">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                    Live
+                  </span>
+                ) : (
+                  <p className="text-xs font-semibold tracking-[0.24em] text-gray-500">
+                    {item.grade}
+                  </p>
+                )}
 
                 <h3 className="mt-4 pr-14 text-xl font-bold leading-tight text-gray-900">
                   {item.degree}
@@ -77,9 +84,32 @@ function EducationSection() {
                   {item.institute}
                 </p>
 
-                <p className="mt-3 text-sm font-medium text-gray-500">{item.timeline}</p>
+                <p
+                  className={`mt-3 text-sm text-gray-500 ${
+                    item.grade === 'Ongoing' ? 'font-semibold text-gray-700' : 'font-medium'
+                  }`}
+                >
+                  {item.timeline}
+                </p>
 
-                <div className="mt-6 flex flex-wrap items-center gap-2">
+                {item.grade === 'Ongoing' && (
+                  <div className="mt-4 max-w-sm space-y-2">
+                    <div className="flex items-center gap-3">
+                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100">
+                        <motion.div
+                          className="h-full rounded-full bg-pink-500"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '90%' }}
+                          viewport={{ once: true, amount: 0.6 }}
+                          transition={{ duration: 0.8, ease: 'easeInOut' }}
+                        />
+                      </div>
+                      <span className="text-xs font-medium text-gray-500">Completing soon</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-5 flex flex-wrap items-center gap-2">
                   <span
                     className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
                   >

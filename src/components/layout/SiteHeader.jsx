@@ -28,13 +28,17 @@ function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { label: 'Home', href: '/#hero' },
+    { label: 'Home', href: '#' },
     { label: 'Skills', href: '/#skills' },
     { label: 'Projects', href: '/#projects' },
   ]
 
   const handleNavClick = (href) => {
     setIsOpen(false)
+    if (href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
     const elementId = href.split('#')[1]
     const element = document.getElementById(elementId)
     if (element) {
@@ -51,10 +55,13 @@ function SiteHeader() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black/5 border border-gray-200/50">
-              <span className="text-sm font-semibold text-black">V</span>
+              <span className="text-xs font-semibold text-black">VL</span>
             </div>
+            <span className="font-medium tracking-tight text-black text-sm">
+              Vaibhav Lohar
+            </span>
           </Link>
         </motion.div>
 

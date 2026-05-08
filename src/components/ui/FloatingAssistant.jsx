@@ -13,13 +13,15 @@ const FloatingAssistant = () => {
       <AnimatePresence>
         {isHovering && (
           <motion.div
-            className="pointer-events-none absolute bottom-full left-1/2 mb-6 -translate-x-1/2 origin-center whitespace-nowrap"
+            className="pointer-events-none absolute bottom-full left-1/2 mb-5 -translate-x-1/2 origin-center whitespace-nowrap"
             initial={{ opacity: 0, scale: 0.9, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
           >
-            <p className="text-sm font-semibold text-black">Ask me regarding Vaibhav</p>
+            <div className="rounded-full border border-slate-200 bg-slate-50/80 px-3 py-1.5 shadow-sm backdrop-blur-md">
+              <p className="text-sm font-medium text-slate-900">Ask me regarding Vaibhav</p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

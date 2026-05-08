@@ -9,23 +9,17 @@ const FloatingAssistant = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div className="fixed bottom-12 right-12 z-[9999]">
+    <div className="fixed bottom-12 right-12 z-[9999] overflow-visible">
       <AnimatePresence>
         {isHovering && (
           <motion.div
-            className="pointer-events-none absolute bottom-full left-1/2 mb-4 -translate-x-1/2 whitespace-nowrap"
+            className="pointer-events-none absolute bottom-full left-1/2 mb-6 -translate-x-1/2 origin-center whitespace-nowrap"
             initial={{ opacity: 0, scale: 0.9, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
           >
-            <div className="relative rounded-2xl border border-white/10 bg-slate-950/90 px-4 py-2 shadow-2xl backdrop-blur-xl">
-              <p className="text-sm font-medium text-cyan-400">Ask me Regarding Vaibhav</p>
-              <div
-                className="absolute -bottom-2 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-b border-white/10 bg-slate-950/90"
-                aria-hidden="true"
-              />
-            </div>
+            <p className="text-sm font-semibold text-black">Ask me regarding Vaibhav</p>
           </motion.div>
         )}
       </AnimatePresence>

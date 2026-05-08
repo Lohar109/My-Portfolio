@@ -39,61 +39,63 @@ function SiteHeader() {
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-lg">
-      <div className="flex max-w-full items-center justify-between px-8 py-4">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-        >
-          <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black/5 border border-gray-200/50">
-              <span className="text-xs font-semibold text-black">VL</span>
-            </div>
-            <span className="font-medium tracking-tight text-black text-sm">
-              Vaibhav Lohar
-            </span>
-          </Link>
-        </motion.div>
+      <div className="mx-auto w-full max-w-7xl px-16 py-4 md:px-24">
+        <div className="flex items-center justify-between gap-8">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+          >
+            <Link to="/" className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/50 bg-black/5">
+                <span className="text-xs font-semibold text-black">VL</span>
+              </div>
+              <span className="text-sm font-medium tracking-tight text-black">
+                Vaibhav Lohar
+              </span>
+            </Link>
+          </motion.div>
 
-        {/* Desktop Navigation */}
-        <motion.nav
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-          className="hidden items-center gap-x-12 md:flex"
-        >
-          {navItems.map((item) => (
-            <NavLink
-              key={item.label}
-              label={item.label}
-              onClick={() => handleNavClick(item.href)}
+          {/* Desktop Navigation */}
+          <motion.nav
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
+            className="hidden items-center gap-x-12 md:flex"
+          >
+            {navItems.map((item) => (
+              <NavLink
+                key={item.label}
+                label={item.label}
+                onClick={() => handleNavClick(item.href)}
+              />
+            ))}
+          </motion.nav>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex flex-col gap-1.5 md:hidden"
+            aria-label="Toggle menu"
+          >
+            <motion.span
+              animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
+              className="block h-0.5 w-5 bg-black transition-all duration-300"
             />
-          ))}
-        </motion.nav>
-
-        {/* Mobile Menu Button */}
-        <motion.button
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col gap-1.5"
-          aria-label="Toggle menu"
-        >
-          <motion.span
-            animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
-            className="block h-0.5 w-5 bg-black transition-all duration-300"
-          />
-          <motion.span
-            animate={{ opacity: isOpen ? 0 : 1 }}
-            className="block h-0.5 w-5 bg-black transition-all duration-300"
-          />
-          <motion.span
-            animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
-            className="block h-0.5 w-5 bg-black transition-all duration-300"
-          />
-        </motion.button>
+            <motion.span
+              animate={{ opacity: isOpen ? 0 : 1 }}
+              className="block h-0.5 w-5 bg-black transition-all duration-300"
+            />
+            <motion.span
+              animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
+              className="block h-0.5 w-5 bg-black transition-all duration-300"
+            />
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

@@ -82,7 +82,7 @@ function SiteHeader({ isDetailPage = false }) {
 
           if (dist < 120) {
             const opacity = 1 - dist / 120
-            ctx.strokeStyle = `rgba(0, 212, 255, ${opacity * 0.22})`
+            ctx.strokeStyle = `rgba(0, 212, 255, ${opacity * 0.3})`
             ctx.lineWidth = 0.8
             ctx.beginPath()
             ctx.moveTo(n1.x, n1.y)
@@ -151,15 +151,19 @@ function SiteHeader({ isDetailPage = false }) {
   }, [activeLink])
 
   const linkClassName =
-    'rounded-full px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-white/70 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-900/40 dark:hover:text-white'
+    'rounded-full px-3 py-1.5 text-sm font-medium text-white transition hover:bg-white/15 hover:text-white sm:px-4 sm:py-2'
 
   return (
-    <header
+    <motion.header
       ref={headerRef}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: 'easeOut' }}
       style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, sans-serif' }}
-      className="sticky top-0 z-40 overflow-hidden border-b border-[#00D4FF]/25 bg-white/70 backdrop-blur-xl dark:border-[#00D4FF]/30 dark:bg-slate-950/75"
+      className="fixed inset-x-0 top-0 z-40 overflow-hidden border-b border-[#00D4FF]/20"
     >
-      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 -z-10" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,0)_100%)]" />
+      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 -z-20" />
 
       <AnimatePresence>
         {stream && (
@@ -198,19 +202,19 @@ function SiteHeader({ isDetailPage = false }) {
         )}
       </AnimatePresence>
 
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:px-16">
+      <div className="mx-auto flex h-[60px] max-w-6xl items-center justify-between gap-4 px-4 sm:h-[60px] sm:px-8 lg:px-12">
         <Link to="/" className="flex items-center gap-3">
           <span
             ref={logoRef}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#00D4FF]/70 bg-slate-950 text-sm font-semibold tracking-[0.08em] text-[#E8FBFF] shadow-[0_0_22px_rgba(0,212,255,0.6)]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#00D4FF]/65 bg-black text-sm font-semibold tracking-[0.08em] text-white shadow-[0_0_14px_rgba(0,212,255,0.55)]"
           >
             VL
           </span>
-          <div className="space-y-1">
-            <p className="text-sm font-semibold tracking-[0.2em] text-slate-900 uppercase dark:text-slate-100">
+          <div className="space-y-0.5">
+            <p className="text-sm font-semibold tracking-[0.18em] text-white uppercase">
               Vaibhav Lohar
             </p>
-            <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+            <p className="text-[11px] font-medium text-white/70">
               Full Stack Developer • AI Engineer
             </p>
           </div>
@@ -252,7 +256,7 @@ function SiteHeader({ isDetailPage = false }) {
           })}
         </nav>
       </div>
-    </header>
+    </motion.header>
   )
 }
 

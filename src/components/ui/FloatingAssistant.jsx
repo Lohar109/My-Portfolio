@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUpRight, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
 const FloatingAssistant = () => {
   // Safe-check logic
   const LottieComponent = Lottie?.default || Lottie;
+  const [isOpen, setIsOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [typedText, setTypedText] = useState('');
 
-  const fullText = 'Ask me regarding Vaibhav.';
+  const fullText = 'Ask me regarding Vaibhav ✨';
 
   useEffect(() => {
-    if (!isHovering) {
+    if (!isHovering || isOpen) {
       setTypedText('');
       return;
     }
@@ -28,12 +30,16 @@ const FloatingAssistant = () => {
     }, 35);
 
     return () => clearInterval(typingTimer);
-  }, [isHovering, fullText]);
+  }, [isHovering, isOpen, fullText]);
+
+  const handleToggleChat = () => {
+    setIsOpen((currentOpen) => !currentOpen);
+  };
 
   return (
     <div className="fixed bottom-12 right-12 z-[9999] overflow-visible">
       <AnimatePresence>
-        {isHovering && (
+        {isHovering && !isOpen && (
           <motion.div
             className="pointer-events-none absolute bottom-full left-1/2 mb-6 -translate-x-1/2 origin-center overflow-visible whitespace-nowrap"
             initial={{ opacity: 0, scale: 0.9, y: 8 }}
@@ -49,11 +55,67 @@ const FloatingAssistant = () => {
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="absolute bottom-28 right-0 h-[500px] w-[350px] overflow-hidden rounded-[2rem] border border-white/20 bg-white/70 shadow-2xl backdrop-blur-2xl"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+          >
+            <div className="flex h-full flex-col">
+              <div className="flex items-center justify-between border-b border-black/5 px-5 py-4">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Vaibhav&apos;s Agent</p>
+                  <p className="mt-0.5 text-xs font-medium text-slate-500">Ready when you are</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/5 bg-white/60 text-slate-900 transition hover:bg-white"
+                  aria-label="Close chat"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto px-4 py-5">
+                <div className="flex justify-start">
+                  <div className="max-w-[85%] rounded-[1.4rem] rounded-bl-md bg-slate-100 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
+                    Hi! I&apos;m currently being configured. You can chat with me soon!
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-black/5 p-4">
+                <div className="flex items-center gap-2 rounded-full bg-slate-100/50 px-4 py-2">
+                  <input
+                    type="text"
+                    placeholder="Type a message..."
+                    className="min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
+                    disabled
+                  />
+                  <button
+                    type="button"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800"
+                    aria-label="Send message"
+                  >
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Transparent icon with hover scale only */}
       <div
         className="cursor-pointer overflow-visible transition-transform duration-500 hover:scale-110 active:scale-95"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
+        onClick={handleToggleChat}
       >
         <LottieComponent 
           animationData={animationData} 

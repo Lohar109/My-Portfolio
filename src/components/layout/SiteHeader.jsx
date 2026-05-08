@@ -19,6 +19,7 @@ function SiteHeader() {
 
   const navItems = [
     { label: 'Home', href: '#' },
+    { label: 'Education', href: '/#education' },
     { label: 'Skills', href: '/#skills' },
     { label: 'Projects', href: '/#projects' },
     { label: 'Contact', href: '/#contact' },
@@ -62,7 +63,7 @@ function SiteHeader() {
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-            className="hidden items-center gap-x-12 md:flex"
+            className="hidden items-center gap-x-6 md:flex"
           >
             {navItems.map((item) => (
               <NavLink

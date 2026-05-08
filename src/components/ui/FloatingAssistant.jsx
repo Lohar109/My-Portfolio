@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
-import { VAIBHAV_KNOWLEDGE } from '../../data/knowledgeBase';
+import { resetVaibhavAgentSession, sendMessageToVaibhavAgent } from '../../services/aiService';
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
 const FloatingAssistant = () => {
@@ -21,21 +21,6 @@ const FloatingAssistant = () => {
   const typingIntervalRef = useRef(null);
   const thinkingTimeoutRef = useRef(null);
   const messagesEndRef = useRef(null);
-
-  const calculateAge = (dobString) => {
-    const birthDate = new Date(dobString);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    const dayDifference = today.getDate() - birthDate.getDate();
-
-    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
-      age -= 1;
-    }
-
-    return age;
-  };
 
   useEffect(() => {
     if (!isHovering || isOpen) {
@@ -72,6 +57,7 @@ const FloatingAssistant = () => {
     setMessages([]);
     setInputValue('');
     setIsThinking(true);
+    resetVaibhavAgentSession();
 
     clearTimeout(thinkingTimeoutRef.current);
     clearInterval(typingIntervalRef.current);
@@ -86,50 +72,6 @@ const FloatingAssistant = () => {
       clearInterval(typingIntervalRef.current);
     };
   }, [isOpen, greetingText]);
-
-  const getAssistantReply = (query) => {
-    const normalizedQuery = query.toLowerCase();
-    const { academics, technicalSkills, personal } = VAIBHAV_KNOWLEDGE;
-
-    if (/how old|age|old are you/.test(normalizedQuery)) {
-      const calculatedAge = calculateAge(personal.dob);
-      return `Vaibhav is currently ${calculatedAge} years old.`;
-    }
-
-    if (/education|academics|cgpa|mca|bsc|college|study|degree/.test(normalizedQuery)) {
-      const bScSubjects = academics.graduation.keySubjects.join(', ');
-
-      return `Verified from official marksheets, Vaibhav's academic record shows a 9.30 CGPA in ${academics.postGraduation.degree} and a 9.08 CGPA in ${academics.graduation.degree}. His B.Sc. subjects include ${bScSubjects}. This reflects strong academic consistency and technical excellence.`;
-    }
-
-    if (/project|projects|shopease|work|built|portfolio/.test(normalizedQuery)) {
-      return 'His key project is ShopEase, an intelligent e-commerce suite that uses multimodal AI across Vision and Audio to create a more interactive shopping experience.';
-    }
-
-    if (/stack|tech|skills|react|node|tailwind|framer|developer|web development/.test(normalizedQuery)) {
-      const skillList = [...technicalSkills.languages, ...technicalSkills.technologies].join(', ');
-      return `Verified from official marksheets, Vaibhav's technical skill set includes ${skillList}. He specializes in premium UI/UX and GenAI integrations as part of his full stack web development profile.`;
-    }
-
-    if (/subject|subjects|syllabus|topics/.test(normalizedQuery)) {
-      const mcaTopics = [
-        academics.postGraduation.degree,
-        `CGPA ${academics.postGraduation.currentCGPA}`,
-        academics.postGraduation.semesterPerformance.sem1,
-        academics.postGraduation.semesterPerformance.sem2,
-        academics.postGraduation.semesterPerformance.sem3,
-      ].join(', ');
-      const bScSubjects = academics.graduation.keySubjects.join(', ');
-
-      return `Verified from official marksheets, the available academic details show M.C.A. progress through ${mcaTopics}, while the B.Sc. subjects listed are ${bScSubjects}.`;
-    }
-
-    if (/who are you|about vaibhav|vaibhav lohar|introduce|profile/.test(normalizedQuery)) {
-      return `${personal.fullName} is a Full Stack Web Developer specializing in premium UI/UX and GenAI integrations.`;
-    }
-
-    return "I specialize in Vaibhav's professional journey. Feel free to ask about his web development skills or academic background!";
-  };
 
   const clearAssistantTimers = () => {
     clearTimeout(thinkingTimeoutRef.current);
@@ -169,7 +111,7 @@ const FloatingAssistant = () => {
     }, 24);
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     const trimmedInput = inputValue.trim();
 
     if (!trimmedInput || isThinking || typingMessageId) {
@@ -186,12 +128,15 @@ const FloatingAssistant = () => {
     setIsThinking(true);
     clearAssistantTimers();
 
-    const replyText = getAssistantReply(trimmedInput);
+    const minimumLoadingDelay = new Promise((resolve) => {
+      thinkingTimeoutRef.current = setTimeout(resolve, 1000);
+    });
 
-    thinkingTimeoutRef.current = setTimeout(() => {
-      setIsThinking(false);
-      typeAssistantResponse(replyText);
-    }, 1000);
+    const replyPromise = sendMessageToVaibhavAgent(trimmedInput);
+    const [replyText] = await Promise.all([replyPromise, minimumLoadingDelay]);
+
+    setIsThinking(false);
+    typeAssistantResponse(replyText);
   };
 
   const handleToggleChat = () => {
@@ -263,7 +208,7 @@ const FloatingAssistant = () => {
                 {isThinking && (
                   <div className="flex justify-start">
                     <div className="rounded-[1.4rem] rounded-bl-md bg-slate-100 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm">
-                      Thinking...
+                      Vaibhav&apos;s Agent is thinking...
                     </div>
                   </div>
                 )}
@@ -273,9 +218,9 @@ const FloatingAssistant = () => {
               <div className="border-t border-black/5 p-4">
                 <form
                   className="flex items-center gap-2 rounded-full bg-slate-100/50 px-4 py-2"
-                  onSubmit={(event) => {
+                  onSubmit={async (event) => {
                     event.preventDefault();
-                    handleSendMessage();
+                    await handleSendMessage();
                   }}
                 >
                   <input
@@ -288,7 +233,9 @@ const FloatingAssistant = () => {
                   />
                   <button
                     type="button"
-                    onClick={handleSendMessage}
+                    onClick={async () => {
+                      await handleSendMessage();
+                    }}
                     className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Send message"
                     disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}

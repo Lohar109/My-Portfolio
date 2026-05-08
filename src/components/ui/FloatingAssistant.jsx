@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
+import { VAIBHAV_KNOWLEDGE } from '../../data/knowledgeBase';
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
 const FloatingAssistant = () => {
@@ -73,9 +74,10 @@ const FloatingAssistant = () => {
 
   const getAssistantReply = (query) => {
     const normalizedQuery = query.toLowerCase();
+    const { academics, technicalSkills, personal } = VAIBHAV_KNOWLEDGE;
 
     if (/education|academics|cgpa|mca|bsc|college|study|degree/.test(normalizedQuery)) {
-      return 'Vaibhav shows strong academic consistency with a 9.30 CGPA in M.C.A. and a 9.08 CGPA in B.Sc., which reflects steady technical excellence and discipline.';
+      return `Verified from official marksheets, Vaibhav's academic record shows a 9.30 CGPA in ${academics.postGraduation.degree} and a 9.08 CGPA in ${academics.graduation.degree}. This reflects strong academic consistency and technical excellence.`;
     }
 
     if (/project|projects|shopease|work|built|portfolio/.test(normalizedQuery)) {
@@ -83,11 +85,12 @@ const FloatingAssistant = () => {
     }
 
     if (/stack|tech|skills|react|node|tailwind|framer|developer|web development/.test(normalizedQuery)) {
-      return 'Vaibhav specializes in React, Node.js, Tailwind CSS, and Framer Motion, with a strong focus on premium UI/UX and GenAI integrations.';
+      const skillList = [...technicalSkills.languages, ...technicalSkills.technologies].join(', ');
+      return `Verified from official marksheets, Vaibhav's technical skill set includes ${skillList}. He specializes in premium UI/UX and GenAI integrations as part of his full stack web development profile.`;
     }
 
     if (/who are you|about vaibhav|vaibhav lohar|introduce|profile/.test(normalizedQuery)) {
-      return 'Vaibhav is a Full Stack Web Developer specializing in premium UI/UX and GenAI integrations.';
+      return `${personal.fullName} is a Full Stack Web Developer specializing in premium UI/UX and GenAI integrations.`;
     }
 
     return "I specialize in Vaibhav's professional journey. Feel free to ask about his web development skills or academic background!";

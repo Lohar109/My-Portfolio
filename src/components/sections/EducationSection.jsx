@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Building2, GraduationCap } from 'lucide-react'
+import { Building2, CalendarDays, GraduationCap } from 'lucide-react'
 
 const educationItems = [
   {
@@ -66,16 +66,9 @@ function EducationSection() {
                 </span>
 
                 {item.grade === 'Ongoing' ? (
-                  <div className="flex flex-wrap items-center gap-2 pr-14">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-700">
-                      <span className="relative flex h-2.5 w-2.5">
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                      </span>
-                      Status: Live
-                    </span>
-
-                    <span className="inline-flex items-center rounded-full border border-gray-200/70 bg-gray-100/50 px-3 py-1 text-[11px] font-medium text-gray-500">
+                  <div className="absolute left-6 top-6 flex items-center">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/70 bg-slate-50/80 px-3 py-1 text-[11px] font-medium tracking-wide text-gray-600">
+                      <CalendarDays size={13} className="text-slate-600" aria-hidden="true" />
                       Expected Graduation: June 2026
                     </span>
                   </div>
@@ -85,7 +78,11 @@ function EducationSection() {
                   </p>
                 )}
 
-                <h3 className="mt-4 pr-14 text-xl font-bold leading-tight text-gray-900">
+                <h3
+                  className={`pr-14 text-xl font-bold leading-tight text-gray-900 ${
+                    item.grade === 'Ongoing' ? 'mt-14' : 'mt-4'
+                  }`}
+                >
                   {item.degree}
                 </h3>
 

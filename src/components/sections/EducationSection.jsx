@@ -66,13 +66,19 @@ function EducationSection() {
                 </span>
 
                 {item.grade === 'Ongoing' ? (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-700">
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                  <div className="flex flex-wrap items-center gap-2 pr-14">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-700">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                      </span>
+                      Status: Live
                     </span>
-                    Status: Live
-                  </span>
+
+                    <span className="inline-flex items-center rounded-full border border-gray-200/70 bg-gray-100/50 px-3 py-1 text-[11px] font-medium text-gray-500">
+                      Expected Graduation: June 2026
+                    </span>
+                  </div>
                 ) : (
                   <p className="text-xs font-semibold tracking-[0.24em] text-gray-500">
                     {item.grade}
@@ -96,32 +102,12 @@ function EducationSection() {
                 </p>
 
                 {item.grade === 'Ongoing' && (
-                  <div className="mt-4 max-w-md space-y-2">
-                    <p className="text-[11px] font-medium tracking-wide text-gray-500">
-                      Final Sprint to Graduation
-                    </p>
-
-                    <div className="h-1.5 overflow-hidden rounded-full bg-gray-100/80">
-                      <motion.div
-                        className="h-full rounded-full bg-pink-500"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '92%' }}
-                        viewport={{ once: true, amount: 0.6 }}
-                        transition={{ duration: 0.9, ease: 'easeInOut' }}
-                      />
-                    </div>
-
-                    <div className="mt-5 flex items-end justify-between gap-3">
-                      <p className="text-xs italic text-gray-500">
-                        Expected Graduation: June 2026
-                      </p>
-
-                      <span
-                        className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
-                      >
-                        {item.performance}
-                      </span>
-                    </div>
+                  <div className="mt-10 flex justify-end">
+                    <span
+                      className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold ${item.performanceClass}`}
+                    >
+                      {item.performance}
+                    </span>
                   </div>
                 )}
 

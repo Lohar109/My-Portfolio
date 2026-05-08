@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, X } from 'lucide-react';
+import { Send, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
@@ -9,9 +9,17 @@ const FloatingAssistant = () => {
   const LottieComponent = Lottie?.default || Lottie;
   const [isOpen, setIsOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isThinking, setIsThinking] = useState(false);
+  const [typingMessageId, setTypingMessageId] = useState(null);
   const [typedText, setTypedText] = useState('');
 
   const fullText = 'Ask me regarding Vaibhav ✨';
+  const greetingText = 'What would you like to know about Vaibhav Lohar? ✨';
+  const typingIntervalRef = useRef(null);
+  const thinkingTimeoutRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (!isHovering || isOpen) {
@@ -31,6 +39,122 @@ const FloatingAssistant = () => {
 
     return () => clearInterval(typingTimer);
   }, [isHovering, isOpen, fullText]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isThinking]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      clearTimeout(thinkingTimeoutRef.current);
+      clearInterval(typingIntervalRef.current);
+      setIsThinking(false);
+      setTypingMessageId(null);
+      return;
+    }
+
+    setMessages([]);
+    setInputValue('');
+    setIsThinking(true);
+
+    clearTimeout(thinkingTimeoutRef.current);
+    clearInterval(typingIntervalRef.current);
+
+    thinkingTimeoutRef.current = setTimeout(() => {
+      setIsThinking(false);
+      typeAssistantResponse(greetingText);
+    }, 1000);
+
+    return () => {
+      clearTimeout(thinkingTimeoutRef.current);
+      clearInterval(typingIntervalRef.current);
+    };
+  }, [isOpen, greetingText]);
+
+  const getAssistantReply = (query) => {
+    const normalizedQuery = query.toLowerCase();
+
+    if (/education|academics|cgpa|mca|bsc|college|study|degree/.test(normalizedQuery)) {
+      return 'Vaibhav shows strong academic consistency with a 9.30 CGPA in M.C.A. and a 9.08 CGPA in B.Sc., which reflects steady technical excellence and discipline.';
+    }
+
+    if (/project|projects|shopease|work|built|portfolio/.test(normalizedQuery)) {
+      return 'His key project is ShopEase, an intelligent e-commerce suite that uses multimodal AI across Vision and Audio to create a more interactive shopping experience.';
+    }
+
+    if (/stack|tech|skills|react|node|tailwind|framer|developer|web development/.test(normalizedQuery)) {
+      return 'Vaibhav specializes in React, Node.js, Tailwind CSS, and Framer Motion, with a strong focus on premium UI/UX and GenAI integrations.';
+    }
+
+    if (/who are you|about vaibhav|vaibhav lohar|introduce|profile/.test(normalizedQuery)) {
+      return 'Vaibhav is a Full Stack Web Developer specializing in premium UI/UX and GenAI integrations.';
+    }
+
+    return "I specialize in Vaibhav's professional journey. Feel free to ask about his web development skills or academic background!";
+  };
+
+  const clearAssistantTimers = () => {
+    clearTimeout(thinkingTimeoutRef.current);
+    clearInterval(typingIntervalRef.current);
+  };
+
+  const typeAssistantResponse = (responseText) => {
+    clearAssistantTimers();
+
+    const messageId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    setTypingMessageId(messageId);
+    setMessages((currentMessages) => [
+      ...currentMessages,
+      { id: messageId, role: 'assistant', text: '', typing: true },
+    ]);
+
+    let charIndex = 0;
+    typingIntervalRef.current = setInterval(() => {
+      charIndex += 1;
+
+      setMessages((currentMessages) =>
+        currentMessages.map((message) =>
+          message.id === messageId
+            ? {
+                ...message,
+                text: responseText.slice(0, charIndex),
+                typing: charIndex < responseText.length,
+              }
+            : message
+        )
+      );
+
+      if (charIndex >= responseText.length) {
+        clearInterval(typingIntervalRef.current);
+        setTypingMessageId(null);
+      }
+    }, 24);
+  };
+
+  const handleSendMessage = () => {
+    const trimmedInput = inputValue.trim();
+
+    if (!trimmedInput || isThinking || typingMessageId) {
+      return;
+    }
+
+    const nextMessages = [
+      ...messages,
+      { id: `${Date.now()}-user`, role: 'user', text: trimmedInput },
+    ];
+
+    setMessages(nextMessages);
+    setInputValue('');
+    setIsThinking(true);
+    clearAssistantTimers();
+
+    const replyText = getAssistantReply(trimmedInput);
+
+    thinkingTimeoutRef.current = setTimeout(() => {
+      setIsThinking(false);
+      typeAssistantResponse(replyText);
+    }, 1000);
+  };
 
   const handleToggleChat = () => {
     setIsOpen((currentOpen) => !currentOpen);
@@ -68,7 +192,7 @@ const FloatingAssistant = () => {
               <div className="flex items-center justify-between border-b border-black/5 px-5 py-4">
                 <div>
                   <p className="text-sm font-semibold text-slate-900">Vaibhav&apos;s Agent</p>
-                  <p className="mt-0.5 text-xs font-medium text-slate-500">Ready when you are</p>
+                  <p className="mt-0.5 text-xs font-medium text-slate-500">Professional English assistant</p>
                 </div>
                 <button
                   type="button"
@@ -80,30 +204,60 @@ const FloatingAssistant = () => {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto px-4 py-5">
-                <div className="flex justify-start">
-                  <div className="max-w-[85%] rounded-[1.4rem] rounded-bl-md bg-slate-100 px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm">
-                    Hi! I&apos;m currently being configured. You can chat with me soon!
+              <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
+                {messages.map((message) => (
+                  <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div
+                      className={`max-w-[85%] rounded-[1.4rem] px-4 py-3 text-sm leading-6 shadow-sm ${
+                        message.role === 'user'
+                          ? 'rounded-br-md bg-slate-900 text-white'
+                          : 'rounded-bl-md bg-slate-100 text-slate-900'
+                      }`}
+                    >
+                      <span className="font-medium whitespace-pre-wrap">
+                        {message.text}
+                        {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ))}
+
+                {isThinking && (
+                  <div className="flex justify-start">
+                    <div className="rounded-[1.4rem] rounded-bl-md bg-slate-100 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm">
+                      Thinking...
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
 
               <div className="border-t border-black/5 p-4">
-                <div className="flex items-center gap-2 rounded-full bg-slate-100/50 px-4 py-2">
+                <form
+                  className="flex items-center gap-2 rounded-full bg-slate-100/50 px-4 py-2"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    handleSendMessage();
+                  }}
+                >
                   <input
                     type="text"
-                    placeholder="Type a message..."
-                    className="min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
-                    disabled
+                    placeholder="Ask about education, projects, or skills..."
+                    className="min-w-0 flex-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400"
+                    value={inputValue}
+                    onChange={(event) => setInputValue(event.target.value)}
+                    disabled={isThinking || Boolean(typingMessageId)}
                   />
                   <button
                     type="button"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800"
+                    onClick={handleSendMessage}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Send message"
+                    disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
                   >
-                    <ArrowUpRight className="h-4 w-4" />
+                    <Send className="h-4 w-4" />
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </motion.div>

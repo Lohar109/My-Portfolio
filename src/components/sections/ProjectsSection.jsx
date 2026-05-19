@@ -88,12 +88,12 @@ function getTechIcon(tech) {
 // Minimal fallback helper icons for missing react-icons
 function EyeIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0z"/><circle cx="12" cy="12" r="3"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0z" /><circle cx="12" cy="12" r="3" /></svg>
   )
 }
 function BoxIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
   )
 }
 
@@ -169,7 +169,7 @@ function renderProjectVisual(project) {
             </span>
             <span className="text-slate-500 text-[8px]">v1.0.4</span>
           </div>
-          
+
           <div className="flex flex-col gap-2 my-1">
             <div className="self-start max-w-[85%] bg-blue-600/10 border border-blue-500/25 text-blue-300 px-2 py-1 rounded-lg rounded-tl-none leading-normal">
               Querying technical journey...
@@ -178,7 +178,7 @@ function renderProjectVisual(project) {
               RAG: Retrieved 3 projects.
             </div>
           </div>
-          
+
           <div className="flex items-center justify-between text-[7px] text-slate-500 pt-1.5 border-t border-slate-800/80">
             <span>model: gemini-3</span>
             <span>latency: 48ms</span>
@@ -193,7 +193,7 @@ function renderProjectVisual(project) {
             <span>3D CONTAINER PACKING</span>
             <span className="bg-amber-100 px-1 py-0.5 rounded text-amber-700 font-black">94.8% OPT</span>
           </div>
-          
+
           <div className="relative flex-1 flex items-center justify-center my-1.5">
             <div className="w-[120px] h-[55px] border-2 border-amber-600/30 rounded bg-white/40 relative flex items-center justify-center">
               <div className="absolute left-2 bottom-1.5 w-8 h-6 bg-amber-500 rounded-sm shadow-sm border border-amber-600/20 text-white text-[6px] font-black flex items-center justify-center">B1</div>
@@ -205,7 +205,7 @@ function renderProjectVisual(project) {
               </div>
             </div>
           </div>
-          
+
           <div className="text-[7px] text-amber-700 font-semibold flex justify-between">
             <span>ITEMS: 142</span>
             <span>SPACE WASTED: 5.2%</span>
@@ -220,20 +220,20 @@ function renderProjectVisual(project) {
             <span className="text-[9px] font-black text-slate-800 tracking-tight">CAMPUS CONNECT</span>
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
           </div>
-          
+
           <div className="flex gap-2 items-center my-1.5">
             <div className="flex-1 bg-white border border-slate-200 rounded-lg p-1.5 flex flex-col gap-0.5 shadow-sm">
               <span className="text-[6px] font-bold text-slate-400 uppercase leading-none">Schedule</span>
               <span className="text-[8px] font-extrabold text-slate-700 leading-none mt-0.5">Algorithms</span>
               <span className="text-[6px] font-medium text-blue-600 mt-0.5">Room 404 • 10:00 AM</span>
             </div>
-            
+
             <div className="h-11 w-11 rounded-lg bg-white border border-slate-200 flex flex-col items-center justify-center shadow-sm shrink-0">
               <span className="text-[8px] font-black text-emerald-600 leading-none">92.4%</span>
               <span className="text-[5px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">ATTEND</span>
             </div>
           </div>
-          
+
           <div className="bg-amber-50 border border-amber-200/50 rounded px-1.5 py-0.5 text-[6px] font-bold text-amber-700 flex items-center justify-between">
             <span>Notice: Assignment 3 tonight!</span>
             <span className="text-amber-800">⚠️</span>
@@ -248,7 +248,7 @@ function renderProjectVisual(project) {
             <span>INSIGHTBOARD ANALYTICS</span>
             <span className="bg-emerald-100 px-1 py-0.5 rounded text-emerald-700 font-black">LIVE</span>
           </div>
-          
+
           <div className="flex-1 flex flex-col justify-end mt-1.5">
             <div className="w-full h-[40px] relative">
               <svg className="w-full h-full overflow-visible" viewBox="0 0 160 40">
@@ -273,7 +273,7 @@ function renderProjectVisual(project) {
               </svg>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-1.5 mt-1 border-t border-emerald-100/60 pt-1 text-[7px] text-emerald-700 font-semibold">
             <span>DAU: 4,820 <span className="text-emerald-500 font-bold">(+12%)</span></span>
             <span className="text-right">BOUNCE: 24.3%</span>
@@ -288,7 +288,7 @@ function renderProjectVisual(project) {
             <span className="text-[9px] font-black text-slate-800 tracking-tight">SUPPORTFLOW</span>
             <span className="text-[6px] font-bold bg-blue-100 text-blue-800 px-1 py-0.5 rounded">AI AUTO-TRIAGE</span>
           </div>
-          
+
           <div className="flex flex-col gap-1.5 my-1.5">
             <div className="bg-white border border-slate-200 rounded p-1 flex items-center justify-between shadow-sm">
               <span className="text-[7px] font-bold text-slate-700">#4819 API Timeout</span>
@@ -299,7 +299,7 @@ function renderProjectVisual(project) {
               <span className="text-[5px] font-black bg-emerald-100 text-emerald-700 px-1 py-0.2 rounded uppercase">DRAFT READY</span>
             </div>
           </div>
-          
+
           <div className="text-[7px] text-slate-500 flex justify-between">
             <span>AVG RESP: 4m 12s</span>
             <span>ACCURACY: 98.4%</span>
@@ -314,7 +314,7 @@ function renderProjectVisual(project) {
             <span className="text-[9px] font-black text-slate-200 tracking-tight">MEDIAOPS STUDIO</span>
             <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
           </div>
-          
+
           <div className="grid grid-cols-3 gap-1.5 my-1.5">
             <div className="h-8 rounded bg-gradient-to-br from-amber-400 to-rose-600 relative overflow-hidden flex items-center justify-center shadow-md">
               <span className="absolute bottom-0.5 right-0.5 text-[5px] bg-black/60 text-emerald-400 font-bold px-0.5 rounded">CDN</span>
@@ -326,7 +326,7 @@ function renderProjectVisual(project) {
               <span className="absolute bottom-0.5 right-0.5 text-[5px] bg-black/60 text-yellow-400 font-bold px-0.5 rounded">80%</span>
             </div>
           </div>
-          
+
           <div className="flex flex-col gap-0.5">
             <div className="flex justify-between text-[6px] text-slate-400 font-bold">
               <span>STORAGE CAP</span>
@@ -437,7 +437,7 @@ function ProjectsSection() {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       {/* Header Panel Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end justify-between">
         {/* Left Column (Headline & Subtitle) */}
         <div className="lg:col-span-7 flex flex-col items-start gap-4">
           {/* Sparkles glass Badge capsule */}
@@ -457,7 +457,7 @@ function ProjectsSection() {
         </div>
 
         {/* Right Column (Metrics Panel Card) */}
-        <div className="lg:col-span-5 w-full">
+        <div className="lg:col-span-5 w-full lg:translate-y-8">
           <div className="border border-gray-200/80 bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex items-center justify-between gap-2.5">
             {/* 1. Projects Metric */}
             <div className="flex flex-col items-center text-center flex-1">
@@ -515,11 +515,10 @@ function ProjectsSection() {
             <button
               key={filter.value}
               onClick={() => handleFilterChange(filter.value)}
-              className={`rounded-xl px-5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
-                isSelected
-                  ? 'bg-neutral-950 text-white shadow-sm border border-neutral-950'
-                  : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-black'
-              }`}
+              className={`rounded-xl px-5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${isSelected
+                ? 'bg-neutral-950 text-white shadow-sm border border-neutral-950'
+                : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-black'
+                }`}
             >
               {filter.label}
             </button>
@@ -531,10 +530,10 @@ function ProjectsSection() {
       {shopEaseProject && (activeFilter === 'All' || activeFilter === 'Web' || activeFilter === 'AI') && (
         <div className="mt-8">
           <div className="border border-gray-200 bg-white rounded-3xl p-6 md:p-8 shadow-sm flex flex-col lg:flex-row gap-8 items-stretch w-full">
-            
+
             {/* Left Side: CSS-only SaaS Dashboard Mockup */}
             <div className="lg:w-1/2 w-full min-h-[340px] bg-[#f8fafc] border border-slate-200/60 rounded-2xl p-4 flex gap-3 relative overflow-hidden font-sans select-none shadow-[inset_0_2px_8px_rgba(0,0,0,0.02)]">
-              
+
               {/* Mock Sidebar */}
               <div className="w-[110px] shrink-0 border-r border-slate-200/80 pr-2 flex flex-col justify-between py-1 hidden sm:flex">
                 <div className="flex flex-col gap-4">
@@ -598,7 +597,7 @@ function ProjectsSection() {
                 {/* Dashboard Title & Top Card */}
                 <div>
                   <h4 className="text-[11px] font-black text-slate-800 tracking-tight leading-none">Dashboard</h4>
-                  
+
                   {/* High Fidelity Ocean Blue Line-Graph Card (Replaces Purple) */}
                   <div className="mt-2 rounded-xl bg-gradient-to-br from-[#1E40AF] via-[#1D4ED8] to-[#2563EB] p-3 text-white shadow-md relative overflow-hidden flex flex-col justify-between min-h-[105px]">
                     {/* Glowing background circles */}
@@ -741,7 +740,7 @@ function ProjectsSection() {
         <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight">
           All Projects
         </h3>
-        
+
         {/* Sort Dropdown */}
         <div className="relative">
           <button
@@ -756,13 +755,13 @@ function ProjectsSection() {
             </span>
             <ChevronDown size={14} className={`text-gray-400 transition-transform duration-200 ${sortDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
-          
+
           <AnimatePresence>
             {sortDropdownOpen && (
               <>
                 {/* Backdrop to close */}
                 <div className="fixed inset-0 z-10" onClick={() => setSortDropdownOpen(false)} />
-                
+
                 <motion.div
                   initial={{ opacity: 0, y: 8, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -839,7 +838,7 @@ function ProjectsSection() {
                     <p className="mt-2 text-sm text-gray-500 font-normal leading-relaxed">
                       {project.summary}
                     </p>
-                    
+
                     {/* Tech Badges */}
                     <div className="mt-4 flex flex-wrap gap-2">
                       {project.stack?.slice(0, 4).map((tech) => (
@@ -915,15 +914,14 @@ function ProjectsSection() {
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${
-              currentPage === 1
-                ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
-                : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
-            }`}
+            className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${currentPage === 1
+              ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
+              : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+              }`}
           >
             &lt;
           </button>
-          
+
           {/* Page numbers */}
           {Array.from({ length: totalPages }, (_, idx) => {
             const pageNum = idx + 1;
@@ -932,26 +930,24 @@ function ProjectsSection() {
               <button
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
-                className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-bold transition-all duration-200 select-none cursor-pointer ${
-                  isActive
-                    ? 'border-indigo-500 bg-indigo-50/20 text-indigo-600'
-                    : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
-                }`}
+                className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-bold transition-all duration-200 select-none cursor-pointer ${isActive
+                  ? 'border-indigo-500 bg-indigo-50/20 text-indigo-600'
+                  : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+                  }`}
               >
                 {pageNum}
               </button>
             );
           })}
-          
+
           {/* Next Button */}
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${
-              currentPage === totalPages
-                ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
-                : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
-            }`}
+            className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${currentPage === totalPages
+              ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
+              : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+              }`}
           >
             &gt;
           </button>

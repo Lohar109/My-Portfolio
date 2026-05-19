@@ -29,7 +29,7 @@ function HeroSection() {
 
       <div className="mx-auto max-w-6xl">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          
+
           {/* Left Column: Text Content and Badges */}
           <div className="flex flex-col items-start text-left">
             {/* Active Status "Software Engineer" Badge */}
@@ -53,10 +53,10 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="mt-4 text-3xl font-medium tracking-tight text-gray-900 sm:text-4.5xl md:text-5xl md:leading-[1.15] leading-tight select-none font-sans"
+              className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4.5xl md:text-5xl md:leading-[1.15] leading-tight select-none font-sans"
             >
               Turning complex ideas into{' '}
-              <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-indigo-500 via-violet-600 to-purple-600 bg-clip-text text-transparent">
                 clean, functional
               </span>{' '}
               reality.
@@ -168,7 +168,7 @@ function HeroSection() {
           >
             <IntroVideoFrame />
           </motion.div>
-          
+
         </div>
       </div>
     </motion.section>

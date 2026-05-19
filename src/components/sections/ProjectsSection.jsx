@@ -705,16 +705,16 @@ function ProjectsSection() {
               <div className="mt-8 flex flex-wrap gap-3 w-full sm:w-auto">
                 <Link
                   to={'/projects/' + shopEaseProject.slug}
-                  className="rounded-xl bg-black px-6 py-3 font-bold !text-white transition-all duration-300 hover:bg-neutral-900 text-center flex items-center justify-center shadow-sm text-sm shrink-0"
+                  className="h-10 rounded-xl bg-black px-6 font-bold !text-white transition-all duration-300 hover:bg-neutral-900 text-center flex items-center justify-center shadow-sm text-sm shrink-0 cursor-pointer"
                 >
-                  View Case Study
+                  Case Study
                 </Link>
 
                 <a
                   href="https://github.com/Lohar109/ShopEase-Ecommerce"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-xl border border-gray-250 bg-white px-6 py-3 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0"
+                  className="h-10 rounded-xl border border-gray-250 bg-white px-6 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0 cursor-pointer"
                 >
                   GitHub Repo
                 </a>
@@ -723,7 +723,7 @@ function ProjectsSection() {
                   href="https://shop-ease-ecommerce-delta.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-xl border border-gray-250 bg-white px-6 py-3 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0"
+                  className="h-10 rounded-xl border border-gray-250 bg-white px-6 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0 cursor-pointer"
                 >
                   Live Demo
                   <ExternalLink size={13} />

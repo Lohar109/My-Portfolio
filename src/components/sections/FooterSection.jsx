@@ -212,40 +212,6 @@ function FooterSection() {
 
             </div>
           </div>
-
-          {/* Social Row at Bottom */}
-          <div className="flex items-center gap-4 select-none">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-              Let's connect
-            </span>
-            <div className="flex gap-3">
-              <a
-                href="https://github.com/Lohar109"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow-md hover:border-black hover:text-black transition-all duration-200"
-                aria-label="GitHub"
-              >
-                <FaGithub className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/vaibhav-lohar-ba7824315"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow-md hover:border-black hover:text-black transition-all duration-200"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedinIn className="h-5 w-5" />
-              </a>
-              <a
-                href={`mailto:${emailAddress}`}
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow-md hover:border-black hover:text-black transition-all duration-200"
-                aria-label="Email Address"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Right Column: Custom Message Form */}

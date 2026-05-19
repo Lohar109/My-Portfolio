@@ -158,7 +158,7 @@ function FooterSection() {
                     </span>
                     <span className="text-sm font-semibold text-gray-850 mt-1.5 flex items-center gap-1.5">
                       +91 91724 91660
-                      <span className="text-[11px] font-bold text-[#25D366]">
+                      <span className="text-[11px] font-bold text-[#128C7E]">
                         (WhatsApp)
                       </span>
                     </span>

@@ -874,20 +874,18 @@ function ProjectsSection() {
                       href={demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 px-5 rounded-2xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="h-10 px-5 rounded-xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                       title="Live Demo"
                     >
                       <span>Case Study</span>
-                      <ArrowRight size={15} />
                     </a>
                   ) : (
                     <Link
                       to={demoUrl}
-                      className="h-12 px-5 rounded-2xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="h-10 px-5 rounded-xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                       title="View Case Study"
                     >
                       <span>Case Study</span>
-                      <ArrowRight size={15} />
                     </Link>
                   )}
 
@@ -896,10 +894,10 @@ function ProjectsSection() {
                     href={githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 shrink-0 cursor-pointer"
+                    className="h-10 w-10 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 shrink-0 cursor-pointer"
                     title="GitHub Repository"
                   >
-                    <FaGithub size={18} />
+                    <FaGithub size={16} />
                   </a>
                 </div>
 

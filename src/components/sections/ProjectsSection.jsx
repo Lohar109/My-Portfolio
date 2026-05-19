@@ -166,9 +166,9 @@ function ProjectsSection() {
             MY WORK
           </div>
 
-          <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 font-sans leading-none sm:text-5xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 font-sans leading-tight sm:text-4xl">
             Projects that solve <br className="hidden sm:inline" />
-            <span className="text-black inline-block mt-1">real problems.</span>
+            <span className="text-black inline-block mt-0.5">real problems.</span>
           </h2>
 
           <p className="max-w-xl text-base leading-relaxed text-gray-500 font-normal">
@@ -185,8 +185,8 @@ function ProjectsSection() {
               <span className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-3 shadow-[0_2px_8px_rgba(37,99,235,0.06)]">
                 <Code size={18} strokeWidth={2.5} />
               </span>
-              <span className="text-2xl font-extrabold text-gray-900 leading-none">8+</span>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Projects</span>
+              <span className="text-xl font-extrabold text-gray-900 leading-none">8+</span>
+              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Projects</span>
             </div>
 
             {/* divider line */}
@@ -197,8 +197,8 @@ function ProjectsSection() {
               <span className="h-10 w-10 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mb-3 shadow-[0_2px_8px_rgba(16,185,129,0.06)]">
                 <Cpu size={18} strokeWidth={2.5} />
               </span>
-              <span className="text-2xl font-extrabold text-gray-900 leading-none">5+</span>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Techs</span>
+              <span className="text-xl font-extrabold text-gray-900 leading-none">5+</span>
+              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Techs</span>
             </div>
 
             {/* divider line */}
@@ -209,8 +209,8 @@ function ProjectsSection() {
               <span className="h-10 w-10 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 mb-3 shadow-[0_2px_8px_rgba(245,158,11,0.06)]">
                 <Star size={18} strokeWidth={2.5} />
               </span>
-              <span className="text-2xl font-extrabold text-gray-900 leading-none">100%</span>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Satisfied</span>
+              <span className="text-xl font-extrabold text-gray-900 leading-none">100%</span>
+              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Satisfied</span>
             </div>
 
             {/* divider line */}
@@ -221,8 +221,8 @@ function ProjectsSection() {
               <span className="h-10 w-10 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600 mb-3 shadow-[0_2px_8px_rgba(225,29,72,0.06)]">
                 <Rocket size={18} strokeWidth={2.5} />
               </span>
-              <span className="text-2xl font-extrabold text-gray-900 leading-none">Impact</span>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Driven</span>
+              <span className="text-xl font-extrabold text-gray-900 leading-none">Impact</span>
+              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Driven</span>
             </div>
           </div>
         </div>

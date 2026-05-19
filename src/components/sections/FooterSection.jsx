@@ -409,7 +409,7 @@ function FooterSection() {
         <div className="p-8 md:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6.5 items-start">
           {/* Feature 1 */}
           <div className="flex flex-col items-start">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50/60 text-amber-550 border border-amber-200/30">
               <Zap size={18} strokeWidth={2} />
             </span>
             <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
@@ -422,7 +422,7 @@ function FooterSection() {
 
           {/* Feature 2 */}
           <div className="flex flex-col items-start">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50/60 text-rose-550 border border-rose-200/30">
               <Target size={18} strokeWidth={2} />
             </span>
             <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
@@ -435,7 +435,7 @@ function FooterSection() {
 
           {/* Feature 3 */}
           <div className="flex flex-col items-start">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50/60 text-emerald-550 border border-emerald-200/30">
               <Users size={18} strokeWidth={2} />
             </span>
             <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
@@ -448,7 +448,7 @@ function FooterSection() {
 
           {/* Feature 4 */}
           <div className="flex flex-col items-start">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50/60 text-indigo-550 border border-indigo-200/30">
               <Lightbulb size={18} strokeWidth={2} />
             </span>
             <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
@@ -463,7 +463,7 @@ function FooterSection() {
 
       {/* Footer Brand Grid Section */}
       <div className="mx-auto max-w-6xl mt-12 w-full rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-        
+
         {/* Brand Col */}
         <div className="flex flex-col items-start justify-between">
           <div>
@@ -484,7 +484,7 @@ function FooterSection() {
               Building scalable web applications and intelligent solutions that make an impact.
             </p>
           </div>
-          
+
           {/* Direct Connect icons inside brand col */}
           <div className="flex gap-2.5 mt-6 select-none">
             <a

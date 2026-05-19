@@ -22,7 +22,7 @@ function FooterSection() {
     subject: '',
     message: '',
   })
-  
+
   const [status, setStatus] = useState('idle') // 'idle' | 'loading' | 'success'
   const [isActive, setIsActive] = useState(true)
 
@@ -84,7 +84,7 @@ function FooterSection() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.015),transparent_70%)]" />
 
       <div className="mx-auto grid max-w-6xl items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
-        
+
         {/* Left Column: Get In Touch Info */}
         <div className="flex flex-col justify-between gap-10 w-full h-full">
           <div className="flex flex-col items-start">
@@ -104,13 +104,13 @@ function FooterSection() {
 
             {/* Paragraph Description */}
             <p className="mt-4 text-base font-normal leading-relaxed text-gray-500/90 max-w-lg">
-              I'm always open to discussing new opportunities, interesting projects, 
+              I'm always open to discussing new opportunities, interesting projects,
               or just having a chat about technology.
             </p>
 
             {/* Contact Information Cards */}
             <div className="mt-8 flex flex-col gap-4 w-full max-w-md">
-              
+
               {/* Email Card */}
               <a
                 href={`mailto:${emailAddress}`}

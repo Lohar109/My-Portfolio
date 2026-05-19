@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import {
   ArrowRight,
   LayoutGrid,
@@ -10,12 +11,7 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import IntroVideoFrame from '../ui/IntroVideoFrame.jsx'
 
 function HeroSection() {
-  const handleScroll = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+  const navigate = useNavigate()
 
   return (
     <motion.section
@@ -103,7 +99,7 @@ function HeroSection() {
               className="mt-5 flex flex-row flex-wrap gap-4 sm:flex-nowrap w-full sm:w-auto"
             >
               <button
-                onClick={() => handleScroll('projects')}
+                onClick={() => navigate('/projects')}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-2.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
               >
                 View Projects
@@ -111,7 +107,7 @@ function HeroSection() {
               </button>
 
               <button
-                onClick={() => handleScroll('skills')}
+                onClick={() => navigate('/skills')}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-2.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
               >
                 Explore Skills

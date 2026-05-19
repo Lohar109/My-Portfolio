@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function NavLink({ label, onClick }) {
   return (
@@ -16,26 +16,20 @@ function NavLink({ label, onClick }) {
 
 function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
 
   const navItems = [
-    { label: 'Home', href: '#' },
-    { label: 'Education', href: '/#education' },
-    { label: 'Skills', href: '/#skills' },
-    { label: 'Projects', href: '/#projects' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'Home', href: '/' },
+    { label: 'Education', href: '/education' },
+    { label: 'Skills', href: '/skills' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   const handleNavClick = (href) => {
     setIsOpen(false)
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      return
-    }
-    const elementId = href.split('#')[1]
-    const element = document.getElementById(elementId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    navigate(href)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (

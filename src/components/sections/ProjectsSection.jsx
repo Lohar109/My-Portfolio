@@ -167,8 +167,7 @@ function ProjectsSection() {
           </div>
 
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 font-sans leading-tight sm:text-4xl">
-            Projects that solve <br className="hidden sm:inline" />
-            <span className="text-black inline-block mt-0.5">real problems.</span>
+            Projects that solve real problems.
           </h2>
 
           <p className="max-w-xl text-base leading-relaxed text-gray-500 font-normal">
@@ -185,7 +184,7 @@ function ProjectsSection() {
               <span className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-3 shadow-[0_2px_8px_rgba(37,99,235,0.06)]">
                 <Code size={18} strokeWidth={2.5} />
               </span>
-              <span className="text-xl font-extrabold text-gray-900 leading-none">8+</span>
+              <span className="text-xl font-extrabold text-gray-900 leading-none">6+</span>
               <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-1.5">Projects</span>
             </div>
 

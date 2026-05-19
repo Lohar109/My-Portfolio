@@ -1,15 +1,19 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-function NavLink({ label, onClick }) {
+function NavLink({ label, onClick, isActive }) {
   return (
     <button
       onClick={onClick}
-      className="group relative px-0.5 py-2 text-sm font-medium tracking-wide text-gray-500 transition-colors duration-300 hover:text-black"
+      className={`group relative px-0.5 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
+        isActive ? 'text-black font-semibold' : 'text-gray-500 hover:text-black'
+      }`}
     >
       {label}
-      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-black transition-all duration-300 ease-out group-hover:w-full" />
+      <span className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 bg-black transition-all duration-300 ease-out ${
+        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+      }`} />
     </button>
   )
 }
@@ -17,6 +21,7 @@ function NavLink({ label, onClick }) {
 function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const navItems = [
     { label: 'Home', href: '/' },
@@ -59,13 +64,19 @@ function SiteHeader() {
             transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
             className="hidden items-center gap-x-6 md:flex"
           >
-            {navItems.map((item) => (
-              <NavLink
-                key={item.label}
-                label={item.label}
-                onClick={() => handleNavClick(item.href)}
-              />
-            ))}
+            {navItems.map((item) => {
+              const isActive =
+                location.pathname === item.href ||
+                (item.href !== '/' && location.pathname.startsWith(item.href))
+              return (
+                <NavLink
+                  key={item.label}
+                  label={item.label}
+                  isActive={isActive}
+                  onClick={() => handleNavClick(item.href)}
+                />
+              )
+            })}
           </motion.nav>
 
           {/* Mobile Menu Button */}
@@ -101,15 +112,25 @@ function SiteHeader() {
         className="overflow-hidden border-t border-gray-100 md:hidden"
       >
         <nav className="flex flex-col gap-4 px-8 py-6 bg-white/95">
-          {navItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => handleNavClick(item.href)}
-              className="relative text-left text-sm font-medium text-gray-500 transition-colors duration-300 hover:text-black"
-            >
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isActive =
+              location.pathname === item.href ||
+              (item.href !== '/' && location.pathname.startsWith(item.href))
+            return (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item.href)}
+                className={`relative text-left text-sm font-medium transition-colors duration-300 ${
+                  isActive ? 'text-black font-semibold' : 'text-gray-500 hover:text-black'
+                }`}
+              >
+                {item.label}
+                {isActive && (
+                  <span className="absolute left-0 -ml-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-black" />
+                )}
+              </button>
+            )
+          })}
         </nav>
       </motion.div>
     </header>

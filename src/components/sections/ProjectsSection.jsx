@@ -427,10 +427,9 @@ function ProjectsSection() {
               <div className="mt-8 flex flex-wrap gap-3 w-full sm:w-auto">
                 <Link
                   to={'/projects/' + shopEaseProject.slug}
-                  className="rounded-xl bg-black px-6 py-3 font-bold !text-white transition-all duration-300 hover:bg-neutral-900 text-center flex items-center justify-center gap-2 shadow-sm text-sm shrink-0"
+                  className="rounded-xl bg-black px-6 py-3 font-bold !text-white transition-all duration-300 hover:bg-neutral-900 text-center flex items-center justify-center shadow-sm text-sm shrink-0"
                 >
                   View Case Study
-                  <ArrowRight size={14} />
                 </Link>
 
                 <a
@@ -498,10 +497,9 @@ function ProjectsSection() {
               <div className="mt-auto flex gap-3">
                 <Link
                   to={'/projects/' + project.slug}
-                  className="rounded-xl bg-black px-4.5 py-3 text-center text-xs font-bold !text-white transition-all duration-300 hover:bg-neutral-900 flex items-center gap-1.5 shadow-sm"
+                  className="rounded-xl bg-black px-4.5 py-3 text-center text-xs font-bold !text-white transition-all duration-300 hover:bg-neutral-900 flex items-center justify-center shadow-sm"
                 >
                   Case Study
-                  <ArrowRight size={12} />
                 </Link>
               </div>
             </motion.article>

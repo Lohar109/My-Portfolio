@@ -365,10 +365,9 @@ function FooterSection() {
               navigate('/projects')
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="inline-flex items-center justify-center gap-2 w-fit rounded-xl border border-black bg-black !text-white hover:bg-neutral-800 px-4 py-3 text-xs font-bold mt-6 sm:mt-8 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center w-fit rounded-xl border border-black bg-black !text-white hover:bg-neutral-800 px-4 py-3 text-xs font-bold mt-6 sm:mt-8 transition-all duration-200 active:scale-[0.98] cursor-pointer"
           >
             View My Work
-            <ArrowRight size={13} />
           </button>
         </div>
 
@@ -527,10 +526,9 @@ function FooterSection() {
                 nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' })
               }
             }}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-xs sm:text-sm py-3 px-4 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer mt-6"
+            className="inline-flex w-full items-center justify-center rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-xs sm:text-sm py-3 px-4 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer mt-6"
           >
             Start a Conversation
-            <ArrowRight size={13} />
           </button>
         </div>
 

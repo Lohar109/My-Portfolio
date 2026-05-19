@@ -141,7 +141,7 @@ function FooterSection() {
                 className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-250"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#25D366] text-white shadow-[0_2px_10px_rgba(37,211,102,0.15)]">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#128C7E] text-white shadow-[0_2px_10px_rgba(37,211,102,0.15)]">
                     <Phone size={18} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">

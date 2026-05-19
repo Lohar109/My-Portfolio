@@ -19,7 +19,7 @@ function HeroSection() {
 
   return (
     <motion.section
-      className="relative overflow-hidden bg-gradient-to-b from-white via-white/80 to-transparent px-6 pt-28 pb-16 sm:px-10 lg:px-16 lg:pt-36 lg:pb-24"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-white/80 to-transparent px-6 pt-20 pb-12 sm:px-10 lg:px-16 lg:pt-24 lg:pb-16"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -53,7 +53,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="mt-6 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4.5xl md:text-5xl md:leading-[1.15] leading-tight select-none font-sans"
+              className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4.5xl md:text-5xl md:leading-[1.15] leading-tight select-none font-sans"
             >
               Turning complex ideas into{' '}
               <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
@@ -67,7 +67,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-6 text-[15px] sm:text-base font-normal leading-relaxed text-gray-500/95 max-w-xl font-sans"
+              className="mt-4 text-[15px] sm:text-base font-normal leading-relaxed text-gray-500/95 max-w-xl font-sans"
             >
               I engineer scalable web applications and integrate cutting-edge GenAI models.
               My focus is on significant work with highly-optimized backend code in Node.js
@@ -79,7 +79,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="mt-8 flex flex-wrap gap-3 select-none"
+              className="mt-5 flex flex-wrap gap-2.5 select-none"
             >
               <span className="inline-flex items-center gap-2 rounded-xl border border-gray-200/80 bg-white px-3.5 py-2 text-xs sm:text-sm font-semibold tracking-wide text-gray-700 shadow-sm transition duration-200 hover:shadow-md hover:border-gray-300">
                 <LayoutGrid className="h-4 w-4 text-indigo-600" />
@@ -100,7 +100,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="mt-8 flex flex-row flex-wrap gap-4 sm:flex-nowrap w-full sm:w-auto"
+              className="mt-5 flex flex-row flex-wrap gap-4 sm:flex-nowrap w-full sm:w-auto"
             >
               <button
                 onClick={() => handleScroll('projects')}
@@ -124,7 +124,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="mt-12 flex items-center gap-4 select-none"
+              className="mt-7 flex items-center gap-4 select-none"
             >
               <span className="text-sm font-semibold tracking-wide text-gray-500">
                 Let's connect

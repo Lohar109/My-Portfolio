@@ -18,8 +18,9 @@ import {
   Cpu,
   Terminal,
   Grid,
+  ListFilter,
 } from 'lucide-react'
-import { FaReact, FaChartLine, FaNetworkWired } from 'react-icons/fa'
+import { FaReact, FaChartLine, FaNetworkWired, FaGithub } from 'react-icons/fa'
 import {
   SiCplusplus,
   SiQt,
@@ -96,8 +97,262 @@ function BoxIcon(props) {
   )
 }
 
+function getProjectLinks(slug) {
+  switch (slug) {
+    case 'studioflow':
+      return {
+        github: 'https://github.com/Lohar109/ShopEase-Ecommerce',
+        demo: 'https://shop-ease-ecommerce-delta.vercel.app/'
+      }
+    case 'portfolio':
+      return {
+        github: 'https://github.com/Lohar109/My-Portfolio',
+        demo: '/'
+      }
+    case 'marketpulse':
+      return {
+        github: 'https://github.com/Lohar109/Loading-Optimisation-Software',
+        demo: '/projects/marketpulse'
+      }
+    case 'campus-connect':
+      return {
+        github: 'https://github.com/Lohar109/Campus-Connect-Portal',
+        demo: '/projects/campus-connect'
+      }
+    case 'insight-board':
+      return {
+        github: 'https://github.com/Lohar109/InsightBoard-Analytics',
+        demo: '/projects/insight-board'
+      }
+    case 'support-flow':
+      return {
+        github: 'https://github.com/Lohar109/SupportFlow-Assistant',
+        demo: '/projects/support-flow'
+      }
+    case 'media-ops':
+      return {
+        github: 'https://github.com/Lohar109/MediaOps-Studio',
+        demo: '/projects/media-ops'
+      }
+    default:
+      return {
+        github: 'https://github.com/Lohar109',
+        demo: '#'
+      }
+  }
+}
+
+function getCategoryDotColor(category) {
+  const cat = (category || '').toLowerCase()
+  if (cat.includes('ai') || cat.includes('ml') || cat.includes('intelligent') || cat.includes('support')) {
+    return 'bg-blue-600' // blue dot
+  }
+  if (cat.includes('web') || cat.includes('saas') || cat.includes('portal') || cat.includes('dashboard') || cat.includes('edtech')) {
+    return 'bg-violet-600' // purple dot
+  }
+  if (cat.includes('desktop') || cat.includes('tool') || cat.includes('logistics')) {
+    return 'bg-amber-600' // amber dot
+  }
+  return 'bg-gray-400'
+}
+
+function renderProjectVisual(project) {
+  const slug = project.slug
+  switch (slug) {
+    case 'portfolio':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0b1220] to-[#1e293b] flex flex-col justify-between p-3.5 font-mono text-[9px] text-sky-400 select-none overflow-hidden">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-1.5">
+            <span className="flex items-center gap-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[8px] text-slate-400 font-semibold tracking-wider uppercase">Agent Active</span>
+            </span>
+            <span className="text-slate-500 text-[8px]">v1.0.4</span>
+          </div>
+          
+          <div className="flex flex-col gap-2 my-1">
+            <div className="self-start max-w-[85%] bg-blue-600/10 border border-blue-500/25 text-blue-300 px-2 py-1 rounded-lg rounded-tl-none leading-normal">
+              Querying technical journey...
+            </div>
+            <div className="self-end max-w-[90%] bg-slate-800/40 border border-slate-700/30 text-emerald-400 px-2 py-1 rounded-lg rounded-tr-none text-right leading-normal">
+              RAG: Retrieved 3 projects.
+            </div>
+          </div>
+          
+          <div className="flex items-center justify-between text-[7px] text-slate-500 pt-1.5 border-t border-slate-800/80">
+            <span>model: gemini-3</span>
+            <span>latency: 48ms</span>
+          </div>
+        </div>
+      )
+
+    case 'marketpulse':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] to-[#fef3c7] flex flex-col justify-between p-3 select-none overflow-hidden">
+          <div className="flex items-center justify-between text-[8px] text-amber-800 font-bold border-b border-amber-200/60 pb-1">
+            <span>3D CONTAINER PACKING</span>
+            <span className="bg-amber-100 px-1 py-0.5 rounded text-amber-700 font-black">94.8% OPT</span>
+          </div>
+          
+          <div className="relative flex-1 flex items-center justify-center my-1.5">
+            <div className="w-[120px] h-[55px] border-2 border-amber-600/30 rounded bg-white/40 relative flex items-center justify-center">
+              <div className="absolute left-2 bottom-1.5 w-8 h-6 bg-amber-500 rounded-sm shadow-sm border border-amber-600/20 text-white text-[6px] font-black flex items-center justify-center">B1</div>
+              <div className="absolute left-11 bottom-1.5 w-10 h-7 bg-orange-500 rounded-sm shadow-sm border border-orange-600/20 text-white text-[6px] font-black flex items-center justify-center">B2</div>
+              <div className="absolute left-6 bottom-4 w-9 h-5 bg-teal-500 rounded-sm shadow-sm border border-teal-600/20 text-white text-[6px] font-black flex items-center justify-center">B3</div>
+              <div className="absolute inset-x-2 bottom-6 border-b border-dashed border-emerald-500 flex justify-between text-[6px] text-emerald-600 font-bold">
+                <span>VOL LIMIT</span>
+                <span>SAFE</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-[7px] text-amber-700 font-semibold flex justify-between">
+            <span>ITEMS: 142</span>
+            <span>SPACE WASTED: 5.2%</span>
+          </div>
+        </div>
+      )
+
+    case 'campus-connect':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] to-[#e0f2fe] flex flex-col justify-between p-3.5 select-none overflow-hidden">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
+            <span className="text-[9px] font-black text-slate-800 tracking-tight">CAMPUS CONNECT</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+          </div>
+          
+          <div className="flex gap-2 items-center my-1.5">
+            <div className="flex-1 bg-white border border-slate-200 rounded-lg p-1.5 flex flex-col gap-0.5 shadow-sm">
+              <span className="text-[6px] font-bold text-slate-400 uppercase leading-none">Schedule</span>
+              <span className="text-[8px] font-extrabold text-slate-700 leading-none mt-0.5">Algorithms</span>
+              <span className="text-[6px] font-medium text-blue-600 mt-0.5">Room 404 • 10:00 AM</span>
+            </div>
+            
+            <div className="h-11 w-11 rounded-lg bg-white border border-slate-200 flex flex-col items-center justify-center shadow-sm shrink-0">
+              <span className="text-[8px] font-black text-emerald-600 leading-none">92.4%</span>
+              <span className="text-[5px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">ATTEND</span>
+            </div>
+          </div>
+          
+          <div className="bg-amber-50 border border-amber-200/50 rounded px-1.5 py-0.5 text-[6px] font-bold text-amber-700 flex items-center justify-between">
+            <span>Notice: Assignment 3 tonight!</span>
+            <span className="text-amber-800">⚠️</span>
+          </div>
+        </div>
+      )
+
+    case 'insight-board':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#fafafa] to-[#ecfdf5] flex flex-col justify-between p-3 select-none overflow-hidden">
+          <div className="flex items-center justify-between text-[8px] text-emerald-800 font-bold border-b border-emerald-100 pb-1">
+            <span>INSIGHTBOARD ANALYTICS</span>
+            <span className="bg-emerald-100 px-1 py-0.5 rounded text-emerald-700 font-black">LIVE</span>
+          </div>
+          
+          <div className="flex-1 flex flex-col justify-end mt-1.5">
+            <div className="w-full h-[40px] relative">
+              <svg className="w-full h-full overflow-visible" viewBox="0 0 160 40">
+                <defs>
+                  <linearGradient id="widgetGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 35 Q20 20, 40 28 T80 12 T120 18 T160 5"
+                  fill="none"
+                  stroke="#10b981"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M0 35 Q20 20, 40 28 T80 12 T120 18 T160 5 L160 40 L0 40 Z"
+                  fill="url(#widgetGrad)"
+                />
+              </svg>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-1.5 mt-1 border-t border-emerald-100/60 pt-1 text-[7px] text-emerald-700 font-semibold">
+            <span>DAU: 4,820 <span className="text-emerald-500 font-bold">(+12%)</span></span>
+            <span className="text-right">BOUNCE: 24.3%</span>
+          </div>
+        </div>
+      )
+
+    case 'support-flow':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] to-[#eff6ff] flex flex-col justify-between p-3 select-none overflow-hidden">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-1">
+            <span className="text-[9px] font-black text-slate-800 tracking-tight">SUPPORTFLOW</span>
+            <span className="text-[6px] font-bold bg-blue-100 text-blue-800 px-1 py-0.5 rounded">AI AUTO-TRIAGE</span>
+          </div>
+          
+          <div className="flex flex-col gap-1.5 my-1.5">
+            <div className="bg-white border border-slate-200 rounded p-1 flex items-center justify-between shadow-sm">
+              <span className="text-[7px] font-bold text-slate-700">#4819 API Timeout</span>
+              <span className="text-[5px] font-black bg-rose-100 text-rose-700 px-1 py-0.2 rounded uppercase">HIGH</span>
+            </div>
+            <div className="bg-white border border-slate-200 rounded p-1 flex items-center justify-between shadow-sm">
+              <span className="text-[7px] font-bold text-slate-700">#4818 Billing Reset</span>
+              <span className="text-[5px] font-black bg-emerald-100 text-emerald-700 px-1 py-0.2 rounded uppercase">DRAFT READY</span>
+            </div>
+          </div>
+          
+          <div className="text-[7px] text-slate-500 flex justify-between">
+            <span>AVG RESP: 4m 12s</span>
+            <span>ACCURACY: 98.4%</span>
+          </div>
+        </div>
+      )
+
+    case 'media-ops':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] to-[#1e1b4b] flex flex-col justify-between p-3 select-none overflow-hidden">
+          <div className="flex items-center justify-between border-b border-slate-800/80 pb-1">
+            <span className="text-[9px] font-black text-slate-200 tracking-tight">MEDIAOPS STUDIO</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+          </div>
+          
+          <div className="grid grid-cols-3 gap-1.5 my-1.5">
+            <div className="h-8 rounded bg-gradient-to-br from-amber-400 to-rose-600 relative overflow-hidden flex items-center justify-center shadow-md">
+              <span className="absolute bottom-0.5 right-0.5 text-[5px] bg-black/60 text-emerald-400 font-bold px-0.5 rounded">CDN</span>
+            </div>
+            <div className="h-8 rounded bg-gradient-to-br from-indigo-500 to-purple-600 relative overflow-hidden flex items-center justify-center shadow-md">
+              <span className="absolute bottom-0.5 right-0.5 text-[5px] bg-black/60 text-emerald-400 font-bold px-0.5 rounded">CDN</span>
+            </div>
+            <div className="h-8 rounded bg-gradient-to-br from-cyan-400 to-blue-600 relative overflow-hidden flex items-center justify-center shadow-md">
+              <span className="absolute bottom-0.5 right-0.5 text-[5px] bg-black/60 text-yellow-400 font-bold px-0.5 rounded">80%</span>
+            </div>
+          </div>
+          
+          <div className="flex flex-col gap-0.5">
+            <div className="flex justify-between text-[6px] text-slate-400 font-bold">
+              <span>STORAGE CAP</span>
+              <span>64.2 GB / 100 GB</span>
+            </div>
+            <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+              <div className="bg-indigo-500 h-full w-[64.2%]" />
+            </div>
+          </div>
+        </div>
+      )
+
+    default:
+      return (
+        <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
+          <Code className="w-8 h-8 text-slate-400" />
+        </div>
+      )
+  }
+}
+
 function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All')
+  const [sortBy, setSortBy] = useState('latest')
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Group filters
   const filters = [
@@ -106,6 +361,11 @@ function ProjectsSection() {
     { label: 'AI / ML', value: 'AI' },
     { label: 'Tools', value: 'Tools' },
   ]
+
+  const handleFilterChange = (filterValue) => {
+    setActiveFilter(filterValue)
+    setCurrentPage(1)
+  }
 
   // Filter project cards logic
   const filteredProjects = projects.filter((project) => {
@@ -146,6 +406,26 @@ function ProjectsSection() {
   // We explicitly pull out ShopEase as the featured showcase card
   const shopEaseProject = projects.find((p) => p.slug === 'studioflow')
   const otherProjects = filteredProjects.filter((p) => p.slug !== 'studioflow')
+
+  // Sort other projects
+  const sortedProjects = [...otherProjects].sort((a, b) => {
+    if (sortBy === 'latest') {
+      return parseInt(b.year || '2026') - parseInt(a.year || '2026')
+    }
+    if (sortBy === 'oldest') {
+      return parseInt(a.year || '2026') - parseInt(b.year || '2026')
+    }
+    if (sortBy === 'alphabetical') {
+      return a.title.localeCompare(b.title)
+    }
+    return 0
+  })
+
+  // Paginate other projects
+  const itemsPerPage = 4
+  const totalPages = Math.ceil(sortedProjects.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const paginatedProjects = sortedProjects.slice(startIndex, startIndex + itemsPerPage)
 
   return (
     <motion.section
@@ -234,7 +514,7 @@ function ProjectsSection() {
           return (
             <button
               key={filter.value}
-              onClick={() => setActiveFilter(filter.value)}
+              onClick={() => handleFilterChange(filter.value)}
               className={`rounded-xl px-5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
                 isSelected
                   ? 'bg-neutral-950 text-white shadow-sm border border-neutral-950'
@@ -456,64 +736,227 @@ function ProjectsSection() {
         </div>
       )}
 
-      {/* Grid of Other Projects */}
-      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-        <AnimatePresence mode="popLayout">
-          {otherProjects.map((project) => (
-            <motion.article
-              layout
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              key={project.slug}
-              className="group cursor-pointer rounded-3xl border border-gray-200/50 bg-white p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-2">
-                  <span className="rounded-full bg-neutral-100 border border-neutral-200/50 px-2 py-0.5 text-[8px] font-bold text-neutral-600 uppercase tracking-widest">
-                    {project.category || 'Product'}
-                  </span>
-                  <span className="text-[10px] font-bold text-gray-400">
-                    {project.year || '2026'}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-gray-900 mb-2 leading-none">
-                  {project.title}
-                </h3>
-
-                <p className="text-xs font-normal text-gray-500 leading-relaxed mb-6">
-                  {project.summary}
-                </p>
-
-                {/* Tech tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.stack?.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200/50 bg-white px-2.5 py-1 text-[11px] font-semibold text-gray-600"
-                    >
-                      {getTechIcon(tech)}
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action buttons */}
-              <div className="mt-auto flex gap-3">
-                <Link
-                  to={'/projects/' + project.slug}
-                  className="rounded-xl bg-black px-4.5 py-3 text-center text-xs font-bold !text-white transition-all duration-300 hover:bg-neutral-900 flex items-center justify-center shadow-sm"
+      {/* All Projects Header with Sort Option */}
+      <div className="mt-16 flex items-center justify-between border-b border-gray-100 pb-5">
+        <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+          All Projects
+        </h3>
+        
+        {/* Sort Dropdown */}
+        <div className="relative">
+          <button
+            onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+            className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-xs md:text-sm font-semibold text-gray-700 hover:bg-gray-50 flex items-center gap-2 transition-all duration-200 select-none shadow-sm cursor-pointer"
+          >
+            <ListFilter size={15} />
+            <span>
+              {sortBy === 'latest' && 'Latest First'}
+              {sortBy === 'oldest' && 'Oldest First'}
+              {sortBy === 'alphabetical' && 'Alphabetical'}
+            </span>
+            <ChevronDown size={14} className={`text-gray-400 transition-transform duration-200 ${sortDropdownOpen ? 'rotate-180' : ''}`} />
+          </button>
+          
+          <AnimatePresence>
+            {sortDropdownOpen && (
+              <>
+                {/* Backdrop to close */}
+                <div className="fixed inset-0 z-10" onClick={() => setSortDropdownOpen(false)} />
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 mt-2 w-44 bg-white border border-gray-150 rounded-xl shadow-lg py-1.5 z-20 overflow-hidden"
                 >
-                  Case Study
-                </Link>
-              </div>
-            </motion.article>
-          ))}
+                  <button
+                    onClick={() => {
+                      setSortBy('latest');
+                      setCurrentPage(1);
+                      setSortDropdownOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors duration-155 ${sortBy === 'latest' ? 'text-blue-600 bg-blue-50/40' : 'text-gray-700'}`}
+                  >
+                    Latest First
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSortBy('oldest');
+                      setCurrentPage(1);
+                      setSortDropdownOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors duration-155 ${sortBy === 'oldest' ? 'text-blue-600 bg-blue-50/40' : 'text-gray-700'}`}
+                  >
+                    Oldest First
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSortBy('alphabetical');
+                      setCurrentPage(1);
+                      setSortDropdownOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors duration-155 ${sortBy === 'alphabetical' ? 'text-blue-600 bg-blue-50/40' : 'text-gray-700'}`}
+                  >
+                    Alphabetical
+                  </button>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Horizontal Cards for Other Projects */}
+      <div className="mt-8 flex flex-col gap-6">
+        <AnimatePresence mode="popLayout">
+          {paginatedProjects.map((project) => {
+            const links = getProjectLinks(project.slug);
+            const githubUrl = links.github;
+            const demoUrl = links.demo;
+
+            return (
+              <motion.article
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                key={project.slug}
+                className="group bg-white border border-gray-200/80 rounded-3xl p-5 md:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:border-gray-300 transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center"
+              >
+                {/* Left Side: Dynamic high fidelity CSS visual preview */}
+                <div className="w-full lg:w-[260px] h-[160px] rounded-2xl overflow-hidden shrink-0 border border-gray-100 flex items-center justify-center bg-gray-50/50 relative group-hover:border-gray-200 transition-colors duration-300">
+                  {renderProjectVisual(project)}
+                </div>
+
+                {/* Middle Content: Project details, technology badges, category/year metadata */}
+                <div className="flex-1 flex flex-col justify-between py-1 self-stretch">
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 tracking-tight leading-tight group-hover:text-indigo-600 transition-colors duration-200">
+                      {project.title}
+                    </h4>
+                    <p className="mt-2 text-sm text-gray-500 font-normal leading-relaxed">
+                      {project.summary}
+                    </p>
+                    
+                    {/* Tech Badges */}
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.stack?.slice(0, 4).map((tech) => (
+                        <span
+                          key={tech}
+                          className="inline-flex items-center gap-1.5 rounded-xl border border-gray-205 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm"
+                        >
+                          {getTechIcon(tech)}
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category and Year Metadata */}
+                  <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-400 select-none">
+                    <span className="flex items-center gap-1.5">
+                      <span className={`h-2.5 w-2.5 rounded-full ${getCategoryDotColor(project.category)}`} />
+                      {project.category || 'Web App'}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-gray-300" />
+                      {project.year || '2026'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right Side: Round-squared outline action buttons for Case Study, GitHub, and Live Demo */}
+                <div className="flex items-center justify-start lg:justify-end gap-3 mt-4 lg:mt-0 shrink-0 lg:pl-6 w-full lg:w-auto">
+                  {/* View Case Study / Live Demo */}
+                  {demoUrl.startsWith('http') ? (
+                    <a
+                      href={demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                      title="Live Demo"
+                    >
+                      <ExternalLink size={18} />
+                    </a>
+                  ) : (
+                    <Link
+                      to={demoUrl}
+                      className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                      title="View Case Study"
+                    >
+                      <ExternalLink size={18} />
+                    </Link>
+                  )}
+
+                  {/* GitHub Repo */}
+                  <a
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                    title="GitHub Repository"
+                  >
+                    <FaGithub size={18} />
+                  </a>
+                </div>
+
+              </motion.article>
+            );
+          })}
         </AnimatePresence>
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="mt-12 flex items-center justify-center gap-2">
+          {/* Previous Button */}
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${
+              currentPage === 1
+                ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
+                : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+            }`}
+          >
+            &lt;
+          </button>
+          
+          {/* Page numbers */}
+          {Array.from({ length: totalPages }, (_, idx) => {
+            const pageNum = idx + 1;
+            const isActive = pageNum === currentPage;
+            return (
+              <button
+                key={pageNum}
+                onClick={() => setCurrentPage(pageNum)}
+                className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-bold transition-all duration-200 select-none cursor-pointer ${
+                  isActive
+                    ? 'border-indigo-500 bg-indigo-50/20 text-indigo-600'
+                    : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+                }`}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
+          
+          {/* Next Button */}
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className={`h-10 w-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${
+              currentPage === totalPages
+                ? 'border-gray-100 bg-gray-50/50 text-gray-300 cursor-not-allowed'
+                : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+            }`}
+          >
+            &gt;
+          </button>
+        </div>
+      )}
 
     </motion.section>
   )

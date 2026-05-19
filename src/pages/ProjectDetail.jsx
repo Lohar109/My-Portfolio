@@ -140,7 +140,7 @@ function ProjectDetail() {
   return (
     <main className="min-h-screen text-gray-900">
       <SiteHeader isDetailPage />
-      <div className="mx-auto max-w-6xl px-6 pb-10 pt-8 sm:px-10 lg:px-16 lg:pb-12">
+      <div className="mx-auto max-w-6xl px-6 pb-10 pt-28 sm:px-10 lg:px-16 lg:pb-12">
         <Link
           to="/#projects"
           className="inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-sm font-semibold !text-white shadow-sm transition hover:bg-gray-800"

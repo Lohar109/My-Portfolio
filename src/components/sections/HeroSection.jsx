@@ -19,7 +19,7 @@ function HeroSection() {
 
   return (
     <motion.section
-      className="relative overflow-hidden bg-gradient-to-b from-white/70 via-gray-50/50 to-transparent px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-white/80 to-transparent px-6 pt-28 pb-16 sm:px-10 lg:px-16 lg:pt-36 lg:pb-24"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}

@@ -11,7 +11,7 @@ function App() {
     <div className="flex min-h-screen flex-col bg-[#f5f5f7] text-gray-900">
       <ScrollToTop />
       <SiteHeader />
-      <div className="flex-1 pt-20">
+      <div className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />

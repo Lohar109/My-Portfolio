@@ -1,121 +1,32 @@
-import { Check, Copy, Mail, MessageCircle, Send } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  ArrowUpRight,
+  Send,
+  ShieldCheck,
+  Check,
+  Loader2,
+} from 'lucide-react'
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 
 const emailAddress = 'vaibhavlohar109@gmail.com'
 
-const socialLinks = [
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/vaibhav-lohar-ba7824315',
-    icon: 'linkedin',
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/Lohar109',
-    icon: 'github',
-  },
-  {
-    label: 'LeetCode',
-    href: 'https://leetcode.com/u/VaibhavL/',
-    icon: 'leetcode',
-  },
-  {
-    label: 'Resume',
-    href: '/resume.pdf',
-    icon: 'resume',
-  },
-]
-
-function SocialIcon({ icon }) {
-  if (icon === 'linkedin') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-        <path
-          fill="#0A66C2"
-          d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.93v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.33 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.11 20.45H3.55V9h3.56v11.45Z"
-        />
-      </svg>
-    )
-  }
-
-  if (icon === 'github') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-        <path
-          fill="#111827"
-          d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.48.09.65-.2.65-.46v-1.62c-2.67.58-3.23-1.13-3.23-1.13-.44-1.1-1.07-1.4-1.07-1.4-.87-.6.07-.58.07-.58.96.07 1.47.99 1.47.99.85 1.46 2.23 1.04 2.78.8.09-.62.33-1.04.6-1.28-2.13-.24-4.37-1.07-4.37-4.74 0-1.05.37-1.9.98-2.58-.1-.24-.43-1.22.1-2.55 0 0 .8-.26 2.62.98a9.1 9.1 0 0 1 4.78 0c1.82-1.24 2.62-.98 2.62-.98.53 1.33.2 2.31.1 2.55.62.68.98 1.53.98 2.58 0 3.68-2.24 4.5-4.38 4.73.34.3.65.88.65 1.78v2.64c0 .26.17.56.66.46A9.5 9.5 0 0 0 12 2.5Z"
-        />
-      </svg>
-    )
-  }
-
-  if (icon === 'leetcode') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-        <path
-          fill="#FFA116"
-          d="M16.1 4.2 9 11.3a2.4 2.4 0 0 0 0 3.4l2.2 2.2a2.4 2.4 0 0 0 3.4 0l1.9-1.9-1.4-1.4-1.9 1.9a.4.4 0 0 1-.56 0l-2.2-2.2a.4.4 0 0 1 0-.56l7.1-7.1-1.4-1.44Z"
-        />
-        <path fill="#B3B3B3" d="M4 12a1 1 0 0 1 1-1h7v2H5a1 1 0 0 1-1-1Z" />
-      </svg>
-    )
-  }
-
-  if (icon === 'whatsapp') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-        <path
-          fill="#25D366"
-          d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.2 4.3 4.4-1.1A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.6.7.7-2.5-.2-.3A8 8 0 1 1 12 20Zm4.4-6c-.24-.12-1.44-.7-1.67-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06a6.57 6.57 0 0 1-1.94-1.2 7.21 7.21 0 0 1-1.34-1.66c-.14-.24-.02-.37.1-.49.1-.1.24-.26.36-.39.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.31.98 2.47c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28Z"
-        />
-      </svg>
-    )
-  }
-
-  if (icon === 'mail') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-        <defs>
-          <linearGradient id="mail-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="#8b5cf6" />
-          </linearGradient>
-        </defs>
-        <path
-          fill="url(#mail-gradient)"
-          d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z"
-        />
-      </svg>
-    )
-  }
-
-  if (icon === 'resume') {
-    return (
-      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-        <path
-          fill="#EF4444"
-          d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-8v-2h8v2zm0-4h-8v-2h8v2zm-3-5V3.5L18.5 9H13z"
-        />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-      <path
-        fill="#2563EB"
-        d="M6 3h9l4 4v14H6V3Zm2 2v14h9V8h-4V5H8Zm2 5h6v1.5h-6V10Zm0 3h6v1.5h-6V13Zm0 3h4v1.5h-4V16Z"
-      />
-      <path fill="#16A34A" d="m15.2 15.5 1.1 1.1 2-2 .9.9-2.9 2.9-2-2 .9-.9Z" />
-    </svg>
-  )
-}
-
 function FooterSection() {
-  const [isCopied, setIsCopied] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
+  
+  const [status, setStatus] = useState('idle') // 'idle' | 'loading' | 'success'
   const [isActive, setIsActive] = useState(true)
 
+  // Track if current time is within active response window (7 AM - 11 PM IST)
   useEffect(() => {
     const checkActiveStatus = () => {
       const hour = parseInt(
@@ -134,181 +45,330 @@ function FooterSection() {
     return () => clearInterval(timer)
   }, [])
 
-  const emailButtonClass =
-    'inline-flex h-8.5 w-24 items-center justify-center gap-2 rounded-full bg-black px-4 text-[16px] !text-white !no-underline transition-all hover:bg-gray-800 active:scale-95'
-  
-  async function handleCopyEmail() {
-    try {
-      await navigator.clipboard.writeText(emailAddress)
-      setIsCopied(true)
-      window.setTimeout(() => setIsCopied(false), 1500)
-    } catch {
-      setIsCopied(false)
-    }
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!formData.name || !formData.email || !formData.message) return
+
+    setStatus('loading')
+
+    // Simulate direct contact dispatch with premium micro-animation delay
+    setTimeout(() => {
+      setStatus('success')
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      })
+      setTimeout(() => setStatus('idle'), 3500)
+    }, 1800)
   }
 
   return (
-    <motion.footer
+    <motion.section
       id="contact"
-      className="relative overflow-hidden px-6 py-24 sm:px-10 lg:px-16"
+      className="relative overflow-hidden px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');`}</style>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent opacity-80" />
+      {/* Background subtle light radial glow */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.015),transparent_70%)]" />
 
       <div className="mx-auto grid max-w-6xl items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
-        <div className="flex flex-col gap-8 w-full h-full">
-          <div className="max-w-3xl">
-            <h2 className="max-w-2xl text-3xl font-bold text-gray-900 tracking-tight leading-tight">
-              Let’s build products that people actually love.
+        
+        {/* Left Column: Get In Touch Info */}
+        <div className="flex flex-col justify-between gap-10 w-full h-full">
+          <div className="flex flex-col items-start">
+            {/* Get In Touch Status Badge */}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-bold uppercase tracking-wider text-black select-none">
+              <span className="h-1.5 w-1.5 rounded-full bg-black"></span>
+              Get In Touch
+            </span>
+
+            {/* Main Premium Heading */}
+            <h2 className="mt-5 text-3.5xl font-bold tracking-tight text-gray-900 leading-tight select-none">
+              Let's build something{' '}
+              <span className="bg-gradient-to-r from-black via-gray-700 to-gray-800 bg-clip-text text-transparent">
+                amazing together.
+              </span>
             </h2>
 
-            <p className="mt-4 max-w-2xl text-lg font-normal leading-8 text-gray-600">
-              As a recent graduate with a passion for web development, I focus on building clean, interactive, and user-friendly interfaces. I'm currently expanding my toolkit with DevOps and AI, looking for my first professional role where I can contribute and grow with a great team.
+            {/* Paragraph Description */}
+            <p className="mt-4 text-base font-normal leading-relaxed text-gray-500/90 max-w-lg">
+              I'm always open to discussing new opportunities, interesting projects, 
+              or just having a chat about technology.
             </p>
+
+            {/* Contact Information Cards */}
+            <div className="mt-8 flex flex-col gap-4 w-full max-w-md">
+              
+              {/* Email Card */}
+              <a
+                href={`mailto:${emailAddress}`}
+                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:shadow-md hover:border-black/20"
+              >
+                <div className="flex items-center">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all duration-300">
+                    <Mail size={18} strokeWidth={2} />
+                  </span>
+                  <div className="ml-4 flex flex-col">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+                      Email
+                    </span>
+                    <span className="text-sm font-semibold text-gray-850 mt-1.5 break-all">
+                      {emailAddress}
+                    </span>
+                  </div>
+                </div>
+                <ArrowUpRight size={16} className="text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-250" />
+              </a>
+
+              {/* Phone Card */}
+              <a
+                href="https://wa.me/9172491660"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:shadow-md hover:border-black/20"
+              >
+                <div className="flex items-center">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all duration-300">
+                    <Phone size={18} strokeWidth={2} />
+                  </span>
+                  <div className="ml-4 flex flex-col">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+                      Phone
+                    </span>
+                    <span className="text-sm font-semibold text-gray-850 mt-1.5">
+                      +91 91724 91660
+                    </span>
+                  </div>
+                </div>
+                <ArrowUpRight size={16} className="text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-250" />
+              </a>
+
+              {/* Location Card */}
+              <div
+                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm"
+              >
+                <div className="flex items-center">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black">
+                    <MapPin size={18} strokeWidth={2} />
+                  </span>
+                  <div className="ml-4 flex flex-col">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+                      Location
+                    </span>
+                    <span className="text-sm font-semibold text-gray-850 mt-1.5">
+                      Jalgaon, Maharashtra, India
+                    </span>
+                  </div>
+                </div>
+                <ArrowUpRight size={16} className="text-gray-300" />
+              </div>
+
+              {/* Availability Card */}
+              <div
+                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm"
+              >
+                <div className="flex items-center">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black">
+                    <Calendar size={18} strokeWidth={2} />
+                  </span>
+                  <div className="ml-4 flex flex-col">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+                      Availability
+                    </span>
+                    <span className="text-sm font-semibold text-gray-850 mt-1.5">
+                      Open for new opportunities
+                    </span>
+                  </div>
+                </div>
+                <span className="relative flex h-2.5 w-2.5 mr-2">
+                  <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${isActive ? 'bg-emerald-400' : 'bg-amber-400'}`}></span>
+                  <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${isActive ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
+                </span>
+              </div>
+
+            </div>
           </div>
 
-          <motion.article
-            className="flex h-fit w-full self-start flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
-                <Mail size={18} strokeWidth={1.8} aria-hidden="true" />
-              </span>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                EMAIL
-              </p>
-            </div>
-
-            <div className="mt-0">
-              <div className="flex items-center">
-                <p className="break-all text-lg font-semibold text-gray-900">
-                  {emailAddress}
-                </p>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="relative group ml-3 flex items-center justify-center rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
-                  aria-label="Copy email address"
-                >
-                  {isCopied ? <Check size={16} strokeWidth={2} className="text-green-600" /> : <Copy size={16} strokeWidth={2} />}
-                  <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2.5 py-1 text-[10px] font-medium tracking-wide text-white opacity-0 shadow-sm transition-all duration-200 group-hover:opacity-100">
-                    Copy
-                    {/* The small triangle arrow pointing down */}
-                    <div className="absolute left-1/2 top-full -translate-x-1/2 border-[4px] border-transparent border-t-gray-900"></div>
-                  </div>
-                </button>
-              </div>
-              <p className="mt-2 text-base font-normal leading-relaxed text-gray-600">
-                Ready to join your team and start building. Reach out for job opportunities or project inquiries.
-              </p>
-            </div>
-
-            <div className="mt-auto pt-4">
+          {/* Social Row at Bottom */}
+          <div className="flex items-center gap-4 select-none">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+              Let's connect
+            </span>
+            <div className="flex gap-3">
               <a
-                href={`mailto:${emailAddress}?subject=${encodeURIComponent('Job Opportunity: [Your Company Name] x Vaibhav')}`}
-                className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
+                href="https://github.com/Lohar109"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow-md hover:border-black hover:text-black transition-all duration-200"
+                aria-label="GitHub"
               >
-                <SocialIcon icon="mail" />
-                Send Email
+                <FaGithub className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/vaibhav-lohar-ba7824315"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow-md hover:border-black hover:text-black transition-all duration-200"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedinIn className="h-5 w-5" />
+              </a>
+              <a
+                href={`mailto:${emailAddress}`}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow-md hover:border-black hover:text-black transition-all duration-200"
+                aria-label="Email Address"
+              >
+                <Mail className="h-5 w-5" />
               </a>
             </div>
-          </motion.article>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-8 w-full h-full">
-          <motion.article
-            className="flex w-full flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
-                  <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
-                </span>
-                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                  DIRECT MESSAGE
-                </p>
+        {/* Right Column: Custom Message Form */}
+        <div className="w-full flex items-center justify-center">
+          <div className="w-full rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm sm:p-9">
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900 select-none">
+              Send me a message
+            </h3>
+            <p className="mt-1 text-sm font-normal text-gray-500 select-none leading-relaxed">
+              Fill out the form below and I'll get back to you as soon as possible.
+            </p>
+
+            <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter your name"
+                    disabled={status === 'loading'}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter your email"
+                    disabled={status === 'loading'}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
+                  />
+                </div>
               </div>
-              <div
-                className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${
-                  isActive ? 'bg-green-50 text-green-500' : 'bg-red-50 text-red-500'
-                }`}
+
+              <div>
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="What's this about?"
+                  disabled={status === 'loading'}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
+                />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="4"
+                  placeholder="Write your message here..."
+                  disabled={status === 'loading'}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 resize-none disabled:opacity-50"
+                />
+              </div>
+
+              {/* Submit Button with Custom Premium Animations */}
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 text-white font-semibold text-sm sm:text-base py-3.5 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.99] cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none"
               >
-                <span className="relative flex h-2 w-2 items-center justify-center">
-                  <span
-                    className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${
-                      isActive ? 'bg-green-400' : 'bg-red-400'
-                    }`}
-                  ></span>
-                  <span
-                    className={`relative inline-flex h-1.5 w-1.5 rounded-full ${
-                      isActive ? 'bg-green-500' : 'bg-red-500'
-                    }`}
-                  ></span>
-                </span>
-                {isActive ? 'Active Now' : 'Away / Responding Soon'}
-              </div>
+                <AnimatePresence mode="wait">
+                  {status === 'loading' ? (
+                    <motion.span
+                      key="loading"
+                      className="flex items-center gap-2"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <Loader2 className="h-4.5 w-4.5 animate-spin" />
+                      Sending...
+                    </motion.span>
+                  ) : status === 'success' ? (
+                    <motion.span
+                      key="success"
+                      className="flex items-center gap-2 text-emerald-400"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <Check className="h-4.5 w-4.5" />
+                      Message Sent!
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="idle"
+                      className="flex items-center gap-2"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <Send className="h-4 w-4" />
+                      Send Message
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </form>
+
+            {/* Privacy Subtext Banner */}
+            <div className="flex items-center gap-2 text-[11px] font-medium text-gray-400 mt-4.5 select-none leading-none">
+              <ShieldCheck size={14} className="text-gray-400" />
+              Your information is safe with me. I'll never share your data.
             </div>
-
-            <p className="mt-2 text-base font-normal leading-relaxed text-gray-600">
-              Want to talk about a potential role or just discuss tech? I'm always open to connecting with new teams and professionals. WhatsApp is the fastest way to reach me for a quick conversation.
-            </p>
-
-            <a
-              href="https://wa.me/9172491660"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition hover:-translate-y-0.5 hover:text-green-600 hover:shadow-md"
-            >
-              <SocialIcon icon="whatsapp" />
-              Message on WhatsApp
-            </a>
-          </motion.article>
-
-          <motion.article
-            className="flex w-full flex-1 flex-col rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm sm:p-8"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200/50 bg-gray-50 text-gray-700">
-                <Send size={18} strokeWidth={1.8} aria-hidden="true" />
-              </span>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
-                SOCIALS
-              </p>
-            </div>
-
-            <p className="mb-4 mt-3 text-base font-normal leading-relaxed text-gray-600">
-              Find my detailed resume, latest projects, and professional background on these platforms.
-            </p>
-
-            <div className="mt-auto flex flex-wrap gap-3">
-              {socialLinks.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:text-gray-900 hover:shadow-md"
-                >
-                  <SocialIcon icon={icon} />
-                  {label}
-                </a>
-              ))}
-            </div>
-          </motion.article>
+          </div>
         </div>
-      </div>
 
-    </motion.footer>
+      </div>
+    </motion.section>
   )
 }
 

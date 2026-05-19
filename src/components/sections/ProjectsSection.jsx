@@ -432,7 +432,16 @@ function ProjectsSection() {
                 </Link>
 
                 <a
-                  href="https://shopease.vaibhavlohar.dev"
+                  href="https://github.com/Lohar109/ShopEase-Ecommerce"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-gray-250 bg-white px-6 py-3 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0"
+                >
+                  GitHub Repo
+                </a>
+
+                <a
+                  href="https://shop-ease-ecommerce-delta.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-xl border border-gray-250 bg-white px-6 py-3 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0"

@@ -172,8 +172,8 @@ function FooterSection() {
                 className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black">
-                    <MapPin size={18} strokeWidth={2} />
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-transparent border-none text-[#EF4444]">
+                    <MapPin size={22} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">

@@ -115,10 +115,10 @@ function FooterSection() {
               {/* Email Card */}
               <a
                 href={`mailto:${emailAddress}`}
-                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:shadow-md hover:border-black/20"
+                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-250"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all duration-300">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#2563EB] text-white shadow-[0_2px_10px_rgba(37,99,235,0.15)]">
                     <Mail size={18} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
@@ -130,7 +130,7 @@ function FooterSection() {
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight size={16} className="text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-250" />
+                <ArrowUpRight size={16} className="text-gray-400 group-hover:text-black transition-colors" />
               </a>
 
               {/* Phone Card */}
@@ -138,22 +138,25 @@ function FooterSection() {
                 href="https://wa.me/9172491660"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:shadow-md hover:border-black/20"
+                className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-250"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-50 border border-gray-200/50 text-black group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all duration-300">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#25D366] text-white shadow-[0_2px_10px_rgba(37,211,102,0.15)]">
                     <Phone size={18} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
                       Phone
                     </span>
-                    <span className="text-sm font-semibold text-gray-850 mt-1.5">
+                    <span className="text-sm font-semibold text-gray-850 mt-1.5 flex items-center gap-1.5">
                       +91 91724 91660
+                      <span className="text-[11px] font-bold text-[#25D366]">
+                        (WhatsApp)
+                      </span>
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight size={16} className="text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-250" />
+                <ArrowUpRight size={16} className="text-gray-400 group-hover:text-black transition-colors" />
               </a>
 
               {/* Location Card */}

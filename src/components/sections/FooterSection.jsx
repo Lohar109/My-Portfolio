@@ -294,7 +294,7 @@ function FooterSection() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 text-white font-semibold text-sm sm:text-base py-3.5 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.99] cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 text-white font-semibold text-sm sm:text-base py-3 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.99] cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none"
               >
                 <AnimatePresence mode="wait">
                   {status === 'loading' ? (
@@ -365,7 +365,7 @@ function FooterSection() {
               navigate('/projects')
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="inline-flex items-center justify-center gap-2 w-fit rounded-xl border border-black bg-black text-white hover:bg-neutral-800 px-4 py-2.5 text-xs font-bold mt-6 sm:mt-8 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 w-fit rounded-xl border border-black bg-black !text-white hover:bg-neutral-800 px-4 py-3 text-xs font-bold mt-6 sm:mt-8 transition-all duration-200 active:scale-[0.98] cursor-pointer"
           >
             View My Work
             <ArrowRight size={13} />

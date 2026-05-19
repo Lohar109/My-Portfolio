@@ -100,7 +100,7 @@ function HeroSection() {
             >
               <button
                 onClick={() => navigate('/projects')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-2.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-3 text-sm sm:text-base font-semibold !text-white shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
               >
                 View Projects
                 <ArrowRight className="h-4 w-4" />
@@ -108,7 +108,7 @@ function HeroSection() {
 
               <button
                 onClick={() => navigate('/skills')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-2.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-3 text-sm sm:text-base font-semibold !text-white shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer w-full sm:w-auto"
               >
                 Explore Skills
                 <ArrowRight className="h-4 w-4" />

@@ -498,7 +498,7 @@ function ProjectsSection() {
               <div className="mt-auto flex gap-3">
                 <Link
                   to={'/projects/' + project.slug}
-                  className="rounded-xl bg-black px-4.5 py-2.5 text-center text-xs font-bold !text-white transition-all duration-300 hover:bg-neutral-900 flex items-center gap-1.5 shadow-sm"
+                  className="rounded-xl bg-black px-4.5 py-3 text-center text-xs font-bold !text-white transition-all duration-300 hover:bg-neutral-900 flex items-center gap-1.5 shadow-sm"
                 >
                   Case Study
                   <ArrowRight size={12} />

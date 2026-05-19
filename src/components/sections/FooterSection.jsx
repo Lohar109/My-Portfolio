@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import {
   Mail,
   Phone,
@@ -11,12 +12,19 @@ import {
   Check,
   Loader2,
   Sparkles,
+  Zap,
+  Target,
+  Users,
+  Lightbulb,
+  ChevronRight,
+  ArrowRight,
 } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 
 const emailAddress = 'vaibhavlohar109@gmail.com'
 
 function FooterSection() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -369,6 +377,194 @@ function FooterSection() {
               Your information is safe with me. I'll never share your data.
             </div>
           </div>
+        </div>
+
+      </div>
+
+      {/* Why Work With Me Section */}
+      <div className="mx-auto max-w-6xl mt-16 w-full rounded-3xl border border-gray-200/50 bg-white shadow-sm overflow-hidden flex flex-col md:flex-row">
+        {/* Left Col: Accent block */}
+        <div className="bg-neutral-50 p-8 md:w-1/3 flex flex-col justify-between border-b md:border-b-0 md:border-r border-gray-200/50">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 font-sans">
+              Why work with me?
+            </h3>
+            <p className="mt-3 text-sm font-normal leading-relaxed text-gray-500 font-sans">
+              I bring ideas to life with clean code, thoughtful design, and a problem-solving mindset.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              navigate('/projects')
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+            className="inline-flex items-center justify-center gap-2 w-fit rounded-xl border border-black bg-black text-white hover:bg-neutral-800 px-4 py-2.5 text-xs font-bold mt-6 sm:mt-8 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+          >
+            View My Work
+            <ArrowRight size={13} />
+          </button>
+        </div>
+
+        {/* Right Col: Features list */}
+        <div className="p-8 md:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6.5 items-start">
+          {/* Feature 1 */}
+          <div className="flex flex-col items-start">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+              <Zap size={18} strokeWidth={2} />
+            </span>
+            <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
+              Fast Response
+            </h4>
+            <p className="text-xs font-normal text-gray-500 mt-2 leading-relaxed font-sans">
+              I usually reply within 24 hours.
+            </p>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="flex flex-col items-start">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+              <Target size={18} strokeWidth={2} />
+            </span>
+            <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
+              Quality Focused
+            </h4>
+            <p className="text-xs font-normal text-gray-500 mt-2 leading-relaxed font-sans">
+              Clean, scalable and maintainable code.
+            </p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="flex flex-col items-start">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+              <Users size={18} strokeWidth={2} />
+            </span>
+            <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
+              Reliable Partner
+            </h4>
+            <p className="text-xs font-normal text-gray-500 mt-2 leading-relaxed font-sans">
+              Committed to delivering real value.
+            </p>
+          </div>
+
+          {/* Feature 4 */}
+          <div className="flex flex-col items-start">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-black border border-neutral-200/30">
+              <Lightbulb size={18} strokeWidth={2} />
+            </span>
+            <h4 className="text-sm font-bold text-gray-900 mt-4 font-sans">
+              Problem Solver
+            </h4>
+            <p className="text-xs font-normal text-gray-500 mt-2 leading-relaxed font-sans">
+              Turning complex ideas into simple solutions.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Brand Grid Section */}
+      <div className="mx-auto max-w-6xl mt-12 w-full rounded-3xl border border-gray-200/50 bg-white p-8 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        
+        {/* Brand Col */}
+        <div className="flex flex-col items-start justify-between">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-black text-white font-bold text-base select-none">
+                VL
+              </span>
+              <div className="flex flex-col">
+                <span className="text-md font-bold text-gray-900 font-sans leading-none">
+                  Vaibhav Lohar
+                </span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-black mt-1 leading-none">
+                  Software Engineer
+                </span>
+              </div>
+            </div>
+            <p className="mt-4 text-sm font-normal leading-relaxed text-gray-500 max-w-xs font-sans">
+              Building scalable web applications and intelligent solutions that make an impact.
+            </p>
+          </div>
+          
+          {/* Direct Connect icons inside brand col */}
+          <div className="flex gap-2.5 mt-6 select-none">
+            <a
+              href="https://github.com/Lohar109"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow hover:border-black hover:text-black transition-all duration-200"
+              aria-label="GitHub"
+            >
+              <FaGithub className="h-4.5 w-4.5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/vaibhav-lohar-ba7824315"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow hover:border-black hover:text-black transition-all duration-200"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn className="h-4.5 w-4.5" />
+            </a>
+            <a
+              href={`mailto:${emailAddress}`}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow hover:border-black hover:text-black transition-all duration-200"
+              aria-label="Email"
+            >
+              <Mail className="h-4.5 w-4.5" />
+            </a>
+          </div>
+        </div>
+
+        {/* Quick Links Col */}
+        <div className="flex flex-col border-t md:border-t-0 md:border-x border-gray-250/20 pt-6 md:pt-0 md:px-8">
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3 leading-none">
+            Quick Links
+          </span>
+          <div className="flex flex-col w-full">
+            {[
+              { name: 'Home', path: '/' },
+              { name: 'Education', path: '/education' },
+              { name: 'Skills', path: '/skills' },
+              { name: 'Projects', path: '/projects' },
+            ].map((link) => (
+              <button
+                key={link.name}
+                onClick={() => {
+                  navigate(link.path)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                className="group flex items-center justify-between w-full py-2 text-sm font-semibold text-gray-550 hover:text-black transition duration-200 border-b border-gray-100/50 text-left cursor-pointer"
+              >
+                <span>{link.name}</span>
+                <ChevronRight size={13} className="text-gray-400 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Let's build Great Col */}
+        <div className="flex flex-col justify-between border-t md:border-t-0 pt-6 md:pt-0">
+          <div>
+            <h4 className="text-md font-bold text-gray-900 font-sans">
+              Let's build something great
+            </h4>
+            <p className="mt-2.5 text-sm font-normal leading-relaxed text-gray-500 font-sans">
+              I'm excited to hear about your project or idea. Let's create something amazing together.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              const nameInput = document.getElementsByName('name')[0]
+              if (nameInput) {
+                nameInput.focus()
+                nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              }
+            }}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-xs sm:text-sm py-3 px-4 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer mt-6"
+          >
+            Start a Conversation
+            <ArrowRight size={13} />
+          </button>
         </div>
 
       </div>

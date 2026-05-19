@@ -822,7 +822,7 @@ function ProjectsSection() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 key={project.slug}
-                className="group bg-white border border-gray-200/80 rounded-3xl p-5 md:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:border-gray-300 transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center"
+                className="group bg-white border border-gray-200/80 rounded-3xl p-5 md:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:border-gray-300 transition-all duration-300 flex flex-col lg:flex-row gap-6 items-stretch"
               >
                 {/* Left Side: Dynamic high fidelity CSS visual preview */}
                 <div className="w-full lg:w-[260px] h-[160px] rounded-2xl overflow-hidden shrink-0 border border-gray-100 flex items-center justify-center bg-gray-50/50 relative group-hover:border-gray-200 transition-colors duration-300">
@@ -866,26 +866,28 @@ function ProjectsSection() {
                   </div>
                 </div>
 
-                {/* Right Side: Round-squared outline action buttons for Case Study, GitHub, and Live Demo */}
-                <div className="flex items-center justify-start lg:justify-end gap-3 mt-4 lg:mt-0 shrink-0 lg:pl-6 w-full lg:w-auto">
+                {/* Right Side: Case Study and GitHub action buttons aligned at the bottom on desktop */}
+                <div className="flex items-center lg:items-end justify-start lg:justify-end gap-3 mt-4 lg:mt-0 shrink-0 lg:pl-6 w-full lg:w-auto lg:self-end lg:pb-1">
                   {/* View Case Study / Live Demo */}
                   {demoUrl.startsWith('http') ? (
                     <a
                       href={demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                      className="h-12 px-5 rounded-2xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                       title="Live Demo"
                     >
-                      <ExternalLink size={18} />
+                      <span>Case Study</span>
+                      <ArrowRight size={15} />
                     </a>
                   ) : (
                     <Link
                       to={demoUrl}
-                      className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                      className="h-12 px-5 rounded-2xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                       title="View Case Study"
                     >
-                      <ExternalLink size={18} />
+                      <span>Case Study</span>
+                      <ArrowRight size={15} />
                     </Link>
                   )}
 
@@ -894,7 +896,7 @@ function ProjectsSection() {
                     href={githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                    className="h-12 w-12 rounded-2xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 shrink-0 cursor-pointer"
                     title="GitHub Repository"
                   >
                     <FaGithub size={18} />

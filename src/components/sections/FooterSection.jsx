@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   Check,
   Loader2,
+  Sparkles,
 } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 
@@ -89,10 +90,14 @@ function FooterSection() {
         <div className="flex flex-col justify-between gap-10 w-full h-full">
           <div className="flex flex-col items-start">
             {/* Get In Touch Status Badge */}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-bold uppercase tracking-wider text-black select-none">
-              <span className="h-1.5 w-1.5 rounded-full bg-black"></span>
-              Get In Touch
-            </span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] text-white shadow-[0_4px_15px_rgba(0,0,0,0.12)] select-none">
+              <Sparkles size={11} className="text-neutral-400 animate-pulse" />
+              <span>Get In Touch</span>
+              <span className="relative flex h-1.5 w-1.5 ml-0.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60 opacity-75"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white"></span>
+              </span>
+            </div>
 
             {/* Main Premium Heading */}
             <h2 className="mt-5 text-3.5xl font-bold tracking-tight text-gray-900 leading-tight select-none">

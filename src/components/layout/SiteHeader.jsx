@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import programmerLogo from '../../assets/programmer.png'
 
 function NavLink({ label, onClick, isActive }) {
   return (
     <button
       onClick={onClick}
       className={`group relative px-0.5 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
-        isActive ? 'text-black font-semibold' : 'text-gray-500 hover:text-black'
+        isActive ? 'text-black font-semibold' : 'text-gray-550 hover:text-black'
       }`}
     >
       {label}
@@ -48,8 +49,8 @@ function SiteHeader() {
             transition={{ duration: 0.4, ease: 'easeOut' }}
           >
             <Link to="/" className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/50 bg-black/5">
-                <span className="text-xs font-semibold text-black">VL</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/50 bg-black/5 overflow-hidden">
+                <img src={programmerLogo} alt="Logo" className="h-full w-full object-cover" />
               </div>
               <span className="text-sm font-medium tracking-tight text-black">
                 Vaibhav Lohar

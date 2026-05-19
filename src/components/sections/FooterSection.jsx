@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import programmerLogo from '../../assets/programmer.png'
 import {
   Mail,
   Phone,
@@ -434,8 +435,8 @@ function FooterSection() {
         <div className="flex flex-col items-start justify-between">
           <div>
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-black text-white font-bold text-base select-none">
-                VL
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 border border-gray-200/50 overflow-hidden select-none">
+                <img src={programmerLogo} alt="Logo" className="h-full w-full object-cover" />
               </span>
               <div className="flex flex-col">
                 <span className="text-md font-bold text-gray-900 font-sans leading-none">

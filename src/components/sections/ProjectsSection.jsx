@@ -507,20 +507,28 @@ function ProjectsSection() {
         </div>
       </div>
 
-      {/* Interactive Filters Row */}
-      <div className="mt-12 flex flex-wrap gap-2.5 justify-start select-none">
+      {/* Interactive Filters Row as Modern Tabs */}
+      <div className="mt-12 border-b border-gray-200 w-full flex gap-8 justify-start select-none">
         {filters.map((filter) => {
           const isSelected = activeFilter === filter.value
           return (
             <button
               key={filter.value}
               onClick={() => handleFilterChange(filter.value)}
-              className={`rounded-xl px-5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${isSelected
-                ? 'bg-neutral-950 text-white shadow-sm border border-neutral-950'
-                : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-black'
-                }`}
+              className={`pb-3.5 text-sm font-semibold tracking-wide transition-all duration-200 cursor-pointer relative ${
+                isSelected
+                  ? 'text-gray-900 font-bold'
+                  : 'text-gray-400 hover:text-gray-700'
+              }`}
             >
               {filter.label}
+              {isSelected && (
+                <motion.div
+                  layoutId="activeTabUnderline"
+                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-gray-900"
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
             </button>
           )
         })}

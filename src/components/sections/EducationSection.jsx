@@ -9,7 +9,7 @@ const educationItems = [
     stream: 'Computer Applications & Software Engineering',
     institute: 'R.C. Patel Educational Trust Institute of Management Research and Development, Shirpur',
     timeline: '2024 - 2026',
-    status: 'Ongoing',
+    status: 'Pursuing',
     metric: 'CGPA',
     grade: '9.30 / 10',
     icon: GraduationCap,
@@ -193,7 +193,7 @@ function EducationSection() {
                           ? 'bg-emerald-50 border border-emerald-100 text-emerald-600 group-hover:bg-emerald-100/60'
                           : 'bg-blue-50 border border-blue-100 text-blue-600 group-hover:bg-blue-100/60'
                       }`}>
-                        {item.status === 'Ongoing' && (
+                        {item.status === 'Pursuing' && (
                           <span className="relative flex h-2 w-2 flex-shrink-0">
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-blue-400"></span>
                             <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>

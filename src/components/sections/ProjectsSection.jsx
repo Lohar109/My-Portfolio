@@ -676,7 +676,7 @@ function ProjectsSection() {
                 </span>
 
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight leading-none">
+                  <h3 className="text-2xl font-bold text-gray-900 tracking-tight leading-none">
                     {shopEaseProject.title}
                   </h3>
                   <span className="rounded-full bg-blue-50 border border-blue-100 px-2 py-0.5 text-[8px] font-bold text-blue-600">

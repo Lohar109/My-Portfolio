@@ -405,27 +405,6 @@ function EducationSection() {
               iconType: 'node',
             },
             {
-              title: 'AWS Cloud Practitioner',
-              subtitle: 'AWS Fundamentals & Cloud Essentials',
-              provider: 'AWS',
-              year: '2023',
-              iconType: 'aws',
-            },
-            {
-              title: 'Google IT Automation with Python',
-              subtitle: 'Python, Git, APIs, Automation',
-              provider: 'Coursera',
-              year: '2023',
-              iconType: 'google',
-            },
-            {
-              title: 'AI with OpenAI & LangChain',
-              subtitle: 'Building AI Applications',
-              provider: 'Coursera',
-              year: '2024',
-              iconType: 'openai',
-            },
-            {
               title: 'Go Bootcamp: Master Golang',
               subtitle: 'Master Golang with 1000+ Exercises',
               provider: 'Udemy',
@@ -463,31 +442,6 @@ function EducationSection() {
                       <path d="M12 2L2 7l10 5 10-5-10-5z" />
                       <path d="M2 17l10 5 10-5" />
                       <path d="M2 12l10 5 10-5" />
-                    </svg>
-                  </div>
-                )}
-                {cert.iconType === 'aws' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-amber-50/50 border border-amber-100 flex flex-col items-center justify-center text-amber-600 font-sans leading-none shadow-sm">
-                    <span className="text-[10px] font-black uppercase tracking-tighter">aws</span>
-                    <svg viewBox="0 0 24 8" width="18" height="6" fill="none" className="text-amber-500 mt-0.5">
-                      <path d="M1 2c4 4 14 4 22 0M21 1.5l1.5.5-1 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                )}
-                {cert.iconType === 'google' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50/30 border border-blue-100 flex items-center justify-center shadow-sm">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
-                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
-                    </svg>
-                  </div>
-                )}
-                {cert.iconType === 'openai' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-teal-50/50 border border-teal-100 flex items-center justify-center text-teal-600 shadow-sm">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" className="text-teal-600">
-                      <path d="M21.3 11.2a4.4 4.4 0 0 0-1.1-2.9 4.3 4.3 0 0 0-3.5-1.7 4.1 4.1 0 0 0-.8.1 4.4 4.4 0 0 0-3.5-3.5A4.1 4.1 0 0 0 12 3a4.3 4.3 0 0 0-4.6 3.6 4.3 4.3 0 0 0-4.3 4.6 4.3 4.3 0 0 0 .1.8 4.4 4.4 0 0 0-.1 4.8 4.3 4.3 0 0 0 3.5 1.7 4.1 4.1 0 0 0 .8-.1 4.4 4.4 0 0 0 3.5 3.5 4.1 4.1 0 0 0 .4.1 4.3 4.3 0 0 0 4.6-3.6 4.3 4.3 0 0 0 4.3-4.6v-.8zM12 4.6a2.7 2.7 0 0 1 2.7 2.7v.5a.8.8 0 0 0 .8.8h.5a2.7 2.7 0 0 1 2.6 3.1.8.8 0 0 0 .3.8c.2.2.5.3.8.3a2.7 2.7 0 0 1 0 5.4.8.8 0 0 0-.8.8v.5a2.7 2.7 0 0 1-3.1 2.6.8.8 0 0 0-.8.3.8.8 0 0 0-.3.8 2.7 2.7 0 0 1-5.4 0 .8.8 0 0 0-.8-.8h-.5a2.7 2.7 0 0 1-2.6-3.1.8.8 0 0 0-.3-.8.8.8 0 0 0-.8-.3 2.7 2.7 0 0 1 0-5.4.8.8 0 0 0 .8-.8v-.5A2.7 2.7 0 0 1 12 4.6z" />
                     </svg>
                   </div>
                 )}

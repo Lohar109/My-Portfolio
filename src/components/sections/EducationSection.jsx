@@ -338,8 +338,8 @@ function EducationSection() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
-              title: 'Job Ready AI Powered Cohort 3.0',
-              subtitle: 'Learning: GenAI / DevOps / Web3 / System Design',
+              title: 'AI Powered Cohort 3.0',
+              subtitle: 'GenAI / DevOps / Web3 / System Design',
               provider: 'Sheryians',
               year: 'Pursuing',
               iconType: 'sheryians',

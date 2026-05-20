@@ -251,8 +251,8 @@ function EducationSection() {
               <Trophy size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1.5 text-left">
-              <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">9.08</h4>
-              <p className="text-sm font-semibold text-[#1E293B] tracking-tight leading-none">CGPA in B.Sc.</p>
+              <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">9.30</h4>
+              <p className="text-sm font-semibold text-[#1E293B] tracking-tight leading-none">CGPA in M.C.A.</p>
               <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Consistent academic performance</p>
             </div>
           </motion.div>
@@ -269,7 +269,7 @@ function EducationSection() {
               <Award size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1.5 text-left">
-              <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">Top 15%</h4>
+              <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">Top 10%</h4>
               <p className="text-sm font-semibold text-[#1E293B] tracking-tight leading-none">Academic Standing</p>
               <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Among top performers in the university</p>
             </div>

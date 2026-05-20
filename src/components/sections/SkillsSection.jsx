@@ -142,7 +142,6 @@ function SkillPill({ skill }) {
 
 function SkillsSection() {
   const [activeTab, setActiveTab] = useState('All')
-  const [expandedCategories, setExpandedCategories] = useState({})
 
   const filterTabs = [
     { label: 'All', value: 'All' },
@@ -157,13 +156,6 @@ function SkillsSection() {
   const filteredSkills = activeTab === 'All'
     ? skills
     : skills.filter(group => group.title === activeTab)
-
-  const toggleCategoryExpand = (title) => {
-    setExpandedCategories(prev => ({
-      ...prev,
-      [title]: !prev[title]
-    }))
-  }
 
   // Define top metric configurations
   const metrics = [
@@ -270,11 +262,6 @@ function SkillsSection() {
           <AnimatePresence mode="popLayout">
             {filteredSkills.map((group) => {
               const CategoryIcon = categoryIcons[group.title] ?? Sparkles
-              const isExpanded = expandedCategories[group.title] || activeTab !== 'All'
-              
-              // Only limit item display count in "All" tab when collapsed
-              const visibleItems = isExpanded ? group.items : group.items.slice(0, 5)
-              const hiddenCount = group.items.length - visibleItems.length
 
               return (
                 <motion.article
@@ -304,29 +291,9 @@ function SkillsSection() {
 
                     {/* Pills container */}
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {visibleItems.map((item) => (
+                      {group.items.map((item) => (
                         <SkillPill key={item.name} skill={item} />
                       ))}
-
-                      {/* Expand / Plus Badge pill */}
-                      {hiddenCount > 0 && (
-                        <button
-                          onClick={() => toggleCategoryExpand(group.title)}
-                          className="inline-flex items-center gap-1 rounded-xl border border-violet-100 bg-violet-50/50 px-3 py-1.5 text-xs font-bold text-violet-600 shadow-sm transition-all duration-300 hover:bg-violet-50 hover:shadow-md cursor-pointer select-none"
-                        >
-                          +{hiddenCount} more
-                        </button>
-                      )}
-
-                      {/* Show less button when expanded and in "All" view */}
-                      {isExpanded && group.items.length > 5 && activeTab === 'All' && (
-                        <button
-                          onClick={() => toggleCategoryExpand(group.title)}
-                          className="inline-flex items-center gap-1 rounded-xl border border-slate-100 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm transition-all duration-300 hover:bg-slate-100 hover:shadow-md cursor-pointer select-none"
-                        >
-                          Show less
-                        </button>
-                      )}
                     </div>
                   </div>
                 </motion.article>

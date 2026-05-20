@@ -439,7 +439,7 @@ function ProjectsSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end justify-between">
         {/* Left Column (Headline & Subtitle) */}
         <div className="lg:col-span-7 flex flex-col items-start gap-4">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 font-sans leading-tight sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 font-sans leading-tight sm:text-4xl">
             Projects that solve real problems.
           </h2>
 

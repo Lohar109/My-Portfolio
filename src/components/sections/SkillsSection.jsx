@@ -56,7 +56,7 @@ import {
   SiAnthropic,
 } from 'react-icons/si'
 import { TbBrandVscode } from 'react-icons/tb'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import { skills } from '../../data/skills.js'
 
 const categoryIcons = {
@@ -156,237 +156,459 @@ function SkillPill({ skill }) {
   )
 }
 
+const orbitingSkills = [
+  // Inner Orbit (Radius 85)
+  {
+    id: 'react',
+    name: 'React',
+    icon: SiReact,
+    color: '#61DAFB',
+    radius: 85,
+    angle: 0,
+    orbit: 'inner',
+    duration: 25,
+    delay: 0,
+    bobDuration: 4
+  },
+  {
+    id: 'nextjs',
+    name: 'Next.js',
+    icon: SiNextdotjs,
+    color: '#1F2937',
+    glowColor: '#6366F1',
+    radius: 85,
+    angle: 120,
+    orbit: 'inner',
+    duration: 25,
+    delay: 0.4,
+    bobDuration: 4
+  },
+  {
+    id: 'javascript',
+    name: 'JS',
+    icon: SiJavascript,
+    color: '#F7DF1E',
+    radius: 85,
+    angle: 240,
+    orbit: 'inner',
+    duration: 25,
+    delay: 0.8,
+    bobDuration: 4
+  },
+  
+  // Middle Orbit (Radius 145)
+  {
+    id: 'nodejs',
+    name: 'Node',
+    icon: SiNodedotjs,
+    color: '#339933',
+    radius: 145,
+    angle: 40,
+    orbit: 'middle',
+    duration: 35,
+    delay: 1.2,
+    bobDuration: 4.5,
+    direction: 'ccw'
+  },
+  {
+    id: 'postgresql',
+    name: 'Postgres',
+    icon: SiPostgresql,
+    color: '#4169E1',
+    radius: 145,
+    angle: 160,
+    orbit: 'middle',
+    duration: 35,
+    delay: 1.6,
+    bobDuration: 4.5,
+    direction: 'ccw'
+  },
+  {
+    id: 'typescript',
+    name: 'TS',
+    icon: SiTypescript,
+    color: '#3178C6',
+    radius: 145,
+    angle: 280,
+    orbit: 'middle',
+    duration: 35,
+    delay: 2.0,
+    bobDuration: 4.5,
+    direction: 'ccw'
+  },
+  
+  // Outer Orbit (Radius 205)
+  {
+    id: 'docker',
+    name: 'Docker',
+    icon: SiDocker,
+    color: '#2496ED',
+    radius: 205,
+    angle: 80,
+    orbit: 'outer',
+    duration: 45,
+    delay: 2.4,
+    bobDuration: 5
+  },
+  {
+    id: 'aiml',
+    name: 'AI / ML',
+    icon: BrainCircuit,
+    color: '#EC4899',
+    radius: 205,
+    angle: 200,
+    orbit: 'outer',
+    duration: 45,
+    delay: 2.8,
+    bobDuration: 5,
+    isPulse: true
+  },
+  {
+    id: 'copilot',
+    name: 'Copilot',
+    icon: SiGithubcopilot,
+    color: '#24292F',
+    glowColor: '#6366F1',
+    radius: 205,
+    angle: 320,
+    orbit: 'outer',
+    duration: 45,
+    delay: 3.2,
+    bobDuration: 5
+  }
+]
+
+const hexToRgb = (hex) => {
+  if (!hex || typeof hex !== 'string') return '99, 102, 241'
+  let cleanHex = hex.replace('#', '')
+  if (cleanHex.length === 3) {
+    cleanHex = cleanHex.split('').map(char => char + char).join('')
+  }
+  const r = parseInt(cleanHex.substring(0, 2), 16) || 0
+  const g = parseInt(cleanHex.substring(2, 4), 16) || 0
+  const b = parseInt(cleanHex.substring(4, 6), 16) || 0
+  return `${r}, ${g}, ${b}`
+}
+
 function DynamicSkillsIllustration() {
-  const orbitRadiusInner = 85
-  const orbitRadiusMiddle = 145
-  const orbitRadiusOuter = 205
+  const [hoveredCard, setHoveredCard] = useState(null)
+  const isOrbitPaused = hoveredCard !== null
+
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  // Map mouse position to degree rotation for 3D parallax tilt
+  const rotateX = useTransform(mouseY, [-220, 220], [12, -12])
+  const rotateY = useTransform(mouseX, [-220, 220], [-12, 12])
+
+  // Add smooth springs
+  const springConfig = { damping: 25, stiffness: 150 }
+  const tiltX = useSpring(rotateX, springConfig)
+  const tiltY = useSpring(rotateY, springConfig)
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const centerX = rect.left + width / 2
+    const centerY = rect.top + height / 2
+    mouseX.set(e.clientX - centerX)
+    mouseY.set(e.clientY - centerY)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
 
   return (
-    <div className="relative w-full max-w-[460px] aspect-square flex items-center justify-center scale-[0.72] xs:scale-[0.85] sm:scale-100 origin-center select-none overflow-visible">
-      {/* Soft purple radial halo glow in background */}
-      <div className="absolute inset-0 bg-radial from-violet-300/30 via-violet-100/5 to-transparent blur-3xl rounded-full scale-125 pointer-events-none animate-pulse duration-[8s]" />
+    <motion.div
+      className="relative w-full max-w-[460px] aspect-square flex items-center justify-center scale-[0.72] xs:scale-[0.85] sm:scale-100 origin-center select-none overflow-visible cursor-default"
+      style={{
+        rotateX: tiltX,
+        rotateY: tiltY,
+        transformStyle: 'preserve-3d',
+        perspective: 1000
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Ambient background soft radial glow */}
+      <div className="absolute inset-0 bg-radial from-violet-300/20 via-violet-100/5 to-transparent blur-3xl rounded-full scale-125 pointer-events-none animate-pulse duration-[8s]" />
 
-      {/* Orbit Track Lines */}
-      <div className="absolute w-[170px] h-[170px] rounded-full border border-dashed border-violet-200/50 pointer-events-none" />
-      <div className="absolute w-[290px] h-[290px] rounded-full border border-dashed border-violet-200/40 pointer-events-none" />
-      <div className="absolute w-[410px] h-[410px] rounded-full border border-dashed border-violet-200/30 pointer-events-none" />
-
-      {/* ==================== INNER ORBIT (Clockwise - 3 Cards) ==================== */}
-      {/* Card 1: React */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        animate={{ rotate: [0, 360] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-      >
+      {/* Floating background star dust particles */}
+      {[
+        { x: 70, y: 80, size: 4, color: '#8B5CF6', delay: 0 },
+        { x: 380, y: 110, size: 5, color: '#3178C6', delay: 1.5 },
+        { x: 50, y: 320, size: 3, color: '#F7DF1E', delay: 0.8 },
+        { x: 410, y: 350, size: 6, color: '#EC4899', delay: 2.2 },
+        { x: 210, y: 30, size: 4, color: '#06B6D4', delay: 1.1 },
+        { x: 250, y: 420, size: 5, color: '#10B981', delay: 1.8 }
+      ].map((star, i) => (
         <motion.div
-          style={{ y: -orbitRadiusInner }}
-          animate={{ rotate: [0, -360] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(97,218,251,0.05)] hover:shadow-[0_12px_24px_rgba(97,218,251,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiReact className="text-[#61DAFB] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">React</span>
-        </motion.div>
-      </motion.div>
+          key={i}
+          className="absolute rounded-full filter blur-[0.5px] pointer-events-none"
+          style={{
+            left: star.x,
+            top: star.y,
+            width: star.size,
+            height: star.size,
+            backgroundColor: star.color,
+          }}
+          animate={{
+            y: [-6, 6, -6],
+            opacity: [0.35, 0.9, 0.35],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{
+            duration: 3 + star.size / 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: star.delay
+          }}
+        />
+      ))}
 
-      {/* Card 2: Next.js */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 120 }}
-        animate={{ rotate: [120, 480] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusInner }}
-          animate={{ rotate: [-120, -480] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiNextdotjs className="text-black h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Next.js</span>
-        </motion.div>
-      </motion.div>
+      {/* Orbit Track Lines with Glowing Comets */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 460 460" fill="none">
+        {/* Inner Track */}
+        <circle cx="230" cy="230" r="85" stroke="rgba(139, 92, 246, 0.12)" strokeWidth="1" strokeDasharray="3 6" />
+        <motion.circle 
+          cx="230" cy="230" r="85" 
+          stroke="url(#comet-inner)" strokeWidth="2.5" strokeLinecap="round"
+          strokeDasharray="25 510"
+          animate={{ strokeDashoffset: [0, -535] }}
+          transition={{ repeat: Infinity, duration: 9, ease: "linear" }}
+        />
 
-      {/* Card 3: JavaScript */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 240 }}
-        animate={{ rotate: [240, 600] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusInner }}
-          animate={{ rotate: [-240, -600] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(247,223,30,0.05)] hover:shadow-[0_12px_24px_rgba(247,223,30,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiJavascript className="text-[#F7DF1E] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">JS</span>
-        </motion.div>
-      </motion.div>
+        {/* Middle Track */}
+        <circle cx="230" cy="230" r="145" stroke="rgba(6, 182, 212, 0.08)" strokeWidth="1" strokeDasharray="4 8" />
+        <motion.circle 
+          cx="230" cy="230" r="145" 
+          stroke="url(#comet-middle)" strokeWidth="2.5" strokeLinecap="round"
+          strokeDasharray="35 876"
+          animate={{ strokeDashoffset: [0, 911] }}
+          transition={{ repeat: Infinity, duration: 14, ease: "linear" }}
+        />
 
-      {/* ==================== MIDDLE ORBIT (Counter-Clockwise - 3 Cards) ==================== */}
-      {/* Card 4: Node.js */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 40 }}
-        animate={{ rotate: [40, -320] }}
-        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusMiddle }}
-          animate={{ rotate: [-40, 320] }}
-          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(51,153,51,0.05)] hover:shadow-[0_12px_24px_rgba(51,153,51,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiNodedotjs className="text-[#339933] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Node</span>
-        </motion.div>
-      </motion.div>
+        {/* Outer Track */}
+        <circle cx="230" cy="230" r="205" stroke="rgba(236, 72, 153, 0.06)" strokeWidth="1" strokeDasharray="5 10" />
+        <motion.circle 
+          cx="230" cy="230" r="205" 
+          stroke="url(#comet-outer)" strokeWidth="2.5" strokeLinecap="round"
+          strokeDasharray="45 1243"
+          animate={{ strokeDashoffset: [0, -1288] }}
+          transition={{ repeat: Infinity, duration: 19, ease: "linear" }}
+        />
 
-      {/* Card 5: PostgreSQL */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 160 }}
-        animate={{ rotate: [160, -200] }}
-        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusMiddle }}
-          animate={{ rotate: [-160, 200] }}
-          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(65,105,225,0.05)] hover:shadow-[0_12px_24px_rgba(65,105,225,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiPostgresql className="text-[#4169E1] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Postgres</span>
-        </motion.div>
-      </motion.div>
+        <defs>
+          <linearGradient id="comet-inner" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8B5CF6" stopOpacity="1" />
+            <stop offset="100%" stopColor="#6366F1" stopOpacity="0.05" />
+          </linearGradient>
+          <linearGradient id="comet-middle" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#06B6D4" stopOpacity="1" />
+            <stop offset="100%" stopColor="#10B981" stopOpacity="0.05" />
+          </linearGradient>
+          <linearGradient id="comet-outer" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#EC4899" stopOpacity="1" />
+            <stop offset="100%" stopColor="#F43F5E" stopOpacity="0.05" />
+          </linearGradient>
+          
+          {/* Dynamic connection beam gradients */}
+          {orbitingSkills.map((skill) => {
+            const glow = skill.glowColor || skill.color
+            return (
+              <linearGradient key={skill.id} id={`beam-gradient-${skill.id}`} x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor={glow} stopOpacity="0" />
+                <stop offset="30%" stopColor={glow} stopOpacity="0.8" />
+                <stop offset="70%" stopColor={glow} stopOpacity="0.8" />
+                <stop offset="100%" stopColor={glow} stopOpacity="0" />
+              </linearGradient>
+            )
+          })}
+        </defs>
+      </svg>
 
-      {/* Card 6: TypeScript */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 280 }}
-        animate={{ rotate: [280, -80] }}
-        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusMiddle }}
-          animate={{ rotate: [-280, 80] }}
-          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(49,120,198,0.05)] hover:shadow-[0_12px_24px_rgba(49,120,198,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiTypescript className="text-[#3178C6] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">TS</span>
-        </motion.div>
-      </motion.div>
+      {/* Orbiting Cards Map */}
+      {orbitingSkills.map((skill) => {
+        const Icon = skill.icon
+        const glow = skill.glowColor || skill.color
+        const isCCW = skill.direction === 'ccw'
 
-      {/* ==================== OUTER ORBIT (Clockwise - 3 Cards) ==================== */}
-      {/* Card 7: Docker */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 80 }}
-        animate={{ rotate: [80, 440] }}
-        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusOuter }}
-          animate={{ rotate: [-80, -440] }}
-          transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(36,150,237,0.05)] hover:shadow-[0_12px_24px_rgba(36,150,237,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiDocker className="text-[#2496ED] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Docker</span>
-        </motion.div>
-      </motion.div>
+        return (
+          <div
+            key={skill.id}
+            className="absolute w-full h-full flex items-center justify-center pointer-events-none"
+            style={{
+              transform: `rotate(${skill.angle}deg)`,
+            }}
+          >
+            {/* Spinning wrapper */}
+            <div
+              className="absolute w-full h-full flex items-center justify-center animate-spin pointer-events-none"
+              style={{
+                animation: `spin ${skill.duration}s linear infinite`,
+                animationPlayState: isOrbitPaused ? 'paused' : 'running',
+                animationDirection: isCCW ? 'reverse' : 'normal',
+              }}
+            >
+              {/* Bobbing Container */}
+              <motion.div
+                className="pointer-events-none"
+                animate={{ y: [-3, 3, -3] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: skill.bobDuration,
+                  ease: "easeInOut",
+                  delay: skill.delay
+                }}
+              >
+                {/* Active connection beam to the reactor centerpiece */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none -z-10" viewBox="0 0 460 460">
+                  <line
+                    x1="230" y1="230"
+                    x2="230" y2={230 - skill.radius}
+                    stroke={hoveredCard === skill.id ? `rgba(${hexToRgb(glow)}, 0.25)` : "rgba(139, 92, 246, 0.04)"}
+                    strokeWidth={hoveredCard === skill.id ? "2" : "1"}
+                    className="transition-all duration-300"
+                  />
+                  {hoveredCard === skill.id && (
+                    <motion.line
+                      x1="230" y1="230"
+                      x2="230" y2={230 - skill.radius}
+                      stroke={`url(#beam-gradient-${skill.id})`}
+                      strokeWidth="2.5"
+                      strokeDasharray="20 40"
+                      animate={{ strokeDashoffset: [0, -60] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                    />
+                  )}
+                </svg>
 
-      {/* Card 8: AI / ML */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 200 }}
-        animate={{ rotate: [200, 560] }}
-        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusOuter }}
-          animate={{ rotate: [-200, -560] }}
-          transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(236,72,153,0.05)] hover:shadow-[0_12px_24px_rgba(236,72,153,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <BrainCircuit className="text-[#EC4899] h-6 w-6 transition-transform duration-300 group-hover:scale-110 animate-pulse" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">AI / ML</span>
-        </motion.div>
-      </motion.div>
+                {/* Card positioning and Counter-Rotation wrapper */}
+                <div
+                  className="pointer-events-auto"
+                  style={{
+                    transform: `translateY(${-skill.radius}px) rotate(${-skill.angle}deg)`,
+                  }}
+                >
+                  <div
+                    className="animate-spin"
+                    style={{
+                      animation: `spin ${skill.duration}s linear infinite`,
+                      animationPlayState: isOrbitPaused ? 'paused' : 'running',
+                      animationDirection: isCCW ? 'normal' : 'reverse',
+                    }}
+                  >
+                    {/* The premium glassmorphic card itself */}
+                    <motion.div
+                      className="relative group flex flex-col items-center justify-center w-16 h-16 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md cursor-grab active:cursor-grabbing transition-all duration-300 shadow-[0_8px_20px_rgba(0,0,0,0.02)]"
+                      style={{
+                        transformStyle: 'preserve-3d',
+                      }}
+                      whileHover={{ 
+                        scale: 1.15, 
+                        z: 25,
+                        boxShadow: `0 0 25px rgba(${hexToRgb(glow)}, 0.35), 0 10px 24px rgba(0,0,0,0.05)`,
+                        borderColor: `${glow}80`
+                      }}
+                      onHoverStart={() => setHoveredCard(skill.id)}
+                      onHoverEnd={() => setHoveredCard(null)}
+                    >
+                      {/* Brand colored neon glow behind card */}
+                      <AnimatePresence>
+                        {hoveredCard === skill.id && (
+                          <motion.div
+                            className="absolute -inset-1.5 rounded-2xl blur-md opacity-25 -z-10 pointer-events-none"
+                            style={{ backgroundColor: glow }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 0.25, scale: 1.05 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.25 }}
+                          />
+                        )}
+                      </AnimatePresence>
 
-      {/* Card 9: Copilot */}
-      <motion.div
-        className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 320 }}
-        animate={{ rotate: [320, 680] }}
-        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
-      >
-        <motion.div
-          style={{ y: -orbitRadiusOuter }}
-          animate={{ rotate: [-320, -680] }}
-          transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
-          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(99,102,241,0.05)] hover:shadow-[0_12px_24px_rgba(99,102,241,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
-        >
-          <SiGithubcopilot className="text-slate-800 h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Copilot</span>
-        </motion.div>
-      </motion.div>
+                      <Icon 
+                        className={`h-6.5 w-6.5 transition-transform duration-300 group-hover:scale-110 ${skill.isPulse ? 'animate-pulse' : ''}`} 
+                        style={{ color: skill.color }} 
+                      />
+                      <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider select-none">
+                        {skill.name}
+                      </span>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        )
+      })}
 
-      {/* ==================== CENTRAL HUB (Pulsing Sphere) ==================== */}
-      {/* Outer Halo Glow */}
+      {/* ==================== CENTRAL HUB (Advanced Reactor Sphere) ==================== */}
+      {/* Outer pulsing glow ring */}
       <motion.div
         className="absolute w-[115px] h-[115px] sm:w-[130px] sm:h-[130px] rounded-full bg-indigo-500/10 border border-indigo-400/20 blur-sm pointer-events-none"
         animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.55, 0.35] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Main Glass Center Globe */}
+      {/* Primary high-tech reactor glass sphere */}
       <motion.div
-        className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-violet-600 via-indigo-600 to-indigo-700 shadow-[0_12px_36px_rgba(99,102,241,0.4)] flex items-center justify-center overflow-hidden border border-white/20 relative z-20 group"
-        whileHover={{ scale: 1.05 }}
+        className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-violet-600 via-indigo-600 to-indigo-700 shadow-[0_12px_36px_rgba(99,102,241,0.4)] flex items-center justify-center overflow-hidden border border-white/20 relative z-20"
+        whileHover={{ 
+          scale: 1.06,
+          boxShadow: '0 16px 48px rgba(99,102,241,0.55)'
+        }}
         transition={{ duration: 0.3 }}
       >
-        {/* Soft lighting overlay reflection */}
+        {/* Mirror lighting reflection gloss */}
         <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-full pointer-events-none" />
 
-        {/* Dynamic rotating internal neural connection graphic */}
+        {/* Double counter-rotating neural connection vectors */}
+        {/* Layer 1: Clockwise */}
         <motion.div
-          className="absolute inset-0 opacity-40 mix-blend-screen flex items-center justify-center scale-90 pointer-events-none"
+          className="absolute inset-0 opacity-50 mix-blend-screen flex items-center justify-center scale-90 pointer-events-none"
           animate={{ rotate: [0, 360] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
-          <svg viewBox="0 0 100 100" className="w-full h-full stroke-violet-200" strokeWidth="1.5" fill="none">
-            {/* Center Node */}
-            <circle cx="50" cy="50" r="4" fill="currentColor" className="text-white" />
-            {/* Inner Ring Connections */}
-            <circle cx="50" cy="50" r="25" strokeDasharray="3 5" />
-            <line x1="50" y1="50" x2="30" y2="35" />
-            <circle cx="30" cy="35" r="3" fill="currentColor" className="text-[#61DAFB]" />
-            <line x1="50" y1="50" x2="70" y2="35" />
-            <circle cx="70" cy="35" r="3" fill="currentColor" className="text-[#339933]" />
-            <line x1="50" y1="50" x2="50" y2="75" />
-            <circle cx="50" cy="75" r="3" fill="currentColor" className="text-[#EC4899]" />
-            {/* Outer Ring Connections */}
-            <line x1="30" y1="35" x2="20" y2="60" />
-            <circle cx="20" cy="60" r="2" fill="currentColor" />
-            <line x1="70" y1="35" x2="80" y2="60" />
-            <circle cx="80" cy="60" r="2" fill="currentColor" />
+          <svg viewBox="0 0 100 100" className="w-full h-full stroke-violet-200" strokeWidth="1" fill="none">
+            <circle cx="50" cy="50" r="30" strokeDasharray="4 8" />
+            <line x1="50" y1="50" x2="20" y2="30" />
+            <circle cx="20" cy="30" r="3.5" fill="currentColor" className="text-[#61DAFB]" />
+            <line x1="50" y1="50" x2="80" y2="70" />
+            <circle cx="80" cy="70" r="3.5" fill="currentColor" className="text-[#3178C6]" />
+            <line x1="50" y1="50" x2="25" y2="75" />
+            <circle cx="25" cy="75" r="3" fill="currentColor" className="text-[#F7DF1E]" />
           </svg>
         </motion.div>
 
-        {/* Central glowing icon symbol */}
+        {/* Layer 2: Counter-Clockwise */}
         <motion.div
-          className="relative z-10 flex items-center justify-center text-white"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 opacity-40 mix-blend-screen flex items-center justify-center scale-95 pointer-events-none"
+          animate={{ rotate: [360, 0] }}
+          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
         >
-          <Sparkles className="h-8 w-8 text-white filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)] animate-pulse" />
+          <svg viewBox="0 0 100 100" className="w-full h-full stroke-indigo-200" strokeWidth="1" fill="none">
+            <circle cx="50" cy="50" r="40" strokeDasharray="3 6" />
+            <line x1="50" y1="50" x2="80" y2="30" />
+            <circle cx="80" cy="30" r="2.5" fill="currentColor" className="text-[#339933]" />
+            <line x1="50" y1="50" x2="20" y2="70" />
+            <circle cx="20" cy="70" r="2.5" fill="currentColor" className="text-[#EC4899]" />
+          </svg>
+        </motion.div>
+
+        {/* Center glowing core sparkling energy */}
+        <motion.div
+          className="relative z-10 flex items-center justify-center text-white pointer-events-none"
+          animate={{ scale: [1, 1.06, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Sparkles className="h-8 w-8 text-white filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.45)] animate-pulse" />
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   )
 }
 

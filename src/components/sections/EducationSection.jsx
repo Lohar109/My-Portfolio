@@ -87,7 +87,7 @@ function EducationSection() {
           </div>
 
           {/* Right Column: Premium 3D-like Illustration */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+          <div className="lg:col-span-6 flex justify-center lg:justify-end translate-y-4 lg:translate-y-16">
             <motion.div
               className="relative w-full max-w-[420px] md:max-w-[460px] aspect-[4/3] flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.95 }}

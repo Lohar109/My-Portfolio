@@ -327,7 +327,7 @@ function EducationSection() {
           
           <button
             onClick={() => setShowAllCertifications(!showAllCertifications)}
-            className="group flex items-center gap-1.5 text-xs font-bold text-violet-600 hover:text-violet-700 transition-colors cursor-pointer select-none"
+            className="group flex items-center gap-1.5 text-xs font-bold text-black hover:text-slate-700 transition-colors cursor-pointer select-none"
           >
             {showAllCertifications ? 'Show Less' : 'View All Certifications'}
             <ArrowRight size={14} className={`transition-transform duration-250 ${showAllCertifications ? 'rotate-90' : 'group-hover:translate-x-1'}`} />

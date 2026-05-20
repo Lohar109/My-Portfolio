@@ -100,9 +100,9 @@ function FooterSection() {
           <div className="flex flex-col items-start">
             {/* Main Premium Heading */}
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
-              Let's build something{' '}
+              Let's Build Something{' '}
               <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-                amazing together.
+                Amazing Together.
               </span>
             </h2>
 

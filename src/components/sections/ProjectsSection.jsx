@@ -440,9 +440,9 @@ function ProjectsSection() {
         {/* Left Column (Headline & Subtitle) */}
         <div className="lg:col-span-7 flex flex-col items-start gap-4">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
-            Projects that solve{' '}
+            Projects That Solve{' '}
             <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-              real problems.
+              Real Problems.
             </span>
           </h2>
 

@@ -60,7 +60,7 @@ function EducationSection() {
 
       <div className="mx-auto max-w-6xl">
         {/* Two-Column Header Section */}
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-10">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-2">
           <div className="lg:col-span-6 space-y-6 text-left">
             {/* Main Title */}
             <motion.h2

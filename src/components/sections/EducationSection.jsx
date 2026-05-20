@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Building2, BookOpen, Star, Trophy, Award, Rocket, Layers, FileText, ArrowRight } from 'lucide-react'
+import { GraduationCap, Building2, BookOpen, Star, Trophy, Award, Rocket, FileText, ArrowRight } from 'lucide-react'
 import educationIllustration from '../../assets/education_illustration.png'
-import subjectsIllustration from '../../assets/subjects_illustration.png'
 
 const educationItems = [
   {
@@ -309,68 +308,6 @@ function EducationSection() {
             </div>
           </motion.div>
         </div>
-
-        {/* 2. Subjects & Core Areas Section */}
-        <motion.div
-          className="flex items-center gap-3 mt-16 mb-8 px-2"
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <Layers size={20} className="text-violet-600 stroke-[2.2]" />
-          <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Subjects & Core Areas</h3>
-        </motion.div>
-
-        {/* Subjects & Core Areas Content Card */}
-        <motion.div
-          className="bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row items-center justify-between gap-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Left Column: Grid/Flex of Subjects */}
-          <div className="flex-1 text-left">
-            <div className="flex flex-wrap gap-3">
-              {[
-                'Data Structures & Algorithms',
-                'Database Management Systems',
-                'Operating Systems',
-                'Computer Networks',
-                'Object-Oriented Programming',
-                'Software Engineering',
-                'Web Development',
-                'System Design',
-                'Artificial Intelligence',
-                'Machine Learning',
-                'Cloud Computing',
-                'DevOps',
-              ].map((subject, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#F5F3FF] border border-[#E9E3FF] px-4 py-2.5 rounded-2xl text-xs font-bold text-violet-750 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-violet-100/50 shadow-sm"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-violet-500 flex-shrink-0" />
-                  {subject}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column: Illustration */}
-          <div className="relative flex-shrink-0 flex items-center justify-center lg:justify-end w-full lg:w-auto">
-            {/* Soft purple radial halo glow in background */}
-            <div className="absolute inset-0 bg-radial from-violet-300/25 via-violet-100/5 to-transparent blur-2xl rounded-full scale-110 pointer-events-none" />
-            <motion.img
-              src={subjectsIllustration}
-              alt="Core Subjects Visual"
-              className="w-full max-w-[240px] md:max-w-[280px] object-contain relative z-10 drop-shadow-[0_12px_24px_rgba(139,92,246,0.08)]"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
-        </motion.div>
 
         {/* 3. Certifications & Courses Section */}
         <motion.div

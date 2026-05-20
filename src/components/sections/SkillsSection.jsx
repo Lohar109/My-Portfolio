@@ -167,10 +167,10 @@ function SkillsSection() {
 
   // Define top metric configurations
   const metrics = [
-    { value: '10+', text: 'Technologies', subtext: 'Worked With', icon: Code2, bg: 'bg-violet-50 text-violet-600' },
-    { value: '5+', text: 'Years of', subtext: 'Learning', icon: Briefcase, bg: 'bg-blue-50 text-blue-600' },
-    { value: '20+', text: 'Projects', subtext: 'Completed', icon: Rocket, bg: 'bg-indigo-50 text-indigo-600' },
-    { value: '100%', text: 'Commitment to', subtext: 'Quality', icon: Star, bg: 'bg-purple-50 text-purple-600' }
+    { value: '10+', text: 'Technologies', subtext: 'Worked With', icon: Code2, bg: 'bg-blue-50 border border-blue-100 text-blue-600 shadow-[0_2px_8px_rgba(37,99,235,0.06)]' },
+    { value: '5+', text: 'Years of', subtext: 'Learning', icon: Briefcase, bg: 'bg-emerald-50 border border-emerald-100 text-emerald-600 shadow-[0_2px_8px_rgba(16,185,129,0.06)]' },
+    { value: '20+', text: 'Projects', subtext: 'Completed', icon: Rocket, bg: 'bg-rose-50 border border-rose-100 text-rose-600 shadow-[0_2px_8px_rgba(225,29,72,0.06)]' },
+    { value: '100%', text: 'Commitment to', subtext: 'Quality', icon: Star, bg: 'bg-amber-50 border border-amber-100 text-amber-600 shadow-[0_2px_8px_rgba(245,158,11,0.06)]' }
   ]
 
   // Define tools for the bottom tools row
@@ -216,8 +216,8 @@ function SkillsSection() {
                 const Icon = metric.icon
                 return (
                   <div key={idx} className={`flex flex-col items-center justify-center text-center w-full ${idx >= 2 ? 'pt-4 sm:pt-0' : ''} ${idx % 2 === 1 ? 'border-l sm:border-l-0 border-slate-100' : ''} ${idx >= 2 && idx % 2 === 0 ? 'sm:border-t-0' : ''}`}>
-                    <div className={`w-11 h-11 rounded-2xl ${metric.bg} flex items-center justify-center mb-2.5 transition-transform duration-300 hover:scale-105 shadow-sm`}>
-                      <Icon size={20} className="stroke-[2.2]" />
+                    <div className={`w-10 h-10 rounded-2xl ${metric.bg} flex items-center justify-center mb-2.5 transition-transform duration-300 hover:scale-105`}>
+                      <Icon size={18} className="stroke-[2.5]" />
                     </div>
                     <span className="text-xl font-extrabold text-gray-900 tracking-tight leading-none">
                       {metric.value}

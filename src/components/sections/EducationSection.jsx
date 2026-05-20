@@ -247,11 +247,11 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
-              <Trophy size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#D97706] transition-colors duration-300">
+              <Trophy size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1.5 text-left">
-              <h4 className="text-3xl font-extrabold text-violet-600 leading-none font-sans tracking-tight">9.08</h4>
+              <h4 className="text-3xl font-extrabold text-[#D97706] leading-none font-sans tracking-tight">9.08</h4>
               <p className="text-sm font-bold text-[#1E293B] tracking-tight leading-none">CGPA in B.Sc.</p>
               <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Consistent academic performance</p>
             </div>
@@ -265,11 +265,11 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
-              <Award size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#4F46E5] transition-colors duration-300">
+              <Award size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1.5 text-left">
-              <h4 className="text-3xl font-extrabold text-violet-600 leading-none font-sans tracking-tight">Top 15%</h4>
+              <h4 className="text-3xl font-extrabold text-[#4F46E5] leading-none font-sans tracking-tight">Top 15%</h4>
               <p className="text-sm font-bold text-[#1E293B] tracking-tight leading-none">Academic Standing</p>
               <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Among top performers in the university</p>
             </div>
@@ -283,11 +283,11 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
-              <BookOpen size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#0D9488] transition-colors duration-300">
+              <BookOpen size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1 text-left">
-              <h4 className="text-base font-bold text-violet-600 leading-tight font-sans">Strong Foundation</h4>
+              <h4 className="text-base font-bold text-[#0D9488] leading-tight font-sans">Strong Foundation</h4>
               <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Built strong fundamentals in Computer Science and problem solving</p>
             </div>
           </motion.div>
@@ -300,11 +300,11 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
-              <Rocket size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#EA580C] transition-colors duration-300">
+              <Rocket size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1 text-left">
-              <h4 className="text-base font-bold text-violet-600 leading-tight font-sans">Continuous Learner</h4>
+              <h4 className="text-base font-bold text-[#EA580C] leading-tight font-sans">Continuous Learner</h4>
               <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Always exploring new technologies and frameworks to stay ahead</p>
             </div>
           </motion.div>

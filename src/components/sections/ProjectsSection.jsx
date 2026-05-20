@@ -503,31 +503,33 @@ function ProjectsSection() {
         </div>
       </div>
 
-      {/* Interactive Filters Row as Modern Tabs */}
-      <div className="mt-12 border-b border-gray-200 w-full flex gap-8 justify-start select-none">
-        {filters.map((filter) => {
-          const isSelected = activeFilter === filter.value
-          return (
-            <button
-              key={filter.value}
-              onClick={() => handleFilterChange(filter.value)}
-              className={`pb-3.5 text-sm font-semibold tracking-wide transition-all duration-200 cursor-pointer relative ${
-                isSelected
-                  ? 'text-gray-900 font-bold'
-                  : 'text-gray-400 hover:text-gray-700'
-              }`}
-            >
-              {filter.label}
-              {isSelected && (
-                <motion.div
-                  layoutId="activeTabUnderline"
-                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-gray-900"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
-            </button>
-          )
-        })}
+      {/* Interactive Filters Row as Premium Pill Tabs */}
+      <div className="mt-12 select-none">
+        <div className="inline-flex items-center gap-1.5 p-1.5 bg-gray-50/90 border border-gray-200/50 rounded-2xl shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] relative z-10 backdrop-blur-sm">
+          {filters.map((filter) => {
+            const isSelected = activeFilter === filter.value
+            return (
+              <button
+                key={filter.value}
+                onClick={() => handleFilterChange(filter.value)}
+                className={`relative px-4.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 cursor-pointer select-none ${
+                  isSelected
+                    ? 'text-white'
+                    : 'text-gray-500 hover:text-gray-800 hover:bg-white/40'
+                }`}
+              >
+                <span className="relative z-10">{filter.label}</span>
+                {isSelected && (
+                  <motion.div
+                    layoutId="activeProjectTabBg"
+                    className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl shadow-[0_4px_12px_rgba(109,40,217,0.25)]"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Featured Project Card Block */}

@@ -118,7 +118,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="mt-6 text-4xl sm:text-5xl md:text-[3.25rem] md:leading-[1.12] font-black tracking-tight text-gray-900 font-sans select-none"
+              className="mt-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans select-none"
             >
               Vaibhav Kumar <br />
               I Build Modern & <br />

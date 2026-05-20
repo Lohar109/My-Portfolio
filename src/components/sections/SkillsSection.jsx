@@ -58,6 +58,7 @@ import {
 import { TbBrandVscode } from 'react-icons/tb'
 import { motion, AnimatePresence } from 'framer-motion'
 import { skills } from '../../data/skills.js'
+import skillsIllustration from '../../assets/skills_illustration.png'
 
 const categoryIcons = {
   'Frontend Development': Code2,
@@ -193,20 +194,20 @@ function SkillsSection() {
       <div className="mx-auto max-w-6xl">
         {/* Header grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
-          <div className="lg:col-span-6 space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
-              Tools, Technologies & Expertise I Use To Build{' '}
-              <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-                Impactful Products.
-              </span>
-            </h2>
-            <p className="max-w-xl text-base sm:text-lg text-gray-500 leading-relaxed font-medium">
-              A combination of technical skills, frameworks, and tools that help me build scalable, performant, and user-friendly applications.
-            </p>
-          </div>
+          <div className="lg:col-span-6 space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
+                Tools, Technologies & Expertise I Use To Build{' '}
+                <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                  Impactful Products.
+                </span>
+              </h2>
+              <p className="max-w-xl text-base sm:text-lg text-gray-500 leading-relaxed font-medium">
+                A combination of technical skills, frameworks, and tools that help me build scalable, performant, and user-friendly applications.
+              </p>
+            </div>
 
-          {/* Metrics Card on the right */}
-          <div className="lg:col-span-6 w-full">
+            {/* Metrics Card positioned underneath the adjacent paragraph */}
             <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.03)] transition-shadow duration-300 grid grid-cols-2 sm:grid-cols-4 gap-4 divide-y divide-slate-100 sm:divide-y-0 sm:divide-x divide-solid">
               {metrics.map((metric, idx) => {
                 const Icon = metric.icon
@@ -228,6 +229,28 @@ function SkillsSection() {
                 )
               })}
             </div>
+          </div>
+
+          {/* Right Column: Premium 3D-like Illustration */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+            <motion.div
+              className="relative w-full max-w-[420px] md:max-w-[460px] aspect-square flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              {/* Soft purple radial halo glow in background */}
+              <div className="absolute inset-0 bg-radial from-violet-300/40 via-violet-100/10 to-transparent blur-3xl rounded-full scale-110 pointer-events-none animate-pulse duration-[6s]" />
+              
+              <motion.img
+                src={skillsIllustration}
+                alt="My Tools and Skills Visual"
+                className="w-full h-full object-contain relative z-10 mix-blend-multiply drop-shadow-[0_12px_36px_rgba(139,92,246,0.18)]"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </motion.div>
           </div>
         </div>
 

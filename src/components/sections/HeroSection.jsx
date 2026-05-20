@@ -103,24 +103,13 @@ function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           {/* Left Column: Text content */}
           <div className="flex flex-col items-start text-left">
-            {/* 👋 Hi, I'm Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              className="inline-flex items-center gap-1.5 rounded-full border border-violet-100 bg-violet-50/70 px-4 py-1.5 text-xs sm:text-sm font-bold tracking-wide text-violet-600 shadow-sm backdrop-blur-sm select-none"
-            >
-              <span>👋 Hi, I'm</span>
-            </motion.div>
-
             {/* Bold Premium Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="mt-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans select-none"
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans select-none"
             >
-              Vaibhav Lohar <br />
               I Build Modern & <br />
               Scalable{' '}
               <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">

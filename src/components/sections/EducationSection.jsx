@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { GraduationCap, Building2, BookOpen, Star, Trophy, Award, Rocket, FileText, ArrowRight } from 'lucide-react'
 import educationIllustration from '../../assets/education_illustration.png'
@@ -50,6 +51,8 @@ const educationItems = [
 ]
 
 function EducationSection() {
+  const [showAllCertifications, setShowAllCertifications] = useState(false);
+
   return (
     <motion.section
       id="education"
@@ -322,18 +325,25 @@ function EducationSection() {
             <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Certifications & Courses</h3>
           </div>
           
-          <a
-            href="#contact"
-            className="group flex items-center gap-1.5 text-xs font-bold text-violet-600 hover:text-violet-700 transition-colors"
+          <button
+            onClick={() => setShowAllCertifications(!showAllCertifications)}
+            className="group flex items-center gap-1.5 text-xs font-bold text-violet-600 hover:text-violet-700 transition-colors cursor-pointer select-none"
           >
-            View All Certifications
-            <ArrowRight size={14} className="transition-transform duration-250 group-hover:translate-x-1" />
-          </a>
+            {showAllCertifications ? 'Show Less' : 'View All Certifications'}
+            <ArrowRight size={14} className={`transition-transform duration-250 ${showAllCertifications ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+          </button>
         </motion.div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
+            {
+              title: 'Job Ready AI Powered Cohort 3.0',
+              subtitle: 'Learning: GenAI / DevOps / Web3 / System Design',
+              provider: 'Sheryians',
+              year: 'Pursuing',
+              iconType: 'sheryians',
+            },
             {
               title: 'Node.js Developer',
               subtitle: 'Node.js Basics to Advanced',
@@ -362,14 +372,7 @@ function EducationSection() {
               year: '2026',
               iconType: 'ibm',
             },
-            {
-              title: 'Job Ready AI Powered Cohort 3.0',
-              subtitle: 'Learning: GenAI / DevOps / Web3 / System Design',
-              provider: 'Sheryians',
-              year: 'Pursuing',
-              iconType: 'sheryians',
-            },
-          ].map((cert, idx) => (
+          ].slice(0, showAllCertifications ? 5 : 4).map((cert, idx) => (
             <motion.div
               key={idx}
               className="group bg-white border border-slate-100 rounded-3xl p-5.5 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between min-h-[175px]"

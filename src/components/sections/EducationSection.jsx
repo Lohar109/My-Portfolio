@@ -12,6 +12,7 @@ const educationItems = [
     metric: 'CGPA',
     grade: '9.30 / 10',
     icon: GraduationCap,
+    iconColor: 'text-[#2563EB]',
   },
   {
     degree: 'Bachelor of Science (Computer Science)',
@@ -22,6 +23,7 @@ const educationItems = [
     metric: 'CGPA',
     grade: '9.08 / 10',
     icon: GraduationCap,
+    iconColor: 'text-[#2563EB]',
   },
   {
     degree: 'Intermediate (12th)',
@@ -32,6 +34,7 @@ const educationItems = [
     metric: 'Percentage',
     grade: '52.62%',
     icon: Building2,
+    iconColor: 'text-[#128C7E]',
   },
   {
     degree: 'High School (10th)',
@@ -42,6 +45,7 @@ const educationItems = [
     metric: 'Percentage',
     grade: '72.00%',
     icon: BookOpen,
+    iconColor: 'text-[#EF4444]',
   },
 ]
 
@@ -158,7 +162,7 @@ function EducationSection() {
                     {/* Left & Center Information */}
                     <div className="flex items-start gap-4 sm:gap-5 flex-1 text-left">
                       {/* Left icon wrapper */}
-                      <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-center text-indigo-600 transition-colors duration-300 group-hover:bg-indigo-100/60">
+                      <div className={`flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none ${item.iconColor}`}>
                         <IconComponent size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
                       </div>
 

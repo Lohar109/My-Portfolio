@@ -64,7 +64,7 @@ function EducationSection() {
           <div className="lg:col-span-6 space-y-6 text-left">
             {/* Main Title */}
             <motion.h2
-              className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-[54px] leading-[1.12] font-sans"
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}

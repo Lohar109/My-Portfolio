@@ -17,7 +17,7 @@ const educationItems = [
     degree: 'Bachelor of Science (Computer Science)',
     stream: 'Computer Science',
     institute: 'Nutan Maratha College, North Maharashtra University, Jalgaon',
-    timeline: '2021 - 2024',
+    timeline: '2020 - 2023',
     status: 'Completed',
     metric: 'CGPA',
     grade: '9.08 / 10',
@@ -30,7 +30,7 @@ const educationItems = [
     timeline: '2016 - 2018',
     status: 'Completed',
     metric: 'Percentage',
-    grade: '52.60%',
+    grade: '52.62%',
     icon: Building2,
   },
   {

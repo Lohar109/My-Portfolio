@@ -29,7 +29,7 @@ export const VAIBHAV_KNOWLEDGE = {
     hsc_12th: {
       stream: "Science", // [cite: 34]
       board: "Maharashtra State Board (Nagpur Division)", // [cite: 31]
-      percentage: "52.60%", // [cite: 38]
+      percentage: "52.62%", // [cite: 38]
       year: "February 2018" // [cite: 34]
     },
     

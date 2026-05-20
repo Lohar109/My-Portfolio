@@ -49,7 +49,7 @@ function EducationSection() {
   return (
     <motion.section
       id="education"
-      className="relative px-6 py-20 sm:px-12 lg:px-24 bg-transparent overflow-hidden"
+      className="relative px-6 pt-6 pb-16 sm:px-12 lg:px-24 bg-transparent overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -60,7 +60,7 @@ function EducationSection() {
 
       <div className="mx-auto max-w-6xl">
         {/* Two-Column Header Section */}
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-10">
           <div className="lg:col-span-6 space-y-6 text-left">
             {/* Main Title */}
             <motion.h2

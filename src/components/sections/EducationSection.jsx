@@ -287,7 +287,7 @@ function EducationSection() {
               <BookOpen size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1 text-left">
-              <h4 className="text-base font-bold text-[#0D9488] leading-tight font-sans">Strong Foundation</h4>
+              <h4 className="text-base font-semibold text-slate-800 leading-tight font-sans">Strong Foundation</h4>
               <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Built strong fundamentals in Computer Science and problem solving</p>
             </div>
           </motion.div>
@@ -304,7 +304,7 @@ function EducationSection() {
               <Rocket size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1 text-left">
-              <h4 className="text-base font-bold text-[#EA580C] leading-tight font-sans">Continuous Learner</h4>
+              <h4 className="text-base font-semibold text-slate-800 leading-tight font-sans">Continuous Learner</h4>
               <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Always exploring new technologies and frameworks to stay ahead</p>
             </div>
           </motion.div>

@@ -219,13 +219,13 @@ function SkillsSection() {
                     <div className={`w-11 h-11 rounded-2xl ${metric.bg} flex items-center justify-center mb-2.5 transition-transform duration-300 hover:scale-105 shadow-sm`}>
                       <Icon size={20} className="stroke-[2.2]" />
                     </div>
-                    <span className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">
+                    <span className="text-xl font-extrabold text-gray-900 tracking-tight leading-none">
                       {metric.value}
                     </span>
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1.5 leading-none">
+                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mt-1.5 leading-none">
                       {metric.text}
                     </span>
-                    <span className="text-[9px] font-medium text-slate-400 mt-0.5 leading-none">
+                    <span className="text-[9px] font-medium text-gray-400 mt-0.5 leading-none">
                       {metric.subtext}
                     </span>
                   </div>

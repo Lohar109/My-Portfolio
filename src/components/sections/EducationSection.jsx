@@ -4,6 +4,16 @@ import educationIllustration from '../../assets/education_illustration.png'
 
 const educationItems = [
   {
+    degree: 'Master of Computer Applications (M.C.A.)',
+    stream: 'Computer Applications & Software Engineering',
+    institute: 'R.C. Patel Educational Trust Institute of Management Research and Development, Shirpur',
+    timeline: '2024 - 2026',
+    status: 'Ongoing',
+    metric: 'CGPA',
+    grade: '9.30 / 10',
+    icon: GraduationCap,
+  },
+  {
     degree: 'Bachelor of Technology (B.Tech)',
     stream: 'Computer Science & Engineering',
     institute: 'Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow',
@@ -39,7 +49,7 @@ function EducationSection() {
   return (
     <motion.section
       id="education"
-      className="relative px-6 py-20 sm:px-12 lg:px-24 bg-[#fafafa]/50 overflow-hidden"
+      className="relative px-6 py-20 sm:px-12 lg:px-24 bg-transparent overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -52,17 +62,6 @@ function EducationSection() {
         {/* Two-Column Header Section */}
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-16">
           <div className="lg:col-span-6 space-y-6 text-left">
-            {/* My Education Pill Tag */}
-            <motion.div
-              className="inline-flex items-center gap-2 rounded-full border border-violet-100 bg-violet-50/70 px-4 py-1.5 text-xs font-bold text-violet-600 shadow-sm"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <GraduationCap size={14} className="stroke-[2.5]" />
-              <span>My Education</span>
-            </motion.div>
-
             {/* Main Title */}
             <motion.h2
               className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[54px] leading-[1.12]"
@@ -101,7 +100,7 @@ function EducationSection() {
               <motion.img
                 src={educationIllustration}
                 alt="My Academic Journey Visual"
-                className="w-full h-full object-contain relative z-10 drop-shadow-[0_12px_36px_rgba(139,92,246,0.18)]"
+                className="w-full h-full object-contain relative z-10 mix-blend-multiply drop-shadow-[0_12px_36px_rgba(139,92,246,0.18)]"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               />
@@ -124,8 +123,8 @@ function EducationSection() {
 
         {/* Timeline Card Stack */}
         <div className="relative pl-12 sm:pl-20 pr-2">
-          {/* Vertical Timeline Track Line */}
-          <div className="absolute left-[29px] sm:left-[43px] top-6 bottom-6 w-[2px] bg-indigo-100/80" />
+          {/* Vertical Timeline Track Line (Dashed, perfectly aligned with dots) */}
+          <div className="absolute left-[12px] sm:left-[32px] top-6 bottom-6 w-0 border-l border-dashed border-violet-300" />
 
           <div className="space-y-6">
             {educationItems.map((item, index) => {
@@ -149,8 +148,8 @@ function EducationSection() {
                     </div>
                   </div>
 
-                  {/* Horizontal Connector Line (Dashed) */}
-                  <div className="absolute -left-[28px] sm:-left-[36px] top-1/2 -translate-y-1/2 w-[28px] sm:w-[36px] h-px border-t border-dashed border-violet-300 pointer-events-none" />
+                  {/* Horizontal Connector Line (Dashed, extending from dot center to card) */}
+                  <div className="absolute -left-[36px] sm:-left-[48px] top-1/2 -translate-y-1/2 w-[36px] sm:w-[48px] h-px border-t border-dashed border-violet-300 pointer-events-none" />
 
                   {/* Horizontal Card Element */}
                   <motion.div
@@ -184,7 +183,11 @@ function EducationSection() {
                       <span className="inline-flex items-center rounded-full bg-violet-50 border border-violet-100 px-3.5 py-1 text-xs font-bold text-violet-600 shadow-sm transition-all duration-300 group-hover:bg-violet-100/60">
                         {item.timeline}
                       </span>
-                      <span className="inline-flex items-center rounded-full bg-emerald-50 border border-emerald-100 px-3.5 py-1 text-xs font-bold text-emerald-600 shadow-sm transition-all duration-300 group-hover:bg-emerald-100/60">
+                      <span className={`inline-flex items-center rounded-full px-3.5 py-1 text-xs font-bold shadow-sm transition-all duration-300 ${
+                        item.status === 'Completed'
+                          ? 'bg-emerald-50 border border-emerald-100 text-emerald-600 group-hover:bg-emerald-100/60'
+                          : 'bg-blue-50 border border-blue-100 text-blue-600 group-hover:bg-blue-100/60'
+                      }`}>
                         {item.status}
                       </span>
                     </div>

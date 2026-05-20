@@ -98,14 +98,8 @@ function FooterSection() {
         {/* Left Column: Get In Touch Info */}
         <div className="flex flex-col justify-between gap-10 w-full h-full">
           <div className="flex flex-col items-start">
-            {/* Get In Touch Status Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] text-white shadow-[0_4px_15px_rgba(0,0,0,0.12)] select-none">
-              <Sparkles size={14} className="text-neutral-400 animate-pulse" />
-              <span>Get In Touch</span>
-            </div>
-
             {/* Main Premium Heading */}
-            <h2 className="mt-5 text-3.5xl font-bold tracking-tight text-gray-900 leading-tight select-none">
+            <h2 className="mt-0 text-3.5xl font-bold tracking-tight text-gray-900 leading-tight select-none">
               Let's build something{' '}
               <span className="bg-gradient-to-r from-black via-gray-700 to-gray-800 bg-clip-text text-transparent">
                 amazing together.

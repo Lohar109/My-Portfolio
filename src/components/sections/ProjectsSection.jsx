@@ -7,7 +7,6 @@ import {
   Users,
   Star,
   Rocket,
-  LayoutGrid,
   ChevronDown,
   ArrowRight,
   ExternalLink,
@@ -440,12 +439,6 @@ function ProjectsSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end justify-between">
         {/* Left Column (Headline & Subtitle) */}
         <div className="lg:col-span-7 flex flex-col items-start gap-4">
-          {/* Sparkles glass Badge capsule */}
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-neutral-800 bg-neutral-950 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white select-none">
-            <LayoutGrid size={11} className="text-white" />
-            MY WORK
-          </div>
-
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 font-sans leading-tight sm:text-4xl">
             Projects that solve real problems.
           </h2>

@@ -187,11 +187,17 @@ function EducationSection() {
                       <span className="inline-flex items-center rounded-full bg-violet-50 border border-violet-100 px-3.5 py-1 text-xs font-bold text-violet-600 shadow-sm transition-all duration-300 group-hover:bg-violet-100/60">
                         {item.timeline}
                       </span>
-                      <span className={`inline-flex items-center rounded-full px-3.5 py-1 text-xs font-bold shadow-sm transition-all duration-300 ${
+                      <span className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-bold shadow-sm transition-all duration-300 ${
                         item.status === 'Completed'
                           ? 'bg-emerald-50 border border-emerald-100 text-emerald-600 group-hover:bg-emerald-100/60'
                           : 'bg-blue-50 border border-blue-100 text-blue-600 group-hover:bg-blue-100/60'
                       }`}>
+                        {item.status === 'Ongoing' && (
+                          <span className="relative flex h-2 w-2 flex-shrink-0">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-blue-400"></span>
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
+                          </span>
+                        )}
                         {item.status}
                       </span>
                     </div>

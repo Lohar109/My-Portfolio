@@ -332,7 +332,7 @@ function EducationSection() {
         </motion.div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {[
             {
               title: 'Node.js Developer',
@@ -361,6 +361,13 @@ function EducationSection() {
               provider: 'IBM',
               year: '2026',
               iconType: 'ibm',
+            },
+            {
+              title: 'Job Ready AI Powered Cohort 3.0',
+              subtitle: 'Learning: GenAI / DevOps / Web3 / System Design',
+              provider: 'Sheryians',
+              year: 'Pursuing',
+              iconType: 'sheryians',
             },
           ].map((cert, idx) => (
             <motion.div
@@ -405,6 +412,11 @@ function EducationSection() {
                     </div>
                   </div>
                 )}
+                {cert.iconType === 'sheryians' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-400 font-sans font-black tracking-tight text-[16px] shadow-sm select-none">
+                    S
+                  </div>
+                )}
 
                 <div className="space-y-0.5">
                   <h5 className="text-xs font-bold text-slate-800 leading-snug group-hover:text-violet-700 transition-colors">{cert.title}</h5>
@@ -417,9 +429,19 @@ function EducationSection() {
                 <span className="bg-gray-50 border border-gray-150 px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-400 uppercase tracking-wider">
                   {cert.provider}
                 </span>
-                <span className="text-[10px] font-bold text-gray-400">
-                  {cert.year}
-                </span>
+                {cert.year === 'Pursuing' ? (
+                  <span className="inline-flex items-center gap-1 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-md text-[10px] font-bold text-blue-600 shadow-sm animate-pulse">
+                    <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-blue-400"></span>
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                    </span>
+                    Pursuing
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-bold text-gray-400">
+                    {cert.year}
+                  </span>
+                )}
               </div>
             </motion.div>
           ))}

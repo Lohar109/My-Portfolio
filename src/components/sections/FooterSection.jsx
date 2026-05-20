@@ -99,9 +99,9 @@ function FooterSection() {
         <div className="flex flex-col justify-between gap-10 w-full h-full">
           <div className="flex flex-col items-start">
             {/* Main Premium Heading */}
-            <h2 className="mt-0 text-3.5xl font-bold tracking-tight text-gray-900 leading-tight select-none">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
               Let's build something{' '}
-              <span className="bg-gradient-to-r from-black via-gray-700 to-gray-800 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
                 amazing together.
               </span>
             </h2>

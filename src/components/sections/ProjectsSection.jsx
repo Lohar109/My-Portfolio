@@ -439,8 +439,11 @@ function ProjectsSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end justify-between">
         {/* Left Column (Headline & Subtitle) */}
         <div className="lg:col-span-7 flex flex-col items-start gap-4">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 font-sans leading-tight sm:text-4xl">
-            Projects that solve real problems.
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
+            Projects that solve{' '}
+            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+              real problems.
+            </span>
           </h2>
 
           <p className="max-w-xl text-base sm:text-lg text-gray-500 leading-relaxed font-medium">

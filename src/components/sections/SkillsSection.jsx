@@ -200,7 +200,7 @@ function SkillsSection() {
         {/* Header grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
           <div className="lg:col-span-6 space-y-4">
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-slate-800 font-sans">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">
               Tools, technologies & expertise I use to build{' '}
               <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
                 impactful products.

@@ -95,12 +95,12 @@ function HeroSection() {
       
       {/* 1. Main Hero Content Row */}
       <motion.section
-        className="mx-auto max-w-6xl px-6 pt-20 pb-10 sm:px-10 lg:px-12 lg:pt-24"
+        className="mx-auto max-w-6xl px-6 pt-6 pb-10 sm:px-10 lg:px-12"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
           {/* Left Column: Text content */}
           <div className="flex flex-col items-start text-left">
             {/* Bold Premium Heading */}

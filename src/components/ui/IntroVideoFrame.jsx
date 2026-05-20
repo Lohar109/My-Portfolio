@@ -75,7 +75,7 @@ function IntroVideoFrame() {
   }
 
   return (
-    <div className="relative w-full max-w-[560px] lg:max-w-none">
+    <div className="relative w-full max-w-[640px] lg:max-w-none">
       {/* Decorative background blur glow */}
       <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-r from-indigo-500/20 to-purple-500/20 opacity-45 blur-2xl -z-10" />
 

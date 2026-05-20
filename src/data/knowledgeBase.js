@@ -20,7 +20,7 @@ export const VAIBHAV_KNOWLEDGE = {
     
     graduation: {
       degree: "Bachelor of Science (Computer Science)", // [cite: 95]
-      college: "J.D.M.V.P. Co-Op Samajs Arts, Commerce and Science College, Jalgaon", // [cite: 58, 79, 101]
+      college: "Nutan Maratha College, North Maharashtra University, Jalgaon", // [cite: 58, 79, 101]
       finalCGPA: "9.08 (80.92%)", // 
       grade: "A+", // [cite: 109]
       keySubjects: ["Data Structures", "Programming in C++", "Operating Systems", "RDBMS", "Computer Networks"] // [cite: 81, 103]
@@ -29,7 +29,7 @@ export const VAIBHAV_KNOWLEDGE = {
     hsc_12th: {
       stream: "Science", // [cite: 34]
       board: "Maharashtra State Board (Nagpur Division)", // [cite: 31]
-      percentage: "52.62%", // [cite: 38]
+      percentage: "52.60%", // [cite: 38]
       year: "February 2018" // [cite: 34]
     },
     

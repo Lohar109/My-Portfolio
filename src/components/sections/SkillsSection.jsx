@@ -58,7 +58,6 @@ import {
 import { TbBrandVscode } from 'react-icons/tb'
 import { motion, AnimatePresence } from 'framer-motion'
 import { skills } from '../../data/skills.js'
-import skillsIllustration from '../../assets/skills_illustration.png'
 
 const categoryIcons = {
   'Frontend Development': Code2,
@@ -157,6 +156,186 @@ function SkillPill({ skill }) {
   )
 }
 
+function DynamicSkillsIllustration() {
+  const orbitRadiusInner = 85
+  const orbitRadiusMiddle = 145
+  const orbitRadiusOuter = 205
+
+  return (
+    <div className="relative w-full max-w-[460px] aspect-square flex items-center justify-center scale-[0.72] xs:scale-[0.85] sm:scale-100 origin-center select-none overflow-visible">
+      {/* Soft purple radial halo glow in background */}
+      <div className="absolute inset-0 bg-radial from-violet-300/30 via-violet-100/5 to-transparent blur-3xl rounded-full scale-125 pointer-events-none animate-pulse duration-[8s]" />
+
+      {/* Orbit Track Lines */}
+      <div className="absolute w-[170px] h-[170px] rounded-full border border-dashed border-violet-200/50 pointer-events-none" />
+      <div className="absolute w-[290px] h-[290px] rounded-full border border-dashed border-violet-200/40 pointer-events-none" />
+      <div className="absolute w-[410px] h-[410px] rounded-full border border-dashed border-violet-200/30 pointer-events-none" />
+
+      {/* ==================== INNER ORBIT (Clockwise) ==================== */}
+      {/* Card 1: React */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        animate={{ rotate: [0, 360] }}
+        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusInner }}
+          animate={{ rotate: [0, -360] }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(97,218,251,0.05)] hover:shadow-[0_12px_24px_rgba(97,218,251,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiReact className="text-[#61DAFB] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">React</span>
+        </motion.div>
+      </motion.div>
+
+      {/* Card 2: Next.js */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 180 }}
+        animate={{ rotate: [180, 540] }}
+        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusInner }}
+          animate={{ rotate: [-180, -540] }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiNextdotjs className="text-black h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Next.js</span>
+        </motion.div>
+      </motion.div>
+
+      {/* ==================== MIDDLE ORBIT (Counter-Clockwise) ==================== */}
+      {/* Card 3: Node.js */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 90 }}
+        animate={{ rotate: [90, -270] }}
+        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusMiddle }}
+          animate={{ rotate: [-90, 270] }}
+          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(51,153,51,0.05)] hover:shadow-[0_12px_24px_rgba(51,153,51,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiNodedotjs className="text-[#339933] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Node</span>
+        </motion.div>
+      </motion.div>
+
+      {/* Card 4: PostgreSQL */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 270 }}
+        animate={{ rotate: [270, -90] }}
+        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusMiddle }}
+          animate={{ rotate: [-270, 90] }}
+          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(65,105,225,0.05)] hover:shadow-[0_12px_24px_rgba(65,105,225,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiPostgresql className="text-[#4169E1] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Postgres</span>
+        </motion.div>
+      </motion.div>
+
+      {/* ==================== OUTER ORBIT (Clockwise) ==================== */}
+      {/* Card 5: Docker */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 45 }}
+        animate={{ rotate: [45, 405] }}
+        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusOuter }}
+          animate={{ rotate: [-45, -405] }}
+          transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(36,150,237,0.05)] hover:shadow-[0_12px_24px_rgba(36,150,237,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiDocker className="text-[#2496ED] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Docker</span>
+        </motion.div>
+      </motion.div>
+
+      {/* Card 6: AI / ML */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 225 }}
+        animate={{ rotate: [225, 585] }}
+        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusOuter }}
+          animate={{ rotate: [-225, -585] }}
+          transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(236,72,153,0.05)] hover:shadow-[0_12px_24px_rgba(236,72,153,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <BrainCircuit className="text-[#EC4899] h-6 w-6 transition-transform duration-300 group-hover:scale-110 animate-pulse" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">AI / ML</span>
+        </motion.div>
+      </motion.div>
+
+      {/* ==================== CENTRAL HUB (Pulsing Sphere) ==================== */}
+      {/* Outer Halo Glow */}
+      <motion.div
+        className="absolute w-[115px] h-[115px] sm:w-[130px] sm:h-[130px] rounded-full bg-indigo-500/10 border border-indigo-400/20 blur-sm pointer-events-none"
+        animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.55, 0.35] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Main Glass Center Globe */}
+      <motion.div
+        className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-violet-600 via-indigo-600 to-indigo-700 shadow-[0_12px_36px_rgba(99,102,241,0.4)] flex items-center justify-center overflow-hidden border border-white/20 relative z-20 group"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Soft lighting overlay reflection */}
+        <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-full pointer-events-none" />
+
+        {/* Dynamic rotating internal neural connection graphic */}
+        <motion.div
+          className="absolute inset-0 opacity-40 mix-blend-screen flex items-center justify-center scale-90 pointer-events-none"
+          animate={{ rotate: [0, 360] }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full stroke-violet-200" strokeWidth="1.5" fill="none">
+            {/* Center Node */}
+            <circle cx="50" cy="50" r="4" fill="currentColor" className="text-white" />
+            {/* Inner Ring Connections */}
+            <circle cx="50" cy="50" r="25" strokeDasharray="3 5" />
+            <line x1="50" y1="50" x2="30" y2="35" />
+            <circle cx="30" cy="35" r="3" fill="currentColor" className="text-[#61DAFB]" />
+            <line x1="50" y1="50" x2="70" y2="35" />
+            <circle cx="70" cy="35" r="3" fill="currentColor" className="text-[#339933]" />
+            <line x1="50" y1="50" x2="50" y2="75" />
+            <circle cx="50" cy="75" r="3" fill="currentColor" className="text-[#EC4899]" />
+            {/* Outer Ring Connections */}
+            <line x1="30" y1="35" x2="20" y2="60" />
+            <circle cx="20" cy="60" r="2" fill="currentColor" />
+            <line x1="70" y1="35" x2="80" y2="60" />
+            <circle cx="80" cy="60" r="2" fill="currentColor" />
+          </svg>
+        </motion.div>
+
+        {/* Central glowing icon symbol */}
+        <motion.div
+          className="relative z-10 flex items-center justify-center text-white"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Sparkles className="h-8 w-8 text-white filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)] animate-pulse" />
+        </motion.div>
+      </motion.div>
+    </div>
+  )
+}
+
 function SkillsSection() {
   const [activeTab, setActiveTab] = useState('All')
 
@@ -231,26 +410,9 @@ function SkillsSection() {
             </div>
           </div>
 
-          {/* Right Column: Premium 3D-like Illustration */}
+          {/* Right Column: Premium Dynamic Orbiting Illustration */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
-            <motion.div
-              className="relative w-full max-w-[420px] md:max-w-[460px] aspect-square flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              {/* Soft purple radial halo glow in background */}
-              <div className="absolute inset-0 bg-radial from-violet-300/40 via-violet-100/10 to-transparent blur-3xl rounded-full scale-110 pointer-events-none animate-pulse duration-[6s]" />
-              
-              <motion.img
-                src={skillsIllustration}
-                alt="My Tools and Skills Visual"
-                className="w-full h-full object-contain relative z-10 mix-blend-multiply drop-shadow-[0_12px_36px_rgba(139,92,246,0.18)]"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              />
-            </motion.div>
+            <DynamicSkillsIllustration />
           </div>
         </div>
 

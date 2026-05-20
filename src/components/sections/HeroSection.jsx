@@ -120,7 +120,7 @@ function HeroSection() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="mt-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans select-none"
             >
-              Vaibhav Kumar <br />
+              Vaibhav Lohar <br />
               I Build Modern & <br />
               Scalable{' '}
               <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">

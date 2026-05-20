@@ -108,7 +108,7 @@ function IntroVideoFrame() {
             >
               <img 
                 src={vaibhavPortrait} 
-                alt="Vaibhav Kumar" 
+                alt="Vaibhav Lohar" 
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Overlay shadow gradient to make controls pop */}

@@ -648,7 +648,7 @@ function SkillsSection() {
     >
       <div className="mx-auto max-w-6xl">
         {/* Header grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-6">
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-tight font-sans">

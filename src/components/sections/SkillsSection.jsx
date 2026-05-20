@@ -171,7 +171,7 @@ function DynamicSkillsIllustration() {
       <div className="absolute w-[290px] h-[290px] rounded-full border border-dashed border-violet-200/40 pointer-events-none" />
       <div className="absolute w-[410px] h-[410px] rounded-full border border-dashed border-violet-200/30 pointer-events-none" />
 
-      {/* ==================== INNER ORBIT (Clockwise) ==================== */}
+      {/* ==================== INNER ORBIT (Clockwise - 3 Cards) ==================== */}
       {/* Card 1: React */}
       <motion.div
         className="absolute w-full h-full flex items-center justify-center"
@@ -192,13 +192,13 @@ function DynamicSkillsIllustration() {
       {/* Card 2: Next.js */}
       <motion.div
         className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 180 }}
-        animate={{ rotate: [180, 540] }}
+        style={{ rotate: 120 }}
+        animate={{ rotate: [120, 480] }}
         transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
       >
         <motion.div
           style={{ y: -orbitRadiusInner }}
-          animate={{ rotate: [-180, -540] }}
+          animate={{ rotate: [-120, -480] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
           className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
         >
@@ -207,17 +207,35 @@ function DynamicSkillsIllustration() {
         </motion.div>
       </motion.div>
 
-      {/* ==================== MIDDLE ORBIT (Counter-Clockwise) ==================== */}
-      {/* Card 3: Node.js */}
+      {/* Card 3: JavaScript */}
       <motion.div
         className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 90 }}
-        animate={{ rotate: [90, -270] }}
+        style={{ rotate: 240 }}
+        animate={{ rotate: [240, 600] }}
+        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusInner }}
+          animate={{ rotate: [-240, -600] }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(247,223,30,0.05)] hover:shadow-[0_12px_24px_rgba(247,223,30,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiJavascript className="text-[#F7DF1E] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">JS</span>
+        </motion.div>
+      </motion.div>
+
+      {/* ==================== MIDDLE ORBIT (Counter-Clockwise - 3 Cards) ==================== */}
+      {/* Card 4: Node.js */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 40 }}
+        animate={{ rotate: [40, -320] }}
         transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
       >
         <motion.div
           style={{ y: -orbitRadiusMiddle }}
-          animate={{ rotate: [-90, 270] }}
+          animate={{ rotate: [-40, 320] }}
           transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
           className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(51,153,51,0.05)] hover:shadow-[0_12px_24px_rgba(51,153,51,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
         >
@@ -226,16 +244,16 @@ function DynamicSkillsIllustration() {
         </motion.div>
       </motion.div>
 
-      {/* Card 4: PostgreSQL */}
+      {/* Card 5: PostgreSQL */}
       <motion.div
         className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 270 }}
-        animate={{ rotate: [270, -90] }}
+        style={{ rotate: 160 }}
+        animate={{ rotate: [160, -200] }}
         transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
       >
         <motion.div
           style={{ y: -orbitRadiusMiddle }}
-          animate={{ rotate: [-270, 90] }}
+          animate={{ rotate: [-160, 200] }}
           transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
           className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(65,105,225,0.05)] hover:shadow-[0_12px_24px_rgba(65,105,225,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
         >
@@ -244,17 +262,35 @@ function DynamicSkillsIllustration() {
         </motion.div>
       </motion.div>
 
-      {/* ==================== OUTER ORBIT (Clockwise) ==================== */}
-      {/* Card 5: Docker */}
+      {/* Card 6: TypeScript */}
       <motion.div
         className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 45 }}
-        animate={{ rotate: [45, 405] }}
+        style={{ rotate: 280 }}
+        animate={{ rotate: [280, -80] }}
+        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusMiddle }}
+          animate={{ rotate: [-280, 80] }}
+          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(49,120,198,0.05)] hover:shadow-[0_12px_24px_rgba(49,120,198,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiTypescript className="text-[#3178C6] h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">TS</span>
+        </motion.div>
+      </motion.div>
+
+      {/* ==================== OUTER ORBIT (Clockwise - 3 Cards) ==================== */}
+      {/* Card 7: Docker */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 80 }}
+        animate={{ rotate: [80, 440] }}
         transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
       >
         <motion.div
           style={{ y: -orbitRadiusOuter }}
-          animate={{ rotate: [-45, -405] }}
+          animate={{ rotate: [-80, -440] }}
           transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
           className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(36,150,237,0.05)] hover:shadow-[0_12px_24px_rgba(36,150,237,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
         >
@@ -263,21 +299,39 @@ function DynamicSkillsIllustration() {
         </motion.div>
       </motion.div>
 
-      {/* Card 6: AI / ML */}
+      {/* Card 8: AI / ML */}
       <motion.div
         className="absolute w-full h-full flex items-center justify-center"
-        style={{ rotate: 225 }}
-        animate={{ rotate: [225, 585] }}
+        style={{ rotate: 200 }}
+        animate={{ rotate: [200, 560] }}
         transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
       >
         <motion.div
           style={{ y: -orbitRadiusOuter }}
-          animate={{ rotate: [-225, -585] }}
+          animate={{ rotate: [-200, -560] }}
           transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
           className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(236,72,153,0.05)] hover:shadow-[0_12px_24px_rgba(236,72,153,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
         >
           <BrainCircuit className="text-[#EC4899] h-6 w-6 transition-transform duration-300 group-hover:scale-110 animate-pulse" />
           <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">AI / ML</span>
+        </motion.div>
+      </motion.div>
+
+      {/* Card 9: Copilot */}
+      <motion.div
+        className="absolute w-full h-full flex items-center justify-center"
+        style={{ rotate: 320 }}
+        animate={{ rotate: [320, 680] }}
+        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+      >
+        <motion.div
+          style={{ y: -orbitRadiusOuter }}
+          animate={{ rotate: [-320, -680] }}
+          transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+          className="group hover:scale-110 active:scale-95 transition-all duration-300 rounded-2xl border border-slate-100 bg-white/90 backdrop-blur-md shadow-[0_8px_20px_rgba(99,102,241,0.05)] hover:shadow-[0_12px_24px_rgba(99,102,241,0.12)] flex flex-col items-center justify-center w-16 h-16 cursor-grab active:cursor-grabbing"
+        >
+          <SiGithubcopilot className="text-slate-800 h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-[9px] font-extrabold text-slate-400 mt-1 uppercase tracking-wider">Copilot</span>
         </motion.div>
       </motion.div>
 

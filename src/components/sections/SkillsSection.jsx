@@ -206,7 +206,7 @@ function SkillsSection() {
                 impactful products.
               </span>
             </h2>
-            <p className="max-w-xl text-sm sm:text-base leading-relaxed text-slate-500 font-medium">
+            <p className="max-w-xl text-base sm:text-lg text-gray-500 leading-relaxed font-medium">
               A combination of technical skills, frameworks, and tools that help me build scalable, performant, and user-friendly applications.
             </p>
           </div>

@@ -107,7 +107,7 @@ function FooterSection() {
             </h2>
 
             {/* Paragraph Description */}
-            <p className="mt-4 text-base font-normal leading-relaxed text-gray-500/90 max-w-lg">
+            <p className="mt-4 text-base sm:text-lg text-gray-500 leading-relaxed font-medium max-w-lg">
               I'm always open to discussing new opportunities, interesting projects,
               or just having a chat about technology.
             </p>

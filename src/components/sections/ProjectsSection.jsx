@@ -443,7 +443,7 @@ function ProjectsSection() {
             Projects that solve real problems.
           </h2>
 
-          <p className="max-w-xl text-base leading-relaxed text-gray-500 font-normal">
+          <p className="max-w-xl text-base sm:text-lg text-gray-500 leading-relaxed font-medium">
             A collection of web applications I've built with clean code,
             thoughtful design, and real-world impact.
           </p>

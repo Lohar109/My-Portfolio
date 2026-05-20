@@ -679,9 +679,6 @@ function ProjectsSection() {
                   <h3 className="text-2xl font-bold text-gray-900 tracking-tight leading-none">
                     {shopEaseProject.title}
                   </h3>
-                  <span className="rounded-full bg-blue-50 border border-blue-100 px-2 py-0.5 text-[8px] font-bold text-blue-600">
-                    Featured
-                  </span>
                 </div>
 
                 <p className="text-sm font-normal leading-relaxed text-gray-500 max-w-xl">

@@ -529,9 +529,6 @@ function EducationSection() {
                 <path d="M5,5 Q35,1 70,7 T95,3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
               </svg>
             </div>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">
-              Vaibhav Lohar
-            </span>
           </div>
         </motion.div>
       </div>

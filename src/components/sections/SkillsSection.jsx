@@ -16,6 +16,8 @@ import {
   Network,
   Cpu,
   Terminal,
+  Bot,
+  MousePointerClick,
 } from 'lucide-react'
 import {
   SiCss,
@@ -51,6 +53,7 @@ import {
   SiEslint,
   SiGraphql,
   SiGithubactions,
+  SiAnthropic,
 } from 'react-icons/si'
 import { TbBrandVscode } from 'react-icons/tb'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -127,6 +130,9 @@ const techIcons = {
   eslint: { icon: SiEslint, className: 'text-[#4B32C3]' },
   notion: { icon: SiNotion, className: 'text-[#000000]' },
   copilot: { icon: SiGithubcopilot, className: 'text-[#000000]' },
+  antigravity: { icon: Bot, className: 'text-[#6366F1]' },
+  claude: { icon: SiAnthropic, className: 'text-[#CC9966]' },
+  cursor: { icon: MousePointerClick, className: 'text-[#3B82F6]' },
 }
 
 function TechIcon({ icon }) {

@@ -73,6 +73,9 @@ export const skills = [
       { name: 'ESLint', icon: 'eslint' },
       { name: 'Notion', icon: 'notion' },
       { name: 'GitHub Copilot', icon: 'copilot' },
+      { name: 'Antigravity', icon: 'antigravity' },
+      { name: 'Claude', icon: 'claude' },
+      { name: 'Cursor', icon: 'cursor' },
     ],
   },
 ]

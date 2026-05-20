@@ -7,7 +7,6 @@ import Contact from './pages/Contact.jsx'
 import ProjectDetail from './pages/ProjectDetail.jsx'
 import ScrollToTop from './components/layout/ScrollToTop.jsx'
 import SiteHeader from './components/layout/SiteHeader.jsx'
-import SiteFooter from './components/layout/SiteFooter.jsx'
 import FloatingAssistant from './components/ui/FloatingAssistant.jsx'
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
-      <SiteFooter />
       <FloatingAssistant />
     </div>
   )

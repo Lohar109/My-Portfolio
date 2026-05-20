@@ -425,6 +425,27 @@ function EducationSection() {
               year: '2024',
               iconType: 'openai',
             },
+            {
+              title: 'Go Bootcamp: Master Golang',
+              subtitle: 'Master Golang with 1000+ Exercises',
+              provider: 'Udemy',
+              year: '2025',
+              iconType: 'golang',
+            },
+            {
+              title: 'Startup School: Prompt to Prototype',
+              subtitle: 'Google for Startups program',
+              provider: 'Google',
+              year: '2025',
+              iconType: 'google-startup',
+            },
+            {
+              title: 'Prompt Engineering for Everyone',
+              subtitle: 'IBM Developer Skills Network',
+              provider: 'IBM',
+              year: '2026',
+              iconType: 'ibm',
+            },
           ].map((cert, idx) => (
             <motion.div
               key={idx}
@@ -468,6 +489,29 @@ function EducationSection() {
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" className="text-teal-600">
                       <path d="M21.3 11.2a4.4 4.4 0 0 0-1.1-2.9 4.3 4.3 0 0 0-3.5-1.7 4.1 4.1 0 0 0-.8.1 4.4 4.4 0 0 0-3.5-3.5A4.1 4.1 0 0 0 12 3a4.3 4.3 0 0 0-4.6 3.6 4.3 4.3 0 0 0-4.3 4.6 4.3 4.3 0 0 0 .1.8 4.4 4.4 0 0 0-.1 4.8 4.3 4.3 0 0 0 3.5 1.7 4.1 4.1 0 0 0 .8-.1 4.4 4.4 0 0 0 3.5 3.5 4.1 4.1 0 0 0 .4.1 4.3 4.3 0 0 0 4.6-3.6 4.3 4.3 0 0 0 4.3-4.6v-.8zM12 4.6a2.7 2.7 0 0 1 2.7 2.7v.5a.8.8 0 0 0 .8.8h.5a2.7 2.7 0 0 1 2.6 3.1.8.8 0 0 0 .3.8c.2.2.5.3.8.3a2.7 2.7 0 0 1 0 5.4.8.8 0 0 0-.8.8v.5a2.7 2.7 0 0 1-3.1 2.6.8.8 0 0 0-.8.3.8.8 0 0 0-.3.8 2.7 2.7 0 0 1-5.4 0 .8.8 0 0 0-.8-.8h-.5a2.7 2.7 0 0 1-2.6-3.1.8.8 0 0 0-.3-.8.8.8 0 0 0-.8-.3 2.7 2.7 0 0 1 0-5.4.8.8 0 0 0 .8-.8v-.5A2.7 2.7 0 0 1 12 4.6z" />
                     </svg>
+                  </div>
+                )}
+                {cert.iconType === 'golang' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-cyan-50/50 border border-cyan-100 flex items-center justify-center text-[#00ADD8] font-sans font-black italic tracking-tighter text-[17px] shadow-sm select-none">
+                    Go
+                  </div>
+                )}
+                {cert.iconType === 'google-startup' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50/50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm relative">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
+                      <path d="M12 2L15 5L19 4L18 8L21 11L18 14L19 18L15 17L12 20L9 17L5 18L6 14L3 11L6 8L5 4L9 5Z" />
+                      <path d="M9 11L11 13L15 9" stroke="#EC4899" strokeWidth="2.5" />
+                    </svg>
+                  </div>
+                )}
+                {cert.iconType === 'ibm' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-sky-50/50 border border-sky-100 flex flex-col items-center justify-center text-sky-700 shadow-sm select-none">
+                    <span className="text-[10px] font-black tracking-tighter uppercase font-sans leading-none">ibm</span>
+                    <div className="flex flex-col gap-0.5 mt-1 w-6">
+                      <div className="h-0.5 bg-sky-600 w-full" />
+                      <div className="h-0.5 bg-sky-600 w-full" />
+                      <div className="h-0.5 bg-sky-600 w-full" />
+                    </div>
                   </div>
                 )}
 

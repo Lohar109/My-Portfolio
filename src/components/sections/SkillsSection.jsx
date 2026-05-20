@@ -181,18 +181,6 @@ function SkillsSection() {
     { value: '100%', text: 'Commitment to', subtext: 'Quality', icon: Star, bg: 'bg-amber-50 border border-amber-100 text-amber-600 shadow-[0_2px_8px_rgba(245,158,11,0.06)]' }
   ]
 
-  // Define tools for the bottom tools row
-  const bottomTools = [
-    { name: 'VS Code', icon: 'vscode' },
-    { name: 'Postman', icon: 'postman' },
-    { name: 'Figma', icon: 'figma' },
-    { name: 'GitHub', icon: 'github' },
-    { name: 'Docker', icon: 'docker' },
-    { name: 'Vercel', icon: 'vercel' },
-    { name: 'Notion', icon: 'notion' },
-    { name: 'PostgreSQL', icon: 'postgresql' }
-  ]
-
   return (
     <motion.section
       id="skills"
@@ -327,31 +315,6 @@ function SkillsSection() {
               )
             })}
           </AnimatePresence>
-        </motion.div>
-
-        {/* Bottom Marquee element: Tools I Use */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-20 space-y-6"
-        >
-          <h4 className="text-sm font-bold text-slate-800 tracking-wider uppercase font-sans">
-            Tools I Use
-          </h4>
-          
-          <div className="bg-white border border-slate-100 rounded-3xl p-4 sm:p-5 shadow-[0_4px_24px_rgba(0,0,0,0.01)] flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6">
-            {bottomTools.map((tool) => (
-              <div
-                key={tool.name}
-                className="group flex items-center gap-2 rounded-2xl border border-slate-100 bg-white px-3.5 py-2 text-xs font-bold text-slate-800 shadow-sm transition-all duration-300 hover:border-slate-200 hover:bg-slate-50/50 hover:-translate-y-0.5 cursor-default select-none"
-              >
-                <TechIcon icon={tool.icon} />
-                <span>{tool.name}</span>
-              </div>
-            ))}
-          </div>
         </motion.div>
       </div>
     </motion.section>

@@ -65,6 +65,16 @@ const categoryIcons = {
   'Tools & Others': Wrench,
 }
 
+const categoryColors = {
+  'Frontend Development': 'bg-blue-50 border border-blue-100 text-blue-600 shadow-[0_2px_8px_rgba(37,99,235,0.06)]',
+  'Backend Development': 'bg-violet-50 border border-violet-100 text-violet-600 shadow-[0_2px_8px_rgba(139,92,246,0.06)]',
+  'Database & Storage': 'bg-emerald-50 border border-emerald-100 text-emerald-600 shadow-[0_2px_8px_rgba(16,185,129,0.06)]',
+  'DevOps & Deployment': 'bg-indigo-50 border border-indigo-100 text-indigo-600 shadow-[0_2px_8px_rgba(79,70,229,0.06)]',
+  'AI / Machine Learning': 'bg-rose-50 border border-rose-100 text-rose-600 shadow-[0_2px_8px_rgba(225,29,72,0.06)]',
+  'Tools & Others': 'bg-amber-50 border border-amber-100 text-amber-600 shadow-[0_2px_8px_rgba(245,158,11,0.06)]',
+}
+
+
 const techIcons = {
   // Frontend
   react: { icon: SiReact, className: 'text-[#61DAFB]' },
@@ -262,6 +272,7 @@ function SkillsSection() {
           <AnimatePresence mode="popLayout">
             {filteredSkills.map((group) => {
               const CategoryIcon = categoryIcons[group.title] ?? Sparkles
+              const categoryColorClass = categoryColors[group.title] ?? 'bg-violet-50 border border-violet-100 text-violet-600'
 
               return (
                 <motion.article
@@ -276,13 +287,14 @@ function SkillsSection() {
                   <div>
                     {/* Top Row: Icon + Title */}
                     <div className="flex items-center gap-3.5">
-                      <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 shadow-sm">
+                      <span className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${categoryColorClass}`}>
                         <CategoryIcon size={20} strokeWidth={2.2} aria-hidden="true" />
                       </span>
                       <h4 className="text-base font-bold tracking-tight text-slate-800 font-sans">
                         {group.title}
                       </h4>
                     </div>
+
 
                     {/* Subtitle/Description */}
                     <p className="mt-3.5 text-xs font-semibold text-slate-400 leading-relaxed">

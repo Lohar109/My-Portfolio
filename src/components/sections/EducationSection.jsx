@@ -199,10 +199,10 @@ function EducationSection() {
                       
                       {/* Column block for CGPA/Percentage */}
                       <div className="flex flex-col items-start md:items-center min-w-[110px] w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-gray-100 text-left md:text-center">
-                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
+                        <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-black">
                           {item.metric}
                         </span>
-                        <span className="text-xl sm:text-2xl font-black text-violet-600 mt-1 sm:mt-1.5 tracking-tight group-hover:scale-105 transition-transform duration-300">
+                        <span className="text-xl sm:text-2xl font-bold text-black mt-1 sm:mt-1.5 tracking-tight group-hover:scale-105 transition-transform duration-300">
                           {item.grade}
                         </span>
                       </div>

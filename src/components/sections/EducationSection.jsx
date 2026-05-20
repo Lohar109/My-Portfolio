@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Building2, BookOpen } from 'lucide-react'
+import { GraduationCap, Building2, BookOpen, Star, Trophy, Award, Rocket, Layers, FileText, ArrowRight } from 'lucide-react'
 import educationIllustration from '../../assets/education_illustration.png'
+import subjectsIllustration from '../../assets/subjects_illustration.png'
 
 const educationItems = [
   {
@@ -223,6 +224,309 @@ function EducationSection() {
             })}
           </div>
         </div>
+
+        {/* 1. Key Highlights Section */}
+        <motion.div
+          className="flex items-center gap-3 mt-16 mb-8 px-2"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <Star size={20} className="text-violet-600 stroke-[2.2]" />
+          <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Key Highlights</h3>
+        </motion.div>
+
+        {/* Key Highlights Grid */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Card 1: CGPA */}
+          <motion.div
+            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
+              <Trophy size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            </div>
+            <div className="space-y-1.5 text-left">
+              <h4 className="text-3xl font-extrabold text-violet-600 leading-none font-sans tracking-tight">9.08</h4>
+              <p className="text-sm font-bold text-[#1E293B] tracking-tight leading-none">CGPA in B.Sc.</p>
+              <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Consistent academic performance</p>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Academic Standing */}
+          <motion.div
+            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
+              <Award size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            </div>
+            <div className="space-y-1.5 text-left">
+              <h4 className="text-3xl font-extrabold text-violet-600 leading-none font-sans tracking-tight">Top 15%</h4>
+              <p className="text-sm font-bold text-[#1E293B] tracking-tight leading-none">Academic Standing</p>
+              <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Among top performers in the university</p>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Strong Foundation */}
+          <motion.div
+            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
+              <BookOpen size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            </div>
+            <div className="space-y-1 text-left">
+              <h4 className="text-base font-bold text-violet-600 leading-tight font-sans">Strong Foundation</h4>
+              <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Built strong fundamentals in Computer Science and problem solving</p>
+            </div>
+          </motion.div>
+
+          {/* Card 4: Continuous Learner */}
+          <motion.div
+            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#F5F3FF] border border-[#E9E3FF] flex items-center justify-center text-violet-600 transition-colors duration-300 group-hover:bg-violet-100/60 shadow-sm">
+              <Rocket size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            </div>
+            <div className="space-y-1 text-left">
+              <h4 className="text-base font-bold text-violet-600 leading-tight font-sans">Continuous Learner</h4>
+              <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Always exploring new technologies and frameworks to stay ahead</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* 2. Subjects & Core Areas Section */}
+        <motion.div
+          className="flex items-center gap-3 mt-16 mb-8 px-2"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <Layers size={20} className="text-violet-600 stroke-[2.2]" />
+          <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Subjects & Core Areas</h3>
+        </motion.div>
+
+        {/* Subjects & Core Areas Content Card */}
+        <motion.div
+          className="bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row items-center justify-between gap-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Left Column: Grid/Flex of Subjects */}
+          <div className="flex-1 text-left">
+            <div className="flex flex-wrap gap-3">
+              {[
+                'Data Structures & Algorithms',
+                'Database Management Systems',
+                'Operating Systems',
+                'Computer Networks',
+                'Object-Oriented Programming',
+                'Software Engineering',
+                'Web Development',
+                'System Design',
+                'Artificial Intelligence',
+                'Machine Learning',
+                'Cloud Computing',
+                'DevOps',
+              ].map((subject, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#F5F3FF] border border-[#E9E3FF] px-4 py-2.5 rounded-2xl text-xs font-bold text-violet-750 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-violet-100/50 shadow-sm"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-violet-500 flex-shrink-0" />
+                  {subject}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Illustration */}
+          <div className="relative flex-shrink-0 flex items-center justify-center lg:justify-end w-full lg:w-auto">
+            {/* Soft purple radial halo glow in background */}
+            <div className="absolute inset-0 bg-radial from-violet-300/25 via-violet-100/5 to-transparent blur-2xl rounded-full scale-110 pointer-events-none" />
+            <motion.img
+              src={subjectsIllustration}
+              alt="Core Subjects Visual"
+              className="w-full max-w-[240px] md:max-w-[280px] object-contain relative z-10 drop-shadow-[0_12px_24px_rgba(139,92,246,0.08)]"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </div>
+        </motion.div>
+
+        {/* 3. Certifications & Courses Section */}
+        <motion.div
+          className="flex items-center justify-between mt-16 mb-8 px-2"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex items-center gap-3">
+            <FileText size={20} className="text-violet-600 stroke-[2.2]" />
+            <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Certifications & Courses</h3>
+          </div>
+          
+          <a
+            href="#contact"
+            className="group flex items-center gap-1.5 text-xs font-bold text-violet-600 hover:text-violet-700 transition-colors"
+          >
+            View All Certifications
+            <ArrowRight size={14} className="transition-transform duration-250 group-hover:translate-x-1" />
+          </a>
+        </motion.div>
+
+        {/* Certifications Grid */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              title: 'Node.js Developer',
+              subtitle: 'Node.js Basics to Advanced',
+              provider: 'Udemy',
+              year: '2023',
+              iconType: 'node',
+            },
+            {
+              title: 'AWS Cloud Practitioner',
+              subtitle: 'AWS Fundamentals & Cloud Essentials',
+              provider: 'AWS',
+              year: '2023',
+              iconType: 'aws',
+            },
+            {
+              title: 'Google IT Automation with Python',
+              subtitle: 'Python, Git, APIs, Automation',
+              provider: 'Coursera',
+              year: '2023',
+              iconType: 'google',
+            },
+            {
+              title: 'AI with OpenAI & LangChain',
+              subtitle: 'Building AI Applications',
+              provider: 'Coursera',
+              year: '2024',
+              iconType: 'openai',
+            },
+          ].map((cert, idx) => (
+            <motion.div
+              key={idx}
+              className="group bg-white border border-slate-100 rounded-3xl p-5.5 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between min-h-[175px]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+            >
+              <div className="flex items-start gap-4 text-left">
+                {/* Custom Brand Icons */}
+                {cert.iconType === 'node' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-emerald-50/50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                      <path d="M2 17l10 5 10-5" />
+                      <path d="M2 12l10 5 10-5" />
+                    </svg>
+                  </div>
+                )}
+                {cert.iconType === 'aws' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-amber-50/50 border border-amber-100 flex flex-col items-center justify-center text-amber-600 font-sans leading-none shadow-sm">
+                    <span className="text-[10px] font-black uppercase tracking-tighter">aws</span>
+                    <svg viewBox="0 0 24 8" width="18" height="6" fill="none" className="text-amber-500 mt-0.5">
+                      <path d="M1 2c4 4 14 4 22 0M21 1.5l1.5.5-1 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                )}
+                {cert.iconType === 'google' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50/30 border border-blue-100 flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                    </svg>
+                  </div>
+                )}
+                {cert.iconType === 'openai' && (
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-teal-50/50 border border-teal-100 flex items-center justify-center text-teal-600 shadow-sm">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" className="text-teal-600">
+                      <path d="M21.3 11.2a4.4 4.4 0 0 0-1.1-2.9 4.3 4.3 0 0 0-3.5-1.7 4.1 4.1 0 0 0-.8.1 4.4 4.4 0 0 0-3.5-3.5A4.1 4.1 0 0 0 12 3a4.3 4.3 0 0 0-4.6 3.6 4.3 4.3 0 0 0-4.3 4.6 4.3 4.3 0 0 0 .1.8 4.4 4.4 0 0 0-.1 4.8 4.3 4.3 0 0 0 3.5 1.7 4.1 4.1 0 0 0 .8-.1 4.4 4.4 0 0 0 3.5 3.5 4.1 4.1 0 0 0 .4.1 4.3 4.3 0 0 0 4.6-3.6 4.3 4.3 0 0 0 4.3-4.6v-.8zM12 4.6a2.7 2.7 0 0 1 2.7 2.7v.5a.8.8 0 0 0 .8.8h.5a2.7 2.7 0 0 1 2.6 3.1.8.8 0 0 0 .3.8c.2.2.5.3.8.3a2.7 2.7 0 0 1 0 5.4.8.8 0 0 0-.8.8v.5a2.7 2.7 0 0 1-3.1 2.6.8.8 0 0 0-.8.3.8.8 0 0 0-.3.8 2.7 2.7 0 0 1-5.4 0 .8.8 0 0 0-.8-.8h-.5a2.7 2.7 0 0 1-2.6-3.1.8.8 0 0 0-.3-.8.8.8 0 0 0-.8-.3 2.7 2.7 0 0 1 0-5.4.8.8 0 0 0 .8-.8v-.5A2.7 2.7 0 0 1 12 4.6z" />
+                    </svg>
+                  </div>
+                )}
+
+                <div className="space-y-0.5">
+                  <h5 className="text-xs font-bold text-slate-800 leading-snug group-hover:text-violet-700 transition-colors">{cert.title}</h5>
+                  <p className="text-[11px] font-semibold text-gray-500 leading-snug">{cert.subtitle}</p>
+                </div>
+              </div>
+
+              {/* Card Footer tags */}
+              <div className="flex items-center justify-between mt-4">
+                <span className="bg-gray-50 border border-gray-150 px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                  {cert.provider}
+                </span>
+                <span className="text-[10px] font-bold text-gray-400">
+                  {cert.year}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* 4. Bottom Quote & Signature Block */}
+        <motion.div
+          className="relative mt-16 bg-gradient-to-r from-violet-50/50 to-indigo-50/30 border border-[#E9E3FF] rounded-3xl p-8 sm:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.005)] overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Subtle Decorative SVGs in background */}
+          <svg className="absolute right-0 bottom-0 top-0 h-full w-2/3 opacity-30 pointer-events-none" viewBox="0 0 200 100" preserveAspectRatio="none">
+            <path d="M0,70 Q50,30 100,70 T200,70" fill="none" stroke="#8B5CF6" strokeWidth="0.5" strokeDasharray="2 2" />
+            <path d="M0,50 Q60,10 120,60 T200,40" fill="none" stroke="#8B5CF6" strokeWidth="0.75" />
+          </svg>
+
+          {/* Left Block: Quote Text */}
+          <div className="flex-1 flex items-start gap-4 text-left z-10">
+            <span className="text-5xl font-serif text-violet-650 leading-none select-none">“</span>
+            <p className="text-base sm:text-lg font-bold text-slate-700 leading-relaxed pt-1.5 max-w-2xl font-sans">
+              Education is not just about earning a degree, it's about developing the skills to solve problems and create meaningful impact.
+            </p>
+          </div>
+
+          {/* Right Block: Signature */}
+          <div className="flex-shrink-0 flex items-center gap-6 z-10 md:text-right">
+            <div className="relative">
+              <span className="text-4xl font-normal tracking-wide text-violet-600 select-none block" style={{ fontFamily: "'Great Vibes', 'Sacramento', 'Dancing Script', cursive" }}>
+                Vaibhav Lohar
+              </span>
+              {/* Star badge */}
+              <div className="absolute -top-4 -right-4 text-violet-500">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </motion.section>
   )

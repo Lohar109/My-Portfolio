@@ -109,15 +109,6 @@ const createGenerativeModel = () => {
   });
 };
 
-const buildGreetingPrompt = (userMessage) => [
-  'The user has started a casual conversation.',
-  'Respond as VL-Agent with a warm, organic, tech-savvy welcome.',
-  'Do not use a template, do not force a project catalog question, and do not repeat the same closing line every time.',
-  'If it fits naturally, introduce yourself as Vaibhav\'s AI partner and invite the user to ask about his stack, projects, or engineering background.',
-  '',
-  `User message: ${userMessage}`,
-].join('\n');
-
 const buildContextPrompt = (userMessage, retrievedContext) => {
   const contextBlocks = (retrievedContext || '')
     .split(/\n\n---\n\n/)
@@ -145,11 +136,10 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
     const model = createGenerativeModel();
 
     if (isCasualGreeting(userMessage)) {
-      const greetingPrompt = buildGreetingPrompt(userMessage);
-      const result = await model.generateContent(greetingPrompt);
+      const result = await model.generateContent(userMessage);
       const text = result?.response?.text?.()?.trim();
 
-      return text || 'Hey — I\'m VL-Agent. Ask me about Vaibhav\'s projects, stack, or academic background.';
+      return text || 'I\'m VL-Agent, Vaibhav\'s AI partner. Ask me about his projects, stack, or academic background.';
     }
 
     const retrievedContext = await retrievePortfolioContext(userMessage).catch((retrievalError) => {
@@ -173,7 +163,7 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
     return text;
   } catch (error) {
     console.error('Gemini chat error:', error);
-    return 'I ran into a generation issue. Ask again with a project, skill, or role focus and I\'ll respond cleanly.';
+    return 'I hit a temporary generation snag, but I\'m still here to help with Vaibhav\'s projects, stack, or academic background.';
   }
 };
 

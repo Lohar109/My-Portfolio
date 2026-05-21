@@ -25,20 +25,39 @@ export const calculateAge = (dobString) => {
 };
 
 const PERSONAL_OR_INAPPROPRIATE_QUERY = /(relationship|girlfriend|boyfriend|dating|marry|marriage|wife|husband|salary|income|money|religion|politics|party|vote|address|home|phone|contact number|private|secret|adult|sex|nude|nsfw|explicit|violence|weapon|hack|illegal|drugs)/i;
+const CASUAL_GREETING_QUERY = /^(hi|hello|hey|hiya|yo|thanks|thank you|who are you)\b/i;
 
-export const shouldUseProfessionalFallback = (query) => PERSONAL_OR_INAPPROPRIATE_QUERY.test(query || '');
+export const shouldUseProfessionalFallback = (query) => {
+  const normalizedQuery = query || '';
+
+  if (CASUAL_GREETING_QUERY.test(normalizedQuery)) {
+    return false;
+  }
+
+  return PERSONAL_OR_INAPPROPRIATE_QUERY.test(normalizedQuery);
+};
 
 const buildSystemInstruction = () => {
   const { personal, academics, technicalSkills } = VAIBHAV_KNOWLEDGE;
   const currentAge = calculateAge(personal.dob);
 
   return [
-    'You are a professional AI assistant for Vaibhav Prakash Lohar.',
+    'You are VL-Agent, an elite, witty, deeply supportive AI assistant for Vaibhav Prakash Lohar.',
+    'Your tone is warm, sharp, polished, and naturally conversational.',
+    'You help with Vaibhav\'s software development journey, portfolio, projects, skills, and academic background.',
     'He was born on October 1, 1999. He is currently 26 years old (as of May 2026).',
     'His academic credentials: MCA (9.30 CGPA) from R.C. Patel and BSc (9.08 CGPA) from Nutan Maratha College.',
     'His secondary education: SSC (72%) and HSC (52.62%).',
     'He is a Full Stack Web Developer expert in React, Node.js, and GenAI.',
-    'Persona: professional, helpful, and strictly focused on Vaibhav\'s web development and academic career.',
+    'Response formatting rules:',
+    '- Never output raw walls of dense text.',
+    '- Always group information logically with short paragraphs and clear sections.',
+    '- Use bold markdown like **key phrases** for technologies, metrics, company names, and important outcomes.',
+    '- Break project details or academic records into clean, separate bullet points when listing multiple items.',
+    '- Use horizontal rules like --- to separate distinct conceptual parts when expanding on details.',
+    '- Keep answers scannable, authentic, and easy to skim.',
+    'Greeting policy:',
+    '- If the user says hello, hi, hey, thanks, or who are you, respond with a warm, casual, professional greeting and invite them to ask about Vaibhav\'s software development background.',
     'If the user asks personal or inappropriate questions, respond exactly with this sentence:',
     PROFESSIONAL_FALLBACK,
     '',
@@ -60,19 +79,21 @@ const buildSystemInstruction = () => {
   ].join('\n');
 };
 
-const summarizeProjects = () => {
-  return projectsData.slice(0, 6).map((project) => {
-    const stack = Array.isArray(project.stack) && project.stack.length > 0 ? ` Stack: ${project.stack.join(', ')}.` : '';
-    return `${project.title} - ${project.summary}${stack}`;
-  }).join(' ');
-};
-
 const summarizeSkills = () => {
   return skills.map((category) => {
     const items = category.items.map((item) => item.name).join(', ');
     return `${category.title}: ${items}`;
   }).join(' ');
 };
+
+const buildGreetingAnswer = () => {
+  return [
+    'Hey! I\'m VL-Agent, Vaibhav\'s portfolio assistant.',
+    'Ask me anything about his **projects**, **skills**, **experience**, or **academic background** and I\'ll keep it clear and useful.',
+  ].join(' ');
+};
+
+const isCasualGreeting = (query) => CASUAL_GREETING_QUERY.test(query || '');
 
 const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
   const normalizedQuery = (userMessage || '').toLowerCase();
@@ -81,23 +102,48 @@ const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
     : '';
 
   if (/(project|projects|built|work|portfolio|case study)/i.test(normalizedQuery)) {
-    return `Vaibhav has built projects such as ${summarizeProjects()}`;
+    const topProjects = projectsData.slice(0, 3).map((project) => {
+      const stack = Array.isArray(project.stack) && project.stack.length > 0 ? ` **Stack:** ${project.stack.join(', ')}` : '';
+      return `- **${project.title}** — ${project.summary}${stack}`;
+    }).join('\n');
+
+    return [
+      'Here are a few of Vaibhav\'s standout projects:',
+      '---',
+      topProjects,
+      '---',
+      'If you want, I can also break down the architecture, stack, or impact of any one project.',
+    ].join('\n');
   }
 
   if (/(skill|skills|technology|technologies|stack|tech|tools)/i.test(normalizedQuery)) {
-    return `Vaibhav's core stack includes ${VAIBHAV_KNOWLEDGE.technicalSkills.technologies.join(', ')}. Broader skill areas: ${summarizeSkills()}`;
+    return [
+      'Vaibhav\'s core stack includes:',
+      '---',
+      `- **Technologies:** ${VAIBHAV_KNOWLEDGE.technicalSkills.technologies.join(', ')}`,
+      `- **Languages:** ${VAIBHAV_KNOWLEDGE.technicalSkills.languages.join(', ')}`,
+      '- **Broader skill areas:**',
+      `  - ${summarizeSkills()}`,
+    ].join('\n');
   }
 
   if (/(education|academic|college|degree|marks|cgpa|study|school)/i.test(normalizedQuery)) {
     return [
-      `Vaibhav's academic profile includes an M.C.A. with a current CGPA of ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} from ${VAIBHAV_KNOWLEDGE.academics.postGraduation.institute}.`,
-      `He also completed a B.Sc. in Computer Science with a final CGPA of ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} from ${VAIBHAV_KNOWLEDGE.academics.graduation.college}.`,
-      `His SSC percentage is ${VAIBHAV_KNOWLEDGE.academics.ssc_10th.percentage} and his HSC percentage is ${VAIBHAV_KNOWLEDGE.academics.hsc_12th.percentage}.`,
-    ].join(' ');
+      'Vaibhav\'s academic profile:',
+      '---',
+      `- **M.C.A.**: ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} CGPA at ${VAIBHAV_KNOWLEDGE.academics.postGraduation.institute}`,
+      `- **B.Sc. (Computer Science)**: ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} from ${VAIBHAV_KNOWLEDGE.academics.graduation.college}`,
+      `- **SSC**: ${VAIBHAV_KNOWLEDGE.academics.ssc_10th.percentage}`,
+      `- **HSC**: ${VAIBHAV_KNOWLEDGE.academics.hsc_12th.percentage}`,
+    ].join('\n');
   }
 
   if (contextSnippet) {
     return `Based on the retrieved portfolio context, ${contextSnippet}`;
+  }
+
+  if (isCasualGreeting(userMessage)) {
+    return buildGreetingAnswer();
   }
 
   return PROFESSIONAL_FALLBACK;

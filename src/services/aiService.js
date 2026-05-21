@@ -10,8 +10,8 @@ const getGeminiApiKey = () => {
 const isGreetingMessage = (message) => /\b(hi|hello|hey|how are you|good morning|good afternoon|good evening)\b/i.test(message);
 
 const buildGreetingReply = () => [
-  'Hello. I can help with Vaibhav\'s projects, skills, education, or experience.',
-  'Ask me something specific, and I\'ll answer clearly and professionally.',
+  'Hello. I\'m here to help with Vaibhav\'s projects, skills, education, and professional background.',
+  'If you want, ask me about a specific project, technology, or achievement and I\'ll keep the answer clear and well-structured.',
 ].join(' ');
 
 export async function sendMessageToVaibhavAgent(userMessage) {

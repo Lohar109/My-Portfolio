@@ -705,13 +705,22 @@ function ProjectsSection() {
               </div>
 
               {/* Action Buttons Row */}
-              <div className="mt-8 flex flex-wrap gap-3 w-full sm:w-auto">
+              <div className="mt-8 flex items-center justify-start sm:justify-end gap-3 w-full">
                 <Link
                   to={'/projects/' + shopEaseProject.slug}
                   className="h-10 rounded-xl border border-gray-250 bg-white px-6 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0 cursor-pointer"
                 >
                   Case Study
                 </Link>
+                <a
+                  href={getProjectLinks(shopEaseProject.slug).github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-10 w-10 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 shrink-0 cursor-pointer"
+                  title="GitHub Repository"
+                >
+                  <FaGithub size={16} />
+                </a>
               </div>
             </div>
 

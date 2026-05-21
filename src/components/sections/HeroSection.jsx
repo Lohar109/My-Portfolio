@@ -126,11 +126,8 @@ function HeroSection() {
             >
               {/* AI-Powered Item */}
               <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
-                </span>
-                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-sans">
+                <span className="relative flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.4)]"></span>
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-sans">
                   AI-Powered
                 </span>
               </div>
@@ -140,10 +137,8 @@ function HeroSection() {
 
               {/* Full Stack Item */}
               <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                </span>
-                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-sans">
+                <span className="relative flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.4)]"></span>
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-sans">
                   Full Stack
                 </span>
               </div>
@@ -153,9 +148,7 @@ function HeroSection() {
 
               {/* System Design Item */}
               <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-                </span>
+                <span className="relative flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.4)]"></span>
                 <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-sans">
                   System Design
                 </span>

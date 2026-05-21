@@ -30,16 +30,69 @@ const FloatingAssistant = () => {
   const [typingMessageId, setTypingMessageId] = useState(null);
   const [typedText, setTypedText] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeTab, setActiveTab] = useState('Chat');
 
   const fullText = 'Ask me anything about Vaibhav ✨';
-  const greetingText = 'Hey there! I\'m Vaibhav\'s AI assistant. I can help you explore his work, skills, experience, and more.';
-  const quickPrompts = [
-    'What technologies does Vaibhav work with?',
-    'Show me Vaibhav\'s latest projects.',
-    'What are Vaibhav\'s achievements?',
-  ];
+
+  const getGreetingText = () => {
+    switch (activeTab) {
+      case 'About Me':
+        return 'Let\'s explore Vaibhav\'s background, story, and experience together! What would you like to know about him?';
+      case 'Projects':
+        return 'Vaibhav has built some amazing full-stack projects. Ask me about his featured work, tech stack, or specific builds!';
+      case 'Skills':
+        return 'From Frontend and Backend to Devops and tools, Vaibhav has a diverse technical skillset. Ask about specific technologies!';
+      case 'Education':
+        return 'Learn about Vaibhav\'s academic journey, degree, certifications, and learning milestones.';
+      case 'Contact':
+        return 'Ready to connect, collaborate, or hire? Ask me how to reach Vaibhav or find his socials!';
+      default:
+        return 'Hey there! I\'m Vaibhav\'s AI assistant. I can help you explore his work, skills, experience, and more.';
+    }
+  };
+
+  const getPlaceholderText = () => {
+    if (activeTab === 'Chat') return "Ask me anything about Vaibhav...";
+    return `Ask about Vaibhav's ${activeTab.toLowerCase()}...`;
+  };
+
+  const sectionPrompts = {
+    'Chat': [
+      'What technologies does Vaibhav work with?',
+      'Show me Vaibhav\'s latest projects.',
+      'What are Vaibhav\'s achievements?',
+    ],
+    'About Me': [
+      'Tell me about Vaibhav\'s background.',
+      'What is his professional journey?',
+      'What are his primary career goals?',
+    ],
+    'Projects': [
+      'What are his featured projects?',
+      'What backend tools does he use in projects?',
+      'Are his projects open source?',
+    ],
+    'Skills': [
+      'What frontend tech does he specialize in?',
+      'Does he have database experience?',
+      'What dev tools does he use?',
+    ],
+    'Education': [
+      'Where did Vaibhav study?',
+      'What degree does he hold?',
+      'Has he done any certifications?',
+    ],
+    'Contact': [
+      'How can I get in touch with Vaibhav?',
+      'What is his LinkedIn profile?',
+      'Can I download his resume?',
+    ]
+  };
+
+  const quickPrompts = sectionPrompts[activeTab] || sectionPrompts['Chat'];
+
   const navItems = [
-    { label: 'Chat', icon: MessageCircleMore, active: true },
+    { label: 'Chat', icon: MessageCircleMore },
     { label: 'About Me', icon: UserRound },
     { label: 'Projects', icon: Briefcase },
     { label: 'Skills', icon: Code2 },
@@ -92,14 +145,14 @@ const FloatingAssistant = () => {
 
     thinkingTimeoutRef.current = setTimeout(() => {
       setIsThinking(false);
-      typeAssistantResponse(greetingText);
+      typeAssistantResponse(getGreetingText());
     }, 1000);
 
     return () => {
       clearTimeout(thinkingTimeoutRef.current);
       clearInterval(typingIntervalRef.current);
     };
-  }, [isOpen, greetingText]);
+  }, [isOpen, activeTab]);
 
   const clearAssistantTimers = () => {
     clearTimeout(thinkingTimeoutRef.current);
@@ -242,20 +295,21 @@ const FloatingAssistant = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 90, scale: 0.98 }}
             transition={{ duration: 0.24, ease: 'easeOut' }}
-          >
-            <aside className={`hidden w-[128px] shrink-0 border-r px-3 py-5 lg:flex lg:flex-col overflow-y-auto scrollbar-none transition-colors duration-300 ${
+          >            <aside className={`hidden w-[128px] shrink-0 border-r px-3 py-5 lg:flex lg:flex-col overflow-y-auto scrollbar-none transition-colors duration-300 ${
               isDarkMode ? 'border-slate-800 bg-slate-900/90' : 'border-slate-200/70 bg-white/85'
             }`}>
               <nav className="flex flex-col gap-1.5 shrink-0">
                 {navItems.map((item) => {
                   const Icon = item.icon;
+                  const isActive = item.label === activeTab;
 
                   return (
                     <button
                       key={item.label}
                       type="button"
-                      className={`flex flex-col items-center gap-1.5 rounded-[1.2rem] px-2 py-2.5 text-[11px] font-medium transition shrink-0 ${
-                        item.active
+                      onClick={() => setActiveTab(item.label)}
+                      className={`flex flex-col items-center gap-1.5 rounded-[1.2rem] px-2 py-2.5 text-[11px] font-medium transition shrink-0 cursor-pointer ${
+                        isActive
                           ? isDarkMode
                             ? 'bg-violet-950/70 text-violet-300 shadow-sm border border-violet-800/40'
                             : 'bg-violet-50 text-violet-700 shadow-sm'
@@ -315,7 +369,14 @@ const FloatingAssistant = () => {
                   <div className="flex items-center gap-2">
                     <h2 className={`text-[17px] font-semibold tracking-[-0.02em] sm:text-[18px] transition-colors duration-300 ${
                       isDarkMode ? 'text-slate-50' : 'text-slate-950'
-                    }`}>Vaibhav&apos;s AI Assistant</h2>
+                    }`}>
+                      Vaibhav&apos;s AI Assistant
+                      {activeTab !== 'Chat' && (
+                        <span className={isDarkMode ? 'text-violet-400 font-medium' : 'text-violet-600 font-medium'}>
+                          {' '}/ {activeTab}
+                        </span>
+                      )}
+                    </h2>
                     <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold transition-colors duration-300 ${
                       isDarkMode
                         ? 'border-violet-800/50 bg-violet-950/40 text-violet-300'
@@ -375,6 +436,36 @@ const FloatingAssistant = () => {
                 </div>
               </div>
 
+              {/* Horizontal Scrollable Tabs on Mobile/Tablet */}
+              <div className={`flex lg:hidden border-b px-4 py-2.5 overflow-x-auto scrollbar-none gap-2 shrink-0 transition-colors duration-300 ${
+                isDarkMode ? 'border-slate-800 bg-slate-950/30' : 'border-slate-200 bg-slate-50/50'
+              }`}>
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = item.label === activeTab;
+
+                  return (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => setActiveTab(item.label)}
+                      className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold transition whitespace-nowrap cursor-pointer shrink-0 ${
+                        isActive
+                          ? isDarkMode
+                            ? 'bg-violet-950/80 text-violet-300 border border-violet-800/40 shadow-sm'
+                            : 'bg-violet-50 text-violet-700 shadow-sm'
+                          : isDarkMode
+                            ? 'text-slate-400 hover:bg-slate-900/50'
+                            : 'text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
               <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6 sm:px-6">
                 {messages.length === 0 && !isThinking && (
                   <div className={`mb-4 max-w-[520px] rounded-[1.25rem] border px-4 py-3 text-sm leading-6 shadow-sm transition-colors duration-300 ${
@@ -382,7 +473,7 @@ const FloatingAssistant = () => {
                       ? 'border-slate-800 bg-slate-900/60 text-slate-300'
                       : 'border-slate-200/70 bg-white px-4 py-3 text-slate-600'
                   }`}>
-                    {greetingText}
+                    {getGreetingText()}
                   </div>
                 )}
                 <div className="space-y-6">
@@ -459,7 +550,7 @@ const FloatingAssistant = () => {
                   <div className="min-w-0 flex-1">
                     <input
                       type="text"
-                      placeholder="Ask me anything about Vaibhav..."
+                      placeholder={getPlaceholderText()}
                       className={`w-full bg-transparent text-base font-medium outline-none transition-colors duration-300 ${
                         isDarkMode ? 'text-slate-50 placeholder:text-slate-500' : 'text-slate-950 placeholder:text-slate-400'
                       }`}

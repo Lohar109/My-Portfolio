@@ -7,9 +7,20 @@ const getGeminiApiKey = () => {
   return key;
 };
 
+const isGreetingMessage = (message) => /\b(hi|hello|hey|how are you|good morning|good afternoon|good evening)\b/i.test(message);
+
+const buildGreetingReply = () => [
+  'Hello. I can help with Vaibhav\'s projects, skills, education, or experience.',
+  'Ask me something specific, and I\'ll answer clearly and professionally.',
+].join(' ');
+
 export async function sendMessageToVaibhavAgent(userMessage) {
   if (!userMessage || typeof userMessage !== 'string') {
     return 'Please provide a short question about Vaibhav — projects, skills, or education.';
+  }
+
+  if (isGreetingMessage(userMessage)) {
+    return buildGreetingReply();
   }
 
   // Retrieve RAG context (may be empty string)

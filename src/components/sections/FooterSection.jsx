@@ -463,7 +463,7 @@ function FooterSection() {
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200/80 bg-white text-gray-800 shadow-sm hover:shadow hover:border-black hover:text-black transition-all duration-200"
               aria-label="LinkedIn"
             >
-              <FaLinkedinIn className="h-4.5 w-4.5" />
+              <FaLinkedinIn className="h-4.5 w-4.5 text-[#0A66C2]" />
             </a>
             <a
               href={`mailto:${emailAddress}`}

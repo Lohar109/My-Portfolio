@@ -83,7 +83,7 @@ function SiteFooter() {
                 rel="noopener noreferrer" 
                 className="flex items-center gap-2.5 text-sm font-semibold text-gray-550 hover:text-slate-800 transition-colors"
               >
-                <FaLinkedinIn size={16} className="text-gray-400" />
+                <FaLinkedinIn size={16} className="text-[#0A66C2]" />
                 <span className="truncate">linkedin.com/in/vaibhav-lohar</span>
               </a>
               <a 
@@ -118,7 +118,7 @@ function SiteFooter() {
                 rel="noopener noreferrer"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm hover:text-slate-900 hover:border-slate-350 hover:shadow transition-all duration-200"
               >
-                <FaLinkedinIn size={18} />
+                <FaLinkedinIn size={18} className="text-[#0A66C2]" />
               </a>
               <a
                 href="https://twitter.com"

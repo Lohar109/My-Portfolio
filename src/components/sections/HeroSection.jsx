@@ -198,7 +198,7 @@ function HeroSection() {
                   className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 shadow-sm hover:shadow-md hover:border-violet-200 hover:text-violet-600 hover:scale-105 active:scale-95 transition-all duration-200"
                   aria-label="LinkedIn Profile"
                 >
-                  <FaLinkedinIn className="h-4.5 w-4.5" />
+                  <FaLinkedinIn className="h-4.5 w-4.5 text-[#0A66C2]" />
                 </a>
                 <a
                   href="mailto:vaibhavlohar109@gmail.com"

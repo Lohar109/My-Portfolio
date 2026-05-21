@@ -43,5 +43,35 @@ export const VAIBHAV_KNOWLEDGE = {
   technicalSkills: {
     languages: ["Java", "Python", "C", "C++", "JavaScript"], // [cite: 60, 81, 103, 121]
     technologies: ["React", "Node.js", "Tailwind CSS", "DBMS", "Deep Learning", "Generative AI", "DevOps"] // [cite: 134]
+  },
+
+  achievements: [
+    {
+      title: "Stellar Academic Track Record",
+      description: "Maintained a high academic ranking throughout. Currently holding an outstanding 9.30 CGPA in Master of Computer Applications (M.C.A.) with a perfect 9.30 SGPA in Semester 3. Previously completed Bachelor of Science in Computer Science with a 9.08 CGPA (Grade A+)."
+    },
+    {
+      title: "ShopEase Intelligent Commerce Suite Engineering",
+      description: "Designed and implemented an enterprise commerce SaaS product. Successfully automated e-commerce catalog onboarding by integrating multimodal Gemini APIs (Vision and Audio) to extract structured catalog data in under 2 seconds."
+    },
+    {
+      title: "Custom GenAI RAG Architecture",
+      description: "Architected a custom Retrieval-Augmented Generation (RAG) agent for this portfolio, leveraging high-dimensional Supabase pgvector cosine similarity search and Gemini-embedding-2 to ground AI answers in verified developer details."
+    },
+    {
+      title: "Robust Full-Stack & Database Engineering",
+      description: "Developed deep engineering mastery across PostgreSQL, MongoDB, Redis, and Supabase. Successfully built complex relational database models, high-performance in-memory caching mechanisms, and type-safe backend migrations using Prisma ORM."
+    }
+  ],
+
+  whyHirePitch: {
+    headline: "Why Hire Vaibhav Prakash Lohar?",
+    points: [
+      "**Elite Full-Stack Capabilities**: Seamlessly transitions between frontend React/Next.js interfaces and Node.js/Express server architectures, ensuring robust, end-to-end web engineering.",
+      "**Generative AI Integration Expert**: Proven competency in designing intelligent systems, deploying custom RAG pipelines, constructing LangChain pipelines, and running vector database similarity searches.",
+      "**Database & Cache Optimization**: Possesses hands-on experience structuring scalable schemas, optimizing complex SQL queries in PostgreSQL, and deploying Redis caching for fast application response times.",
+      "**Proven Academic Excellence & Fast Learner**: Backed by a stellar 9.30 MCA CGPA, demonstrating excellent technical comprehension, strong self-discipline, and the capacity to master complex technologies rapidly.",
+      "**Proactive Builder Mindset**: Focused on engineering functional, production-ready applications with zero-dependency component designs and high visual premium layouts."
+    ]
   }
 };

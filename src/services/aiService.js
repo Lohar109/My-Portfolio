@@ -19,6 +19,14 @@ const buildGreetingReply = () => [
 const detectIntent = (message) => {
   const normalized = message.toLowerCase();
 
+  if (/achievement|achievements|milestone|milestones|award|awards|score|scores|rank|ranks/i.test(normalized)) {
+    return 'achievements';
+  }
+
+  if (/hire|employ|recruit|why hire|pitch|recommendation|value/i.test(normalized)) {
+    return 'whyHire';
+  }
+
   if (/project|portfolio|case study|work|build|app|system|case-study/i.test(normalized)) {
     return 'project';
   }
@@ -138,8 +146,30 @@ function generateLocalSmartResponse(userMessage, retrievedContext) {
     ].join('\n');
   }
 
-  // 7. Contact / Hire intent
-  if (/\b(contact|email|phone|linkedin|github|hire|social|socials|resume)\b/i.test(query)) {
+  // 7. Why Hire / Professional Pitch intent
+  if (/\b(hire|why hire|employ|recruit|pitch|proposition)\b/i.test(query)) {
+    const pitch = VAIBHAV_KNOWLEDGE.whyHirePitch;
+    return [
+      `### ${pitch.headline}`,
+      "Vaibhav is an exceptional candidate with a high technical aptitude and a structured approach to building systems. Here is why you should consider hiring him for your team:\n",
+      pitch.points.map(point => `- ${point}`).join('\n'),
+      "\nIf you want to connect with him directly for an interview or review his resume, please click the **Get in Touch / Contact** tab or reach out to him at [LinkedIn](https://www.linkedin.com/in/vaibhavlohar109/)!"
+    ].join('\n');
+  }
+
+  // 8. Achievements / Milestones intent
+  if (/\b(achievement|achievements|milestone|milestones|award|awards|score|scores|cgpa|rank|ranks)\b/i.test(query)) {
+    const achievements = VAIBHAV_KNOWLEDGE.achievements;
+    return [
+      "### Vaibhav's Key Milestones & Achievements\n",
+      "Vaibhav has built a highly successful academic and technical record:",
+      achievements.map(a => `- **${a.title}**: ${a.description}`).join('\n'),
+      "\nThese accomplishments reflect his strong commitment to engineering excellence, visual precision, and outstanding academic performance."
+    ].join('\n');
+  }
+
+  // 9. Contact / Socials intent
+  if (/\b(contact|email|phone|linkedin|github|social|socials|resume)\b/i.test(query)) {
     return [
       "I would love to help you connect with Vaibhav! Here is how you can reach out:",
       "- **Location**: Jalgaon/Pune, India",
@@ -150,7 +180,7 @@ function generateLocalSmartResponse(userMessage, retrievedContext) {
     ].join('\n');
   }
 
-  // 8. General fallback when we have retrieved context
+  // 10. General fallback when we have retrieved context
   if (retrievedContext && retrievedContext.length > 50) {
     let formatted = retrievedContext
       .replace(/Project Title:/g, '\n**Project:**')
@@ -197,6 +227,8 @@ export async function sendMessageToVaibhavAgent(userMessage) {
     project: 'The user is asking about a project. Prioritize concrete outcomes, technical stack, and problem-solving details.',
     education: 'The user is asking about education. Prioritize verified academic facts, institutions, and achievements.',
     skills: 'The user is asking about skills or technologies. Focus on listing technologies, tools, libraries, and practical experience. If the retrieved context contains project descriptions, extract and list the technologies used in those projects rather than summarizing the project narrative. Provide versions or experience level if available.',
+    achievements: 'The user is asking about academic, technical, or project achievements. Highlight his outstanding MCA 9.30 CGPA (Winter 2025 Semester 3 9.30 SGPA), BSc 9.08 CGPA, and top system architectures (ShopEase SaaS, GenAI Portfolio). Format as a beautiful clean list.',
+    whyHire: 'The user is asking why they should hire Vaibhav. Give a highly persuasive, elite full-stack developer pitch focusing on his AI/RAG expertise, database mastery (PostgreSQL, Supabase, Redis), high academic success (9.30 MCA CGPA), and functional builder mindset. Include call-to-actions pointing to LinkedIn/GitHub.',
     general: 'The user is asking a general question. Keep the answer concise, natural, and helpful.',
   }[intent];
 
@@ -209,9 +241,17 @@ export async function sendMessageToVaibhavAgent(userMessage) {
     const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. 
     Answer the user's question dynamically, warmly, and in a clean conversational structure (using paragraph explanations, bold highlights, bullet points, and clear list formatting). 
     Never output raw unstructured context keys directly (like "Project Title:", "Role:", "Summary:", "Core Challenge:"). Always summarize them naturally as a real human developer would in a professional interview.
+    Make sure all links (e.g. LinkedIn, GitHub) are returned as proper clickable markdown links (e.g. [LinkedIn Profile](https://www.linkedin.com/in/vaibhavlohar109/)).
     
     Verified Background Context:
-    ${retrievedContext || 'No specific project matching this query. Greet the user naturally and answer accurately.'}
+    ${retrievedContext || 'No specific project matching this query.'}
+    
+    Static Knowledge Base Reference:
+    - Name: ${VAIBHAV_KNOWLEDGE.personal.name}
+    - Role: ${VAIBHAV_KNOWLEDGE.personal.role}
+    - Academics: MCA ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} CGPA (latest Sem 3 9.30 SGPA), BSc ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} CGPA.
+    - Achievements: ${VAIBHAV_KNOWLEDGE.achievements.map(a => `${a.title}: ${a.description}`).join(' ')}
+    - Hiring Pitch: ${VAIBHAV_KNOWLEDGE.whyHirePitch.headline} ${VAIBHAV_KNOWLEDGE.whyHirePitch.points.join(' ')}
     
     Intent: ${intent}
     ${intentInstruction}

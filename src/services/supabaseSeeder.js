@@ -19,6 +19,20 @@ const getGeminiApiKey = () => {
 export const seedDatabase = async () => {
   try {
     console.log("Starting database seeding process via Direct REST API...");
+
+    // Clear existing rows first to prevent duplicate entries polluting similarity searches
+    console.log("Cleaning up existing database records to prevent duplicate vector pollution...");
+    const { error: deleteError } = await supabase
+      .from('portfolio_embeddings')
+      .delete()
+      .neq('content', '');
+    
+    if (deleteError) {
+      console.warn("Warning: Could not clear old portfolio embeddings, proceeding anyway:", deleteError);
+    } else {
+      console.log("Successfully cleared previous vector records!");
+    }
+
     const chunks = [];
 
     // 1. Profile Data Text Block
@@ -40,6 +54,22 @@ export const seedDatabase = async () => {
         metadata: { category: "project", slug: project.slug }
       });
     }
+
+    // 4. Achievements Data Text Block
+    const achievementsText = VAIBHAV_KNOWLEDGE.achievements
+      .map(a => `Achievement: ${a.title} - ${a.description}`)
+      .join(' ');
+    chunks.push({
+      content: `Professional Milestones & Achievements: ${achievementsText}`,
+      metadata: { category: "achievements" }
+    });
+
+    // 5. Why Hire / Professional Pitch Text Block
+    const pitchText = VAIBHAV_KNOWLEDGE.whyHirePitch.points.join(' ');
+    chunks.push({
+      content: `Professional Pitch & Why Hire: ${VAIBHAV_KNOWLEDGE.whyHirePitch.headline} ${pitchText}`,
+      metadata: { category: "why_hire" }
+    });
 
     console.log(`Generated ${chunks.length} clean text blocks. Dispatching Direct HTTP vectors requests...`);
 

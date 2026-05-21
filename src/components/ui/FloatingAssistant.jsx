@@ -212,15 +212,13 @@ const FloatingAssistant = () => {
               </div>
 
               <div className="border-b border-slate-200/70 px-5 py-4 sm:px-6">
-                <div className="rounded-[1.5rem] border border-slate-200 bg-gradient-to-br from-slate-950 to-slate-800 px-4 py-4 text-white shadow-lg shadow-slate-900/10">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-slate-300">
-                    <Sparkles className="h-3.5 w-3.5" />
-                    Intelligent portfolio agent
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-slate-100">
-                    Ask a direct question and get a grounded, professional answer drawn from Vaibhav&apos;s verified background.
-                  </p>
+                <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                  <Sparkles className="h-3.5 w-3.5 text-slate-900" />
+                  Live portfolio conversation
                 </div>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                  Ask about Vaibhav&apos;s projects, skills, or education. The reply area below stays wide and readable for ongoing conversation.
+                </p>
               </div>
 
               <div className="flex-1 min-h-0 overflow-y-auto bg-gradient-to-b from-slate-50/80 to-white px-4 py-5 sm:px-6">

@@ -55,13 +55,67 @@ export async function retrievePortfolioContext(query) {
 
   if (!data || data.length === 0) return ''
 
-  // Extract a text-like field from each row and join into a single context string
-  const pieces = data.map((row) => {
+  const queryTerms = query
+    .toLowerCase()
+    .split(/[^a-z0-9+.#-]+/i)
+    .map((term) => term.trim())
+    .filter((term) => term.length > 2)
+
+  const extractText = (row) => {
     if (!row) return ''
     if (typeof row === 'string') return row
-    // common keys to try
-    return row.content ?? row.text ?? row.document ?? row.payload ?? row.metadata ?? Object.values(row).find(v => typeof v === 'string') ?? JSON.stringify(row)
-  }).filter(Boolean)
+
+    const candidate = row.content ?? row.text ?? row.document ?? row.payload ?? row.metadata
+    if (typeof candidate === 'string') return candidate
+    if (candidate && typeof candidate === 'object') {
+      const candidateText = Object.values(candidate).find((value) => typeof value === 'string')
+      if (candidateText) return candidateText
+    }
+
+    return Object.values(row).find((value) => typeof value === 'string') ?? JSON.stringify(row)
+  }
+
+  const extractSimilarity = (row) => {
+    if (!row || typeof row !== 'object') return 0
+
+    const similarity = row.similarity ?? row.score ?? row.match_score
+    if (typeof similarity === 'number' && Number.isFinite(similarity)) {
+      return similarity
+    }
+
+    const distance = row.distance ?? row.match_distance
+    if (typeof distance === 'number' && Number.isFinite(distance)) {
+      return 1 - distance
+    }
+
+    return 0
+  }
+
+  const scoreTextRelevance = (text) => {
+    const normalizedText = (text || '').toLowerCase()
+    if (!normalizedText) return 0
+
+    return queryTerms.reduce((score, term) => score + (normalizedText.includes(term) ? 1 : 0), 0)
+  }
+
+  const rankedPieces = data
+    .map((row, index) => ({
+      row,
+      text: extractText(row),
+      baseRank: data.length - index,
+      similarityRank: extractSimilarity(row),
+      textRank: scoreTextRelevance(extractText(row)),
+    }))
+    .filter(({ text }) => Boolean(text))
+    .sort((left, right) => {
+      if (right.textRank !== left.textRank) return right.textRank - left.textRank
+      if (right.similarityRank !== left.similarityRank) return right.similarityRank - left.similarityRank
+      return right.baseRank - left.baseRank
+    })
+
+  const pieces = rankedPieces.map(({ text }) => text)
+
+  if (pieces.length === 0) return ''
 
   return pieces.join('\n\n---\n\n')
 }

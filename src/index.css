@@ -37,3 +37,30 @@ a {
 button {
   font-family: inherit;
 }
+
+/* AI Assistant Markdown Links specific overrides */
+.markdown-body.light-links a {
+  color: #6d28d9 !important; /* Premium rich violet-700 */
+  text-decoration: underline !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+.markdown-body.light-links a:hover {
+  color: #4f46e5 !important; /* Indigo-600 */
+  opacity: 0.85;
+}
+
+.markdown-body.dark-links a {
+  color: #a78bfa !important; /* Soft violet-400 */
+  text-decoration: underline !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+.markdown-body.dark-links a:hover {
+  color: #c084fc !important; /* Purple-400 */
+  opacity: 0.85;
+}

@@ -190,7 +190,11 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
   // Flush any final active list
   flushList(lines.length);
 
-  return <div className="markdown-body select-text">{elements}</div>;
+  return (
+    <div className={`markdown-body select-text ${isDarkMode ? 'dark-links' : 'light-links'}`}>
+      {elements}
+    </div>
+  );
 };
 
 export default MarkdownRenderer;

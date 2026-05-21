@@ -18,6 +18,7 @@ import {
 import Lottie from 'lottie-react';
 import { sendMessageToVaibhavAgent } from '../../services/aiService';
 import animationData from '../../assets/lottie/AI Assistent.json';
+import MarkdownRenderer from './MarkdownRenderer';
 
 const FloatingAssistant = () => {
   const LottieComponent = Lottie?.default || Lottie;
@@ -488,10 +489,22 @@ const FloatingAssistant = () => {
                             ? 'rounded-bl-md border-slate-800 bg-slate-900 text-slate-100'
                             : 'rounded-bl-md border-slate-200 bg-white text-slate-800'
                       }`}>
-                        <span className="whitespace-pre-wrap text-sm leading-7 font-medium">
-                          {message.text}
-                          {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
-                        </span>
+                        {message.role === 'user' ? (
+                          <span className="whitespace-pre-wrap text-sm leading-7 font-medium">
+                            {message.text}
+                          </span>
+                        ) : (
+                          <div className="w-full select-text">
+                            <MarkdownRenderer text={message.text} isDarkMode={isDarkMode} />
+                            {message.typing && (
+                              <span 
+                                className={`inline-block h-3.5 w-1.5 ml-1 animate-pulse align-middle rounded-full ${
+                                  isDarkMode ? 'bg-violet-400' : 'bg-violet-600'
+                                }`} 
+                              />
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

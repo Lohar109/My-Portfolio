@@ -1,5 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { VAIBHAV_KNOWLEDGE } from '../data/knowledgeBase';
+import { projectsData } from '../data/projects';
+import { skills } from '../data/skills';
 import { retrievePortfolioContext } from './portfolioRetrieval';
 
 export const PROFESSIONAL_FALLBACK = "I specialize in Vaibhav's professional journey. Please ask about his technical skills or academic achievements!";
@@ -58,6 +60,49 @@ const buildSystemInstruction = () => {
   ].join('\n');
 };
 
+const summarizeProjects = () => {
+  return projectsData.slice(0, 6).map((project) => {
+    const stack = Array.isArray(project.stack) && project.stack.length > 0 ? ` Stack: ${project.stack.join(', ')}.` : '';
+    return `${project.title} - ${project.summary}${stack}`;
+  }).join(' ');
+};
+
+const summarizeSkills = () => {
+  return skills.map((category) => {
+    const items = category.items.map((item) => item.name).join(', ');
+    return `${category.title}: ${items}`;
+  }).join(' ');
+};
+
+const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
+  const normalizedQuery = (userMessage || '').toLowerCase();
+  const contextSnippet = retrievedContext
+    ? retrievedContext.split('\n').map((line) => line.trim()).filter(Boolean).slice(0, 3).join(' ')
+    : '';
+
+  if (/(project|projects|built|work|portfolio|case study)/i.test(normalizedQuery)) {
+    return `Vaibhav has built projects such as ${summarizeProjects()}`;
+  }
+
+  if (/(skill|skills|technology|technologies|stack|tech|tools)/i.test(normalizedQuery)) {
+    return `Vaibhav's core stack includes ${VAIBHAV_KNOWLEDGE.technicalSkills.technologies.join(', ')}. Broader skill areas: ${summarizeSkills()}`;
+  }
+
+  if (/(education|academic|college|degree|marks|cgpa|study|school)/i.test(normalizedQuery)) {
+    return [
+      `Vaibhav's academic profile includes an M.C.A. with a current CGPA of ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} from ${VAIBHAV_KNOWLEDGE.academics.postGraduation.institute}.`,
+      `He also completed a B.Sc. in Computer Science with a final CGPA of ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} from ${VAIBHAV_KNOWLEDGE.academics.graduation.college}.`,
+      `His SSC percentage is ${VAIBHAV_KNOWLEDGE.academics.ssc_10th.percentage} and his HSC percentage is ${VAIBHAV_KNOWLEDGE.academics.hsc_12th.percentage}.`,
+    ].join(' ');
+  }
+
+  if (contextSnippet) {
+    return `Based on the retrieved portfolio context, ${contextSnippet}`;
+  }
+
+  return PROFESSIONAL_FALLBACK;
+};
+
 const getGeminiApiKey = () => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
@@ -75,7 +120,7 @@ const getChatSession = () => {
 
   const genAI = new GoogleGenerativeAI(getGeminiApiKey());
   const model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-flash',
+    model: 'gemini-2.0-flash',
     systemInstruction: buildSystemInstruction(),
   });
 
@@ -106,14 +151,14 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
     const text = result?.response?.text?.()?.trim();
 
     if (!text) {
-      return RE_SYNC_FALLBACK;
+      return buildLocalPortfolioAnswer(userMessage, retrievedContext);
     }
 
     return text;
   } catch (error) {
     console.error('Gemini chat error:', error);
     chatSession = null;
-    return RE_SYNC_FALLBACK;
+    return buildLocalPortfolioAnswer(userMessage);
   }
 };
 

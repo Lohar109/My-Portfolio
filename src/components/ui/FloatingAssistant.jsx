@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
-import { sendMessageToVaibhavAgent } from '../../services/aiService';
+import { RE_SYNC_FALLBACK, sendMessageToVaibhavAgent } from '../../services/aiService';
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
 const FloatingAssistant = () => {
@@ -131,11 +131,16 @@ const FloatingAssistant = () => {
       thinkingTimeoutRef.current = setTimeout(resolve, 1000);
     });
 
-    const replyPromise = sendMessageToVaibhavAgent(trimmedInput);
-    const [replyText] = await Promise.all([replyPromise, minimumLoadingDelay]);
-
-    setIsThinking(false);
-    typeAssistantResponse(replyText);
+    try {
+      const replyPromise = sendMessageToVaibhavAgent(trimmedInput);
+      const [replyText] = await Promise.all([replyPromise, minimumLoadingDelay]);
+      typeAssistantResponse(replyText);
+    } catch (error) {
+      console.error('Floating assistant send error:', error);
+      typeAssistantResponse(RE_SYNC_FALLBACK);
+    } finally {
+      setIsThinking(false);
+    }
   };
 
   const handleToggleChat = () => {

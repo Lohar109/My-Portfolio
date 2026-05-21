@@ -157,14 +157,14 @@ function HeroSection() {
             >
               <button
                 onClick={() => navigate('/projects')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 active:scale-[0.99] transition-all duration-200 cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 active:scale-[0.99] transition-all duration-200 cursor-pointer w-full sm:w-auto"
               >
                 <span>View Projects</span>
               </button>
 
               <button
                 onClick={() => window.open('/resume.pdf', '_blank')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 active:scale-[0.99] transition-all duration-200 cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-lg shadow-black/10 hover:shadow-black/20 active:scale-[0.99] transition-all duration-200 cursor-pointer w-full sm:w-auto"
               >
                 <Download className="h-4.5 w-4.5" />
                 <span>Download Resume</span>

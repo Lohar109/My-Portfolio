@@ -310,17 +310,6 @@ const FloatingAssistant = () => {
                     </button>
                   ))}
                 </div>
-
-                <div className="mt-5 rounded-[1.5rem] border border-slate-200 bg-slate-950 px-4 py-4 text-white shadow-lg shadow-slate-900/10">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-300">
-                    Session status
-                  </p>
-                  <div className="mt-3 space-y-2 text-sm leading-6 text-slate-100">
-                    <p>• Live portfolio retrieval enabled</p>
-                    <p>• Structured, grounded responses</p>
-                    <p>• Side-panel controls always visible</p>
-                  </div>
-                </div>
               </div>
             </aside>
           </motion.div>

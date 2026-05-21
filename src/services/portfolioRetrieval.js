@@ -34,16 +34,18 @@ export async function retrievePortfolioContext(query) {
   }
 
   const json = await resp.json()
+  console.log('Vector API Response:', json)
 
-  const vector = json?.embedding?.values ?? json?.embedding ?? null
+  const vectorArray = json?.embedding?.values
 
-  if (!vector) {
+  if (!vectorArray) {
+    console.error('Unable to extract embedding vector from Gemini response. Expected result.embedding.values but received:', json)
     throw new Error(`Unable to extract embedding from Gemini response: ${JSON.stringify(json)}`)
   }
 
   // Call Supabase RPC to perform vector similarity search
   const { data, error } = await supabase.rpc('match_portfolio_embeddings', {
-    query_embedding: vector,
+    query_embedding: vectorArray,
     match_threshold: 0.35,
     match_count: 3,
   })
@@ -115,9 +117,11 @@ export async function retrievePortfolioContext(query) {
 
   const pieces = rankedPieces.map(({ text }) => text)
 
-  if (pieces.length === 0) return ''
+  const uniquePieces = [...new Set(pieces)]
 
-  return pieces.join('\n\n---\n\n')
+  if (uniquePieces.length === 0) return ''
+
+  return uniquePieces.join('\n\n---\n\n')
 }
 
 export default retrievePortfolioContext

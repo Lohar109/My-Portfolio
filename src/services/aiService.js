@@ -102,11 +102,35 @@ const buildGreetingAnswer = () => {
 
 const isCasualGreeting = (query) => CASUAL_GREETING_QUERY.test(query || '');
 
+const PROJECT_FOCUSED_QUERY = /(project|projects|built|portfolio|case study|loading optimization|loading optimisation|shopease|campus connect|insightboard|supportflow|mediaops|marketpulse)/i;
+
+const shouldUseFreshContextSession = (query, retrievedContext) => Boolean(retrievedContext) && PROJECT_FOCUSED_QUERY.test(query || '');
+
+const buildContextualMessage = (userMessage, retrievedContext) => [
+  'Ignore prior chat history and any conflicting project details from earlier turns.',
+  'Use only the freshly retrieved portfolio context below when answering this question.',
+  'If the retrieved context conflicts with past conversation memory, the retrieved context wins.',
+  '',
+  `Retrieved context:\n${retrievedContext}`,
+  '',
+  `User question:\n${userMessage}`,
+].join('\n');
+
 const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
   const normalizedQuery = (userMessage || '').toLowerCase();
   const contextSnippet = retrievedContext
     ? retrievedContext.split('\n').map((line) => line.trim()).filter(Boolean).slice(0, 3).join(' ')
     : '';
+
+  const hasRetrievedProjectContext = Boolean(retrievedContext) && PROJECT_FOCUSED_QUERY.test(normalizedQuery);
+
+  if (hasRetrievedProjectContext) {
+    return [
+      'Here is the exact retrieved project block:',
+      '---',
+      retrievedContext,
+    ].join('\n');
+  }
 
   if (/(project|projects|built|work|portfolio|case study)/i.test(normalizedQuery)) {
     const topProjects = projectsData.slice(0, 3).map((project) => {
@@ -186,21 +210,34 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
     return PROFESSIONAL_FALLBACK;
   }
 
-  try {
-    let retrievedContext = '';
+  let retrievedContext = '';
 
+  try {
     try {
       retrievedContext = await retrievePortfolioContext(userMessage);
     } catch (retrievalError) {
       console.error('Portfolio retrieval error:', retrievalError);
     }
 
-    const contextualPrompt = retrievedContext
-      ? `Use the following retrieved portfolio context when it is relevant and accurate:\n\n${retrievedContext}\n\nUser question:\n${userMessage}`
+    const contextualMessage = retrievedContext
+      ? buildContextualMessage(userMessage, retrievedContext)
       : userMessage;
 
-    const chat = getChatSession();
-    const result = await chat.sendMessage(contextualPrompt);
+    console.log('Retrieved Database Context:', retrievedContext);
+
+    const chat = shouldUseFreshContextSession(userMessage, retrievedContext)
+      ? (() => {
+          const genAI = new GoogleGenerativeAI(getGeminiApiKey());
+          const model = genAI.getGenerativeModel({
+            model: 'gemini-2.0-flash',
+            systemInstruction: buildSystemInstruction(),
+          });
+
+          return model.startChat({ history: [] });
+        })()
+      : getChatSession();
+
+    const result = await chat.sendMessage(contextualMessage);
     const text = result?.response?.text?.()?.trim();
 
     if (!text) {
@@ -211,7 +248,7 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
   } catch (error) {
     console.error('Gemini chat error:', error);
     chatSession = null;
-    return buildLocalPortfolioAnswer(userMessage);
+    return buildLocalPortfolioAnswer(userMessage, retrievedContext);
   }
 };
 

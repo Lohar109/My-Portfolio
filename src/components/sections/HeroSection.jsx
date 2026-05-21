@@ -117,18 +117,30 @@ function HeroSection() {
               </span>
             </motion.h1>
 
-            {/* Tech Subheadings */}
+            {/* Tech Badges */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-6 flex flex-wrap items-center gap-2.5 text-xs sm:text-sm font-bold tracking-wider text-indigo-600 font-sans uppercase"
+              className="mt-6 flex flex-wrap items-center gap-3 select-none"
             >
-              <span>AI-Powered</span>
-              <span className="text-gray-300 font-normal">•</span>
-              <span>Full Stack</span>
-              <span className="text-gray-300 font-normal">•</span>
-              <span>System Design</span>
+              {/* AI-Powered Badge */}
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-100/60 bg-indigo-50/40 px-3 py-1 text-xs font-black tracking-wide text-indigo-600 shadow-[0_2px_8px_-3px_rgba(99,102,241,0.08)] transition-all duration-300 hover:scale-105 hover:bg-indigo-50/80 cursor-default">
+                <Sparkles className="h-3.5 w-3.5 text-indigo-500 animate-pulse" />
+                <span className="font-sans uppercase text-[10px] tracking-wider font-extrabold">AI-Powered</span>
+              </div>
+              
+              {/* Full Stack Badge */}
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-100/60 bg-violet-50/40 px-3 py-1 text-xs font-black tracking-wide text-violet-600 shadow-[0_2px_8px_-3px_rgba(109,40,217,0.08)] transition-all duration-300 hover:scale-105 hover:bg-violet-50/80 cursor-default">
+                <Code2 className="h-3.5 w-3.5 text-violet-500" />
+                <span className="font-sans uppercase text-[10px] tracking-wider font-extrabold">Full Stack</span>
+              </div>
+
+              {/* System Design Badge */}
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-purple-100/60 bg-purple-50/40 px-3 py-1 text-xs font-black tracking-wide text-purple-600 shadow-[0_2px_8px_-3px_rgba(147,51,234,0.08)] transition-all duration-300 hover:scale-105 hover:bg-purple-50/80 cursor-default">
+                <Server className="h-3.5 w-3.5 text-purple-500" />
+                <span className="font-sans uppercase text-[10px] tracking-wider font-extrabold">System Design</span>
+              </div>
             </motion.div>
 
             {/* Description */}

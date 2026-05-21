@@ -2,24 +2,38 @@ import { supabase } from '../config/supabaseClient';
 import { VAIBHAV_KNOWLEDGE } from '../data/knowledgeBase';
 import { projectsData } from '../data/projects';
 
+const GEMINI_API_VERSION = 'v1beta';
+const GEMINI_EMBEDDING_MODEL = 'gemini-embedding-2';
+const GEMINI_EMBEDDING_DIMENSIONS = 1536;
+
+const getGeminiApiKey = () => {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error('VITE_GEMINI_API_KEY is missing. Check your .env file and restart the Vite dev server.');
+  }
+
+  return apiKey;
+};
+
 export const seedDatabase = async () => {
   try {
-    console.log("Starting database seeding process...");
+    console.log("Starting database seeding process via Direct REST API...");
     const chunks = [];
 
-    // 1. Profile Data ko Text String mein convert karke array mein daalo
+    // 1. Profile Data Text Block
     chunks.push({
       content: `Identity: ${VAIBHAV_KNOWLEDGE.personal.name}. Role: ${VAIBHAV_KNOWLEDGE.personal.role}. Location: ${VAIBHAV_KNOWLEDGE.personal.location}. Born: 1999-10-01.`,
       metadata: { category: "profile" }
     });
 
-    // 2. Academics Data ko convert karo
+    // 2. Academics Data Text Block
     chunks.push({
       content: `Education Timeline: Master of Computer Applications (M.C.A.) with current CGPA ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} from ${VAIBHAV_KNOWLEDGE.academics.postGraduation.institute}. Bachelor of Science (Computer Science) with final CGPA ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} from ${VAIBHAV_KNOWLEDGE.academics.graduation.college}.`,
       metadata: { category: "education" }
     });
 
-    // 3. Har ek project ki details ke dynamic blocks banao
+    // 3. Projects Data Text Blocks
     for (const project of projectsData) {
       chunks.push({
         content: `Project Title: ${project.title}. Role: ${project.role}. Summary: ${project.summary}. Core Challenge: ${project.challenge}. Technical Stack Used: ${(project.stack || []).join(', ')}.`,
@@ -27,37 +41,38 @@ export const seedDatabase = async () => {
       });
     }
 
-    console.log(`Generated ${chunks.length} clean text blocks. Now generating vector embeddings via Gemini...`);
+    console.log(`Generated ${chunks.length} clean text blocks. Dispatching Direct HTTP vectors requests...`);
 
-    // 4. Gemini API ka use karke embeddings vectors generate karna aur Supabase mein push karna
-    // Kyunki hum frontend par hain, hum direct window.fetch ya Gemini standard endpoints use kar sakte hain
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const apiKey = getGeminiApiKey();
 
     for (const chunk of chunks) {
-      // Gemini embedding service endpoint call
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/${GEMINI_API_VERSION}/models/${GEMINI_EMBEDDING_MODEL}:embedContent?key=${apiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            model: "models/text-embedding-004",
-            content: { parts: [{ text: chunk.content }] }
+            content: { parts: [{ text: chunk.content }] },
+            outputDimensionality: GEMINI_EMBEDDING_DIMENSIONS
           })
         }
       );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Google API Error: ${response.status} - ${errorText}`);
+      }
 
       const result = await response.json();
       const vectorArray = result?.embedding?.values;
 
       if (!vectorArray) {
-        throw new Error(`Failed to generate embedding for: ${chunk.content}`);
+        throw new Error(`No embedding vector found in response for: ${chunk.content}`);
       }
 
-      // Supabase table mein live insertion call
       const { error } = await supabase.from('portfolio_embeddings').insert({
         content: chunk.content,
-        embedding: vectorArray, // Array format vector ([0.12, -0.04...])
+        embedding: vectorArray,
         metadata: chunk.metadata
       });
 

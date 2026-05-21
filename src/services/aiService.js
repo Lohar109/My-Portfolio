@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { retrievePortfolioContext } from './portfolioRetrieval';
+import { skills as skillBuckets } from '../data/skills.js';
 
 const getGeminiApiKey = () => {
   const key = import.meta.env.VITE_GEMINI_API_KEY;
@@ -17,7 +18,7 @@ const buildGreetingReply = () => [
 const detectIntent = (message) => {
   const normalized = message.toLowerCase();
 
-  if (/project|portfolio|case study|work|build|app|tool|system/i.test(normalized)) {
+  if (/project|portfolio|case study|work|build|app|system|case-study/i.test(normalized)) {
     return 'project';
   }
 
@@ -25,7 +26,7 @@ const detectIntent = (message) => {
     return 'education';
   }
 
-  if (/skill|technology|stack|react|node|javascript|genai|ai|framework/i.test(normalized)) {
+  if (/skill|skills|technology|technologies|stack|stacks|react|node|javascript|genai|ai|framework|tools?/i.test(normalized)) {
     return 'skills';
   }
 
@@ -67,9 +68,73 @@ export async function sendMessageToVaibhavAgent(userMessage) {
   const intentInstruction = {
     project: 'The user is asking about a project. Prioritize concrete outcomes, technical stack, and problem-solving details.',
     education: 'The user is asking about education. Prioritize verified academic facts, institutions, and achievements.',
-    skills: 'The user is asking about skills. Prioritize technologies, tools, and practical experience.',
+    skills: 'The user is asking about skills or technologies. Focus on listing technologies, tools, libraries, and practical experience. If the retrieved context contains project descriptions, extract and list the technologies used in those projects rather than summarizing the project narrative. Provide versions or experience level if available.',
     general: 'The user is asking a general question. Keep the answer concise, natural, and helpful.',
   }[intent];
+
+  // If the user asked specifically about skills, try a strict extraction step
+  // 1) Ask the model to extract technology names only (comma-separated)
+  // 2) If that fails or looks generic, fall back to a local keyword extractor
+  const tryExtractTechnologies = async (context) => {
+    if (!context || context.length < 10) return null;
+
+    try {
+      const apiKey = getGeminiApiKey();
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+      const extractionPrompt = `Extract technology names, libraries, platforms, and tools from the following CONTEXT.\nOutput ONLY a comma-separated list of names with no extra commentary or narration.\nCONTEXT:\n${context}`;
+
+      const extractionResult = await model.generateContent(extractionPrompt);
+      const extractedText = extractionResult?.response?.text?.()?.trim() ?? '';
+
+      if (extractedText && !looksTooGeneric(extractedText)) {
+        // Normalize into array
+        const parts = extractedText
+          .split(/[\n,;]+/) // split on newlines, commas, semicolons
+          .map((p) => p.replace(/^[\-\s•]+/, '').trim())
+          .filter((p) => p.length > 1);
+
+        if (parts.length > 0) return parts;
+      }
+    } catch (err) {
+      console.warn('Technology extraction with model failed:', err?.message || err);
+    }
+
+    // Local fallback: scan the context for known skill names from data/skills.js
+    try {
+      const known = new Map();
+      skillBuckets.forEach((bucket) => {
+        (bucket.items || []).forEach((it) => known.set(it.name.toLowerCase(), it.name));
+      });
+
+      const found = [];
+      const lowered = context.toLowerCase();
+      // sort by first occurrence in the context so order feels natural
+      Array.from(known.keys()).forEach((key) => {
+        const idx = lowered.indexOf(key);
+        if (idx !== -1) found.push({ key, idx, name: known.get(key) });
+      });
+
+      found.sort((a, b) => a.idx - b.idx);
+      const unique = [...new Set(found.map((f) => f.name))];
+      if (unique.length > 0) return unique;
+    } catch (err) {
+      console.warn('Local tech extraction failed:', err?.message || err);
+    }
+
+    return null;
+  };
+
+  // If intent is skills, attempt extraction-first flow for a precise answer
+  if (intent === 'skills') {
+    const techList = await tryExtractTechnologies(retrievedContext);
+    if (techList && techList.length > 0) {
+      const formatted = techList.map((t) => `- ${t}`).join('\n');
+      return `Technologies & Tools:\n\n${formatted}`;
+    }
+    // If extraction failed, continue to the normal generation path below
+  }
 
   const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. Answer the following question dynamically using your own vocabulary and conversational structure based strictly on this verified background context data. Do NOT use static phrasing templates or pre-scripted lines. Be adaptive, structure your output with bold highlights, bullet points, and horizontal breaks, and react like a real human engineer in an interview.
 

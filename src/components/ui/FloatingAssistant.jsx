@@ -1,12 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, BrainCircuit, Send, Sparkles, X } from 'lucide-react';
-import Lottie from 'lottie-react'; 
+import {
+  ArrowRight,
+  Briefcase,
+  Code2,
+  Contact,
+  GraduationCap,
+  MessageCircleMore,
+  Rocket,
+  Send,
+  Sparkles,
+  UserRound,
+  X,
+} from 'lucide-react';
+import Lottie from 'lottie-react';
 import { sendMessageToVaibhavAgent } from '../../services/aiService';
-import animationData from '../../assets/lottie/AI Assistent.json'; 
+import animationData from '../../assets/lottie/AI Assistent.json';
 
 const FloatingAssistant = () => {
-  // Safe-check logic
   const LottieComponent = Lottie?.default || Lottie;
   const fallbackReply = 'I\'m having a quick issue right now. Please try again and I\'ll respond with the current portfolio context.';
   const [isOpen, setIsOpen] = useState(false);
@@ -17,12 +28,28 @@ const FloatingAssistant = () => {
   const [typingMessageId, setTypingMessageId] = useState(null);
   const [typedText, setTypedText] = useState('');
 
-  const fullText = 'Ask me regarding Vaibhav ✨';
-  const greetingText = 'What would you like to know about Vaibhav Lohar? ✨';
+  const fullText = 'Ask me anything about Vaibhav ✨';
+  const greetingText = 'Hey there! I\'m Vaibhav\'s AI assistant. I can help you explore his work, skills, experience, and more.';
   const quickPrompts = [
-    'Tell me about the Loading Optimisation project.',
-    'What are Vaibhav\'s strongest technical skills?',
-    'Summarize his education and academic background.',
+    'What technologies does Vaibhav work with?',
+    'Show me Vaibhav\'s latest projects.',
+    'What are Vaibhav\'s achievements?',
+  ];
+  const navItems = [
+    { label: 'Chat', icon: MessageCircleMore, active: true },
+    { label: 'About Me', icon: UserRound },
+    { label: 'Projects', icon: Briefcase },
+    { label: 'Skills', icon: Code2 },
+    { label: 'Education', icon: GraduationCap },
+    { label: 'Contact', icon: Contact },
+  ];
+  const featureCards = [
+    { title: 'About Vaibhav', description: 'Background, experience and journey', icon: UserRound },
+    { title: 'Skills & Expertise', description: 'Technologies and technical skills', icon: Code2 },
+    { title: 'Projects', description: 'Explore featured projects', icon: Rocket },
+    { title: 'Education', description: 'Academic background and learning', icon: GraduationCap },
+    { title: 'Achievements', description: 'Milestones and recognitions', icon: Sparkles },
+    { title: 'Get in Touch', description: 'Contact, socials and collaboration', icon: Contact },
   ];
   const typingIntervalRef = useRef(null);
   const thinkingTimeoutRef = useRef(null);
@@ -153,8 +180,43 @@ const FloatingAssistant = () => {
     setIsOpen((currentOpen) => !currentOpen);
   };
 
+  const handleQuickPrompt = async (prompt) => {
+    setInputValue(prompt);
+    await sendMessageFromText(prompt);
+  };
+
+  const sendMessageFromText = async (text) => {
+    const trimmedInput = (text ?? inputValue).trim();
+
+    if (!trimmedInput || isThinking || typingMessageId) {
+      return;
+    }
+
+    const nextMessages = [...messages, { id: `${Date.now()}-user`, role: 'user', text: trimmedInput }];
+
+    setMessages(nextMessages);
+    setInputValue('');
+    setIsThinking(true);
+    clearAssistantTimers();
+
+    const minimumLoadingDelay = new Promise((resolve) => {
+      thinkingTimeoutRef.current = setTimeout(resolve, 850);
+    });
+
+    try {
+      const replyPromise = sendMessageToVaibhavAgent(trimmedInput);
+      const [replyText] = await Promise.all([replyPromise, minimumLoadingDelay]);
+      typeAssistantResponse(replyText);
+    } catch (error) {
+      console.error('Floating assistant send error:', error);
+      typeAssistantResponse(fallbackReply);
+    } finally {
+      setIsThinking(false);
+    }
+  };
+
   return (
-    <div className="fixed bottom-8 right-8 z-[9999] overflow-visible sm:bottom-10 sm:right-10">
+    <div className="fixed bottom-6 right-6 z-[9999] overflow-visible sm:bottom-8 sm:right-8">
       <AnimatePresence>
         {isHovering && !isOpen && (
           <motion.div
@@ -164,7 +226,7 @@ const FloatingAssistant = () => {
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
           >
-            <div className="flex w-max items-center gap-2 rounded-full border border-black/5 bg-white/85 px-3 py-1.5 shadow-lg shadow-black/10 backdrop-blur-2xl">
+            <div className="flex w-max items-center gap-2 rounded-full border border-black/5 bg-white/90 px-3 py-1.5 shadow-lg shadow-black/10 backdrop-blur-2xl">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" aria-hidden="true" />
               <p className="text-[12px] font-medium text-slate-900 whitespace-nowrap">{typedText}</p>
             </div>
@@ -175,30 +237,69 @@ const FloatingAssistant = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-y-4 right-4 flex h-[calc(100vh-2rem)] w-[min(1120px,calc(100vw-1rem))] overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white/90 shadow-[0_28px_90px_rgba(15,23,42,0.2)] backdrop-blur-2xl"
-            initial={{ opacity: 0, x: 80, scale: 0.98 }}
+            className="fixed inset-y-4 right-4 flex h-[calc(100vh-2rem)] w-[min(1160px,calc(100vw-1rem))] overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white/92 shadow-[0_30px_100px_rgba(15,23,42,0.18)] backdrop-blur-2xl"
+            initial={{ opacity: 0, x: 90, scale: 0.98 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 80, scale: 0.98 }}
+            exit={{ opacity: 0, x: 90, scale: 0.98 }}
             transition={{ duration: 0.24, ease: 'easeOut' }}
           >
-            <div className="flex h-full min-h-0 w-full flex-col border-r border-slate-200/70 bg-gradient-to-b from-slate-50 to-white lg:w-[calc(100%-300px)]">
-              <div className="flex items-start justify-between gap-4 border-b border-slate-100/80 px-6 py-4 sm:px-8 bg-white/60 backdrop-blur-sm">
-                <div className="flex items-start gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-500 text-white shadow-lg">
-                      <BrainCircuit className="h-5 w-5" />
-                    </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                        <p className="text-sm font-semibold text-slate-900">Vaibhav&apos;s Agent</p>
-                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                          Ready
-                        </span>
-                    </div>
-                      <p className="mt-1 max-w-[360px] text-xs leading-5 text-slate-500">
-                        A polished assistant for projects, skills and professional background.
-                      </p>
+            <aside className="hidden w-[128px] shrink-0 border-r border-slate-200/70 bg-white/85 px-3 py-4 lg:flex lg:flex-col">
+              <div className="flex flex-col items-center gap-3 rounded-[1.8rem] border border-slate-200/70 bg-white px-3 py-4 shadow-sm">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-50 to-violet-100 shadow-inner">
+                  <LottieComponent animationData={animationData} loop style={{ width: 62, height: 62 }} />
+                </div>
+                <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,0.12)]" />
+              </div>
+
+              <nav className="mt-4 flex flex-1 flex-col gap-2">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <button
+                      key={item.label}
+                      type="button"
+                      className={`flex flex-col items-center gap-2 rounded-[1.2rem] px-2 py-3 text-[11px] font-medium transition ${
+                        item.active
+                          ? 'bg-violet-50 text-violet-700 shadow-sm'
+                          : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+
+              <div className="mt-auto space-y-3">
+                <div className="rounded-[1.25rem] border border-slate-200 bg-white p-3 shadow-sm">
+                  <div className="mb-2 flex items-center gap-2 text-violet-600">
+                    <Sparkles className="h-4 w-4" />
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em]">Need something specific?</p>
                   </div>
+                  <p className="text-[11px] leading-5 text-slate-500">
+                    Ask me anything about Vaibhav Lohar.
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+                  <button type="button" className="h-8 w-8 rounded-full bg-slate-50 text-slate-500">☼</button>
+                  <button type="button" className="h-8 w-8 rounded-full bg-slate-50 text-slate-500">◔</button>
+                </div>
+              </div>
+            </aside>
+
+            <div className="flex h-full min-h-0 flex-1 flex-col bg-gradient-to-b from-white via-slate-50/50 to-white">
+              <div className="flex items-center justify-between gap-4 border-b border-slate-200/70 px-5 py-4 sm:px-6 bg-white/75 backdrop-blur-sm">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-[17px] font-semibold tracking-[-0.02em] text-slate-950 sm:text-[18px]">Vaibhav&apos;s AI Assistant</h2>
+                    <span className="inline-flex items-center rounded-full border border-violet-200 bg-violet-50 px-2.5 py-0.5 text-[11px] font-semibold text-violet-700">
+                      AI
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm text-slate-500">Your personal portfolio assistant <span className="align-middle text-emerald-500">●</span></p>
                 </div>
 
                 <button
@@ -211,74 +312,129 @@ const FloatingAssistant = () => {
                 </button>
               </div>
 
-              <div className="flex-1 min-h-0 overflow-y-auto bg-gradient-to-b from-slate-50/80 to-white px-4 py-5 sm:px-6">
+              <div className="flex-1 min-h-0 overflow-y-auto px-4 py-5 sm:px-6">
                 {messages.length === 0 && !isThinking && (
-                  <div className="mb-4 rounded-[1.5rem] border border-dashed border-slate-200 bg-white/80 p-4 text-sm leading-6 text-slate-600 shadow-sm">
-                    Start with a project, skill, or education question. The assistant will keep the tone professional and concise.
+                  <div className="mb-4 max-w-[520px] rounded-[1.25rem] border border-slate-200/70 bg-white px-4 py-3 text-sm leading-6 text-slate-600 shadow-sm">
+                    {greetingText}
                   </div>
                 )}
 
-                <div className="space-y-3">
+                <div className="space-y-6">
                   {messages.map((message) => (
-                      <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div
-                          className={`max-w-[min(100%,760px)] rounded-[1.25rem] px-5 py-4 text-sm leading-7 ${
-                            message.role === 'user'
-                              ? 'rounded-br-md bg-indigo-50 text-indigo-900 border border-indigo-100 shadow-sm'
-                              : 'rounded-bl-md border border-slate-100 bg-white text-slate-900 shadow-sm'
-                          }`}
-                        >
-                          <span className="font-medium whitespace-pre-wrap">
-                            {message.text}
-                            {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
-                          </span>
+                    <div key={message.id} className={`flex items-start gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      {message.role !== 'user' && (
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm">
+                          <LottieComponent animationData={animationData} loop style={{ width: 36, height: 36 }} />
                         </div>
+                      )}
+
+                      <div className={`max-w-[min(100%,640px)] rounded-[1.35rem] border px-4 py-3 shadow-sm ${message.role === 'user' ? 'rounded-br-md border-violet-200 bg-gradient-to-br from-violet-600 to-indigo-500 text-white' : 'rounded-bl-md border-slate-200 bg-white text-slate-800'}`}>
+                        <span className="whitespace-pre-wrap text-sm leading-7 font-medium">
+                          {message.text}
+                          {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
+                        </span>
                       </div>
-                    ))}
+
+                      {message.role === 'user' && (
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-violet-700 shadow-sm">
+                          <UserRound className="h-5 w-5" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
 
                   {isThinking && (
-                    <div className="flex justify-start">
-                      <div className="rounded-[1.5rem] rounded-bl-md border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 shadow-sm">
-                        Vaibhav&apos;s Agent is thinking...
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm">
+                        <LottieComponent animationData={animationData} loop style={{ width: 36, height: 36 }} />
+                      </div>
+                      <div className="rounded-[1.35rem] rounded-bl-md border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm">
+                        Vaibhav&apos;s AI Assistant is thinking...
                       </div>
                     </div>
                   )}
+
+                  {messages.length === 0 && !isThinking && (
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {featureCards.map((card) => {
+                        const Icon = card.icon;
+                        return (
+                          <button
+                            key={card.title}
+                            type="button"
+                            onClick={() => setInputValue(card.title)}
+                            className="group rounded-[1.2rem] border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md"
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-50 text-violet-600">
+                                <Icon className="h-4 w-4" />
+                              </div>
+                              <ArrowRight className="h-4 w-4 text-slate-300 transition group-hover:text-violet-500" />
+                            </div>
+                            <h3 className="mt-4 text-[15px] font-semibold text-slate-900">{card.title}</h3>
+                            <p className="mt-1 text-sm leading-6 text-slate-500">{card.description}</p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
                   <div ref={messagesEndRef} />
                 </div>
               </div>
 
               <div className="border-t border-slate-200/80 bg-white/95 p-4 sm:p-5">
+                <div className="mb-3 flex flex-col gap-2">
+                  <div className="flex items-center gap-2 text-violet-600">
+                    <Sparkles className="h-4 w-4" />
+                    <p className="text-sm font-medium">You can also ask</p>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-3">
+                    {quickPrompts.map((prompt) => (
+                      <button
+                        key={prompt}
+                        type="button"
+                        onClick={() => handleQuickPrompt(prompt)}
+                        className="rounded-full border border-violet-100 bg-violet-50 px-4 py-2.5 text-left text-[13px] font-medium text-violet-700 transition hover:border-violet-200 hover:bg-violet-100"
+                      >
+                        {prompt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <form
                   className="flex items-end gap-2 rounded-[1.4rem] border border-slate-200 bg-slate-50 px-3 py-3 shadow-sm"
                   onSubmit={async (event) => {
                     event.preventDefault();
-                    await handleSendMessage();
+                    await sendMessageFromText();
                   }}
                 >
                   <div className="min-w-0 flex-1">
                     <input
                       type="text"
-                      placeholder="Ask about education, projects, or skills..."
+                      placeholder="Ask me anything about Vaibhav..."
                       className="w-full bg-transparent text-sm font-medium text-slate-950 outline-none placeholder:text-slate-400"
                       value={inputValue}
                       onChange={(event) => setInputValue(event.target.value)}
                       disabled={isThinking || Boolean(typingMessageId)}
                     />
                   </div>
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        await handleSendMessage();
-                      }}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-500 text-white shadow-md hover:scale-[1.02] transition-transform disabled:cursor-not-allowed disabled:opacity-40"
-                      aria-label="Send message"
-                      disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
-                    >
-                      <Send className="h-4 w-4" />
-                    </button>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await sendMessageFromText();
+                    }}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-white shadow-md transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Send message"
+                    disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
+                  >
+                    <Send className="h-4 w-4" />
+                  </button>
                 </form>
+
                 <div className="mt-3 flex items-center justify-between gap-3 px-1 text-[11px] font-medium text-slate-400">
-                  <span>Professional, grounded replies from verified portfolio context.</span>
+                  <span>AI responses may vary. Please verify important information.</span>
                   <span className="hidden items-center gap-1 sm:inline-flex">
                     <ArrowRight className="h-3 w-3" />
                     Press Enter to send
@@ -286,32 +442,6 @@ const FloatingAssistant = () => {
                 </div>
               </div>
             </div>
-
-            <aside className="hidden w-[300px] shrink-0 flex-col border-l border-slate-200/70 bg-white/90 lg:flex">
-              <div className="border-b border-slate-200/80 px-5 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-400">
-                  Quick actions
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  Keep the settings and shortcuts visible while the conversation stays centered.
-                </p>
-              </div>
-
-              <div className="flex-1 overflow-y-auto px-4 py-4">
-                <div className="space-y-3">
-                  {quickPrompts.map((prompt) => (
-                    <button
-                      key={prompt}
-                      type="button"
-                      onClick={() => setInputValue(prompt)}
-                      className="w-full rounded-[1.25rem] border border-slate-200 bg-slate-50 px-4 py-3 text-left text-sm leading-6 text-slate-700 transition hover:border-slate-300 hover:bg-white hover:text-slate-950"
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </aside>
           </motion.div>
         )}
       </AnimatePresence>
@@ -323,9 +453,9 @@ const FloatingAssistant = () => {
         onMouseLeave={() => setIsHovering(false)}
         onClick={handleToggleChat}
       >
-        <LottieComponent 
-          animationData={animationData} 
-          loop={true} 
+        <LottieComponent
+          animationData={animationData}
+          loop={true}
           style={{ width: 100, height: 100 }}
         />
       </div>

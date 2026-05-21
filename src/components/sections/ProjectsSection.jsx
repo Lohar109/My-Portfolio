@@ -712,25 +712,6 @@ function ProjectsSection() {
                 >
                   Case Study
                 </Link>
-
-                <a
-                  href="https://github.com/Lohar109/ShopEase-Ecommerce"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-10 rounded-xl border border-gray-250 bg-white px-6 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0 cursor-pointer"
-                >
-                  GitHub Repo
-                </a>
-
-                <a
-                  href="https://shop-ease-ecommerce-delta.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-10 rounded-xl border border-gray-250 bg-white px-6 font-bold text-gray-800 transition-all duration-300 hover:bg-gray-50 text-center flex items-center justify-center gap-2 text-sm shrink-0 cursor-pointer"
-                >
-                  Live Demo
-                  <ExternalLink size={13} />
-                </a>
               </div>
             </div>
 

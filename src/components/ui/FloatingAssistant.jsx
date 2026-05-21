@@ -256,9 +256,6 @@ const FloatingAssistant = () => {
                   }}
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
-                      Ask anything
-                    </p>
                     <input
                       type="text"
                       placeholder="Ask about education, projects, or skills..."

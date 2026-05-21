@@ -182,22 +182,22 @@ const FloatingAssistant = () => {
             transition={{ duration: 0.24, ease: 'easeOut' }}
           >
             <div className="flex h-full min-h-0 w-full flex-col border-r border-slate-200/70 bg-gradient-to-b from-slate-50 to-white lg:w-[calc(100%-300px)]">
-              <div className="flex items-start justify-between gap-4 border-b border-slate-200/80 px-5 py-4 sm:px-6">
+              <div className="flex items-start justify-between gap-4 border-b border-slate-100/80 px-6 py-4 sm:px-8 bg-white/60 backdrop-blur-sm">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-md shadow-slate-900/20">
-                    <BrainCircuit className="h-5 w-5" />
-                  </div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-500 text-white shadow-lg">
+                      <BrainCircuit className="h-5 w-5" />
+                    </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-semibold text-slate-950">Vaibhav&apos;s Agent</p>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                        Ready
-                      </span>
+                        <p className="text-sm font-semibold text-slate-900">Vaibhav&apos;s Agent</p>
+                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                          Ready
+                        </span>
                     </div>
-                    <p className="mt-1 max-w-[320px] text-xs leading-5 text-slate-500">
-                      A polished assistant for projects, skills, education, and professional background.
-                    </p>
+                      <p className="mt-1 max-w-[360px] text-xs leading-5 text-slate-500">
+                        A polished assistant for projects, skills and professional background.
+                      </p>
                   </div>
                 </div>
 
@@ -220,21 +220,21 @@ const FloatingAssistant = () => {
 
                 <div className="space-y-3">
                   {messages.map((message) => (
-                    <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div
-                        className={`max-w-[min(100%,760px)] rounded-[1.5rem] px-4 py-3 text-sm leading-6 shadow-sm ${
-                          message.role === 'user'
-                            ? 'rounded-br-md bg-slate-950 text-white shadow-slate-900/10'
-                            : 'rounded-bl-md border border-slate-200 bg-white text-slate-900'
-                        }`}
-                      >
-                        <span className="font-medium whitespace-pre-wrap">
-                          {message.text}
-                          {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
-                        </span>
+                      <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div
+                          className={`max-w-[min(100%,760px)] rounded-[1.25rem] px-5 py-4 text-sm leading-7 ${
+                            message.role === 'user'
+                              ? 'rounded-br-md bg-indigo-50 text-indigo-900 border border-indigo-100 shadow-sm'
+                              : 'rounded-bl-md border border-slate-100 bg-white text-slate-900 shadow-sm'
+                          }`}
+                        >
+                          <span className="font-medium whitespace-pre-wrap">
+                            {message.text}
+                            {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
 
                   {isThinking && (
                     <div className="flex justify-start">
@@ -265,17 +265,17 @@ const FloatingAssistant = () => {
                       disabled={isThinking || Boolean(typingMessageId)}
                     />
                   </div>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      await handleSendMessage();
-                    }}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white transition hover:-translate-y-0.5 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
-                    aria-label="Send message"
-                    disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
-                  >
-                    <Send className="h-4 w-4" />
-                  </button>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await handleSendMessage();
+                      }}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-500 text-white shadow-md hover:scale-[1.02] transition-transform disabled:cursor-not-allowed disabled:opacity-40"
+                      aria-label="Send message"
+                      disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
+                    >
+                      <Send className="h-4 w-4" />
+                    </button>
                 </form>
                 <div className="mt-3 flex items-center justify-between gap-3 px-1 text-[11px] font-medium text-slate-400">
                   <span>Professional, grounded replies from verified portfolio context.</span>

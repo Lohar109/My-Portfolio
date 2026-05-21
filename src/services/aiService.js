@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { retrievePortfolioContext } from './portfolioRetrieval';
 import { skills as skillBuckets } from '../data/skills.js';
+import { VAIBHAV_KNOWLEDGE } from '../data/knowledgeBase.js';
 
 const getGeminiApiKey = () => {
   const key = import.meta.env.VITE_GEMINI_API_KEY;
@@ -11,8 +12,8 @@ const getGeminiApiKey = () => {
 const isGreetingMessage = (message) => /\b(hi|hello|hey|how are you|good morning|good afternoon|good evening)\b/i.test(message);
 
 const buildGreetingReply = () => [
-  'Hello. I\'m here to help with Vaibhav\'s projects, skills, education, and professional background.',
-  'If you want, ask me about a specific project, technology, or achievement and I\'ll keep the answer clear and well-structured.',
+  'Hey there! I\'m Vaibhav\'s AI partner. I am here to help you explore his technical journey, full-stack projects, skillset, and academic achievements.',
+  'What specific area or project are you interested in today? Feel free to ask anything!'
 ].join(' ');
 
 const detectIntent = (message) => {
@@ -40,14 +41,141 @@ const looksTooGeneric = (text) => {
 
   const normalized = text.toLowerCase();
   return (
-    text.length < 60 ||
+    text.length < 30 ||
     normalized.includes('i’m having a quick issue right now') ||
     normalized.includes('i am having a quick issue right now') ||
     normalized.includes('please try again') ||
     normalized.includes('ask me to') ||
-    normalized.includes('what would you like to ask')
+    normalized.includes('what would you like to ask') ||
+    normalized.includes('project title:') ||
+    normalized.includes('core challenge:') ||
+    normalized.includes('technical stack used:')
   );
 };
+
+function generateLocalSmartResponse(userMessage, retrievedContext) {
+  const query = userMessage.toLowerCase();
+
+  // 1. Database & Storage intent
+  if (/\b(database|databases|db|sql|postgresql|postgres|mongodb|mongo|redis|supabase|prisma)\b/i.test(query)) {
+    return [
+      "Yes, Vaibhav has strong **Database & Storage** experience! He is proficient in both relational and non-relational database management systems.",
+      "His core database skill set includes:",
+      "- **PostgreSQL & SQL**: Writing complex relational queries and managing database schemas.",
+      "- **Supabase**: Leveraged for auth, real-time database syncing, and hosting database instances.",
+      "- **MongoDB**: Managing document-based NoSQL storage for flexible data structures.",
+      "- **Redis**: Implementing high-performance in-memory caching and session management.",
+      "- **Prisma ORM**: Building type-safe database queries and migration workflows.",
+      "\nHe has actively applied these technologies in his top projects. For instance, in **ShopEase Intelligent Commerce Suite**, he built a robust database model in **PostgreSQL** to handle multi-variant inventory data, and in this **GenAI Portfolio**, he utilizes a **Vector Database** to manage semantic embeddings for RAG retrieval."
+    ].join('\n');
+  }
+
+  // 2. AI / Machine Learning intent
+  if (/\b(ai|genai|generative|ml|machine learning|embeddings|vector|rag|langchain|openai|gemini|pinecone)\b/i.test(query)) {
+    return [
+      "Yes! Vaibhav is deeply skilled in **Generative AI & Intelligent Systems Design**.",
+      "His expertise in AI/ML includes:",
+      "- **RAG (Retrieval-Augmented Generation)**: Grounding LLM responses using semantic search.",
+      "- **LangChain**: Building LLM chains, agent routing, and prompt engineering pipelines.",
+      "- **Vector Databases (Pinecone, Supabase pgvector)**: Storing and matching high-dimensional embeddings.",
+      "- **Google Gemini & OpenAI APIs**: Developing multimodal vision and audio categorization systems.",
+      "\nHis portfolio itself is a testament to this expertise. It features a custom-built GenAI agent that implements a specialized RAG pipeline to search, retrieve, and ground answers about his technical journey in real-time. He also built **ShopEase**, which utilizes vision and audio APIs to automate inventory onboarding."
+    ].join('\n');
+  }
+
+  // 3. Backend / APIs intent
+  if (/\b(backend|node|nodejs|express|api|apis|rest|restful|graphql|auth|jwt)\b/i.test(query)) {
+    return [
+      "Vaibhav has extensive experience in **Backend Development**, specializing in building scalable APIs and secure backend architectures.",
+      "His core backend capabilities include:",
+      "- **Node.js & Express.js**: Crafting robust server-side applications and high-throughput microservices.",
+      "- **API Design**: Building and maintaining clean **RESTful APIs** and **GraphQL** endpoints.",
+      "- **Security**: Implementing secure JWT authentication, session management, and middleware layers.",
+      "- **Prisma ORM**: Integrating type-safe database queries for streamlined operations.",
+      "\nHis backend engineering is prominent in projects like **ShopEase**, where he structured an enterprise-ready server architecture to process automated inventory pipelines, and this **AI Assistant**'s backend routing."
+    ].join('\n');
+  }
+
+  // 4. Frontend / React / UI intent
+  if (/\b(frontend|react|next|nextjs|typescript|ts|javascript|js|tailwind|css|vue|html)\b/i.test(query)) {
+    return [
+      "Vaibhav is an expert in **Frontend Development**, with a strong passion for building responsive, premium, and interactive user interfaces.",
+      "His frontend stack features:",
+      "- **React.js & Next.js**: Architecting dynamic single-page and server-rendered web applications.",
+      "- **TypeScript**: Writing clean, type-safe, and maintainable component-driven code.",
+      "- **Tailwind CSS & Vanilla CSS**: Implementing responsive grid/flexbox layouts and fluid animations.",
+      "- **Vite**: Optimizing rapid frontend builds and hot-module replacement setups.",
+      "\nHis eye for UI design is fully showcased in this portfolio, designed to feel calm, fluid, and highly interactive with dark mode support, modern glassmorphism, and smooth Framer Motion transitions."
+    ].join('\n');
+  }
+
+  // 5. Projects intent
+  if (/\b(project|projects|work|featured|app|apps|build|code|casestudy|case study)\b/i.test(query)) {
+    return [
+      "Vaibhav has engineered several high-impact, full-stack projects. Here are his top featured builds:",
+      "\n1. **ShopEase Intelligent Commerce Suite (SaaS Product)**",
+      "   - *Focus*: Enterprise commerce operations with automated inventory pipelines.",
+      "   - *Tech*: Node.js, React, PostgreSQL, Multimodal GenAI (Vision & Audio), Supabase.",
+      "   - *Outcome*: Automates e-commerce catalog onboarding by instantly extracting structured product details from images and voice notes.",
+      "\n2. **GenAI-Powered Portfolio & Agent (Developer Platform)**",
+      "   - *Focus*: Self-aware portfolio showcasing profile intelligence.",
+      "   - *Tech*: React, Node.js, Supabase, LangChain, Google Gemini, RAG Architecture, Vector DB.",
+      "   - *Outcome*: A live, self-describing portfolio that answers targeted technical questions about his journey with grounded responses.",
+      "\nWould you like me to tell you more about the architecture or challenges of any specific project?"
+    ].join('\n');
+  }
+
+  // 6. Education / Academics intent
+  if (/\b(education|academics|college|degree|mca|bsc|school|university|cgpa|marks|study|studies)\b/i.test(query)) {
+    const academics = VAIBHAV_KNOWLEDGE.academics;
+    return [
+      "Vaibhav has an outstanding academic track record in Computer Science and Applications:",
+      `- **Post-Graduation**: **Master of Computer Applications (M.C.A.)** at ${academics.postGraduation.institute}.`,
+      `  - *Academic Excellence*: Currently holding a stellar **${academics.postGraduation.currentCGPA} CGPA** (Sem 3: 9.30 SGPA, Sem 2: 8.46 SGPA, Sem 1: 8.08 SGPA).`,
+      `- **Graduation**: **Bachelor of Science (Computer Science)** at ${academics.graduation.college}.`,
+      `  - *Result*: Graduated with a high **${academics.graduation.finalCGPA}** (Grade: **${academics.graduation.grade}**).`,
+      `  - *Key Focus Area*: RDBMS, Data Structures, Operating Systems, Computer Networks, and C++ Programming.`
+    ].join('\n');
+  }
+
+  // 7. Contact / Hire intent
+  if (/\b(contact|email|phone|linkedin|github|hire|social|socials|resume)\b/i.test(query)) {
+    return [
+      "I would love to help you connect with Vaibhav! Here is how you can reach out:",
+      "- **Location**: Jalgaon/Pune, India",
+      "- **Socials & Profiles**:",
+      "  - [LinkedIn Profile](https://www.linkedin.com/in/vaibhavlohar109/) (Professional updates & networking)",
+      "  - [GitHub Profile](https://github.com/Lohar109) (Source code & open-source contributions)",
+      "\nYou can also click the **Get in Touch / Contact** option on the sidebar to send a direct message to his email!"
+    ].join('\n');
+  }
+
+  // 8. General fallback when we have retrieved context
+  if (retrievedContext && retrievedContext.length > 50) {
+    let formatted = retrievedContext
+      .replace(/Project Title:/g, '\n**Project:**')
+      .replace(/Role:/g, '\n- **Role:**')
+      .replace(/Summary:/g, '\n- **Summary:**')
+      .replace(/Core Challenge:/g, '\n- **Core Challenge:**')
+      .replace(/Technical Stack Used:/g, '\n- **Tech Stack:**');
+      
+    return [
+      "I've searched Vaibhav's portfolio data and found this relevant information:",
+      formatted,
+      "\nFeel free to ask a follow-up question or explore more specific details about his projects, skills, or academics!"
+    ].join('\n');
+  }
+
+  return [
+    "I'm here to act as Vaibhav's AI partner! I can provide smart, detailed information on his:",
+    "- **Full-Stack Development Skills** (React, Next.js, Node.js, Express, TypeScript)",
+    "- **Database Expertise** (PostgreSQL, MongoDB, Supabase, Redis, SQL)",
+    "- **AI System Design** (RAG architecture, LangChain, vector embeddings, Gemini/OpenAI)",
+    "- **Featured Projects** (ShopEase SaaS, GenAI Portfolio, and custom-built systems)",
+    "- **Academic Record** (MCA with a stellar 9.30 CGPA)",
+    "\nWhat specific aspect of his work or background would you like to explore?"
+  ].join('\n');
+}
 
 export async function sendMessageToVaibhavAgent(userMessage) {
   if (!userMessage || typeof userMessage !== 'string') {
@@ -72,98 +200,34 @@ export async function sendMessageToVaibhavAgent(userMessage) {
     general: 'The user is asking a general question. Keep the answer concise, natural, and helpful.',
   }[intent];
 
-  // If the user asked specifically about skills, try a strict extraction step
-  // 1) Ask the model to extract technology names only (comma-separated)
-  // 2) If that fails or looks generic, fall back to a local keyword extractor
-  const tryExtractTechnologies = async (context) => {
-    if (!context || context.length < 10) return null;
-
-    try {
-      const apiKey = getGeminiApiKey();
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-
-      const extractionPrompt = `Extract technology names, libraries, platforms, and tools from the following CONTEXT.\nOutput ONLY a comma-separated list of names with no extra commentary or narration.\nCONTEXT:\n${context}`;
-
-      const extractionResult = await model.generateContent(extractionPrompt);
-      const extractedText = extractionResult?.response?.text?.()?.trim() ?? '';
-
-      if (extractedText && !looksTooGeneric(extractedText)) {
-        // Normalize into array
-        const parts = extractedText
-          .split(/[\n,;]+/) // split on newlines, commas, semicolons
-          .map((p) => p.replace(/^[\-\s•]+/, '').trim())
-          .filter((p) => p.length > 1);
-
-        if (parts.length > 0) return parts;
-      }
-    } catch (err) {
-      console.warn('Technology extraction with model failed:', err?.message || err);
-    }
-
-    // Local fallback: scan the context for known skill names from data/skills.js
-    try {
-      const known = new Map();
-      skillBuckets.forEach((bucket) => {
-        (bucket.items || []).forEach((it) => known.set(it.name.toLowerCase(), it.name));
-      });
-
-      const found = [];
-      const lowered = context.toLowerCase();
-      // sort by first occurrence in the context so order feels natural
-      Array.from(known.keys()).forEach((key) => {
-        const idx = lowered.indexOf(key);
-        if (idx !== -1) found.push({ key, idx, name: known.get(key) });
-      });
-
-      found.sort((a, b) => a.idx - b.idx);
-      const unique = [...new Set(found.map((f) => f.name))];
-      if (unique.length > 0) return unique;
-    } catch (err) {
-      console.warn('Local tech extraction failed:', err?.message || err);
-    }
-
-    return null;
-  };
-
-  // If intent is skills, attempt extraction-first flow for a precise answer
-  if (intent === 'skills') {
-    const techList = await tryExtractTechnologies(retrievedContext);
-    if (techList && techList.length > 0) {
-      const formatted = techList.map((t) => `- ${t}`).join('\n');
-      return `Technologies & Tools:\n\n${formatted}`;
-    }
-    // If extraction failed, continue to the normal generation path below
-  }
-
-  const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. Answer the following question dynamically using your own vocabulary and conversational structure based strictly on this verified background context data. Do NOT use static phrasing templates or pre-scripted lines. Be adaptive, structure your output with bold highlights, bullet points, and horizontal breaks, and react like a real human engineer in an interview.
-
-Intent: ${intent}
-${intentInstruction}
-
-Context: ${retrievedContext || 'No specific project matching this greeting. Greet the user naturally as an elite AI agent.'}
-User Question: ${userMessage}`;
-
+  // Try calling the live Generative AI (Gemini) model
   try {
     const apiKey = getGeminiApiKey();
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+    const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. 
+    Answer the user's question dynamically, warmly, and in a clean conversational structure (using paragraph explanations, bold highlights, bullet points, and clear list formatting). 
+    Never output raw unstructured context keys directly (like "Project Title:", "Role:", "Summary:", "Core Challenge:"). Always summarize them naturally as a real human developer would in a professional interview.
+    
+    Verified Background Context:
+    ${retrievedContext || 'No specific project matching this query. Greet the user naturally and answer accurately.'}
+    
+    Intent: ${intent}
+    ${intentInstruction}
+    
+    User Question: ${userMessage}`;
 
     const result = await model.generateContent(prompt);
     const text = result?.response?.text?.()?.trim();
 
     if (text && !looksTooGeneric(text)) return text;
 
-    console.warn('Generative model returned weak or empty text — falling back to local summary.');
+    console.warn('Generative model returned weak or empty text — falling back to smart local heuristics.');
   } catch (err) {
     console.error('Generative model error:', err);
   }
 
-  // Local synthesized fallback (non-throwing): summarize retrievedContext when model fails
-  if (retrievedContext && retrievedContext.length > 50) {
-    const snippet = retrievedContext.length > 800 ? `${retrievedContext.slice(0, 800)}...` : retrievedContext;
-    return `Summary (from portfolio data):\n\n---\n${snippet}\n\nIf you want more detail, ask me to "tell me more about" a specific project or skill.`;
-  }
-
-  return "I don't have the portfolio context right now, but I can answer general questions about Vaibhav's skills and projects — what would you like to ask?";
+  // Trigger our Smart Local Heuristics Fallback Engine
+  return generateLocalSmartResponse(userMessage, retrievedContext);
 }

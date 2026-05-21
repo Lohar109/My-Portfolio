@@ -46,14 +46,7 @@ const FloatingAssistant = () => {
     { label: 'Education', icon: GraduationCap },
     { label: 'Contact', icon: Contact },
   ];
-  const featureCards = [
-    { title: 'About Vaibhav', description: 'Background, experience and journey', icon: UserRound },
-    { title: 'Skills & Expertise', description: 'Technologies and technical skills', icon: Code2 },
-    { title: 'Projects', description: 'Explore featured projects', icon: Rocket },
-    { title: 'Education', description: 'Academic background and learning', icon: GraduationCap },
-    { title: 'Achievements', description: 'Milestones and recognitions', icon: Sparkles },
-    { title: 'Get in Touch', description: 'Contact, socials and collaboration', icon: Contact },
-  ];
+
   const typingIntervalRef = useRef(null);
   const thinkingTimeoutRef = useRef(null);
   const messagesEndRef = useRef(null);
@@ -462,42 +455,7 @@ const FloatingAssistant = () => {
                     </div>
                   )}
 
-                  {messages.filter(m => m.role === 'user').length === 0 && !isThinking && (
-                    <div className="grid gap-3 sm:grid-cols-2 mt-4 sm:mt-6">
-                      {featureCards.map((card) => {
-                        const Icon = card.icon;
-                        return (
-                          <button
-                            key={card.title}
-                            type="button"
-                            onClick={() => handleQuickPrompt(card.title)}
-                            className={`group rounded-[1.2rem] border p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-0.5 cursor-pointer shrink-0 ${
-                              isDarkMode
-                                ? 'border-slate-800 bg-slate-900/40 hover:border-violet-800 hover:bg-slate-900/80 hover:shadow-violet-950/20'
-                                : 'border-slate-200 bg-white hover:border-violet-200 hover:shadow-md'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between gap-3">
-                              <div className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 ${
-                                isDarkMode ? 'bg-violet-950/50 text-violet-400' : 'bg-violet-50 text-violet-600'
-                              }`}>
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <ArrowRight className={`h-4 w-4 transition-colors duration-300 ${
-                                isDarkMode ? 'text-slate-700 group-hover:text-violet-400' : 'text-slate-300 group-hover:text-violet-500'
-                              }`} />
-                            </div>
-                            <h3 className={`mt-4 text-[15px] font-semibold transition-colors duration-300 ${
-                              isDarkMode ? 'text-slate-50' : 'text-slate-900'
-                            }`}>{card.title}</h3>
-                            <p className={`mt-1 text-sm leading-6 transition-colors duration-300 ${
-                              isDarkMode ? 'text-slate-400' : 'text-slate-500'
-                            }`}>{card.description}</p>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
+
 
                   <div ref={messagesEndRef} />
                 </div>

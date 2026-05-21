@@ -14,6 +14,24 @@ const buildGreetingReply = () => [
   'If you want, ask me about a specific project, technology, or achievement and I\'ll keep the answer clear and well-structured.',
 ].join(' ');
 
+const detectIntent = (message) => {
+  const normalized = message.toLowerCase();
+
+  if (/project|portfolio|case study|work|build|app|tool|system/i.test(normalized)) {
+    return 'project';
+  }
+
+  if (/education|degree|college|school|cgpa|marks|academic|study/i.test(normalized)) {
+    return 'education';
+  }
+
+  if (/skill|technology|stack|react|node|javascript|genai|ai|framework/i.test(normalized)) {
+    return 'skills';
+  }
+
+  return 'general';
+};
+
 const looksTooGeneric = (text) => {
   if (!text) {
     return true;
@@ -45,7 +63,18 @@ export async function sendMessageToVaibhavAgent(userMessage) {
     return '';
   });
 
+  const intent = detectIntent(userMessage);
+  const intentInstruction = {
+    project: 'The user is asking about a project. Prioritize concrete outcomes, technical stack, and problem-solving details.',
+    education: 'The user is asking about education. Prioritize verified academic facts, institutions, and achievements.',
+    skills: 'The user is asking about skills. Prioritize technologies, tools, and practical experience.',
+    general: 'The user is asking a general question. Keep the answer concise, natural, and helpful.',
+  }[intent];
+
   const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. Answer the following question dynamically using your own vocabulary and conversational structure based strictly on this verified background context data. Do NOT use static phrasing templates or pre-scripted lines. Be adaptive, structure your output with bold highlights, bullet points, and horizontal breaks, and react like a real human engineer in an interview.
+
+Intent: ${intent}
+${intentInstruction}
 
 Context: ${retrievedContext || 'No specific project matching this greeting. Greet the user naturally as an elite AI agent.'}
 User Question: ${userMessage}`;

@@ -275,17 +275,7 @@ const FloatingAssistant = () => {
                 })}
               </nav>
 
-              <div className="mt-auto space-y-3 shrink-0 pt-4">
-                <div className="rounded-[1.25rem] border border-slate-200 bg-white p-3 shadow-sm shrink-0">
-                  <div className="mb-1.5 flex items-center gap-1.5 text-violet-600">
-                    <Sparkles className="h-3.5 w-3.5 shrink-0" />
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em]">Specifics?</p>
-                  </div>
-                  <p className="text-[10px] leading-relaxed text-slate-500">
-                    Ask me anything about Vaibhav Lohar.
-                  </p>
-                </div>
-
+              <div className="mt-auto shrink-0 pt-4">
                 <div className="flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white p-1 shadow-sm shrink-0">
                   <button type="button" className="h-7 w-7 rounded-full bg-slate-50 text-slate-500 hover:bg-slate-100 transition flex items-center justify-center text-xs font-semibold">☼</button>
                   <button type="button" className="h-7 w-7 rounded-full bg-slate-50 text-slate-500 hover:bg-slate-100 transition flex items-center justify-center text-xs font-semibold">◔</button>

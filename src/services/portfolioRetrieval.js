@@ -1,5 +1,9 @@
 import { supabase } from '../config/supabaseClient.js'
 
+const GEMINI_API_VERSION = 'v1beta'
+const GEMINI_EMBEDDING_MODEL = 'gemini-embedding-2'
+const GEMINI_EMBEDDING_DIMENSIONS = 1536
+
 /**
  * Retrieve context for a portfolio query using vector search.
  * - Generates an embedding via Google's embedding endpoint
@@ -12,10 +16,10 @@ export async function retrievePortfolioContext(query) {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY
   if (!apiKey) throw new Error('VITE_GEMINI_API_KEY is not set')
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${apiKey}`
+  const url = `https://generativelanguage.googleapis.com/${GEMINI_API_VERSION}/models/${GEMINI_EMBEDDING_MODEL}:embedContent?key=${apiKey}`
   const body = {
     content: { parts: [{ text: query }] },
-    outputDimensionality: 1536,
+    outputDimensionality: GEMINI_EMBEDDING_DIMENSIONS,
   }
 
   const resp = await fetch(url, {
@@ -31,20 +35,10 @@ export async function retrievePortfolioContext(query) {
 
   const json = await resp.json()
 
-  // Try common response shapes to extract the embedding vector
-  let vector = null
-  if (Array.isArray(json?.data) && Array.isArray(json.data[0]?.embedding)) {
-    vector = json.data[0].embedding
-  } else if (Array.isArray(json?.outputs) && Array.isArray(json.outputs[0]?.embedding)) {
-    vector = json.outputs[0].embedding
-  } else if (Array.isArray(json?.outputs) && Array.isArray(json.outputs[0]?.content) && Array.isArray(json.outputs[0].content[0]?.embedding)) {
-    vector = json.outputs[0].content[0].embedding
-  } else if (Array.isArray(json?.embedding)) {
-    vector = json.embedding
-  }
+  const vector = json?.embedding?.values ?? json?.embedding ?? null
 
   if (!vector) {
-    throw new Error('Unable to extract embedding from Gemini response')
+    throw new Error(`Unable to extract embedding from Gemini response: ${JSON.stringify(json)}`)
   }
 
   // Call Supabase RPC to perform vector similarity search

@@ -89,7 +89,14 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
   }
 
   try {
-    const retrievedContext = await retrievePortfolioContext(userMessage);
+    let retrievedContext = '';
+
+    try {
+      retrievedContext = await retrievePortfolioContext(userMessage);
+    } catch (retrievalError) {
+      console.error('Portfolio retrieval error:', retrievalError);
+    }
+
     const contextualPrompt = retrievedContext
       ? `Use the following retrieved portfolio context when it is relevant and accurate:\n\n${retrievedContext}\n\nUser question:\n${userMessage}`
       : userMessage;

@@ -117,29 +117,48 @@ function HeroSection() {
               </span>
             </motion.h1>
 
-            {/* Tech Badges */}
+            {/* Futuristic Glassmorphic Tech Track */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-6 flex flex-wrap items-center gap-3 select-none"
+              className="mt-6 inline-flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-gray-200/50 bg-white/40 px-5 py-2.5 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.015)] select-none transition-all duration-300 hover:shadow-[0_12px_40px_rgba(99,102,241,0.06)] hover:border-indigo-100/80 cursor-default"
             >
-              {/* AI-Powered Badge */}
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-100/60 bg-indigo-50/40 px-3 py-1 text-xs font-black tracking-wide text-indigo-600 shadow-[0_2px_8px_-3px_rgba(99,102,241,0.08)] transition-all duration-300 hover:scale-105 hover:bg-indigo-50/80 cursor-default">
-                <Sparkles className="h-3.5 w-3.5 text-indigo-500 animate-pulse" />
-                <span className="font-sans uppercase text-[10px] tracking-wider font-extrabold">AI-Powered</span>
-              </div>
-              
-              {/* Full Stack Badge */}
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-100/60 bg-violet-50/40 px-3 py-1 text-xs font-black tracking-wide text-violet-600 shadow-[0_2px_8px_-3px_rgba(109,40,217,0.08)] transition-all duration-300 hover:scale-105 hover:bg-violet-50/80 cursor-default">
-                <Code2 className="h-3.5 w-3.5 text-violet-500" />
-                <span className="font-sans uppercase text-[10px] tracking-wider font-extrabold">Full Stack</span>
+              {/* AI-Powered Item */}
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
+                </span>
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-sans">
+                  AI-Powered
+                </span>
               </div>
 
-              {/* System Design Badge */}
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-purple-100/60 bg-purple-50/40 px-3 py-1 text-xs font-black tracking-wide text-purple-600 shadow-[0_2px_8px_-3px_rgba(147,51,234,0.08)] transition-all duration-300 hover:scale-105 hover:bg-purple-50/80 cursor-default">
-                <Server className="h-3.5 w-3.5 text-purple-500" />
-                <span className="font-sans uppercase text-[10px] tracking-wider font-extrabold">System Design</span>
+              {/* Elegant Vertical Divider */}
+              <div className="hidden sm:block h-3.5 w-[1px] bg-gray-200/80 rounded-full" />
+
+              {/* Full Stack Item */}
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-sans">
+                  Full Stack
+                </span>
+              </div>
+
+              {/* Elegant Vertical Divider */}
+              <div className="hidden sm:block h-3.5 w-[1px] bg-gray-200/80 rounded-full" />
+
+              {/* System Design Item */}
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+                </span>
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-sans">
+                  System Design
+                </span>
               </div>
             </motion.div>
 

@@ -237,13 +237,13 @@ const FloatingAssistant = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-y-4 right-4 flex h-[calc(100vh-2rem)] w-[min(1160px,calc(100vw-1rem))] overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white/92 shadow-[0_30px_100px_rgba(15,23,42,0.18)] backdrop-blur-2xl"
+            className="fixed top-6 bottom-6 right-6 flex h-[calc(100vh-3rem)] w-[min(1160px,calc(100vw-1.5rem))] overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white/92 shadow-[0_30px_100px_rgba(15,23,42,0.18)] backdrop-blur-2xl"
             initial={{ opacity: 0, x: 90, scale: 0.98 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 90, scale: 0.98 }}
             transition={{ duration: 0.24, ease: 'easeOut' }}
           >
-            <aside className="hidden w-[128px] shrink-0 border-r border-slate-200/70 bg-white/85 px-3 py-4 lg:flex lg:flex-col">
+            <aside className="hidden w-[128px] shrink-0 border-r border-slate-200/70 bg-white/85 px-3 py-5 lg:flex lg:flex-col">
               <div className="flex flex-col items-center gap-3 rounded-[1.8rem] border border-slate-200/70 bg-white px-3 py-4 shadow-sm">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-50 to-violet-100 shadow-inner">
                   <LottieComponent animationData={animationData} loop style={{ width: 62, height: 62 }} />
@@ -291,7 +291,7 @@ const FloatingAssistant = () => {
             </aside>
 
             <div className="flex h-full min-h-0 flex-1 flex-col bg-gradient-to-b from-white via-slate-50/50 to-white">
-              <div className="flex items-center justify-between gap-4 border-b border-slate-200/70 px-5 py-4 sm:px-6 bg-white/75 backdrop-blur-sm">
+              <div className="flex items-center justify-between gap-4 border-b border-slate-200/70 px-5 py-5 sm:px-6 bg-white/75 backdrop-blur-sm">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
                     <h2 className="text-[17px] font-semibold tracking-[-0.02em] text-slate-950 sm:text-[18px]">Vaibhav&apos;s AI Assistant</h2>
@@ -312,7 +312,7 @@ const FloatingAssistant = () => {
                 </button>
               </div>
 
-              <div className="flex-1 min-h-0 overflow-y-auto px-4 py-5 sm:px-6">
+              <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6 sm:px-6">
                 {messages.length === 0 && !isThinking && (
                   <div className="mb-4 max-w-[520px] rounded-[1.25rem] border border-slate-200/70 bg-white px-4 py-3 text-sm leading-6 text-slate-600 shadow-sm">
                     {greetingText}
@@ -383,8 +383,8 @@ const FloatingAssistant = () => {
                 </div>
               </div>
 
-              <div className="border-t border-slate-200/80 bg-white/95 p-4 sm:p-5">
-                <div className="mb-3 flex flex-col gap-2">
+              <div className="shrink-0 border-t border-slate-200/80 bg-white/95 p-4 sm:p-5">
+                <div className="mb-4 flex flex-col gap-2">
                   <div className="flex items-center gap-2 text-violet-600">
                     <Sparkles className="h-4 w-4" />
                     <p className="text-sm font-medium">You can also ask</p>

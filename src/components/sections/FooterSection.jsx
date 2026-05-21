@@ -233,7 +233,7 @@ function FooterSection() {
                     required
                     placeholder="Enter your name"
                     disabled={status === 'loading'}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
                   />
                 </div>
                 <div>
@@ -248,7 +248,7 @@ function FooterSection() {
                     required
                     placeholder="Enter your email"
                     disabled={status === 'loading'}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -264,7 +264,7 @@ function FooterSection() {
                   onChange={handleChange}
                   placeholder="What's this about?"
                   disabled={status === 'loading'}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 disabled:opacity-50"
                 />
               </div>
 
@@ -280,7 +280,7 @@ function FooterSection() {
                   rows="4"
                   placeholder="Write your message here..."
                   disabled={status === 'loading'}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 resize-none disabled:opacity-50"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-405 text-sm focus:border-black focus:ring-0 focus:outline-none transition duration-200 resize-none disabled:opacity-50"
                 />
               </div>
 

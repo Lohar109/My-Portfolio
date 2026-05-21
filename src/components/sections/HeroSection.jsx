@@ -27,8 +27,6 @@ function HeroSection() {
         iconHover: 'group-hover:bg-[#2563EB] group-hover:text-white',
         titleHover: 'group-hover:text-[#2563EB]',
         arrowHover: 'group-hover:text-[#2563EB] group-hover:border-blue-100 group-hover:bg-blue-50/50',
-        cardGlow: 'group-hover:from-blue-500/5 group-hover:to-indigo-500/5',
-        cardBorder: 'hover:border-blue-200/80 hover:shadow-[0_20px_35px_-12px_rgba(37,99,235,0.12)]'
       }
     },
     {
@@ -40,8 +38,6 @@ function HeroSection() {
         iconHover: 'group-hover:bg-purple-600 group-hover:text-white',
         titleHover: 'group-hover:text-purple-600',
         arrowHover: 'group-hover:text-purple-600 group-hover:border-purple-100 group-hover:bg-purple-50/50',
-        cardGlow: 'group-hover:from-purple-500/5 group-hover:to-pink-500/5',
-        cardBorder: 'hover:border-purple-200/80 hover:shadow-[0_20px_35px_-12px_rgba(139,92,246,0.12)]'
       }
     },
     {
@@ -53,8 +49,6 @@ function HeroSection() {
         iconHover: 'group-hover:bg-[#128C7E] group-hover:text-white',
         titleHover: 'group-hover:text-[#128C7E]',
         arrowHover: 'group-hover:text-[#128C7E] group-hover:border-emerald-100 group-hover:bg-emerald-50/50',
-        cardGlow: 'group-hover:from-emerald-500/5 group-hover:to-teal-500/5',
-        cardBorder: 'hover:border-emerald-200/80 hover:shadow-[0_20px_35px_-12px_rgba(18,140,126,0.12)]'
       }
     },
     {
@@ -66,8 +60,6 @@ function HeroSection() {
         iconHover: 'group-hover:bg-[#EF4444] group-hover:text-white',
         titleHover: 'group-hover:text-[#EF4444]',
         arrowHover: 'group-hover:text-[#EF4444] group-hover:border-red-100 group-hover:bg-red-50/50',
-        cardGlow: 'group-hover:from-red-500/5 group-hover:to-orange-500/5',
-        cardBorder: 'hover:border-red-200/80 hover:shadow-[0_20px_35px_-12px_rgba(239,68,68,0.12)]'
       }
     },
   ]
@@ -273,17 +265,14 @@ function HeroSection() {
         {/* Services 4-Card Grid */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => {
-            const { iconBg, iconHover, titleHover, arrowHover, cardGlow, cardBorder } = service.colorClasses
+            const { iconBg, iconHover, titleHover, arrowHover } = service.colorClasses
             return (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className={`group relative flex flex-col justify-between rounded-[1.75rem] border border-gray-150/70 bg-white/70 p-6 shadow-[0_10px_24px_-8px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:bg-white cursor-default ${cardBorder}`}
+                className="group relative flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 cursor-default"
               >
                 <div>
-                  {/* Custom glowing background glow */}
-                  <div className={`absolute -inset-px rounded-[1.75rem] bg-gradient-to-r from-indigo-500/0 via-indigo-500/0 to-indigo-500/0 transition duration-500 pointer-events-none -z-10 ${cardGlow}`} />
-
                   {/* Service Icon inside glowing background circle */}
                   <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border group-hover:scale-110 transition-all duration-300 ${iconBg} ${iconHover}`}>
                     {service.icon}

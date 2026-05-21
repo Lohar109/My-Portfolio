@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Send, X } from 'lucide-react';
 import Lottie from 'lottie-react'; 
-import { RE_SYNC_FALLBACK, sendMessageToVaibhavAgent } from '../../services/aiService';
+import { sendMessageToVaibhavAgent } from '../../services/aiService';
 import animationData from '../../assets/lottie/AI Assistent.json'; 
 
 const FloatingAssistant = () => {
   // Safe-check logic
   const LottieComponent = Lottie?.default || Lottie;
+  const fallbackReply = 'I\'m having a quick issue right now. Please try again and I\'ll respond with the current portfolio context.';
   const [isOpen, setIsOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -137,7 +138,7 @@ const FloatingAssistant = () => {
       typeAssistantResponse(replyText);
     } catch (error) {
       console.error('Floating assistant send error:', error);
-      typeAssistantResponse(RE_SYNC_FALLBACK);
+      typeAssistantResponse(fallbackReply);
     } finally {
       setIsThinking(false);
     }

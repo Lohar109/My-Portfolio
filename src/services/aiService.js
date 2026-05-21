@@ -1,13 +1,9 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { VAIBHAV_KNOWLEDGE } from '../data/knowledgeBase';
-import { projectsData } from '../data/projects';
-import { skills } from '../data/skills';
 import { retrievePortfolioContext } from './portfolioRetrieval';
 
 export const PROFESSIONAL_FALLBACK = "I specialize in Vaibhav's professional journey. Please ask about his technical skills or academic achievements!";
 export const RE_SYNC_FALLBACK = "I'm currently re-syncing with Vaibhav's database. One second!";
-
-let chatSession = null;
 
 export const calculateAge = (dobString) => {
   const birthDate = new Date(dobString);
@@ -71,6 +67,7 @@ const buildSystemInstruction = () => {
     '- If the user says hello, hi, hey, how are you, or a generic thanks, respond with a warm, organic full-stack engineer welcome.',
     '- Vary the greeting phrasing naturally and ask which specific domain of Vaibhav\'s stack they want to inspect.',
     '- Do not fetch or inject portfolio context for casual greetings.',
+    '- Do NOT use static templates. Vary your conversational structure naturally across greetings. Do not end every sentence by forcing a specific project catalog question unless it naturally flows into the user\'s intent.',
     'If the user asks personal or inappropriate questions, respond exactly with this sentence:',
     PROFESSIONAL_FALLBACK,
     '',
@@ -92,145 +89,7 @@ const buildSystemInstruction = () => {
   ].join('\n');
 };
 
-const summarizeSkills = () => {
-  return skills.map((category) => {
-    const items = category.items.map((item) => item.name).join(', ');
-    return `${category.title}: ${items}`;
-  }).join(' ');
-};
-
-const buildGreetingAnswer = (userMessage) => {
-  const greetingVariants = [
-    'Hey, I\'m VL-Agent. I can unpack Vaibhav\'s **projects**, **stack**, or **academic profile** with precision.',
-    'Absolutely, I\'m here. Ask me about Vaibhav\'s **full-stack work**, **AI integrations**, or any project detail you want dissected.',
-    'Good to see you. If you want the sharp version of Vaibhav\'s engineering story, point me at a project, skill, or metric.',
-    'Hello. I can walk you through Vaibhav\'s **React**, **Node.js**, **Supabase**, or **GenAI** work in a clean, technical format.',
-  ];
-
-  const index = Math.abs((userMessage || '').length) % greetingVariants.length;
-  return `${greetingVariants[index]} Which part of his full-stack toolkit should we inspect first?`;
-};
-
 const isCasualGreeting = (query) => CASUAL_CONVERSATION_QUERY.test(query || '');
-
-const PROJECT_FOCUSED_QUERY = /(project|projects|built|portfolio|case study|loading optimization|loading optimisation|shopease|campus connect|insightboard|supportflow|mediaops|marketpulse)/i;
-
-const shouldUseFreshContextSession = (query, retrievedContext) => Boolean(retrievedContext) && PROJECT_FOCUSED_QUERY.test(query || '');
-
-const buildContextualMessage = (userMessage, retrievedContext) => [
-  'Ignore prior chat history and any conflicting project details from earlier turns.',
-  'Use only the freshly retrieved portfolio context below when answering this question.',
-  'If the retrieved context conflicts with past conversation memory, the retrieved context wins.',
-  'Do not quote the retrieved context verbatim. Synthesize it into a natural, original answer.',
-  '',
-  `Retrieved context:\n${retrievedContext}`,
-  '',
-  `User question:\n${userMessage}`,
-].join('\n');
-
-const parseProjectContext = (retrievedContext) => {
-  const blocks = (retrievedContext || '')
-    .split(/\n\n---\n\n/)
-    .map((block) => block.trim())
-    .filter(Boolean);
-
-  const firstBlock = blocks[0] || '';
-  const titleMatch = firstBlock.match(/Project Title:\s*(.+?)(?:\.|$)/i);
-  const roleMatch = firstBlock.match(/Role:\s*(.+?)(?:\.|$)/i);
-  const summaryMatch = firstBlock.match(/Summary:\s*(.+?)(?:\.|$)/i);
-  const challengeMatch = firstBlock.match(/Core Challenge:\s*(.+?)(?:\.|$)/i);
-  const stackMatch = firstBlock.match(/Technical Stack Used:\s*(.+?)(?:\.|$)/i);
-
-  if (!titleMatch && !summaryMatch && !challengeMatch && !stackMatch) {
-    return '';
-  }
-
-  const sections = [];
-
-  if (titleMatch || roleMatch) {
-    sections.push(`**Project Focus:** ${[titleMatch?.[1], roleMatch ? `(${roleMatch[1]})` : ''].filter(Boolean).join(' ')}`.trim());
-  }
-
-  if (summaryMatch) {
-    sections.push(`**Executive Summary:** ${summaryMatch[1]}`);
-  }
-
-  if (challengeMatch) {
-    sections.push(`**Technical Challenge:** ${challengeMatch[1]}`);
-  }
-
-  if (stackMatch) {
-    sections.push(`**System Stack:** ${stackMatch[1]}`);
-  }
-
-  return sections.join('\n');
-};
-
-const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
-  const normalizedQuery = (userMessage || '').toLowerCase();
-  const contextSnippet = retrievedContext
-    ? retrievedContext.split('\n').map((line) => line.trim()).filter(Boolean).slice(0, 3).join(' ')
-    : '';
-
-  const hasRetrievedProjectContext = Boolean(retrievedContext) && PROJECT_FOCUSED_QUERY.test(normalizedQuery);
-
-  if (hasRetrievedProjectContext) {
-    const synthesizedContext = parseProjectContext(retrievedContext);
-
-    return [
-      'Here is the most relevant project synthesis:',
-      '---',
-      synthesizedContext || retrievedContext,
-    ].join('\n');
-  }
-
-  if (/(project|projects|built|work|portfolio|case study)/i.test(normalizedQuery)) {
-    const topProjects = projectsData.slice(0, 3).map((project) => {
-      const stack = Array.isArray(project.stack) && project.stack.length > 0 ? ` **Stack:** ${project.stack.join(', ')}` : '';
-      return `- **${project.title}** — ${project.summary}${stack}`;
-    }).join('\n');
-
-    return [
-      'Here are a few of Vaibhav\'s standout projects:',
-      '---',
-      topProjects,
-      '---',
-      'If you want, I can also break down the architecture, stack, or impact of any one project.',
-    ].join('\n');
-  }
-
-  if (/(skill|skills|technology|technologies|stack|tech|tools)/i.test(normalizedQuery)) {
-    return [
-      'Vaibhav\'s core stack includes:',
-      '---',
-      `- **Technologies:** ${VAIBHAV_KNOWLEDGE.technicalSkills.technologies.join(', ')}`,
-      `- **Languages:** ${VAIBHAV_KNOWLEDGE.technicalSkills.languages.join(', ')}`,
-      '- **Broader skill areas:**',
-      `  - ${summarizeSkills()}`,
-    ].join('\n');
-  }
-
-  if (/(education|academic|college|degree|marks|cgpa|study|school)/i.test(normalizedQuery)) {
-    return [
-      'Vaibhav\'s academic profile:',
-      '---',
-      `- **M.C.A.**: ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} CGPA at ${VAIBHAV_KNOWLEDGE.academics.postGraduation.institute}`,
-      `- **B.Sc. (Computer Science)**: ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} from ${VAIBHAV_KNOWLEDGE.academics.graduation.college}`,
-      `- **SSC**: ${VAIBHAV_KNOWLEDGE.academics.ssc_10th.percentage}`,
-      `- **HSC**: ${VAIBHAV_KNOWLEDGE.academics.hsc_12th.percentage}`,
-    ].join('\n');
-  }
-
-  if (contextSnippet) {
-    return `Based on the retrieved portfolio context, ${contextSnippet}`;
-  }
-
-  if (isCasualGreeting(userMessage)) {
-    return buildGreetingAnswer();
-  }
-
-  return PROFESSIONAL_FALLBACK;
-};
 
 const getGeminiApiKey = () => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -242,72 +101,81 @@ const getGeminiApiKey = () => {
   return apiKey;
 };
 
-const getChatSession = () => {
-  if (chatSession) {
-    return chatSession;
-  }
-
+const createGenerativeModel = () => {
   const genAI = new GoogleGenerativeAI(getGeminiApiKey());
-  const model = genAI.getGenerativeModel({
+  return genAI.getGenerativeModel({
     model: 'gemini-2.0-flash',
     systemInstruction: buildSystemInstruction(),
   });
+};
 
-  chatSession = model.startChat({ history: [] });
-  return chatSession;
+const buildGreetingPrompt = (userMessage) => [
+  'The user has started a casual conversation.',
+  'Respond as VL-Agent with a warm, organic, tech-savvy welcome.',
+  'Do not use a template, do not force a project catalog question, and do not repeat the same closing line every time.',
+  'If it fits naturally, introduce yourself as Vaibhav\'s AI partner and invite the user to ask about his stack, projects, or engineering background.',
+  '',
+  `User message: ${userMessage}`,
+].join('\n');
+
+const buildContextPrompt = (userMessage, retrievedContext) => {
+  const contextBlocks = (retrievedContext || '')
+    .split(/\n\n---\n\n/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  return [
+    'You are answering with fresh database context only.',
+    'Synthesize the material naturally. Do not copy raw labels such as Project Title, Core Challenge, Summary, or Technical Stack Used.',
+    'Vary the structure depending on the question: brief overview for summaries, bullets for stack breakdowns, and a deeper conversational explanation for challenges.',
+    'Sound like Vaibhav himself or an elite staff technical advocate speaking in real time to a recruiter.',
+    '',
+    ...contextBlocks.map((block, index) => `Context block ${index + 1}:\n${block}`),
+    '',
+    `User question: ${userMessage}`,
+  ].join('\n\n---\n\n');
 };
 
 export const sendMessageToVaibhavAgent = async (userMessage) => {
-  if (isCasualGreeting(userMessage)) {
-    return buildGreetingAnswer(userMessage);
-  }
-
   if (shouldUseProfessionalFallback(userMessage)) {
     return PROFESSIONAL_FALLBACK;
   }
 
-  let retrievedContext = '';
-
   try {
-    try {
-      retrievedContext = await retrievePortfolioContext(userMessage);
-    } catch (retrievalError) {
-      console.error('Portfolio retrieval error:', retrievalError);
+    const model = createGenerativeModel();
+
+    if (isCasualGreeting(userMessage)) {
+      const greetingPrompt = buildGreetingPrompt(userMessage);
+      const result = await model.generateContent(greetingPrompt);
+      const text = result?.response?.text?.()?.trim();
+
+      return text || 'Hey — I\'m VL-Agent. Ask me about Vaibhav\'s projects, stack, or academic background.';
     }
 
-    const contextualMessage = retrievedContext
-      ? buildContextualMessage(userMessage, retrievedContext)
-      : userMessage;
+    const retrievedContext = await retrievePortfolioContext(userMessage).catch((retrievalError) => {
+      console.error('Portfolio retrieval error:', retrievalError);
+      return '';
+    });
 
     console.log('Retrieved Database Context:', retrievedContext);
 
-    const chat = shouldUseFreshContextSession(userMessage, retrievedContext)
-      ? (() => {
-          const genAI = new GoogleGenerativeAI(getGeminiApiKey());
-          const model = genAI.getGenerativeModel({
-            model: 'gemini-2.0-flash',
-            systemInstruction: buildSystemInstruction(),
-          });
+    const contextualMessage = retrievedContext
+      ? buildContextPrompt(userMessage, retrievedContext)
+      : userMessage;
 
-          return model.startChat({ history: [] });
-        })()
-      : getChatSession();
-
-    const result = await chat.sendMessage(contextualMessage);
+    const result = await model.generateContent(contextualMessage);
     const text = result?.response?.text?.()?.trim();
 
     if (!text) {
-      return buildLocalPortfolioAnswer(userMessage, retrievedContext);
+      return 'I hit a generation snag, but I can still unpack Vaibhav\'s projects, stack, or experience if you want to ask again.';
     }
 
     return text;
   } catch (error) {
     console.error('Gemini chat error:', error);
-    chatSession = null;
-    return buildLocalPortfolioAnswer(userMessage, retrievedContext);
+    return 'I ran into a generation issue. Ask again with a project, skill, or role focus and I\'ll respond cleanly.';
   }
 };
 
 export const resetVaibhavAgentSession = () => {
-  chatSession = null;
 };

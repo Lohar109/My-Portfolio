@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   ArrowRight,
   Download,
-  Rocket,
-  GraduationCap,
   Code2,
-  Award,
   Sparkles,
   Palette,
   Server,
@@ -19,32 +16,6 @@ import IntroVideoFrame from '../ui/IntroVideoFrame.jsx'
 function HeroSection() {
   const navigate = useNavigate()
 
-  const metrics = [
-    {
-      id: 'projects',
-      value: '20+',
-      label: 'Projects Completed',
-      icon: <Rocket className="h-5 w-5" />,
-    },
-    {
-      id: 'learning',
-      value: '5+',
-      label: 'Years of Learning',
-      icon: <GraduationCap className="h-5 w-5" />,
-    },
-    {
-      id: 'tech',
-      value: '10+',
-      label: 'Technologies',
-      icon: <Code2 className="h-5 w-5" />,
-    },
-    {
-      id: 'quality',
-      value: '100%',
-      label: 'Commitment to Quality',
-      icon: <Award className="h-5 w-5" />,
-    },
-  ]
 
   const services = [
     {
@@ -240,34 +211,6 @@ function HeroSection() {
         </div>
       </motion.section>
 
-      {/* 2. Metrics Bar Section */}
-      <motion.section 
-        className="mx-auto max-w-6xl px-6 py-6 sm:px-10 lg:px-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-      >
-        <div className="w-full rounded-2xl border border-gray-150 bg-white/60 p-5 md:p-6 backdrop-blur-md shadow-[0_12px_32px_-8px_rgba(0,0,0,0.03)] grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y-0 divide-x-0 lg:divide-x lg:divide-gray-100">
-          {metrics.map((metric) => (
-            <div 
-              key={metric.id}
-              className="flex items-center gap-4 px-3 py-2 sm:px-6 lg:justify-center transition-all duration-300 hover:scale-[1.03] select-none"
-            >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50/80 text-indigo-600 border border-indigo-100/50 shadow-sm">
-                {metric.icon}
-              </div>
-              <div className="flex flex-col">
-                <span className="text-2xl sm:text-3xl font-black text-gray-900 leading-none">
-                  {metric.value}
-                </span>
-                <span className="mt-1 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-gray-400">
-                  {metric.label}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.section>
 
       {/* 3. "What I Do" (Services) Section */}
       <motion.section

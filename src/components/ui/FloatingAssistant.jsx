@@ -246,20 +246,6 @@ const FloatingAssistant = () => {
             <aside className={`hidden w-[128px] shrink-0 border-r px-3 py-5 lg:flex lg:flex-col overflow-y-auto scrollbar-none transition-colors duration-300 ${
               isDarkMode ? 'border-slate-800 bg-slate-900/90' : 'border-slate-200/70 bg-white/85'
             }`}>
-              {/* Sleek compact Avatar container with glowing green badge */}
-              <div className="flex flex-col items-center justify-center shrink-0 mb-4">
-                <div className="relative shrink-0">
-                  <div className={`flex h-14 w-14 items-center justify-center rounded-full shadow-inner border transition-colors duration-300 ${
-                    isDarkMode
-                      ? 'bg-gradient-to-br from-indigo-950/50 to-violet-900/50 border-slate-800'
-                      : 'bg-gradient-to-br from-indigo-50 to-violet-100 border-slate-200/50'
-                  }`}>
-                    <LottieComponent animationData={animationData} loop style={{ width: 44, height: 44 }} />
-                  </div>
-                  <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-emerald-500 border-2 border-white shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                </div>
-              </div>
-
               <nav className="flex flex-col gap-1.5 shrink-0">
                 {navItems.map((item) => {
                   const Icon = item.icon;
@@ -399,18 +385,9 @@ const FloatingAssistant = () => {
                     {greetingText}
                   </div>
                 )}
-
                 <div className="space-y-6">
                   {messages.map((message) => (
-                    <div key={message.id} className={`flex items-start gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      {message.role !== 'user' && (
-                        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border shadow-sm transition-colors duration-300 ${
-                          isDarkMode ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'
-                        }`}>
-                          <LottieComponent animationData={animationData} loop style={{ width: 36, height: 36 }} />
-                        </div>
-                      )}
-
+                    <div key={message.id} className={`flex items-start ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[min(100%,640px)] rounded-[1.35rem] border px-4 py-3 shadow-sm transition-all duration-300 ${
                         message.role === 'user'
                           ? isDarkMode
@@ -425,26 +402,11 @@ const FloatingAssistant = () => {
                           {message.typing ? <span className="ml-0.5 inline-block animate-pulse">|</span> : null}
                         </span>
                       </div>
-
-                      {message.role === 'user' && (
-                        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border shadow-sm transition-colors duration-300 ${
-                          isDarkMode
-                            ? 'border-violet-900 bg-violet-950/60 text-violet-300'
-                            : 'border-violet-200 bg-violet-50 text-violet-700'
-                        }`}>
-                          <UserRound className="h-5 w-5" />
-                        </div>
-                      )}
                     </div>
                   ))}
 
                   {isThinking && (
-                    <div className="flex items-start gap-3">
-                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border shadow-sm transition-colors duration-300 ${
-                        isDarkMode ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'
-                      }`}>
-                        <LottieComponent animationData={animationData} loop style={{ width: 36, height: 36 }} />
-                      </div>
+                    <div className="flex items-start">
                       <div className={`rounded-[1.35rem] rounded-bl-md border px-4 py-3 text-sm font-medium shadow-sm transition-colors duration-300 ${
                         isDarkMode
                           ? 'border-slate-800 bg-slate-900 text-slate-300'
@@ -454,8 +416,6 @@ const FloatingAssistant = () => {
                       </div>
                     </div>
                   )}
-
-
 
                   <div ref={messagesEndRef} />
                 </div>

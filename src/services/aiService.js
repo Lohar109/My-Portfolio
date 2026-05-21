@@ -14,6 +14,22 @@ const buildGreetingReply = () => [
   'If you want, ask me about a specific project, technology, or achievement and I\'ll keep the answer clear and well-structured.',
 ].join(' ');
 
+const looksTooGeneric = (text) => {
+  if (!text) {
+    return true;
+  }
+
+  const normalized = text.toLowerCase();
+  return (
+    text.length < 60 ||
+    normalized.includes('i’m having a quick issue right now') ||
+    normalized.includes('i am having a quick issue right now') ||
+    normalized.includes('please try again') ||
+    normalized.includes('ask me to') ||
+    normalized.includes('what would you like to ask')
+  );
+};
+
 export async function sendMessageToVaibhavAgent(userMessage) {
   if (!userMessage || typeof userMessage !== 'string') {
     return 'Please provide a short question about Vaibhav — projects, skills, or education.';
@@ -42,9 +58,9 @@ User Question: ${userMessage}`;
     const result = await model.generateContent(prompt);
     const text = result?.response?.text?.()?.trim();
 
-    if (text) return text;
+    if (text && !looksTooGeneric(text)) return text;
 
-    console.warn('Generative model returned empty text — falling back to local summary.');
+    console.warn('Generative model returned weak or empty text — falling back to local summary.');
   } catch (err) {
     console.error('Generative model error:', err);
   }

@@ -448,7 +448,7 @@ const FloatingAssistant = () => {
                 </div>
 
                 <form
-                  className={`flex items-end gap-2 rounded-[1.4rem] border px-3 py-3 shadow-sm transition-colors duration-300 ${
+                  className={`flex items-center gap-2 rounded-full border pl-4 pr-1.5 py-1.5 shadow-sm transition-colors duration-300 ${
                     isDarkMode ? 'border-slate-800 bg-slate-900/60' : 'border-slate-200 bg-slate-50'
                   }`}
                   onSubmit={async (event) => {
@@ -460,7 +460,7 @@ const FloatingAssistant = () => {
                     <input
                       type="text"
                       placeholder="Ask me anything about Vaibhav..."
-                      className={`w-full bg-transparent text-sm font-medium outline-none transition-colors duration-300 ${
+                      className={`w-full bg-transparent text-base font-medium outline-none transition-colors duration-300 ${
                         isDarkMode ? 'text-slate-50 placeholder:text-slate-500' : 'text-slate-950 placeholder:text-slate-400'
                       }`}
                       value={inputValue}
@@ -473,7 +473,7 @@ const FloatingAssistant = () => {
                     onClick={async () => {
                       await sendMessageFromText();
                     }}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-white shadow-md transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-white shadow-md transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
                     aria-label="Send message"
                     disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
                   >

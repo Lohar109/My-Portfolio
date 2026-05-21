@@ -30,11 +30,42 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
       : 'bg-violet-50 text-violet-700 font-mono text-[13px] px-1.5 py-0.5 rounded border border-violet-100/70';
     html = html.replace(/`([^`]+)`/g, `<code class="${codeClass}">$1</code>`);
 
-    // 4. Links: [text](url)
     const linkClass = isDarkMode
-      ? 'text-violet-400 font-semibold underline hover:text-violet-300 transition-colors'
-      : 'text-violet-600 font-semibold underline hover:text-violet-700 transition-colors';
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, `<a href="$2" target="_blank" rel="noopener noreferrer" class="${linkClass}">$1</a>`);
+      ? 'text-violet-400 font-semibold underline hover:text-violet-300 transition-colors cursor-pointer'
+      : 'text-violet-600 font-semibold underline hover:text-violet-700 transition-colors cursor-pointer';
+
+    // 4. Markdown Links: [text](url) -> temporarily replace with placeholders to avoid matching their URLs as bare URLs
+    const placeholders = [];
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+      const id = `___LINK_PLACEHOLDER_${placeholders.length}___`;
+      placeholders.push({
+        id,
+        html: `<a href="${url}" target="_blank" rel="noopener noreferrer" class="${linkClass}">${text}</a>`
+      });
+      return id;
+    });
+
+    // 5. Bare URLs: https://... or http://... or www....
+    const urlRegex = /(https?:\/\/[^\s<>]+|www\.[^\s<>]+)/gi;
+    html = html.replace(urlRegex, (url) => {
+      const href = url.toLowerCase().startsWith('http') ? url : `https://${url}`;
+      let cleanUrl = href;
+      let displayUrl = url;
+      const trailingPunct = /[.,;:?)]+$/;
+      const punctMatch = url.match(trailingPunct);
+      if (punctMatch) {
+        const punctuation = punctMatch[0];
+        displayUrl = url.slice(0, -punctuation.length);
+        cleanUrl = href.slice(0, -punctuation.length);
+        return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="${linkClass}">${displayUrl}</a>${punctuation}`;
+      }
+      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="${linkClass}">${displayUrl}</a>`;
+    });
+
+    // 6. Restore placeholders
+    placeholders.forEach(({ id, html: replacement }) => {
+      html = html.replace(id, replacement);
+    });
 
     return html;
   };

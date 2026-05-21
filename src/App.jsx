@@ -17,7 +17,7 @@ import FloatingAssistant from './components/ui/FloatingAssistant.jsx'
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#eaeaea] text-gray-900">
+    <div className="flex min-h-screen flex-col bg-[#f5f5f7] text-gray-900">
       <ScrollToTop />
       <SiteHeader />
       <div className="flex-1">

@@ -145,7 +145,7 @@ function HeroSection() {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="mt-4 text-[15px] sm:text-base font-medium leading-relaxed text-gray-500/90 max-w-xl font-sans"
             >
-              Creating premium web applications, AI tools, and scalable systems with modern technologies.
+              A software developer who doesn't just call APIs, but builds custom semantic data pipelines and vector models. Expert in engineering secure enterprise apps across web and desktop platforms.
             </motion.p>
 
             {/* Action Buttons */}

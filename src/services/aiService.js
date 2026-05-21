@@ -25,12 +25,12 @@ export const calculateAge = (dobString) => {
 };
 
 const PERSONAL_OR_INAPPROPRIATE_QUERY = /(relationship|girlfriend|boyfriend|dating|marry|marriage|wife|husband|salary|income|money|religion|politics|party|vote|address|home|phone|contact number|private|secret|adult|sex|nude|nsfw|explicit|violence|weapon|hack|illegal|drugs)/i;
-const CASUAL_GREETING_QUERY = /^(hi|hello|hey|hiya|yo|thanks|thank you|who are you)\b/i;
+const CASUAL_CONVERSATION_QUERY = /^(hi|hello|hey|hiya|yo|thanks|thank you|who are you|how are you|how's it going|what's up|good morning|good afternoon|good evening)\b/i;
 
 export const shouldUseProfessionalFallback = (query) => {
   const normalizedQuery = query || '';
 
-  if (CASUAL_GREETING_QUERY.test(normalizedQuery)) {
+  if (CASUAL_CONVERSATION_QUERY.test(normalizedQuery)) {
     return false;
   }
 
@@ -54,6 +54,9 @@ const buildSystemInstruction = () => {
     '- Never dump a list of all projects when the user requested one specific project.',
     '- Pinpoint the project\'s architecture, stack, and core challenge with precision.',
     '- If the query is broad, answer broadly; if it is specific, stay tightly scoped.',
+    '- Never copy raw key-value labels from retrieved context such as Project Title, Core Challenge, Technical Stack Used, or Summary.',
+    '- Read the retrieved context and synthesize an original answer in fluid, elite technical language.',
+    '- If the same project is asked again, vary the structure of the response so it is not word-for-word repetitive.',
     'Response formatting rules:',
     '- Never output dense blocks of paragraphs.',
     '- Break thoughts into clean, scannable parts.',
@@ -61,10 +64,13 @@ const buildSystemInstruction = () => {
     '- Use structural bullet points to break down Core Features, Technical Challenge, and System Stack.',
     '- Use horizontal rules (---) to separate distinct logical sections.',
     '- Keep responses authentic, crisp, and technically grounded.',
+    '- For overviews, use a brief executive summary.',
+    '- For stack breakdowns, use bullets.',
+    '- For technical challenges, use a conversational problem-solving deep dive.',
     'Greeting policy:',
-    '- If the user says hello, hi, hey, or a generic thanks, respond with a punchy, warm, tech-focused welcome.',
-    '- Ask which specific domain of Vaibhav\'s full-stack skill set they want to inspect.',
-    '- Do not fetch or dump portfolio data for casual greetings.',
+    '- If the user says hello, hi, hey, how are you, or a generic thanks, respond with a warm, organic full-stack engineer welcome.',
+    '- Vary the greeting phrasing naturally and ask which specific domain of Vaibhav\'s stack they want to inspect.',
+    '- Do not fetch or inject portfolio context for casual greetings.',
     'If the user asks personal or inappropriate questions, respond exactly with this sentence:',
     PROFESSIONAL_FALLBACK,
     '',
@@ -93,14 +99,19 @@ const summarizeSkills = () => {
   }).join(' ');
 };
 
-const buildGreetingAnswer = () => {
-  return [
-    'Hey! I\'m VL-Agent, Vaibhav\'s portfolio assistant.',
-    'Ask me anything about his **projects**, **skills**, **experience**, or **academic background** and I\'ll keep it clear and useful.',
-  ].join(' ');
+const buildGreetingAnswer = (userMessage) => {
+  const greetingVariants = [
+    'Hey, I\'m VL-Agent. I can unpack Vaibhav\'s **projects**, **stack**, or **academic profile** with precision.',
+    'Absolutely, I\'m here. Ask me about Vaibhav\'s **full-stack work**, **AI integrations**, or any project detail you want dissected.',
+    'Good to see you. If you want the sharp version of Vaibhav\'s engineering story, point me at a project, skill, or metric.',
+    'Hello. I can walk you through Vaibhav\'s **React**, **Node.js**, **Supabase**, or **GenAI** work in a clean, technical format.',
+  ];
+
+  const index = Math.abs((userMessage || '').length) % greetingVariants.length;
+  return `${greetingVariants[index]} Which part of his full-stack toolkit should we inspect first?`;
 };
 
-const isCasualGreeting = (query) => CASUAL_GREETING_QUERY.test(query || '');
+const isCasualGreeting = (query) => CASUAL_CONVERSATION_QUERY.test(query || '');
 
 const PROJECT_FOCUSED_QUERY = /(project|projects|built|portfolio|case study|loading optimization|loading optimisation|shopease|campus connect|insightboard|supportflow|mediaops|marketpulse)/i;
 
@@ -110,11 +121,50 @@ const buildContextualMessage = (userMessage, retrievedContext) => [
   'Ignore prior chat history and any conflicting project details from earlier turns.',
   'Use only the freshly retrieved portfolio context below when answering this question.',
   'If the retrieved context conflicts with past conversation memory, the retrieved context wins.',
+  'Do not quote the retrieved context verbatim. Synthesize it into a natural, original answer.',
   '',
   `Retrieved context:\n${retrievedContext}`,
   '',
   `User question:\n${userMessage}`,
 ].join('\n');
+
+const parseProjectContext = (retrievedContext) => {
+  const blocks = (retrievedContext || '')
+    .split(/\n\n---\n\n/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  const firstBlock = blocks[0] || '';
+  const titleMatch = firstBlock.match(/Project Title:\s*(.+?)(?:\.|$)/i);
+  const roleMatch = firstBlock.match(/Role:\s*(.+?)(?:\.|$)/i);
+  const summaryMatch = firstBlock.match(/Summary:\s*(.+?)(?:\.|$)/i);
+  const challengeMatch = firstBlock.match(/Core Challenge:\s*(.+?)(?:\.|$)/i);
+  const stackMatch = firstBlock.match(/Technical Stack Used:\s*(.+?)(?:\.|$)/i);
+
+  if (!titleMatch && !summaryMatch && !challengeMatch && !stackMatch) {
+    return '';
+  }
+
+  const sections = [];
+
+  if (titleMatch || roleMatch) {
+    sections.push(`**Project Focus:** ${[titleMatch?.[1], roleMatch ? `(${roleMatch[1]})` : ''].filter(Boolean).join(' ')}`.trim());
+  }
+
+  if (summaryMatch) {
+    sections.push(`**Executive Summary:** ${summaryMatch[1]}`);
+  }
+
+  if (challengeMatch) {
+    sections.push(`**Technical Challenge:** ${challengeMatch[1]}`);
+  }
+
+  if (stackMatch) {
+    sections.push(`**System Stack:** ${stackMatch[1]}`);
+  }
+
+  return sections.join('\n');
+};
 
 const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
   const normalizedQuery = (userMessage || '').toLowerCase();
@@ -125,10 +175,12 @@ const buildLocalPortfolioAnswer = (userMessage, retrievedContext = '') => {
   const hasRetrievedProjectContext = Boolean(retrievedContext) && PROJECT_FOCUSED_QUERY.test(normalizedQuery);
 
   if (hasRetrievedProjectContext) {
+    const synthesizedContext = parseProjectContext(retrievedContext);
+
     return [
-      'Here is the exact retrieved project block:',
+      'Here is the most relevant project synthesis:',
       '---',
-      retrievedContext,
+      synthesizedContext || retrievedContext,
     ].join('\n');
   }
 
@@ -206,6 +258,10 @@ const getChatSession = () => {
 };
 
 export const sendMessageToVaibhavAgent = async (userMessage) => {
+  if (isCasualGreeting(userMessage)) {
+    return buildGreetingAnswer(userMessage);
+  }
+
   if (shouldUseProfessionalFallback(userMessage)) {
     return PROFESSIONAL_FALLBACK;
   }

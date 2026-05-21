@@ -211,13 +211,6 @@ const FloatingAssistant = () => {
                 </button>
               </div>
 
-              <div className="border-b border-slate-200/70 px-5 py-4 sm:px-6">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                  <Sparkles className="h-3.5 w-3.5 text-slate-900" />
-                  Vaibhav&apos;s Agent
-                </div>
-              </div>
-
               <div className="flex-1 min-h-0 overflow-y-auto bg-gradient-to-b from-slate-50/80 to-white px-4 py-5 sm:px-6">
                 {messages.length === 0 && !isThinking && (
                   <div className="mb-4 rounded-[1.5rem] border border-dashed border-slate-200 bg-white/80 p-4 text-sm leading-6 text-slate-600 shadow-sm">

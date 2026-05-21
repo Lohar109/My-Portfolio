@@ -22,21 +22,53 @@ function HeroSection() {
       title: 'Full Stack Development',
       description: 'Building robust and scalable web applications using modern technologies.',
       icon: <Code2 className="h-5.5 w-5.5" />,
+      colorClasses: {
+        iconBg: 'bg-blue-50/80 text-[#2563EB] border-blue-100/30',
+        iconHover: 'group-hover:bg-[#2563EB] group-hover:text-white',
+        titleHover: 'group-hover:text-[#2563EB]',
+        arrowHover: 'group-hover:text-[#2563EB] group-hover:border-blue-100 group-hover:bg-blue-50/50',
+        cardGlow: 'group-hover:from-blue-500/5 group-hover:to-indigo-500/5',
+        cardBorder: 'hover:border-blue-200/80 hover:shadow-[0_20px_35px_-12px_rgba(37,99,235,0.12)]'
+      }
     },
     {
       title: 'AI Integrations',
       description: 'Creating AI-powered features and intelligent systems using latest AI models.',
       icon: <Sparkles className="h-5.5 w-5.5" />,
+      colorClasses: {
+        iconBg: 'bg-purple-50/80 text-purple-600 border-purple-100/30',
+        iconHover: 'group-hover:bg-purple-600 group-hover:text-white',
+        titleHover: 'group-hover:text-purple-600',
+        arrowHover: 'group-hover:text-purple-600 group-hover:border-purple-100 group-hover:bg-purple-50/50',
+        cardGlow: 'group-hover:from-purple-500/5 group-hover:to-pink-500/5',
+        cardBorder: 'hover:border-purple-200/80 hover:shadow-[0_20px_35px_-12px_rgba(139,92,246,0.12)]'
+      }
     },
     {
       title: 'UI/UX Engineering',
       description: 'Designing clean, responsive and user-friendly interfaces that users love.',
       icon: <Palette className="h-5.5 w-5.5" />,
+      colorClasses: {
+        iconBg: 'bg-emerald-50/80 text-[#128C7E] border-emerald-100/30',
+        iconHover: 'group-hover:bg-[#128C7E] group-hover:text-white',
+        titleHover: 'group-hover:text-[#128C7E]',
+        arrowHover: 'group-hover:text-[#128C7E] group-hover:border-emerald-100 group-hover:bg-emerald-50/50',
+        cardGlow: 'group-hover:from-emerald-500/5 group-hover:to-teal-500/5',
+        cardBorder: 'hover:border-emerald-200/80 hover:shadow-[0_20px_35px_-12px_rgba(18,140,126,0.12)]'
+      }
     },
     {
       title: 'System Design',
       description: 'Architecting high-performance, secure and scalable backend infrastructures.',
       icon: <Server className="h-5.5 w-5.5" />,
+      colorClasses: {
+        iconBg: 'bg-red-50/80 text-[#EF4444] border-red-100/30',
+        iconHover: 'group-hover:bg-[#EF4444] group-hover:text-white',
+        titleHover: 'group-hover:text-[#EF4444]',
+        arrowHover: 'group-hover:text-[#EF4444] group-hover:border-red-100 group-hover:bg-red-50/50',
+        cardGlow: 'group-hover:from-red-500/5 group-hover:to-orange-500/5',
+        cardBorder: 'hover:border-red-200/80 hover:shadow-[0_20px_35px_-12px_rgba(239,68,68,0.12)]'
+      }
     },
   ]
 
@@ -240,37 +272,40 @@ function HeroSection() {
 
         {/* Services 4-Card Grid */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative flex flex-col justify-between rounded-[1.75rem] border border-gray-150/70 bg-white/70 p-6 shadow-[0_10px_24px_-8px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200/80 hover:bg-white hover:shadow-[0_20px_35px_-12px_rgba(99,102,241,0.12)] cursor-default"
-            >
-              <div>
-                {/* Custom glowing background glow */}
-                <div className="absolute -inset-px rounded-[1.75rem] bg-gradient-to-r from-indigo-500/0 via-indigo-500/0 to-indigo-500/0 group-hover:from-indigo-500/5 group-hover:to-purple-500/5 transition duration-500 pointer-events-none -z-10" />
+          {services.map((service, index) => {
+            const { iconBg, iconHover, titleHover, arrowHover, cardGlow, cardBorder } = service.colorClasses
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`group relative flex flex-col justify-between rounded-[1.75rem] border border-gray-150/70 bg-white/70 p-6 shadow-[0_10px_24px_-8px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:bg-white cursor-default ${cardBorder}`}
+              >
+                <div>
+                  {/* Custom glowing background glow */}
+                  <div className={`absolute -inset-px rounded-[1.75rem] bg-gradient-to-r from-indigo-500/0 via-indigo-500/0 to-indigo-500/0 transition duration-500 pointer-events-none -z-10 ${cardGlow}`} />
 
-                {/* Service Icon inside glowing background circle */}
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50/80 text-indigo-600 border border-indigo-100/30 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                  {service.icon}
+                  {/* Service Icon inside glowing background circle */}
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border group-hover:scale-110 transition-all duration-300 ${iconBg} ${iconHover}`}>
+                    {service.icon}
+                  </div>
+
+                  <h3 className={`mt-5 text-base sm:text-lg font-black text-gray-900 transition duration-200 ${titleHover}`}>
+                    {service.title}
+                  </h3>
+                  <p className="mt-2.5 text-xs sm:text-sm font-semibold leading-relaxed text-gray-400/95">
+                    {service.description}
+                  </p>
                 </div>
 
-                <h3 className="mt-5 text-base sm:text-lg font-black text-gray-900 group-hover:text-indigo-600 transition duration-200">
-                  {service.title}
-                </h3>
-                <p className="mt-2.5 text-xs sm:text-sm font-semibold leading-relaxed text-gray-400/95">
-                  {service.description}
-                </p>
-              </div>
-
-              {/* Bottom-right diagonal arrow with dynamic shift */}
-              <div className="mt-6 flex justify-end">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-gray-100 bg-gray-50/50 text-gray-400 group-hover:scale-110 group-hover:border-indigo-100 group-hover:bg-indigo-50/50 group-hover:text-indigo-600 transition-all duration-300">
-                  <ArrowUpRight className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                {/* Bottom-right diagonal arrow with dynamic shift */}
+                <div className="mt-6 flex justify-end">
+                  <div className={`flex h-8 w-8 items-center justify-center rounded-xl border border-gray-100 bg-gray-50/50 text-gray-400 group-hover:scale-110 transition-all duration-300 ${arrowHover}`}>
+                    <ArrowUpRight className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
       </motion.section>
     </div>

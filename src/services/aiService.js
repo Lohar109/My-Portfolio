@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { VAIBHAV_KNOWLEDGE } from '../data/knowledgeBase';
+import { retrievePortfolioContext } from './portfolioRetrieval';
 
 export const PROFESSIONAL_FALLBACK = "I specialize in Vaibhav's professional journey. Please ask about his technical skills or academic achievements!";
 export const RE_SYNC_FALLBACK = "I'm currently re-syncing with Vaibhav's database. One second!";
@@ -88,8 +89,13 @@ export const sendMessageToVaibhavAgent = async (userMessage) => {
   }
 
   try {
+    const retrievedContext = await retrievePortfolioContext(userMessage);
+    const contextualPrompt = retrievedContext
+      ? `Use the following retrieved portfolio context when it is relevant and accurate:\n\n${retrievedContext}\n\nUser question:\n${userMessage}`
+      : userMessage;
+
     const chat = getChatSession();
-    const result = await chat.sendMessage(userMessage);
+    const result = await chat.sendMessage(contextualPrompt);
     const text = result?.response?.text?.()?.trim();
 
     if (!text) {

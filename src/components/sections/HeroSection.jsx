@@ -256,7 +256,7 @@ function HeroSection() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between cursor-default"
+              className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-default"
             >
               <div>
                 {/* Service Icon inside borderless transparent circle */}
@@ -270,13 +270,6 @@ function HeroSection() {
                 <p className="mt-2.5 text-xs sm:text-sm font-semibold leading-relaxed text-gray-400/95 text-left">
                   {service.description}
                 </p>
-              </div>
-
-              {/* Bottom-right diagonal arrow with dynamic shift */}
-              <div className="mt-6 flex justify-end">
-                <div className={`flex h-8 w-8 items-center justify-center rounded-xl border border-gray-100 bg-gray-50/50 text-gray-400 group-hover:scale-110 transition-all duration-300 ${service.arrowHover}`}>
-                  <ArrowUpRight className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
               </div>
             </motion.div>
           ))}

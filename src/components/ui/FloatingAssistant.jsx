@@ -33,7 +33,7 @@ const FloatingAssistant = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('Chat');
 
-  const fullText = 'Ask me anything about Vaibhav ✨';
+  const fullText = 'Hello';
 
   const getGreetingText = () => {
     switch (activeTab) {
@@ -53,7 +53,7 @@ const FloatingAssistant = () => {
   };
 
   const getPlaceholderText = () => {
-    if (activeTab === 'Chat') return "Ask me anything about Vaibhav...";
+    if (activeTab === 'Chat') return "Ask me anything...";
     return `Ask about Vaibhav's ${activeTab.toLowerCase()}...`;
   };
 

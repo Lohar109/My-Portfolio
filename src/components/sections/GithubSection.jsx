@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Star,
   GitFork,
   BookOpen,
   ExternalLink,
@@ -612,11 +611,6 @@ function GithubSection() {
                       >
                         {repo.name}
                       </a>
-                    </div>
-                    
-                    <div className="flex items-center gap-1.5 shrink-0 bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-400 select-none">
-                      <Star className="h-3 w-3 fill-yellow-400 stroke-yellow-400" />
-                      {repo.stargazers_count}
                     </div>
                   </div>
 

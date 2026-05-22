@@ -55,6 +55,78 @@ function GithubSection() {
     }
   ]
 
+  const monthToIndex = {
+    January: 0,
+    February: 1,
+    March: 2,
+    April: 3,
+    May: 4,
+    June: 5,
+    July: 6,
+    August: 7,
+    September: 8,
+    October: 9,
+    November: 10,
+    December: 11
+  }
+
+  const buildContributionDataFromText = (text) => {
+    const today = new Date()
+    const currentYear = today.getFullYear()
+    const currentMonth = today.getMonth()
+    const countsByDate = new Map()
+
+    const totalMatch = text.match(/##\s*([\d,]+)\s+contributions in the last year/)
+    const totalFromPage = totalMatch ? Number(totalMatch[1].replace(/,/g, '')) : null
+
+    const contributionPattern = /(No|\d+) contributions on ([A-Za-z]+) (\d{1,2})(?:st|nd|rd|th)/g
+    let match = contributionPattern.exec(text)
+
+    while (match) {
+      const rawCount = match[1]
+      const monthName = match[2]
+      const day = Number(match[3])
+      const monthIndex = monthToIndex[monthName]
+
+      if (monthIndex !== undefined) {
+        const year = monthIndex > currentMonth ? currentYear - 1 : currentYear
+        const date = new Date(year, monthIndex, day)
+        const dateKey = date.toISOString().split('T')[0]
+        countsByDate.set(dateKey, rawCount === 'No' ? 0 : Number(rawCount))
+      }
+
+      match = contributionPattern.exec(text)
+    }
+
+    const contributionsList = []
+    let maxCommit = 0
+
+    for (let i = 370; i >= 0; i--) {
+      const date = new Date(today)
+      date.setDate(today.getDate() - i)
+      const dateKey = date.toISOString().split('T')[0]
+      const count = countsByDate.get(dateKey) || 0
+
+      if (count > maxCommit) {
+        maxCommit = count
+      }
+
+      contributionsList.push({
+        date: dateKey,
+        count,
+        level: count === 0 ? 0 : count < 10 ? 1 : count < 30 ? 2 : count < 40 ? 3 : 4
+      })
+    }
+
+    return {
+      total: {
+        lastYear: totalFromPage ?? contributionsList.reduce((sum, day) => sum + day.count, 0)
+      },
+      contributions: contributionsList,
+      maxCommit
+    }
+  }
+
   useEffect(() => {
     let refreshTimer = null
     let isMounted = true
@@ -122,30 +194,12 @@ function GithubSection() {
         const nextRepos = enrichedRepos.length > 0 ? enrichedRepos : fallbackRepos
         setRepos(nextRepos)
 
-        // 3. Fetch Live Contributions Data dynamically
+        // 3. Fetch the public GitHub contributions page through a text proxy so the graph matches GitHub itself.
         try {
-          const contribRes = await fetch(`https://github-contributions-api.deno.dev/${username}.json`)
+          const contribRes = await fetch(`https://r.jina.ai/http://github.com/users/${username}/contributions`)
           if (contribRes.ok) {
-            const data = await contribRes.json()
-            const levelMap = {
-              'NONE': 0,
-              'FIRST_QUARTILE': 1,
-              'SECOND_QUARTILE': 2,
-              'THIRD_QUARTILE': 3,
-              'FOURTH_QUARTILE': 4
-            }
-            
-            const contributionsData = {
-              total: {
-                lastYear: data.totalContributions
-              },
-              contributions: data.contributions.flat().map(day => ({
-                date: day.date,
-                count: day.contributionCount,
-                level: levelMap[day.contributionLevel] ?? 0
-              })),
-              maxCommit: Math.max(...data.contributions.flat().map(d => d.contributionCount))
-            }
+            const contributionsText = await contribRes.text()
+            const contributionsData = buildContributionDataFromText(contributionsText)
 
             if (isMounted) {
               setContributions(contributionsData)

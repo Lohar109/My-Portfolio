@@ -617,20 +617,6 @@ function GithubSection() {
                           whileTap={{ scale: 0.98 }}
                           className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-pink-500/10 via-fuchsia-500/5 to-pink-500/10 hover:from-pink-500/20 hover:via-fuchsia-500/15 hover:to-pink-500/20 border border-pink-200/60 hover:border-pink-300 text-[10px] font-black text-pink-600 hover:text-pink-700 tracking-wider font-sans transition-all duration-300 shadow-sm hover:shadow-[0_4px_16px_rgba(236,72,153,0.22)] cursor-pointer"
                         >
-                          <motion.div
-                            className="flex items-center justify-center origin-center shrink-0"
-                            animate={{
-                              scaleY: [1, 1, 0.15, 1, 1, 1, 0.15, 1],
-                            }}
-                            transition={{
-                              duration: 4.5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              times: [0, 0.45, 0.48, 0.52, 0.8, 0.83, 0.87, 1]
-                            }}
-                          >
-                            <Eye className="h-3.5 w-3.5" />
-                          </motion.div>
                           <span>LIVE</span>
                           <span className="relative flex h-1.5 w-1.5 shrink-0">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>

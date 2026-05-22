@@ -684,9 +684,16 @@ function LeetcodeSection() {
                     onMouseEnter={(e) => setActiveTooltip({
                       count: day.count,
                       date: day.date,
-                      x: e.currentTarget.offsetLeft - 80,
-                      y: e.currentTarget.offsetTop - 36
+                      x: e.clientX,
+                      y: e.clientY - 12
                     })}
+                    onMouseMove={(e) => setActiveTooltip((currentTooltip) => ({
+                      ...(currentTooltip || {}),
+                      count: day.count,
+                      date: day.date,
+                      x: e.clientX,
+                      y: e.clientY - 12
+                    }))}
                     onMouseLeave={() => setActiveTooltip(null)}
                   />
                 ))}
@@ -708,28 +715,29 @@ function LeetcodeSection() {
               </div>
             </div>
           </div>
-
-          {/* Submissions interactive Tooltip */}
-          <AnimatePresence>
-            {activeTooltip && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="absolute z-30 bg-gray-900 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-lg pointer-events-none font-sans"
-                style={{
-                  left: `${activeTooltip.x}px`,
-                  top: `${activeTooltip.y}px`
-                }}
-              >
-                <div className="text-center whitespace-nowrap">
-                  <span className="text-amber-400">{activeTooltip.count} submissions</span> on {formatTooltipDate(activeTooltip.date)}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </motion.div>
+
+      {/* Tooltip rendered outside the clipped card so hover details remain visible */}
+      <AnimatePresence>
+        {activeTooltip && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed z-[9999] bg-gray-900 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-lg pointer-events-none font-sans"
+            style={{
+              left: `${activeTooltip.x}px`,
+              top: `${activeTooltip.y}px`,
+              transform: 'translate(-50%, -100%)'
+            }}
+          >
+            <div className="text-center whitespace-nowrap">
+              <span className="text-amber-400">{activeTooltip.count} submissions</span> on {formatTooltipDate(activeTooltip.date)}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Recent Solved Problems Title Accordion */}
       <motion.div

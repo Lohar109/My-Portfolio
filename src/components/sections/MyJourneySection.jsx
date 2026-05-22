@@ -139,10 +139,7 @@ function MyJourneySection() {
                     {step.description}
                   </p>
                   
-                  {/* Premium purple text for year */}
-                  <div className="mt-auto pt-3 text-purple-600 text-[10px] font-extrabold tracking-wide font-sans select-none">
-                    {step.year}
-                  </div>
+
                 </div>
               </div>
             </motion.div>

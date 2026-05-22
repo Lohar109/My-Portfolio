@@ -71,11 +71,31 @@ function MyJourneySection() {
       {/* Timeline Wrapper */}
       <div className="relative w-full">
         {/* Horizontal Connector Line for Desktop (lg and up) */}
-        <div className="hidden lg:block absolute top-[18px] left-[12.5%] right-[6%] h-[2px] z-0">
-          <div className="w-full h-full border-t-2 border-dotted border-red-500/80 relative">
-            {/* Arrowhead at the end of the line */}
-            <div className="absolute right-0 top-0 -translate-y-1/2 w-0 h-0 border-y-[5px] border-y-transparent border-l-[8px] border-l-red-500" />
-          </div>
+        <div className="hidden lg:block absolute top-[18px] left-[12.5%] right-[0%] h-[2px] z-0">
+          <svg className="w-full h-[2px] overflow-visible">
+            <line
+              x1="0"
+              y1="1"
+              x2="100%"
+              y2="1"
+              stroke="#dc2626"
+              strokeWidth="2"
+              strokeDasharray="4 6"
+              className="animate-flow-line"
+            />
+          </svg>
+          <style>{`
+            @keyframes flow {
+              to {
+                stroke-dashoffset: -20;
+              }
+            }
+            .animate-flow-line {
+              animation: flow 1.5s linear infinite;
+            }
+          `}</style>
+          {/* Arrowhead at the end of the line */}
+          <div className="absolute right-0 top-[1px] -translate-y-1/2 w-0 h-0 border-y-[5px] border-y-transparent border-l-[8px] border-l-red-600" />
         </div>
 
         {/* 4-Column Timeline Grid */}

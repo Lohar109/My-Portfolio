@@ -312,15 +312,12 @@ function GithubSection() {
   }
 
   // Get color for contribution squares (Premium purple-pink theme)
-  const getContributionColor = (level) => {
-    switch (level) {
-      case 0: return 'bg-slate-100 hover:bg-slate-200'
-      case 1: return 'bg-purple-200/70 hover:bg-purple-200 hover:shadow-[0_0_8px_rgba(192,132,252,0.4)]'
-      case 2: return 'bg-purple-400 hover:bg-purple-400 hover:shadow-[0_0_12px_rgba(192,132,252,0.6)]'
-      case 3: return 'bg-purple-600 hover:bg-purple-600 hover:shadow-[0_0_16px_rgba(147,51,234,0.8)]'
-      case 4: return 'bg-pink-500 hover:bg-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.9)]'
-      default: return 'bg-slate-100'
-    }
+  const getContributionColor = (count) => {
+    if (count === 0) return 'bg-slate-100 hover:bg-slate-200'
+    if (count < 10) return 'bg-purple-200/80 hover:bg-purple-200 hover:shadow-[0_0_8px_rgba(192,132,252,0.4)]'
+    if (count < 30) return 'bg-purple-500 hover:bg-purple-500 hover:shadow-[0_0_12px_rgba(168,85,247,0.6)]'
+    if (count < 40) return 'bg-purple-800 hover:bg-purple-800 hover:shadow-[0_0_16px_rgba(107,33,168,0.8)]'
+    return 'bg-pink-500 hover:bg-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.9)]'
   }
 
   // Language color mappings
@@ -490,7 +487,7 @@ function GithubSection() {
                   contributions.contributions.map((day, idx) => (
                     <div
                       key={day.date + idx}
-                      className={`h-[9px] w-[9px] rounded-[2px] transition-all duration-200 cursor-pointer ${getContributionColor(day.level)}`}
+                      className={`h-[9px] w-[9px] rounded-[2px] transition-all duration-200 cursor-pointer ${getContributionColor(day.count)}`}
                       onMouseEnter={(e) => setActiveTooltip({
                         count: day.count,
                         date: day.date,
@@ -517,8 +514,8 @@ function GithubSection() {
                   <span>Less</span>
                   <span className="h-2 w-2 rounded-[1px] bg-slate-100" />
                   <span className="h-2 w-2 rounded-[1px] bg-purple-200" />
-                  <span className="h-2 w-2 rounded-[1px] bg-purple-400" />
-                  <span className="h-2 w-2 rounded-[1px] bg-purple-600" />
+                  <span className="h-2 w-2 rounded-[1px] bg-purple-500" />
+                  <span className="h-2 w-2 rounded-[1px] bg-purple-800" />
                   <span className="h-2 w-2 rounded-[1px] bg-pink-500" />
                   <span>More</span>
                 </div>

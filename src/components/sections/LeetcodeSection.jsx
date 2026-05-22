@@ -60,7 +60,7 @@ function LeetcodeSection() {
     badges: [
       { id: '10301958', displayName: 'Knight', icon: '/static/images/badges/knight.png', creationDate: '2026-05-06' },
       { id: '10252754', displayName: '100 Days Badge 2026', icon: 'https://assets.leetcode.com/static_assets/others/100_1080_1080.png', creationDate: '2026-05-03' },
-      { id: '10211122', displayName: 'May Challenge 2026', icon: 'https://assets.leetcode.com/static_assets/others/may_2026_challenge.png', creationDate: '2026-05-22' }
+      { id: '10211122', displayName: 'May Challenge 2026', icon: 'https://assets.leetcode.com/static_assets/public/images/badges/dcc-2026-5.png', creationDate: '2026-05-22' }
     ]
   }
   const fallbackSubmissions = [

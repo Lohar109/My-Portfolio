@@ -405,8 +405,11 @@ function GithubSection() {
       {/* GitHub Profile Details & Contributions Widget */}
       <motion.div
         variants={itemVariants}
-        className="w-full bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_36px_rgba(147,51,234,0.04)] transition-all duration-300 mb-10 flex flex-col gap-8"
+        className="w-full bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_36px_rgba(147,51,234,0.04)] transition-all duration-500 mb-10 flex flex-col gap-8 relative overflow-hidden group/github"
       >
+        {/* Subtle accent corner glow */}
+        <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-purple-500/5 blur-3xl transition-opacity duration-500" />
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 transform scale-x-0 group-hover/github:scale-x-100 transition-transform duration-500 origin-left" />
         {/* Profile Card Header */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
           <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left w-full">

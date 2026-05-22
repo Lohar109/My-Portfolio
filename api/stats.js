@@ -105,11 +105,11 @@ const monthToIndex = {
 function generateFallbackContributions() {
   const days = 371;
   const contributionsList = [];
-  const today = new Date('2026-05-22');
+  const today = new Date();
   
   let remaining = 1292;
   const counts = new Array(days).fill(0);
-  counts[0] = 44; // May 22nd, 2026 is index 0
+  counts[0] = 44; // Today is index 0
   
   for (let i = 1; i <= 90 && remaining > 0; i++) {
     let val = Math.min(remaining, (i * 13) % 15);
@@ -211,35 +211,26 @@ function buildContributionDataFromText(html) {
     });
   });
 
-  // Ensure May 22nd has exactly 44 contributions
-  let todayDay = contributionsList.find(d => d.date === '2026-05-22');
-  if (todayDay) {
-    todayDay.count = 44;
-  }
+  // Sort chronologically by date
+  contributionsList.sort((a, b) => a.date.localeCompare(b.date));
 
-  // Adjust other days so the sum is exactly 1,336
-  let currentSum = contributionsList.reduce((sum, d) => sum + d.count, 0);
-  let diff = 1336 - currentSum;
-  
-  if (diff !== 0 && contributionsList.length > 0) {
-    let idx = 0;
-    while (diff !== 0 && idx < contributionsList.length) {
-      let day = contributionsList[idx];
-      if (day.date !== '2026-05-22') {
-        if (diff > 0) {
-          day.count++;
-          diff--;
-        } else if (diff < 0 && day.count > 0) {
-          day.count--;
-          diff++;
-        }
-      }
-      idx++;
-      if (idx >= contributionsList.length) idx = 0;
+  // Parse total contributions in the last year dynamically
+  const totalMatch = html.match(/id="js-contribution-activity-description"[^>]*>([\s\S]*?)contributions\s+in\s+the\s+last\s+year/);
+  let totalContributions = 0;
+  if (totalMatch) {
+    totalContributions = Number(totalMatch[1].replace(/[^0-9]/g, ''));
+  } else {
+    const altMatch = html.match(/([\d,]+)\s+contributions?\s+in\s+(?:the\s+)?last\s+(?:year|12\s+months)/i);
+    if (altMatch) {
+      totalContributions = Number(altMatch[1].replace(/[^0-9]/g, ''));
     }
   }
 
-  // Recalculate maxCommit and levels
+  if (!totalContributions) {
+    totalContributions = contributionsList.reduce((sum, d) => sum + d.count, 0) || 1336;
+  }
+
+  // Recalculate maxCommit and levels based on actual data
   let maxCommit = 44;
   contributionsList.forEach(day => {
     if (day.count > maxCommit) {
@@ -254,7 +245,7 @@ function buildContributionDataFromText(html) {
 
   return {
     total: {
-      lastYear: 1336
+      lastYear: totalContributions
     },
     contributions: contributionsList,
     maxCommit

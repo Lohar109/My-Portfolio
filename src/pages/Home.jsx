@@ -2,6 +2,7 @@
 import HeroSection from '../components/sections/HeroSection.jsx'
 import MyJourneySection from '../components/sections/MyJourneySection.jsx'
 import GithubSection from '../components/sections/GithubSection.jsx'
+import LeetcodeSection from '../components/sections/LeetcodeSection.jsx'
 import { motion } from 'framer-motion'
 
 function Home() {
@@ -15,6 +16,7 @@ function Home() {
       <HeroSection />
       <MyJourneySection />
       <GithubSection />
+      <LeetcodeSection />
     </motion.main>
   )
 }

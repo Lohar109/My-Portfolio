@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import {
-  ArrowRight,
   Download,
   Mail,
 } from 'lucide-react'
@@ -122,7 +121,6 @@ function HeroSection() {
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-50 border border-gray-200 hover:border-violet-200 px-6 py-3 text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 shadow-sm hover:shadow-[0_8px_24px_rgba(99,102,241,0.06)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
               >
                 <span>View Projects</span>
-                <ArrowRight className="h-4.5 w-4.5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
 
               <button

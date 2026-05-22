@@ -562,7 +562,7 @@ function GithubSection() {
         {/* Smooth Toggle Button right next to Title */}
         <button
           onClick={() => setShowRepos(!showRepos)}
-          className="flex items-center justify-center p-1 rounded-full bg-purple-50 hover:bg-purple-100/80 border border-purple-100 text-purple-700 hover:text-purple-800 shadow-sm hover:shadow transition-all duration-300 cursor-pointer shrink-0"
+          className="flex items-center justify-center h-7 w-7 rounded-full bg-purple-50 hover:bg-purple-100 border border-purple-100 text-purple-700 hover:text-purple-800 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer shrink-0"
           aria-label="Toggle Featured Repositories"
         >
           <motion.div
@@ -570,7 +570,7 @@ function GithubSection() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="flex items-center justify-center"
           >
-            <ChevronDown className="h-3.5 w-3.5" />
+            <ChevronDown className="h-4.5 w-4.5" />
           </motion.div>
         </button>
       </motion.div>

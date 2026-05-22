@@ -59,24 +59,6 @@ function HomeFooterSection() {
     { name: 'System Design', icon: Feather },
   ]
 
-  const connectItems = [
-    {
-      label: 'vaibhavlohar109@gmail.com',
-      url: `mailto:${emailAddress}`,
-      icon: Mail,
-    },
-    {
-      label: 'linkedin.com/in/vaibhav-lohar',
-      url: 'https://www.linkedin.com/in/vaibhav-lohar-ba7824315',
-      icon: FaLinkedinIn,
-    },
-    {
-      label: 'github.com/lohar109',
-      url: 'https://github.com/Lohar109',
-      icon: FaGithub,
-    },
-  ]
-
   return (
     <div className="relative mt-6 w-full bg-slate-50/20 px-6 pb-12 pt-6 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
@@ -136,7 +118,7 @@ function HomeFooterSection() {
         </motion.div>
 
         {/* 2. Main Footer Grid (matching mockup columns) */}
-        <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-4 select-none">
+        <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3 select-none">
           {/* Column 1: Brand Info */}
           <div className="flex flex-col items-start gap-5 text-left">
             <div className="flex items-center gap-3">
@@ -209,31 +191,6 @@ function HomeFooterSection() {
                   <li key={service.name} className="flex items-center gap-2.5 text-sm font-semibold text-gray-550 hover:text-violet-600 transition-colors duration-200">
                     <ServiceIcon className="h-4 w-4 text-violet-400" />
                     <span>{service.name}</span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-
-          {/* Column 4: Connect Details */}
-          <div className="flex flex-col items-start text-left md:pl-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4 select-none">
-              Connect
-            </span>
-            <ul className="space-y-3.5 w-full">
-              {connectItems.map((item, idx) => {
-                const ItemIcon = item.icon
-                return (
-                  <li key={idx}>
-                    <a
-                      href={item.url}
-                      target={item.url.startsWith('http') ? '_blank' : undefined}
-                      rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-2.5 text-sm font-semibold text-gray-550 hover:text-violet-600 transition-colors duration-200 w-full"
-                    >
-                      <ItemIcon className="h-4 w-4 shrink-0 text-violet-500" />
-                      <span className="truncate">{item.label}</span>
-                    </a>
                   </li>
                 )
               })}

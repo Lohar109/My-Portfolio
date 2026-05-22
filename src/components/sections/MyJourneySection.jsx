@@ -71,7 +71,7 @@ function MyJourneySection() {
     >
       {/* Section Title */}
       <div className="text-left mb-10 select-none">
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 font-sans">
+        <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-gray-900 font-sans">
           My Journey
         </h2>
       </div>

@@ -396,7 +396,7 @@ function GithubSection() {
     >
       {/* Title */}
       <div className="text-left mb-10 select-none">
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 font-sans flex items-center gap-3">
+        <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-gray-900 font-sans flex items-center gap-3">
           <SiGithub className="h-7 w-7 text-purple-600 animate-pulse shrink-0" />
           Codebase & Activity
         </h2>

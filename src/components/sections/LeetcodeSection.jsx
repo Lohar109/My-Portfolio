@@ -390,7 +390,7 @@ function LeetcodeSection() {
 
   return (
     <motion.section
-      className="mx-auto max-w-6xl px-6 pt-6 pb-24 sm:px-10 lg:px-12 relative overflow-hidden"
+      className="mx-auto max-w-6xl px-6 pt-6 pb-6 sm:px-10 lg:px-12 relative overflow-hidden"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

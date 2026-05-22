@@ -78,7 +78,7 @@ function HomeFooterSection() {
   ]
 
   return (
-    <div className="relative mt-24 w-full bg-slate-50/20 px-6 pb-12 pt-6 sm:px-10 lg:px-16">
+    <div className="relative mt-6 w-full bg-slate-50/20 px-6 pb-12 pt-6 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
         {/* 1. Call to Action Banner */}
         <motion.div

@@ -25,8 +25,8 @@ function MyJourneySection() {
     {
       number: '03',
       year: '2022',
-      title: 'Freelancing',
-      description: 'Worked with clients and delivered impactful digital solutions.',
+      title: 'Full-Stack Integration',
+      description: 'Connected independent systems into production environments, balancing UI flow with secure databases.',
       icon: <Briefcase className="h-6 w-6 stroke-[2]" />,
       iconBg: 'bg-amber-50',
       iconColor: 'text-amber-600',

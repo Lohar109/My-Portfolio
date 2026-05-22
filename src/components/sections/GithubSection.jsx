@@ -12,7 +12,8 @@ import {
   Code,
   RefreshCw,
   Eye,
-  Layers
+  Layers,
+  ChevronDown
 } from 'lucide-react'
 import { SiGithub } from 'react-icons/si'
 
@@ -24,6 +25,7 @@ function GithubSection() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
+  const [showRepos, setShowRepos] = useState(true)
 
   const fallbackRepos = [
     {
@@ -550,91 +552,124 @@ function GithubSection() {
       </motion.div>
 
       {/* Featured Repositories Title Header */}
-      <motion.div variants={itemVariants} className="text-left mb-6 select-none">
+      <motion.div
+        variants={itemVariants}
+        className="flex items-center justify-between flex-wrap gap-4 mb-6 select-none"
+      >
         <div className="flex items-center gap-2">
           <Layers className="h-4.5 w-4.5 text-purple-600" />
           <h4 className="text-xs sm:text-sm font-black text-gray-900 font-sans uppercase tracking-wider">
             Featured Repositories
           </h4>
         </div>
-      </motion.div>
 
-      {/* 3-Column Repositories Grid */}
-      <motion.div
-        variants={containerVariants}
-        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {repos.map((repo, idx) => (
+        {/* Smooth Toggle Button */}
+        <button
+          onClick={() => setShowRepos(!showRepos)}
+          className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-wider uppercase bg-purple-50 hover:bg-purple-100/80 border border-purple-100 text-purple-700 hover:text-purple-800 shadow-sm hover:shadow transition-all duration-300 cursor-pointer"
+        >
+          <span>{showRepos ? 'Hide' : 'Show'}</span>
           <motion.div
-            key={repo.name + idx}
-            variants={itemVariants}
-            className="flex flex-col h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(147,51,234,0.05)] hover:border-purple-100/50 transition-all duration-300 hover:-translate-y-1 group"
+            animate={{ rotate: showRepos ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="flex items-center justify-center shrink-0"
           >
-            {/* Repo Header */}
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-4.5 w-4.5 text-purple-500 group-hover:text-pink-500 transition-colors duration-300" />
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-purple-600 transition-colors duration-200 select-all"
-                >
-                  {repo.name}
-                </a>
-              </div>
-              
-              <div className="flex items-center gap-1.5 shrink-0 bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-400 select-none">
-                <Star className="h-3 w-3 fill-yellow-400 stroke-yellow-400" />
-                {repo.stargazers_count}
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-xs font-semibold leading-relaxed text-gray-400 flex-1 mb-4 select-text">
-              {repo.description || 'No description provided.'}
-            </p>
-
-            {/* Footer containing language + details button */}
-            <div className="flex items-center justify-between border-t border-slate-50 pt-4 mt-auto select-none">
-              {/* Language Tag */}
-              {repo.language ? (
-                <span className={`text-[9px] font-extrabold px-2.5 py-0.5 rounded-full font-sans uppercase tracking-wider ${getLanguageColor(repo.language)}`}>
-                  {repo.language}
-                </span>
-              ) : (
-                <span className="text-[9px] font-extrabold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-sans uppercase tracking-wider">
-                  Universal
-                </span>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-3">
-                {repo.homepage && (
-                  <a
-                    href={repo.homepage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-[10px] font-extrabold text-pink-500 hover:text-pink-600 tracking-wider font-sans transition-colors duration-200"
-                  >
-                    <Eye className="h-3.5 w-3.5" />
-                    LIVE
-                  </a>
-                )}
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[10px] font-extrabold text-purple-600 hover:text-purple-700 tracking-wider font-sans transition-colors duration-200"
-                >
-                  REPO
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </div>
-            </div>
+            <ChevronDown className="h-3.5 w-3.5" />
           </motion.div>
-        ))}
+        </button>
       </motion.div>
+
+      {/* Collapsible 3-Column Repositories Grid */}
+      <AnimatePresence initial={false}>
+        {showRepos && (
+          <motion.div
+            key="github-repos-grid"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden"
+          >
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pt-1 pb-1"
+            >
+              {repos.map((repo, idx) => (
+                <motion.div
+                  key={repo.name + idx}
+                  variants={itemVariants}
+                  className="flex flex-col h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(147,51,234,0.05)] hover:border-purple-100/50 transition-all duration-300 hover:-translate-y-1 group"
+                >
+                  {/* Repo Header */}
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div className="flex items-center gap-2">
+                      <BookOpen className="h-4.5 w-4.5 text-purple-500 group-hover:text-pink-500 transition-colors duration-300" />
+                      <a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-purple-600 transition-colors duration-200 select-all"
+                      >
+                        {repo.name}
+                      </a>
+                    </div>
+                    
+                    <div className="flex items-center gap-1.5 shrink-0 bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-400 select-none">
+                      <Star className="h-3 w-3 fill-yellow-400 stroke-yellow-400" />
+                      {repo.stargazers_count}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-xs font-semibold leading-relaxed text-gray-400 flex-1 mb-4 select-text">
+                    {repo.description || 'No description provided.'}
+                  </p>
+
+                  {/* Footer containing language + details button */}
+                  <div className="flex items-center justify-between border-t border-slate-50 pt-4 mt-auto select-none">
+                    {/* Language Tag */}
+                    {repo.language ? (
+                      <span className={`text-[9px] font-extrabold px-2.5 py-0.5 rounded-full font-sans uppercase tracking-wider ${getLanguageColor(repo.language)}`}>
+                        {repo.language}
+                      </span>
+                    ) : (
+                      <span className="text-[9px] font-extrabold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-sans uppercase tracking-wider">
+                        Universal
+                      </span>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-3">
+                      {repo.homepage && (
+                        <a
+                          href={repo.homepage}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-[10px] font-extrabold text-pink-500 hover:text-pink-600 tracking-wider font-sans transition-colors duration-200"
+                        >
+                          <Eye className="h-3.5 w-3.5" />
+                          LIVE
+                        </a>
+                      )}
+                      <a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-[10px] font-extrabold text-purple-600 hover:text-purple-700 tracking-wider font-sans transition-colors duration-200"
+                      >
+                        REPO
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.section>
   )
 }

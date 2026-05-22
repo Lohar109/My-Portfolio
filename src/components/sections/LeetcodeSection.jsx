@@ -49,7 +49,7 @@ function LeetcodeSection() {
   }
   const fallbackContest = {
     contestAttend: 12,
-    contestRating: 2010,
+    contestRating: 2009.7567617198652,
     contestGlobalRanking: 20314,
     totalParticipants: 874287,
     contestTopPercentage: 2.42,
@@ -60,16 +60,47 @@ function LeetcodeSection() {
     badges: [
       { id: '10301958', displayName: 'Knight', icon: '/static/images/badges/knight.png', creationDate: '2026-05-06' },
       { id: '10252754', displayName: '100 Days Badge 2026', icon: 'https://assets.leetcode.com/static_assets/others/100_1080_1080.png', creationDate: '2026-05-03' },
-      { id: '10211122', displayName: 'May Challenge 2026', icon: 'https://assets.leetcode.com/static_assets/public/images/badges/dcc-2026-5.png', creationDate: '2026-05-22' }
+      { id: '9776130', displayName: '50 Days Badge 2026', icon: 'https://assets.leetcode.com/static_assets/others/50_1080_1080.png', creationDate: '2026-03-14' },
+      { id: '10222620', displayName: 'Apr LeetCoding Challenge', icon: '/static/images/badges/dcc-2026-4.png', creationDate: '2026-04-30' },
+      { id: '9894700', displayName: 'Mar LeetCoding Challenge', icon: '/static/images/badges/dcc-2026-3.png', creationDate: '2026-03-31' },
+      { id: '9601296', displayName: 'Feb LeetCoding Challenge', icon: '/static/images/badges/dcc-2026-2.png', creationDate: '2026-02-28' },
+      { id: '10311803', displayName: 'Top Interview 150', icon: 'https://assets.leetcode.com/static_assets/others/Top_100_Liked-1.png', creationDate: '2026-05-11' },
+      { id: '10223039', displayName: 'Top 100 Liked', icon: 'https://assets.leetcode.com/static_assets/others/Top_100_Liked.png', creationDate: '2026-04-30' },
+      { id: '10168125', displayName: 'Data Navigator Badge', icon: 'https://assets.leetcode.com/static_assets/others/Quest_Data_Large.png', creationDate: '2026-04-25' },
+      { id: '10031087', displayName: 'Algorithm Deconstructor Badge', icon: 'https://assets.leetcode.com/static_assets/others/Quest_Algorithm_Large.png', creationDate: '2026-04-11' },
+      { id: '9833103', displayName: 'LeetCode 75', icon: 'https://assets.leetcode.com/static_assets/others/LeetCode_75.png', creationDate: '2026-03-22' },
+      { id: '9534240', displayName: 'Architecture Builder Badge', icon: 'https://assets.leetcode.com/static_assets/others/Quest_Architecture_Large.png', creationDate: '2026-02-22' },
+      { id: '9458841', displayName: 'Mathematical Insight Badge', icon: 'https://assets.leetcode.com/static_assets/others/Quest_Math_Large.png', creationDate: '2026-02-18' },
+      { id: '9458421', displayName: 'Top SQL 50', icon: 'https://assets.leetcode.com/static_assets/others/Top_SQL_50.png', creationDate: '2026-02-17' }
     ]
+  }
+  const fallbackCalendar = {
+    activeYears: [2026],
+    streak: 119,
+    totalActiveDays: 119,
+    submissionCalendar: '{"1769212800": 5, "1769299200": 32, "1769385600": 4, "1769472000": 5, "1769558400": 6, "1769644800": 5, "1769731200": 5, "1769817600": 17, "1769904000": 8, "1769990400": 5, "1770076800": 5, "1770163200": 5, "1770249600": 6, "1770336000": 11, "1770422400": 6, "1770508800": 15, "1770595200": 5, "1770681600": 5, "1770768000": 8, "1770854400": 5, "1770940800": 5, "1771027200": 8, "1771113600": 9, "1771200000": 5, "1771286400": 7, "1771372800": 7, "1771459200": 1, "1771545600": 10, "1771632000": 5, "1771718400": 19, "1771804800": 3, "1771891200": 4, "1771977600": 5, "1772064000": 8, "1772150400": 13, "1772236800": 11, "1772323200": 15, "1772409600": 9, "1772496000": 17, "1772582400": 2, "1772668800": 1, "1772755200": 1, "1772841600": 1, "1772928000": 6, "1773014400": 2, "1773100800": 12, "1773187200": 7, "1773273600": 5, "1773360000": 8, "1773446400": 5, "1773532800": 5, "1773619200": 5, "1773705600": 7, "1773792000": 17, "1773878400": 42, "1773964800": 5, "1774051200": 8, "1774137600": 19, "1774224000": 35, "1774310400": 15, "1774396800": 11, "1774483200": 14, "1774569600": 9, "1774656000": 12, "1774742400": 8, "1774828800": 10, "1774915200": 8, "1775001600": 36, "1775088000": 7, "1775174400": 6, "1775260800": 4, "1775347200": 9, "1775433600": 10, "1775520000": 10, "1775606400": 10, "1775692800": 14, "1775779200": 12, "1775865600": 18, "1775952000": 14, "1776038400": 10, "1776124800": 5, "1776211200": 4, "1776297600": 5, "1776384000": 11, "1776470400": 1, "1776556800": 5, "1776643200": 1, "1776729600": 5, "1776816000": 3, "1776902400": 1, "1776988800": 16, "1777075200": 11, "1777161600": 1, "1777248000": 1, "1777334400": 14, "1777420800": 6, "1777507200": 6, "1777593600": 8, "1777680000": 4, "1777766400": 7, "1777852800": 6, "1777939200": 6, "1778025600": 2, "1778112000": 7, "1778198400": 7, "1778284800": 6, "1778371200": 8, "1778457600": 6, "1778544000": 1, "1778630400": 1, "1778716800": 1, "1778803200": 1, "1778889600": 1, "1778976000": 1, "1779062400": 1, "1779148800": 1, "1779235200": 1, "1779321600": 1, "1779408000": 4}'
   }
   const fallbackSubmissions = [
     { title: 'Reverse Integer', titleSlug: 'reverse-integer', timestamp: '1779415374', statusDisplay: 'Accepted', lang: 'java' },
-    { title: 'Search in Rotated Sorted Array', titleSlug: 'search-in-rotated-sorted-array', timestamp: '1779414220', statusDisplay: 'Accepted', lang: 'java' },
-    { title: '3Sum', titleSlug: '3sum', timestamp: '1779312000', statusDisplay: 'Accepted', lang: 'javascript' },
-    { title: 'Container With Most Water', titleSlug: 'container-with-most-water', timestamp: '1779211000', statusDisplay: 'Accepted', lang: 'python' },
-    { title: 'Two Sum', titleSlug: 'two-sum', timestamp: '1779110000', statusDisplay: 'Accepted', lang: 'cpp' },
-    { title: 'Merge k Sorted Lists', titleSlug: 'merge-k-sorted-lists', timestamp: '1779010000', statusDisplay: 'Accepted', lang: 'java' }
+    { title: 'Search in Rotated Sorted Array', titleSlug: 'search-in-rotated-sorted-array', timestamp: '1779414220', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Find the Length of the Longest Common Prefix', titleSlug: 'find-the-length-of-the-longest-common-prefix', timestamp: '1779356664', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Find the Prefix Common Array of Two Arrays', titleSlug: 'find-the-prefix-common-array-of-two-arrays', timestamp: '1779274580', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Minimum Common Value', titleSlug: 'minimum-common-value', timestamp: '1779153262', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Jump Game IV', titleSlug: 'jump-game-iv', timestamp: '1779068871', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Jump Game III', titleSlug: 'jump-game-iii', timestamp: '1778980833', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Find Minimum in Rotated Sorted Array II', titleSlug: 'find-minimum-in-rotated-sorted-array-ii', timestamp: '1778894430', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Find Minimum in Rotated Sorted Array', titleSlug: 'find-minimum-in-rotated-sorted-array', timestamp: '1778809603', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Check if Array is Good', titleSlug: 'check-if-array-is-good', timestamp: '1778721239', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Minimum Moves to Make Array Complementary', titleSlug: 'minimum-moves-to-make-array-complementary', timestamp: '1778634668', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Minimum Initial Energy to Finish Tasks', titleSlug: 'minimum-initial-energy-to-finish-tasks', timestamp: '1778551944', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Best Time to Buy and Sell Stock IV', titleSlug: 'best-time-to-buy-and-sell-stock-iv', timestamp: '1778463344', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Best Time to Buy and Sell Stock III', titleSlug: 'best-time-to-buy-and-sell-stock-iii', timestamp: '1778463262', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Unique Paths II', titleSlug: 'unique-paths-ii', timestamp: '1778463141', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Triangle', titleSlug: 'triangle', timestamp: '1778463032', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Bitwise AND of Numbers Range', titleSlug: 'bitwise-and-of-numbers-range', timestamp: '1778462946', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Separate the Digits in an Array', titleSlug: 'separate-the-digits-in-an-array', timestamp: '1778462856', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'IPO', titleSlug: 'ipo', timestamp: '1778376791', statusDisplay: 'Accepted', lang: 'javascript' },
+    { title: 'Maximum Sum Circular Subarray', titleSlug: 'maximum-sum-circular-subarray', timestamp: '1778376350', statusDisplay: 'Accepted', lang: 'javascript' }
   ]
 
   useEffect(() => {
@@ -142,7 +173,7 @@ function LeetcodeSection() {
         const submissionsData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/acSubmission`, { submission: fallbackSubmissions })
         await delay(200)
         
-        const calendarData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/calendar`, null)
+        const calendarData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/calendar`, fallbackCalendar)
 
         setProfile(profileData)
         setSolved(solvedData)
@@ -208,37 +239,16 @@ function LeetcodeSection() {
 
     // Determine calendar data
     let submissionLookup = {}
-    if (calendar?.submissionCalendar) {
+    const calendarSource = calendar?.submissionCalendar || fallbackCalendar.submissionCalendar
+    if (calendarSource) {
       try {
-        const calendarObj = JSON.parse(calendar.submissionCalendar)
+        const calendarObj = JSON.parse(calendarSource)
         Object.entries(calendarObj).forEach(([unixStr, count]) => {
           const dateStr = getLocalDateStringFromUnix(Number(unixStr))
           submissionLookup[dateStr] = (submissionLookup[dateStr] || 0) + count
         })
       } catch (e) {
         console.error('Error parsing calendar string', e)
-      }
-    } else {
-      // Replicate the high-fidelity streak pattern from your LeetCode profile
-      // Highly active in the past 119 days ending today (streak of 119)
-      for (let i = 370; i >= 0; i--) {
-        const d = new Date(today)
-        d.setDate(today.getDate() - i)
-        const dateStr = getLocalDateString(d)
-
-        // 119 days streak ending today
-        if (i < 119) {
-          // Generate a premium pattern of submissions
-          // More active on weekdays, average 5-8 submissions
-          const dayOfWeek = d.getDay()
-          let count = 0
-          if (dayOfWeek === 0 || dayOfWeek === 6) {
-            count = Math.floor(Math.sin(i * 0.1) * 3) + 4 // 1 to 7
-          } else {
-            count = Math.floor(Math.cos(i * 0.2) * 5) + 8 // 3 to 13
-          }
-          submissionLookup[dateStr] = Math.max(1, count)
-        }
       }
     }
 
@@ -627,11 +637,11 @@ function LeetcodeSection() {
             <div className="flex items-center gap-3 select-none flex-wrap">
               <div className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[11px] font-extrabold">
                 <CheckCircle className="h-3.5 w-3.5" />
-                941 Submissions in 12 months
+                {(solved?.totalSubmissionNum?.[0]?.submissions || 941)} Submissions in 12 months
               </div>
               <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-100 text-amber-700 px-3 py-1 rounded-full text-[11px] font-extrabold animate-pulse">
                 <Flame className="h-3.5 w-3.5 fill-amber-500 stroke-amber-500" />
-                {calendar?.streak || 119} Day Streak
+                {(calendar?.streak || fallbackCalendar.streak)} Day Streak
               </div>
             </div>
           </div>

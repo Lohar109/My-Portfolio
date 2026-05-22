@@ -33,7 +33,7 @@ function GithubSection() {
       stargazers_count: 0,
       forks_count: 0,
       html_url: `https://github.com/${username}/ShopEase-Ecommerce`,
-      homepage: null
+      homepage: 'https://shop-ease-ecommerce-delta.vercel.app/'
     },
     {
       name: 'Generative-AI',
@@ -69,7 +69,7 @@ function GithubSection() {
       stargazers_count: 0,
       forks_count: 0,
       html_url: `https://github.com/${username}/Developer-Workflow`,
-      homepage: null
+      homepage: 'https://developer-workflow.onrender.com/'
     },
     {
       name: 'ShopEase-Ecom-Landing',
@@ -78,7 +78,7 @@ function GithubSection() {
       stargazers_count: 0,
       forks_count: 0,
       html_url: `https://github.com/${username}/ShopEase-Ecom-Landing`,
-      homepage: null
+      homepage: 'https://shopease-ecom-landing.onrender.com/'
     }
   ]
 

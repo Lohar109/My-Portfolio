@@ -16,7 +16,7 @@ const githubFallbackRepos = [
     stargazers_count: 0,
     forks_count: 0,
     html_url: `https://github.com/${GITHUB_USERNAME}/ShopEase-Ecommerce`,
-    homepage: null
+    homepage: 'https://shop-ease-ecommerce-delta.vercel.app/'
   },
   {
     name: 'Generative-AI',
@@ -52,7 +52,7 @@ const githubFallbackRepos = [
     stargazers_count: 0,
     forks_count: 0,
     html_url: `https://github.com/${GITHUB_USERNAME}/Developer-Workflow`,
-    homepage: null
+    homepage: 'https://developer-workflow.onrender.com/'
   },
   {
     name: 'ShopEase-Ecom-Landing',
@@ -61,7 +61,7 @@ const githubFallbackRepos = [
     stargazers_count: 0,
     forks_count: 0,
     html_url: `https://github.com/${GITHUB_USERNAME}/ShopEase-Ecom-Landing`,
-    homepage: null
+    homepage: 'https://shopease-ecom-landing.onrender.com/'
   }
 ]
 
@@ -352,7 +352,8 @@ async function fetchGithubStats() {
         );
         return {
           ...repo,
-          description: repo.description || (matchingFallback ? matchingFallback.description : 'No description provided.')
+          description: repo.description || (matchingFallback ? matchingFallback.description : 'No description provided.'),
+          homepage: (matchingFallback && matchingFallback.homepage) || repo.homepage
         };
       });
     }

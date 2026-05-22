@@ -429,7 +429,7 @@ function LeetcodeSection() {
               <img
                 src={profile?.avatar || fallbackProfile.avatar}
                 alt={profile?.name || username}
-                className="relative h-20 w-20 rounded-full border-2 border-white object-cover select-none"
+                className="relative h-24 w-24 rounded-full border-2 border-white object-cover select-none"
               />
             </a>
 

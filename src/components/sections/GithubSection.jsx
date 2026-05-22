@@ -413,15 +413,20 @@ function GithubSection() {
         {/* Profile Card Header */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
           <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left w-full">
-            {/* Avatar with purple gradient border */}
-            <div className="relative group">
+            {/* Avatar with purple gradient border linking to GitHub */}
+            <a
+              href={`https://github.com/${username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group cursor-pointer block shrink-0"
+            >
               <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 opacity-80 group-hover:opacity-100 blur-[2px] transition duration-300" />
               <img
                 src={profile?.avatar_url}
                 alt={profile?.name || username}
                 className="relative h-20 w-20 rounded-full border-2 border-white object-cover select-none"
               />
-            </div>
+            </a>
             
             {/* Profile Meta info */}
             <div className="flex-1">
@@ -455,18 +460,6 @@ function GithubSection() {
               <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
                 Followers
               </div>
-            </div>
-            <div className="h-8 w-[1px] bg-slate-200" />
-            <div className="text-center">
-              <a
-                href={`https://github.com/${username}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center h-10 w-10 rounded-full bg-purple-600 hover:bg-pink-600 text-white shadow-md shadow-purple-600/10 hover:shadow-pink-600/20 transition-all duration-300"
-                title="Open GitHub Profile"
-              >
-                <ExternalLink className="h-4.5 w-4.5" />
-              </a>
             </div>
           </div>
         </div>

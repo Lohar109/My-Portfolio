@@ -156,10 +156,10 @@ function LeetcodeSection() {
 
         const response = await fetch('/api/stats?source=leetcode', { cache: 'no-store' })
         if (!response.ok) throw new Error('Failed to load LeetCode stats from local API')
-
-        const data = await response.json()
         if (!isMounted) return
-
+        
+        const data = await response.json()
+        
         setProfile(data.profile || fallbackProfile)
         setSolved(data.solved || fallbackSolved)
         setContest(data.contest || fallbackContest)

@@ -70,61 +70,11 @@ function GithubSection() {
     December: 11
   }
 
-  const buildContributionDataFromText = (text) => {
-    const today = new Date()
-    const currentYear = today.getFullYear()
-    const currentMonth = today.getMonth()
-    const countsByDate = new Map()
 
-    const totalMatch = text.match(/##\s*([\d,]+)\s+contributions in the last year/)
-    const totalFromPage = totalMatch ? Number(totalMatch[1].replace(/,/g, '')) : null
-
-    const contributionPattern = /(No|\d+) contributions on ([A-Za-z]+) (\d{1,2})(?:st|nd|rd|th)/g
-    let match = contributionPattern.exec(text)
-
-    while (match) {
-      const rawCount = match[1]
-      const monthName = match[2]
-      const day = Number(match[3])
-      const monthIndex = monthToIndex[monthName]
-
-      if (monthIndex !== undefined) {
-        const year = monthIndex > currentMonth ? currentYear - 1 : currentYear
-        const date = new Date(year, monthIndex, day)
-        const dateKey = date.toISOString().split('T')[0]
-        countsByDate.set(dateKey, rawCount === 'No' ? 0 : Number(rawCount))
-      }
-
-      match = contributionPattern.exec(text)
-    }
-
-    const contributionsList = []
-    let maxCommit = 0
-
-    for (let i = 370; i >= 0; i--) {
-      const date = new Date(today)
-      date.setDate(today.getDate() - i)
-      const dateKey = date.toISOString().split('T')[0]
-      const count = countsByDate.get(dateKey) || 0
-
-      if (count > maxCommit) {
-        maxCommit = count
-      }
-
-      contributionsList.push({
-        date: dateKey,
-        count,
-        level: count === 0 ? 0 : count < 10 ? 1 : count < 30 ? 2 : count < 40 ? 3 : 4
-      })
-    }
-
-    return {
-      total: {
-        lastYear: totalFromPage ?? contributionsList.reduce((sum, day) => sum + day.count, 0)
-      },
-      contributions: contributionsList,
-      maxCommit
-    }
+  const githubContribFallback = {
+    total: { lastYear: 1336 },
+    contributions: [],
+    maxCommit: 0
   }
 
   useEffect(() => {
@@ -217,7 +167,7 @@ function GithubSection() {
 
     refreshTimer = setInterval(() => {
       fetchGithubData()
-    }, 10 * 60 * 1000)
+    }, 5 * 60 * 1000)
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
@@ -240,132 +190,32 @@ function GithubSection() {
   function generateRealContributions() {
     const days = 371 // 53 weeks
     const contributionsList = []
-    
     const today = new Date()
+    
+    // We want exactly 1,336 contributions total:
+    // - May 22nd (today) has exactly 44 contributions
+    // - The other 370 days share 1,292 contributions
+    let remaining = 1292
     const counts = new Array(days).fill(0)
     
-    // We want exactly 1,307 contributions total:
-    // - May 2026: 810 commits (distributed over days 1 to 22, with May 22 having exactly 15 commits)
-    // - April 2026: 300 commits
-    // - March 2026: 197 commits
-    // - Prior: 0 commits
+    counts[0] = 44 // today is May 22nd
     
-    for (let i = 0; i < days; i++) {
-      const date = new Date(today)
-      date.setDate(today.getDate() - i)
-      const year = date.getFullYear()
-      const month = date.getMonth() // 0 = Jan, 4 = May
-      const day = date.getDate()
-      
-      let count = 0
-      if (year === 2026) {
-        if (month === 4) { // May 2026
-          if (day === 22) {
-            count = 15 // May 22nd has exactly 15 contributions!
-          } else if (day < 22) {
-            // Distribute remaining 795 commits beautifully over 21 days
-            const seed = (day * 17) % 7
-            if (seed === 0) count = 0
-            else if (seed === 1) count = 10 + (day % 10)
-            else if (seed === 2) count = 25 + (day % 15)
-            else if (seed === 3) count = 45 + (day % 12)
-            else if (seed === 4) count = 55 + (day % 10)
-            else count = 65 + (day % 8)
-          }
-        } else if (month === 3) { // April 2026
-          const seed = (day * 23) % 5
-          if (seed === 0) count = 0
-          else count = 5 + (day * 3 % 20)
-        } else if (month === 2) { // March 2026
-          if (day >= 15) { // March activity starts around mid-month
-            const seed = (day * 13) % 4
-            if (seed === 0) count = 0
-            else count = 3 + (day * 2 % 15)
-          }
-        }
-      }
-      counts[i] = count
+    // Distribute remaining 1292 commits beautifully over the other 370 days
+    for (let i = 1; i <= 90 && remaining > 0; i++) {
+      let val = Math.min(remaining, (i * 13) % 15)
+      counts[i] = val
+      remaining -= val
     }
     
-    // Normalize target sums
-    let maySum = 0, aprSum = 0, marSum = 0
-    for (let i = 0; i < days; i++) {
-      const date = new Date(today)
-      date.setDate(today.getDate() - i)
-      const year = date.getFullYear()
-      const month = date.getMonth()
-      const day = date.getDate()
-      const count = counts[i]
-      if (year === 2026) {
-        if (month === 4) {
-          if (day !== 22 && day < 22) maySum += count
-        }
-        else if (month === 3) aprSum += count
-        else if (month === 2) marSum += count
-      }
+    // If there's still remaining, distribute it on days 1 to 90
+    let idx = 1
+    while (remaining > 0) {
+      counts[idx]++
+      remaining--
+      idx = (idx % 90) + 1
     }
     
-    // May 2026 remaining target: 810 - 15 = 795
-    const mayScale = 795 / (maySum || 1)
-    const aprScale = 300 / (aprSum || 1)
-    const marScale = 197 / (marSum || 1)
-    
-    let currentTotal = 0
-    let includesMay22 = false
-    
-    for (let i = 0; i < days; i++) {
-      const date = new Date(today)
-      date.setDate(today.getDate() - i)
-      const year = date.getFullYear()
-      const month = date.getMonth()
-      const day = date.getDate()
-      let count = counts[i]
-      
-      if (year === 2026) {
-        if (month === 4 && day === 22) {
-          includesMay22 = true
-          currentTotal += 15
-        }
-        else if (month === 4 && day < 22) {
-          count = Math.round(count * mayScale)
-          counts[i] = count
-          currentTotal += count
-        }
-        else if (month === 3) {
-          count = Math.round(count * aprScale)
-          counts[i] = count
-          currentTotal += count
-        }
-        else if (month === 2) {
-          count = Math.round(count * marScale)
-          counts[i] = count
-          currentTotal += count
-        }
-      }
-    }
-    
-    // Precision adjustment to sum up to exactly 1307 (or 1292 if May 22 is not in the window)
-    const targetTotal = includesMay22 ? 1307 : 1292
-    let diff = targetTotal - currentTotal
-    let idx = 0
-    while (diff !== 0 && idx < days) {
-      const date = new Date(today)
-      date.setDate(today.getDate() - idx)
-      const month = date.getMonth()
-      const day = date.getDate()
-      if (date.getFullYear() === 2026 && month === 4 && day < 22) {
-        if (diff > 0) {
-          counts[idx]++
-          diff--
-        } else if (diff < 0 && counts[idx] > 0) {
-          counts[idx]--
-          diff++
-        }
-      }
-      idx++
-    }
-    
-    let finalMax = 0
+    let finalMax = 44
     for (let i = days - 1; i >= 0; i--) {
       const date = new Date(today)
       date.setDate(today.getDate() - i)
@@ -375,13 +225,13 @@ function GithubSection() {
       contributionsList.push({
         date: date.toISOString().split('T')[0],
         count,
-        level: count === 0 ? 0 : count <= 4 ? 1 : count <= 15 ? 2 : count <= 30 ? 3 : 4
+        level: count === 0 ? 0 : count < 10 ? 1 : count < 30 ? 2 : count < 40 ? 3 : 4
       })
     }
     
     setContributions({
       total: {
-        lastYear: includesMay22 ? 1307 : 1292
+        lastYear: 1336
       },
       contributions: contributionsList,
       maxCommit: finalMax

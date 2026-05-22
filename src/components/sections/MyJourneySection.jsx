@@ -131,8 +131,8 @@ function MyJourneySection() {
                     {step.description}
                   </p>
                   
-                  {/* Premium red badge for year */}
-                  <div className="mt-auto pt-3 inline-block bg-red-50/80 text-red-600 px-3.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wide font-sans select-none">
+                  {/* Premium red text for year */}
+                  <div className="mt-auto pt-3 text-red-600 text-[10px] font-extrabold tracking-wide font-sans select-none">
                     {step.year}
                   </div>
                 </div>

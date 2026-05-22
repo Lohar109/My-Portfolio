@@ -150,96 +150,37 @@ function LeetcodeSection() {
     }
 
     async function fetchLeetcodeData() {
-      const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-
       try {
         setLoading(true)
         setError(false)
 
-        let isRateLimited = false
-        let usedFallback = false
+        const response = await fetch('/api/stats?source=leetcode', { cache: 'no-store' })
+        if (!response.ok) throw new Error('Failed to load LeetCode stats from local API')
 
-        // 2. Resilient per-endpoint fetcher with automatic fallback and rate-limit short-circuiting
-        const fetchWithFallback = async (url, fallback) => {
-          if (isRateLimited) {
-            usedFallback = true
-            return fallback
-          }
-          try {
-            const res = await fetch(url)
-            if (res.ok) {
-              return await res.json()
-            }
-            if (res.status === 429) {
-              isRateLimited = true
-              usedFallback = true
-              console.warn(`Rate limited (429) on ${url}. Aborting remaining network calls and using fallbacks to avoid console clutter.`)
-            } else {
-              usedFallback = true
-              console.warn(`API responded with status ${res.status} on ${url}. Using local fallback.`)
-            }
-          } catch (e) {
-            usedFallback = true
-            console.warn(`Network error fetching ${url}. Using local fallback:`, e)
-          }
-          return fallback
-        }
-
-        // 3. Sequence requests with 200ms staggering delay to avoid triggering rate limiters
-        const profileData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}`, fallbackProfile)
-        await delay(200)
-        
-        const solvedData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/solved`, fallbackSolved)
-        await delay(200)
-        
-        const contestData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/contest`, fallbackContest)
-        await delay(200)
-        
-        const badgesData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/badges`, fallbackBadges)
-        await delay(200)
-        
-        const submissionsData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/acSubmission`, { submission: fallbackSubmissions })
-        await delay(200)
-        
-        const calendarData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/calendar`, fallbackCalendar)
-
+        const data = await response.json()
         if (!isMounted) return
 
-        if (usedFallback && cachedData) {
+        setProfile(data.profile || fallbackProfile)
+        setSolved(data.solved || fallbackSolved)
+        setContest(data.contest || fallbackContest)
+        setBadges(normalizeBadges(data.badges || fallbackBadges))
+        setSubmissions(data.submissions || fallbackSubmissions)
+        setCalendar(data.calendar || fallbackCalendar)
+
+        localStorage.setItem(cacheKey, JSON.stringify(data))
+        localStorage.setItem(cacheTimeKey, Date.now().toString())
+
+      } catch (err) {
+        console.error('Unexpected error loading LeetCode data from local API.', err)
+        if (!isMounted) return
+        if (cachedData) {
           setProfile(cachedData.profile || fallbackProfile)
           setSolved(cachedData.solved || fallbackSolved)
           setContest(cachedData.contest || fallbackContest)
           setBadges(cachedData.badges || fallbackBadges)
           setSubmissions(cachedData.submissions || fallbackSubmissions)
           setCalendar(cachedData.calendar || fallbackCalendar)
-          return
-        }
-
-        setProfile(profileData)
-        setSolved(solvedData)
-        setContest(contestData)
-        setBadges(normalizeBadges(badgesData))
-        setSubmissions(submissionsData.submission || submissionsData || [])
-        setCalendar(calendarData)
-
-        // Cache only fully live data so a temporary failure does not overwrite the last good profile.
-        if (!usedFallback) {
-          const dataToCache = {
-          profile: profileData,
-          solved: solvedData,
-          contest: contestData,
-          badges: normalizeBadges(badgesData),
-          submissions: submissionsData.submission || submissionsData || [],
-          calendar: calendarData
-          }
-          localStorage.setItem(cacheKey, JSON.stringify(dataToCache))
-          localStorage.setItem(cacheTimeKey, Date.now().toString())
-        }
-
-      } catch (err) {
-        console.error('Unexpected error loading LeetCode data. Resetting completely to fallbacks.', err)
-        if (!isMounted) return
-        if (!cachedData) {
+        } else {
           setError(true)
           setProfile(fallbackProfile)
           setSolved(fallbackSolved)

@@ -156,77 +156,36 @@ function GithubSection() {
         setLoading(true)
         setError(false)
 
-        // 1. Fetch Profile Data
-        const profileRes = await fetch(`https://api.github.com/users/${username}`)
-        if (!profileRes.ok) throw new Error('Failed to fetch profile')
-        const profileData = await profileRes.json()
-        const nextProfile = {
-          ...profileData,
-          bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems..."
-        }
-        setProfile(nextProfile)
-
-        // 2. Fetch Repositories
-        const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`)
-        if (!reposRes.ok) throw new Error('Failed to fetch repositories')
-        const reposData = await reposRes.json()
-        
-        // Filter out forks and sort by stargazers + updated time
-        const originalRepos = reposData
-          .filter(repo => !repo.fork)
-          .sort((a, b) => {
-            if (b.stargazers_count !== a.stargazers_count) {
-              return b.stargazers_count - a.stargazers_count
-            }
-            return new Date(b.updated_at) - new Date(a.updated_at)
-          })
-          .slice(0, 6)
-        
-        // Enrich descriptions with our beautiful professional descriptions
-        const enrichedRepos = originalRepos.map(repo => {
-          const matchingFallback = fallbackRepos.find(f => f.name.toLowerCase() === repo.name.toLowerCase())
-          return {
-            ...repo,
-            description: matchingFallback ? matchingFallback.description : (repo.description || 'No description provided.')
-          }
-        })
-        
-        const nextRepos = enrichedRepos.length > 0 ? enrichedRepos : fallbackRepos
-        setRepos(nextRepos)
-
-        // 3. Fetch the public GitHub contributions page through a text proxy so the graph matches GitHub itself.
         try {
-          const contribRes = await fetch(`https://r.jina.ai/http://github.com/users/${username}/contributions`)
-          if (contribRes.ok) {
-            const contributionsText = await contribRes.text()
-            const contributionsData = buildContributionDataFromText(contributionsText)
+          const response = await fetch('/api/stats?source=github', { cache: 'no-store' })
+          if (!response.ok) throw new Error('Failed to load GitHub stats from local API')
 
-            if (isMounted) {
-              setContributions(contributionsData)
-            }
+          const data = await response.json()
+          if (!isMounted) return
 
-            localStorage.setItem(cacheKey, JSON.stringify({
-              profile: nextProfile,
-              repos: nextRepos,
-              contributions: contributionsData
-            }))
-            localStorage.setItem(cacheTimeKey, Date.now().toString())
-          } else {
-            if (cachedData?.contributions) {
-              setContributions(cachedData.contributions)
-            } else {
-              generateRealContributions()
-            }
-          }
+          setProfile(data.profile)
+          setRepos(Array.isArray(data.repos) && data.repos.length > 0 ? data.repos : fallbackRepos)
+          setContributions(data.contributions || githubContribFallback)
+
+          localStorage.setItem(cacheKey, JSON.stringify(data))
+          localStorage.setItem(cacheTimeKey, Date.now().toString())
         } catch (err) {
-          console.warn('Error fetching live GitHub contributions, falling back to local dataset:', err)
           if (cachedData?.contributions) {
             setContributions(cachedData.contributions)
           } else {
+            setProfile(cachedData?.profile || {
+              name: 'Vaibhav Lohar',
+              login: 'Lohar109',
+              bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems...",
+              avatar_url: 'https://github.com/Lohar109.png',
+              public_repos: 8,
+              followers: 2,
+              following: 3
+            })
+            setRepos(cachedData?.repos || fallbackRepos)
             generateRealContributions()
           }
         }
-
       } catch (err) {
         console.error('Error fetching GitHub data:', err)
         if (!cachedData) {

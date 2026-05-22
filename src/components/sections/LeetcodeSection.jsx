@@ -288,6 +288,7 @@ function LeetcodeSection() {
   const hardTotal = 934
   const rating = contest?.contestRating ? Math.round(contest.contestRating) : 2010
   const globalRanking = contest?.contestGlobalRanking || 20314
+  const totalParticipants = contest?.totalParticipants || 874287
   const attended = contest?.contestAttend || 12
   const topPercentage = contest?.contestTopPercentage || 2.42
   const userRank = profile?.ranking || 118083

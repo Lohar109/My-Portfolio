@@ -71,7 +71,7 @@ function MyJourneySection() {
       {/* Timeline Wrapper */}
       <div className="relative w-full">
         {/* Horizontal Connector Line for Desktop (lg and up) */}
-        <div className="hidden lg:block absolute top-[18px] left-[12.5%] right-[2%] h-[2px] -z-10">
+        <div className="hidden lg:block absolute top-[18px] left-[12.5%] right-[6%] h-[2px] z-0">
           <div className="w-full h-full border-t-2 border-dotted border-red-500/80 relative">
             {/* Arrowhead at the end of the line */}
             <div className="absolute right-0 top-0 -translate-y-1/2 w-0 h-0 border-y-[5px] border-y-transparent border-l-[8px] border-l-red-500" />
@@ -84,10 +84,10 @@ function MyJourneySection() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="flex flex-col items-center group cursor-default"
+              className="flex flex-col items-center group cursor-default h-full"
             >
               {/* Timeline Node (Red circle with white number) */}
-              <div className="relative flex items-center justify-center mb-6">
+              <div className="relative z-10 flex items-center justify-center mb-6">
                 {/* Outer pulsing ring on hover */}
                 <div className="absolute -inset-1.5 rounded-full bg-red-500/10 scale-0 group-hover:scale-100 transition-transform duration-300 -z-10" />
                 <span className="flex h-9.5 w-9.5 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white shadow-md shadow-red-600/15 group-hover:bg-red-500 transition-colors duration-300 font-sans tracking-wide select-none">
@@ -96,23 +96,23 @@ function MyJourneySection() {
               </div>
 
               {/* Step Card */}
-              <div className="w-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_36px_rgba(239,68,68,0.04)] hover:border-red-100/50 transition-all duration-300 hover:-translate-y-1 flex items-start gap-4">
+              <div className="w-full h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_36px_rgba(239,68,68,0.04)] hover:border-red-100/50 transition-all duration-300 hover:-translate-y-1 flex items-start gap-4">
                 {/* Icon box inside light red rounded square */}
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-red-500 transition-transform duration-300 group-hover:scale-105 select-none">
                   {step.icon}
                 </div>
 
                 {/* Text Content */}
-                <div className="flex flex-col items-start text-left">
+                <div className="flex flex-col items-start text-left self-stretch flex-1">
                   <h3 className="text-sm sm:text-base font-black text-gray-900 tracking-tight transition duration-200 group-hover:text-red-600 font-sans">
                     {step.title}
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold leading-relaxed text-gray-400/95 max-w-[200px]">
+                  <p className="mt-1.5 text-xs font-semibold leading-relaxed text-gray-400/95 max-w-[200px] flex-1">
                     {step.description}
                   </p>
                   
                   {/* Premium red badge for year */}
-                  <div className="mt-3.5 inline-block bg-red-50/80 text-red-600 px-3.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wide font-sans select-none">
+                  <div className="mt-auto pt-3 inline-block bg-red-50/80 text-red-600 px-3.5 py-0.5 rounded-full text-[10px] font-extrabold tracking-wide font-sans select-none">
                     {step.year}
                   </div>
                 </div>

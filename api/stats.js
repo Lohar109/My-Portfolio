@@ -343,6 +343,9 @@ async function fetchLeetCodeGraphQL(query, variables) {
 async function fetchLeetcodeStats() {
   const query = `
     query PortfolioStats($username: String!) {
+      followers(userSlug: $username) {
+        allNum
+      }
       matchedUser(username: $username) {
         username
         profile {
@@ -408,8 +411,10 @@ async function fetchLeetcodeStats() {
   const submitStats = matchedUser.submitStats || {};
   const userCalendar = matchedUser.userCalendar || {};
   const badgesList = matchedUser.badges || [];
+  const followersCount = data.followers?.allNum ?? 23;
 
   return {
+    followersCount,
     profile: {
       username: LEETCODE_USERNAME,
       name: profile.realName || 'VaibhavLohar',

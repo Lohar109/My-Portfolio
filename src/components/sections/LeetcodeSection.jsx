@@ -23,6 +23,7 @@ function LeetcodeSection() {
   const [badges, setBadges] = useState(null)
   const [submissions, setSubmissions] = useState([])
   const [calendar, setCalendar] = useState(null)
+  const [followersCount, setFollowersCount] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
@@ -122,6 +123,7 @@ function LeetcodeSection() {
         if (cachedData?.badges) setBadges(cachedData.badges)
         if (cachedData?.submissions) setSubmissions(cachedData.submissions)
         if (cachedData?.calendar) setCalendar(cachedData.calendar)
+        if (cachedData?.followersCount !== undefined) setFollowersCount(cachedData.followersCount)
         return cachedData
       } catch (error) {
         console.warn('Unable to read cached LeetCode data:', error)
@@ -166,6 +168,7 @@ function LeetcodeSection() {
         setBadges(normalizeBadges(data.badges || fallbackBadges))
         setSubmissions(data.submissions || fallbackSubmissions)
         setCalendar(data.calendar || fallbackCalendar)
+        setFollowersCount(data.followersCount ?? 23)
 
         localStorage.setItem(cacheKey, JSON.stringify(data))
         localStorage.setItem(cacheTimeKey, Date.now().toString())
@@ -180,6 +183,7 @@ function LeetcodeSection() {
           setBadges(cachedData.badges || fallbackBadges)
           setSubmissions(cachedData.submissions || fallbackSubmissions)
           setCalendar(cachedData.calendar || fallbackCalendar)
+          setFollowersCount(cachedData.followersCount ?? 23)
         } else {
           setError(true)
           setProfile(fallbackProfile)
@@ -188,6 +192,7 @@ function LeetcodeSection() {
           setBadges(fallbackBadges)
           setSubmissions(fallbackSubmissions)
           setCalendar(fallbackCalendar)
+          setFollowersCount(23)
         }
       } finally {
         if (isMounted) {
@@ -442,6 +447,15 @@ function LeetcodeSection() {
               </div>
               <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
                 Global Rank
+              </div>
+            </div>
+            <div className="h-8 w-[1px] bg-slate-200" />
+            <div className="text-center">
+              <div className="text-base sm:text-lg font-black text-gray-900 font-sans">
+                {(followersCount ?? 23).toLocaleString()}
+              </div>
+              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
+                Followers
               </div>
             </div>
             <div className="h-8 w-[1px] bg-slate-200" />

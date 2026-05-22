@@ -56,6 +56,27 @@ function GithubSection() {
   ]
 
   useEffect(() => {
+    const cacheKey = `github_cache_${username}`
+    const cacheTimeKey = `github_cache_time_${username}`
+
+    const hydrateCachedData = () => {
+      try {
+        const cachedRaw = localStorage.getItem(cacheKey)
+        if (!cachedRaw) return null
+
+        const cachedData = JSON.parse(cachedRaw)
+        if (cachedData?.profile) setProfile(cachedData.profile)
+        if (cachedData?.repos) setRepos(cachedData.repos)
+        if (cachedData?.contributions) setContributions(cachedData.contributions)
+        return cachedData
+      } catch (error) {
+        console.warn('Unable to read cached GitHub data:', error)
+        return null
+      }
+    }
+
+    const cachedData = hydrateCachedData()
+
     async function fetchGithubData() {
       try {
         setLoading(true)
@@ -95,7 +116,8 @@ function GithubSection() {
           }
         })
         
-        setRepos(enrichedRepos.length > 0 ? enrichedRepos : fallbackRepos)
+        const nextRepos = enrichedRepos.length > 0 ? enrichedRepos : fallbackRepos
+        setRepos(nextRepos)
 
         // 3. Fetch Live Contributions Data dynamically
         try {
@@ -110,7 +132,7 @@ function GithubSection() {
               'FOURTH_QUARTILE': 4
             }
             
-            setContributions({
+            const contributionsData = {
               total: {
                 lastYear: data.totalContributions
               },
@@ -120,7 +142,19 @@ function GithubSection() {
                 level: levelMap[day.contributionLevel] ?? 0
               })),
               maxCommit: Math.max(...data.contributions.flat().map(d => d.contributionCount))
-            })
+            }
+
+            setContributions(contributionsData)
+
+            localStorage.setItem(cacheKey, JSON.stringify({
+              profile: {
+                ...profileData,
+                bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems..."
+              },
+              repos: nextRepos,
+              contributions: contributionsData
+            }))
+            localStorage.setItem(cacheTimeKey, Date.now().toString())
           } else {
             generateRealContributions()
           }
@@ -131,18 +165,20 @@ function GithubSection() {
 
       } catch (err) {
         console.error('Error fetching GitHub data:', err)
-        setError(true)
-        setProfile({
-          name: 'Vaibhav Lohar',
-          login: 'Lohar109',
-          bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems...",
-          avatar_url: 'https://github.com/Lohar109.png',
-          public_repos: 8,
-          followers: 2,
-          following: 3
-        })
-        setRepos(fallbackRepos)
-        generateRealContributions()
+        if (!cachedData) {
+          setError(true)
+          setProfile({
+            name: 'Vaibhav Lohar',
+            login: 'Lohar109',
+            bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems...",
+            avatar_url: 'https://github.com/Lohar109.png',
+            public_repos: 8,
+            followers: 2,
+            following: 3
+          })
+          setRepos(fallbackRepos)
+          generateRealContributions()
+        }
       } finally {
         setLoading(false)
       }

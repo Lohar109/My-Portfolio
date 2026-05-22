@@ -107,6 +107,29 @@ function LeetcodeSection() {
   useEffect(() => {
     let refreshTimer = null
     let isMounted = true
+    const cacheKey = `leetcode_cache_${username}`
+    const cacheTimeKey = `leetcode_cache_time_${username}`
+
+    const hydrateCachedData = () => {
+      try {
+        const cachedRaw = localStorage.getItem(cacheKey)
+        if (!cachedRaw) return null
+
+        const cachedData = JSON.parse(cachedRaw)
+        if (cachedData?.profile) setProfile(cachedData.profile)
+        if (cachedData?.solved) setSolved(cachedData.solved)
+        if (cachedData?.contest) setContest(cachedData.contest)
+        if (cachedData?.badges) setBadges(cachedData.badges)
+        if (cachedData?.submissions) setSubmissions(cachedData.submissions)
+        if (cachedData?.calendar) setCalendar(cachedData.calendar)
+        return cachedData
+      } catch (error) {
+        console.warn('Unable to read cached LeetCode data:', error)
+        return null
+      }
+    }
+
+    const cachedData = hydrateCachedData()
 
     const normalizeBadges = (payload) => {
       const apiBadges = Array.isArray(payload?.badges) ? payload.badges : []
@@ -128,18 +151,18 @@ function LeetcodeSection() {
 
     async function fetchLeetcodeData() {
       const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-      const cacheKey = `leetcode_cache_${username}`
-      const cacheTimeKey = `leetcode_cache_time_${username}`
 
       try {
         setLoading(true)
         setError(false)
 
         let isRateLimited = false
+        let usedFallback = false
 
         // 2. Resilient per-endpoint fetcher with automatic fallback and rate-limit short-circuiting
         const fetchWithFallback = async (url, fallback) => {
           if (isRateLimited) {
+            usedFallback = true
             return fallback
           }
           try {
@@ -149,11 +172,14 @@ function LeetcodeSection() {
             }
             if (res.status === 429) {
               isRateLimited = true
+              usedFallback = true
               console.warn(`Rate limited (429) on ${url}. Aborting remaining network calls and using fallbacks to avoid console clutter.`)
             } else {
+              usedFallback = true
               console.warn(`API responded with status ${res.status} on ${url}. Using local fallback.`)
             }
           } catch (e) {
+            usedFallback = true
             console.warn(`Network error fetching ${url}. Using local fallback:`, e)
           }
           return fallback
@@ -179,6 +205,16 @@ function LeetcodeSection() {
 
         if (!isMounted) return
 
+        if (usedFallback && cachedData) {
+          setProfile(cachedData.profile || fallbackProfile)
+          setSolved(cachedData.solved || fallbackSolved)
+          setContest(cachedData.contest || fallbackContest)
+          setBadges(cachedData.badges || fallbackBadges)
+          setSubmissions(cachedData.submissions || fallbackSubmissions)
+          setCalendar(cachedData.calendar || fallbackCalendar)
+          return
+        }
+
         setProfile(profileData)
         setSolved(solvedData)
         setContest(contestData)
@@ -186,27 +222,32 @@ function LeetcodeSection() {
         setSubmissions(submissionsData.submission || submissionsData || [])
         setCalendar(calendarData)
 
-        // Cache combined dynamic/fallback data
-        const dataToCache = {
+        // Cache only fully live data so a temporary failure does not overwrite the last good profile.
+        if (!usedFallback) {
+          const dataToCache = {
           profile: profileData,
           solved: solvedData,
           contest: contestData,
           badges: normalizeBadges(badgesData),
           submissions: submissionsData.submission || submissionsData || [],
           calendar: calendarData
+          }
+          localStorage.setItem(cacheKey, JSON.stringify(dataToCache))
+          localStorage.setItem(cacheTimeKey, Date.now().toString())
         }
-        localStorage.setItem(cacheKey, JSON.stringify(dataToCache))
-        localStorage.setItem(cacheTimeKey, Date.now().toString())
 
       } catch (err) {
         console.error('Unexpected error loading LeetCode data. Resetting completely to fallbacks.', err)
         if (!isMounted) return
-        setError(true)
-        setProfile(fallbackProfile)
-        setSolved(fallbackSolved)
-        setContest(fallbackContest)
-        setBadges(fallbackBadges)
-        setSubmissions(fallbackSubmissions)
+        if (!cachedData) {
+          setError(true)
+          setProfile(fallbackProfile)
+          setSolved(fallbackSolved)
+          setContest(fallbackContest)
+          setBadges(fallbackBadges)
+          setSubmissions(fallbackSubmissions)
+          setCalendar(fallbackCalendar)
+        }
       } finally {
         if (isMounted) {
           setLoading(false)

@@ -34,7 +34,7 @@ function HeroSection() {
   }
 
   return (
-    <div className="relative bg-slate-50/30 overflow-x-hidden">
+    <div className="relative bg-slate-50/30">
       {/* Background soft lighting dots and gradients */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[1000px] bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.06),rgba(229,231,235,0.25)_40%,transparent_70%)]" />
       

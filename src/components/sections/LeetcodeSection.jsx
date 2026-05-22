@@ -29,7 +29,7 @@ function LeetcodeSection() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
-  const [showProblems, setShowProblems] = useState(true)
+  const [showProblems, setShowProblems] = useState(false)
 
   // Fallbacks in case unofficial API is slow or offline
   const fallbackProfile = {

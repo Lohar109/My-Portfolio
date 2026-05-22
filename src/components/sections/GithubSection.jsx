@@ -23,7 +23,7 @@ function GithubSection() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
-  const [showRepos, setShowRepos] = useState(true)
+  const [showRepos, setShowRepos] = useState(false)
 
   const fallbackRepos = [
     {

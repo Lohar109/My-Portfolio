@@ -109,27 +109,32 @@ function HeroSection() {
               A software developer who doesn't just call APIs, but builds custom semantic data pipelines and vector models. Expert in engineering secure enterprise apps across web and desktop platforms.
             </motion.p>
 
-            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="mt-7 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+              className="mt-7 flex flex-col sm:flex-row gap-5 w-full sm:w-auto"
             >
-              <button
-                onClick={() => navigate('/projects')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-50 border border-gray-200 hover:border-violet-200 px-6 py-3 text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 shadow-sm hover:shadow-[0_8px_24px_rgba(99,102,241,0.06)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
-              >
-                <span>View Projects</span>
-              </button>
+              <div className="snake-border-wrapper w-full sm:w-auto active:scale-[0.98]">
+                <div className="snake-border-glow" />
+                <button
+                  onClick={() => navigate('/projects')}
+                  className="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none"
+                >
+                  <span>View Projects</span>
+                </button>
+              </div>
 
-              <button
-                onClick={() => window.open('/resume.pdf', '_blank')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-50 border border-gray-200 hover:border-violet-200 px-6 py-3 text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 shadow-sm hover:shadow-[0_8px_24px_rgba(99,102,241,0.06)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
-              >
-                <Download className="h-4.5 w-4.5 group-hover:translate-y-0.5 transition-transform duration-300" />
-                <span>Download Resume</span>
-              </button>
+              <div className="snake-border-wrapper w-full sm:w-auto active:scale-[0.98]">
+                <div className="snake-border-glow" />
+                <button
+                  onClick={() => window.open('/resume.pdf', '_blank')}
+                  className="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none group"
+                >
+                  <Download className="h-4.5 w-4.5 group-hover:translate-y-0.5 transition-transform duration-300" />
+                  <span>Download Resume</span>
+                </button>
+              </div>
             </motion.div>
 
             {/* Social "Connect with me" row */}

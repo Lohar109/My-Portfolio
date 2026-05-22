@@ -64,3 +64,59 @@ button {
   color: #c084fc !important; /* Purple-400 */
   opacity: 0.85;
 }
+
+/* Glowing Snake Border Animation */
+.snake-border-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px; /* rounded-xl */
+  padding: 2px; /* 2px thickness for a bold, visible line */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.snake-border-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15);
+}
+
+.snake-border-glow {
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 15%,
+    #818cf8 35%, /* indigo-400 */
+    #c084fc 65%, /* purple-400 */
+    transparent 85%
+  );
+  animation: rotate-snake 3s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes rotate-snake {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.snake-border-wrapper:hover .snake-border-glow {
+  animation-duration: 1.5s;
+  background: conic-gradient(
+    from 0deg,
+    transparent 10%,
+    #4f46e5 35%, /* indigo-600 */
+    #c084fc 65%, /* purple-400 */
+    transparent 90%
+  );
+}

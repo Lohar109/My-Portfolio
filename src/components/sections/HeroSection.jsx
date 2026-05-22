@@ -3,11 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   ArrowRight,
   Download,
-  Code2,
-  Sparkles,
-  Palette,
-  Server,
-  ArrowUpRight,
   Mail,
 } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
@@ -17,40 +12,7 @@ function HeroSection() {
   const navigate = useNavigate()
 
 
-  const services = [
-    {
-      title: 'Full Stack Development',
-      description: 'Building robust and scalable web applications using modern technologies.',
-      icon: <Code2 className="h-6 w-6 stroke-[2]" />,
-      iconColor: 'text-[#2563EB]',
-      titleHover: 'group-hover:text-[#2563EB]',
-      arrowHover: 'group-hover:text-[#2563EB] group-hover:border-blue-100 group-hover:bg-blue-50/50',
-    },
-    {
-      title: 'AI Integrations',
-      description: 'Creating AI-powered features and intelligent systems using latest AI models.',
-      icon: <Sparkles className="h-6 w-6 stroke-[2]" />,
-      iconColor: 'text-purple-600',
-      titleHover: 'group-hover:text-purple-600',
-      arrowHover: 'group-hover:text-purple-600 group-hover:border-purple-100 group-hover:bg-purple-50/50',
-    },
-    {
-      title: 'UI/UX Engineering',
-      description: 'Designing clean, responsive and user-friendly interfaces that users love.',
-      icon: <Palette className="h-6 w-6 stroke-[2]" />,
-      iconColor: 'text-[#128C7E]',
-      titleHover: 'group-hover:text-[#128C7E]',
-      arrowHover: 'group-hover:text-[#128C7E] group-hover:border-emerald-100 group-hover:bg-emerald-50/50',
-    },
-    {
-      title: 'System Design',
-      description: 'Architecting high-performance, secure and scalable backend infrastructures.',
-      icon: <Server className="h-6 w-6 stroke-[2]" />,
-      iconColor: 'text-[#EF4444]',
-      titleHover: 'group-hover:text-[#EF4444]',
-      arrowHover: 'group-hover:text-[#EF4444] group-hover:border-red-100 group-hover:bg-red-50/50',
-    },
-  ]
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -220,59 +182,6 @@ function HeroSection() {
           >
             <IntroVideoFrame />
           </motion.div>
-        </div>
-      </motion.section>
-
-
-      {/* 3. "What I Do" (Services) Section */}
-      <motion.section
-        className="mx-auto max-w-6xl px-6 pt-12 pb-24 sm:px-10 lg:px-12"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-      >
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 select-none">
-          <div className="text-left">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 font-sans">
-              What I Do
-            </h2>
-            <p className="mt-2 text-sm sm:text-base font-semibold text-gray-400 max-w-lg">
-              I help businesses and individuals build high-quality digital solutions.
-            </p>
-          </div>
-          <button
-            onClick={() => navigate('/skills')}
-            className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 px-5 py-2.5 text-xs sm:text-sm font-bold text-gray-700 hover:text-indigo-600 hover:border-indigo-100 hover:scale-105 active:scale-98 transition duration-200 cursor-pointer self-start sm:self-auto"
-          >
-            <span>View All Services</span>
-          </button>
-        </div>
-
-        {/* Services 4-Card Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-default"
-            >
-              <div>
-                {/* Service Icon inside borderless transparent circle */}
-                <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-transparent border-none transition-transform duration-300 group-hover:scale-110 ${service.iconColor}`}>
-                  {service.icon}
-                </div>
-
-                <h3 className={`mt-5 text-base sm:text-lg font-black text-gray-900 transition duration-200 ${service.titleHover}`}>
-                  {service.title}
-                </h3>
-                <p className="mt-2.5 text-xs sm:text-sm font-semibold leading-relaxed text-gray-400/95 text-left">
-                  {service.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
         </div>
       </motion.section>
     </div>

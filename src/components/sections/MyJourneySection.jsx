@@ -10,6 +10,8 @@ function MyJourneySection() {
       title: 'Learning & Exploring',
       description: 'Started my journey with curiosity and passion for technology.',
       icon: <BookOpen className="h-6 w-6 stroke-[2]" />,
+      iconBg: 'bg-teal-50',
+      iconColor: 'text-teal-600',
     },
     {
       number: '02',
@@ -17,6 +19,8 @@ function MyJourneySection() {
       title: 'Building Projects',
       description: 'Built real-world projects and gained practical experience.',
       icon: <Code2 className="h-6 w-6 stroke-[2]" />,
+      iconBg: 'bg-blue-50',
+      iconColor: 'text-blue-600',
     },
     {
       number: '03',
@@ -24,6 +28,8 @@ function MyJourneySection() {
       title: 'Freelancing',
       description: 'Worked with clients and delivered impactful digital solutions.',
       icon: <Briefcase className="h-6 w-6 stroke-[2]" />,
+      iconBg: 'bg-amber-50',
+      iconColor: 'text-amber-600',
     },
     {
       number: '04',
@@ -31,6 +37,8 @@ function MyJourneySection() {
       title: 'AI & Advanced Systems',
       description: 'Exploring AI, LLMs and building intelligent scalable systems.',
       icon: <Cpu className="h-6 w-6 stroke-[2]" />,
+      iconBg: 'bg-pink-50',
+      iconColor: 'text-pink-600',
     },
   ]
 
@@ -117,8 +125,8 @@ function MyJourneySection() {
 
               {/* Step Card */}
               <div className="w-full h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_36px_rgba(147,51,234,0.05)] hover:border-purple-100/50 transition-all duration-300 hover:-translate-y-1 flex items-start gap-4">
-                {/* Icon box inside light purple rounded square */}
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-50 text-purple-500 transition-transform duration-300 group-hover:scale-105 select-none">
+                {/* Icon box inside light rounded square */}
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${step.iconBg} ${step.iconColor} transition-transform duration-300 group-hover:scale-105 select-none`}>
                   {step.icon}
                 </div>
 

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   GitFork,
   BookOpen,
-  ExternalLink,
   Calendar,
   GitCommit,
   Users,
@@ -597,8 +596,10 @@ function GithubSection() {
                 <motion.div
                   key={repo.name + idx}
                   variants={itemVariants}
-                  className="flex flex-col h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(147,51,234,0.05)] hover:border-purple-100/50 transition-all duration-300 hover:-translate-y-1 group"
+                  className="flex flex-col h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(147,51,234,0.06)] hover:border-purple-100/80 transition-all duration-500 hover:-translate-y-1.5 group relative overflow-hidden"
                 >
+                  {/* Premium top gradient line visible on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   {/* Repo Header */}
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div className="flex items-start gap-2.5 min-w-0">
@@ -607,9 +608,10 @@ function GithubSection() {
                         href={repo.html_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-purple-600 transition-colors duration-200 select-all break-words"
+                        className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-purple-600 transition-colors duration-200 select-all break-words relative pb-0.5 group/link"
                       >
                         {repo.name}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover/link:w-full" />
                       </a>
                     </div>
                   </div>
@@ -633,13 +635,13 @@ function GithubSection() {
                     )}
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       {repo.homepage && (
                         <a
                           href={repo.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-[10px] font-extrabold text-pink-500 hover:text-pink-600 tracking-wider font-sans transition-colors duration-200"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-pink-50/50 hover:bg-pink-50 border border-pink-100/50 hover:border-pink-200/80 text-[10px] font-extrabold text-pink-600 hover:text-pink-700 tracking-wider font-sans transition-all duration-300 shadow-sm hover:shadow-[0_2px_8px_rgba(236,72,153,0.08)] hover:-translate-y-0.5 cursor-pointer"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           LIVE
@@ -649,10 +651,9 @@ function GithubSection() {
                         href={repo.html_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-[10px] font-extrabold text-purple-600 hover:text-purple-700 tracking-wider font-sans transition-colors duration-200"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50/50 hover:bg-purple-50 border border-purple-100/50 hover:border-purple-200/80 text-[10px] font-extrabold text-purple-600 hover:text-purple-700 tracking-wider font-sans transition-all duration-300 shadow-sm hover:shadow-[0_2px_8px_rgba(147,51,234,0.08)] hover:-translate-y-0.5 cursor-pointer"
                       >
                         REPO
-                        <ExternalLink className="h-3 w-3" />
                       </a>
                     </div>
                   </div>

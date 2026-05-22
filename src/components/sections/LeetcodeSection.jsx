@@ -74,41 +74,98 @@ function LeetcodeSection() {
 
   useEffect(() => {
     async function fetchLeetcodeData() {
+      const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+      const cacheKey = `leetcode_cache_${username}`
+      const cacheTimeKey = `leetcode_cache_time_${username}`
+
       try {
         setLoading(true)
         setError(false)
 
-        // Fetch from the robust unofficial endpoint
-        const [profileRes, solvedRes, contestRes, badgesRes, submissionsRes, calendarRes] = await Promise.all([
-          fetch(`https://alfa-leetcode-api.onrender.com/${username}`),
-          fetch(`https://alfa-leetcode-api.onrender.com/${username}/solved`),
-          fetch(`https://alfa-leetcode-api.onrender.com/${username}/contest`),
-          fetch(`https://alfa-leetcode-api.onrender.com/${username}/badges`),
-          fetch(`https://alfa-leetcode-api.onrender.com/${username}/acSubmission`),
-          fetch(`https://alfa-leetcode-api.onrender.com/${username}/calendar`)
-        ])
-
-        if (!profileRes.ok || !solvedRes.ok || !contestRes.ok || !badgesRes.ok || !submissionsRes.ok || !calendarRes.ok) {
-          throw new Error('Some LeetCode endpoints failed to respond')
+        // 1. Check LocalStorage Cache (expires in 4 hours)
+        const cached = localStorage.getItem(cacheKey)
+        const cachedTime = localStorage.getItem(cacheTimeKey)
+        const cacheDuration = 4 * 60 * 60 * 1000 // 4 hours
+        if (cached && cachedTime && (Date.now() - Number(cachedTime) < cacheDuration)) {
+          try {
+            const parsed = JSON.parse(cached)
+            setProfile(parsed.profile)
+            setSolved(parsed.solved)
+            setContest(parsed.contest)
+            setBadges(parsed.badges)
+            setSubmissions(parsed.submissions)
+            setCalendar(parsed.calendar)
+            setLoading(false)
+            return
+          } catch (e) {
+            console.warn('Failed to parse cached LeetCode data, refetching...', e)
+          }
         }
 
-        const profileData = await profileRes.json()
-        const solvedData = await solvedRes.json()
-        const contestData = await contestRes.json()
-        const badgesData = await badgesRes.json()
-        const submissionsData = await submissionsRes.json()
-        const calendarData = await calendarRes.json()
+        let isRateLimited = false
+
+        // 2. Resilient per-endpoint fetcher with automatic fallback and rate-limit short-circuiting
+        const fetchWithFallback = async (url, fallback) => {
+          if (isRateLimited) {
+            return fallback
+          }
+          try {
+            const res = await fetch(url)
+            if (res.ok) {
+              return await res.json()
+            }
+            if (res.status === 429) {
+              isRateLimited = true
+              console.warn(`Rate limited (429) on ${url}. Aborting remaining network calls and using fallbacks to avoid console clutter.`)
+            } else {
+              console.warn(`API responded with status ${res.status} on ${url}. Using local fallback.`)
+            }
+          } catch (e) {
+            console.warn(`Network error fetching ${url}. Using local fallback:`, e)
+          }
+          return fallback
+        }
+
+        // 3. Sequence requests with 200ms staggering delay to avoid triggering rate limiters
+        const profileData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}`, fallbackProfile)
+        await delay(200)
+        
+        const solvedData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/solved`, fallbackSolved)
+        await delay(200)
+        
+        const contestData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/contest`, fallbackContest)
+        await delay(200)
+        
+        const badgesData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/badges`, fallbackBadges)
+        await delay(200)
+        
+        const submissionsData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/acSubmission`, { submission: fallbackSubmissions })
+        await delay(200)
+        
+        const calendarData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/calendar`, null)
 
         setProfile(profileData)
         setSolved(solvedData)
         setContest(contestData)
         setBadges(badgesData)
-        setSubmissions(submissionsData.submission || [])
+        setSubmissions(submissionsData.submission || submissionsData || [])
         setCalendar(calendarData)
+
+        // Cache combined dynamic/fallback data
+        const dataToCache = {
+          profile: profileData,
+          solved: solvedData,
+          contest: contestData,
+          badges: badgesData,
+          submissions: submissionsData.submission || submissionsData || [],
+          calendar: calendarData
+        }
+        localStorage.setItem(cacheKey, JSON.stringify(dataToCache))
+        localStorage.setItem(cacheTimeKey, Date.now().toString())
+
       } catch (err) {
-        console.error('Failed to live-fetch LeetCode data. Using high-fidelity fallbacks.', err)
+        console.error('Unexpected error loading LeetCode data. Resetting completely to fallbacks.', err)
         setError(true)
-        // Set fallback data
         setProfile(fallbackProfile)
         setSolved(fallbackSolved)
         setContest(fallbackContest)

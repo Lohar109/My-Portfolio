@@ -602,13 +602,13 @@ function GithubSection() {
                 >
                   {/* Repo Header */}
                   <div className="flex items-start justify-between gap-4 mb-3">
-                    <div className="flex items-center gap-2">
-                      <BookOpen className="h-4.5 w-4.5 text-purple-500 group-hover:text-pink-500 transition-colors duration-300" />
+                    <div className="flex items-start gap-2.5 min-w-0">
+                      <BookOpen className="h-5.5 w-5.5 text-purple-500 group-hover:text-pink-500 transition-colors duration-300 shrink-0 mt-0.5" />
                       <a
                         href={repo.html_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-purple-600 transition-colors duration-200 select-all"
+                        className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-purple-600 transition-colors duration-200 select-all break-words"
                       >
                         {repo.name}
                       </a>

@@ -56,6 +56,8 @@ function GithubSection() {
   ]
 
   useEffect(() => {
+    let refreshTimer = null
+    let isMounted = true
     const cacheKey = `github_cache_${username}`
     const cacheTimeKey = `github_cache_time_${username}`
 
@@ -86,10 +88,11 @@ function GithubSection() {
         const profileRes = await fetch(`https://api.github.com/users/${username}`)
         if (!profileRes.ok) throw new Error('Failed to fetch profile')
         const profileData = await profileRes.json()
-        setProfile({
+        const nextProfile = {
           ...profileData,
           bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems..."
-        })
+        }
+        setProfile(nextProfile)
 
         // 2. Fetch Repositories
         const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`)
@@ -144,23 +147,30 @@ function GithubSection() {
               maxCommit: Math.max(...data.contributions.flat().map(d => d.contributionCount))
             }
 
-            setContributions(contributionsData)
+            if (isMounted) {
+              setContributions(contributionsData)
+            }
 
             localStorage.setItem(cacheKey, JSON.stringify({
-              profile: {
-                ...profileData,
-                bio: "Full-Stack Developer passionate about building high-performance web applications that solve real-world problems..."
-              },
+              profile: nextProfile,
               repos: nextRepos,
               contributions: contributionsData
             }))
             localStorage.setItem(cacheTimeKey, Date.now().toString())
           } else {
-            generateRealContributions()
+            if (cachedData?.contributions) {
+              setContributions(cachedData.contributions)
+            } else {
+              generateRealContributions()
+            }
           }
         } catch (err) {
           console.warn('Error fetching live GitHub contributions, falling back to local dataset:', err)
-          generateRealContributions()
+          if (cachedData?.contributions) {
+            setContributions(cachedData.contributions)
+          } else {
+            generateRealContributions()
+          }
         }
 
       } catch (err) {
@@ -178,13 +188,39 @@ function GithubSection() {
           })
           setRepos(fallbackRepos)
           generateRealContributions()
+        } else {
+          setProfile(cachedData.profile)
+          setRepos(cachedData.repos || fallbackRepos)
+          setContributions(cachedData.contributions)
         }
       } finally {
-        setLoading(false)
+        if (isMounted) {
+          setLoading(false)
+        }
       }
     }
 
     fetchGithubData()
+
+    refreshTimer = setInterval(() => {
+      fetchGithubData()
+    }, 10 * 60 * 1000)
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchGithubData()
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      isMounted = false
+      if (refreshTimer) {
+        clearInterval(refreshTimer)
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [])
 
   // Helper to generate elegant realistic commit pattern matching the user's real GitHub profile

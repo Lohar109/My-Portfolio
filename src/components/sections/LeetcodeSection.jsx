@@ -529,10 +529,10 @@ function LeetcodeSection() {
 
             {/* Badges showcase bar */}
             <div className="border-t border-slate-100/80 pt-4 flex items-center justify-between flex-wrap gap-3">
-              <span className="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest select-none">Recent Badges</span>
-              <div className="flex items-center gap-2">
+              <span className="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest select-none">LeetCode Badges</span>
+              <div className="flex items-center gap-2 flex-wrap justify-end">
                 {badges?.badges ? (
-                  badges.badges.slice(0, 4).map((badge, idx) => {
+                  badges.badges.map((badge, idx) => {
                     const badgeUrl = badge.icon.startsWith('http') ? badge.icon : `https://leetcode.com${badge.icon}`
                     return (
                       <div

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { createPortal } from 'react-dom'
 import {
   GitFork,
   BookOpen,
@@ -494,8 +495,8 @@ function GithubSection() {
                       onMouseEnter={(e) => setActiveTooltip({
                         count: day.count,
                         date: day.date,
-                        x: e.currentTarget.offsetLeft - 80,
-                        y: e.currentTarget.offsetTop - 36
+                        x: Math.min(Math.max(e.currentTarget.getBoundingClientRect().left + (e.currentTarget.getBoundingClientRect().width / 2), 16), window.innerWidth - 16),
+                        y: Math.max(e.currentTarget.getBoundingClientRect().top - 12, 12)
                       })}
                       onMouseLeave={() => setActiveTooltip(null)}
                     />
@@ -530,20 +531,24 @@ function GithubSection() {
           {/* Interactive Tooltip */}
           <AnimatePresence>
             {activeTooltip && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="absolute z-30 bg-gray-900 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-lg pointer-events-none font-sans"
-                style={{
-                  left: `${activeTooltip.x}px`,
-                  top: `${activeTooltip.y}px`
-                }}
-              >
-                <div className="text-center whitespace-nowrap">
-                  <span className="text-pink-400">{activeTooltip.count} commits</span> on {formatTooltipDate(activeTooltip.date)}
-                </div>
-              </motion.div>
+              createPortal(
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="fixed z-50 bg-gray-900 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-lg pointer-events-none font-sans"
+                  style={{
+                    left: `${activeTooltip.x}px`,
+                    top: `${activeTooltip.y}px`,
+                    transform: 'translate(-50%, -100%)'
+                  }}
+                >
+                  <div className="text-center whitespace-nowrap">
+                    <span className="text-pink-400">{activeTooltip.count} commits</span> on {formatTooltipDate(activeTooltip.date)}
+                  </div>
+                </motion.div>,
+                document.body
+              )
             )}
           </AnimatePresence>
         </div>

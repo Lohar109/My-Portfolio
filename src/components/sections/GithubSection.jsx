@@ -25,7 +25,7 @@ function GithubSection() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
-  const [showRepos, setShowRepos] = useState(true)
+  const [showRepos, setShowRepos] = useState(false)
 
   const fallbackRepos = [
     {
@@ -554,25 +554,23 @@ function GithubSection() {
       {/* Featured Repositories Title Header */}
       <motion.div
         variants={itemVariants}
-        className="flex items-center justify-between flex-wrap gap-4 mb-6 select-none"
+        className="flex items-center gap-3 mb-6 select-none"
       >
-        <div className="flex items-center gap-2">
-          <Layers className="h-4.5 w-4.5 text-purple-600" />
-          <h4 className="text-xs sm:text-sm font-black text-gray-900 font-sans uppercase tracking-wider">
-            Featured Repositories
-          </h4>
-        </div>
-
-        {/* Smooth Toggle Button */}
+        <Layers className="h-4.5 w-4.5 text-purple-600 shrink-0" />
+        <h4 className="text-xs sm:text-sm font-black text-gray-900 font-sans uppercase tracking-wider shrink-0">
+          Featured Repositories
+        </h4>
+        
+        {/* Smooth Toggle Button right next to Title */}
         <button
           onClick={() => setShowRepos(!showRepos)}
-          className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-wider uppercase bg-purple-50 hover:bg-purple-100/80 border border-purple-100 text-purple-700 hover:text-purple-800 shadow-sm hover:shadow transition-all duration-300 cursor-pointer"
+          className="flex items-center justify-center p-1 rounded-full bg-purple-50 hover:bg-purple-100/80 border border-purple-100 text-purple-700 hover:text-purple-800 shadow-sm hover:shadow transition-all duration-300 cursor-pointer shrink-0"
+          aria-label="Toggle Featured Repositories"
         >
-          <span>{showRepos ? 'Hide' : 'Show'}</span>
           <motion.div
             animate={{ rotate: showRepos ? 180 : 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="flex items-center justify-center shrink-0"
+            className="flex items-center justify-center"
           >
             <ChevronDown className="h-3.5 w-3.5" />
           </motion.div>

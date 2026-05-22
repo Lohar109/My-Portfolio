@@ -11,7 +11,9 @@ import {
   Percent,
   CheckCircle,
   Activity,
-  Flame
+  Flame,
+  ArrowUpRight,
+  ExternalLink
 } from 'lucide-react'
 import { SiLeetcode } from 'react-icons/si'
 
@@ -27,7 +29,7 @@ function LeetcodeSection() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
-  const [showProblems, setShowProblems] = useState(false)
+  const [showProblems, setShowProblems] = useState(true)
 
   // Fallbacks in case unofficial API is slow or offline
   const fallbackProfile = {
@@ -244,6 +246,18 @@ function LeetcodeSection() {
     const [year, month, day] = dateStr.split('-')
     const date = new Date(Number(year), Number(month) - 1, Number(day))
     return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  }
+
+  function formatSubmissionTime(unixSec) {
+    if (!unixSec) return ''
+    const date = new Date(Number(unixSec) * 1000)
+    return date.toLocaleDateString(undefined, { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
   }
 
   // Submission calendar squares builder
@@ -776,50 +790,88 @@ function LeetcodeSection() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pt-1 pb-1"
+              className="w-full bg-white border border-slate-100 rounded-3xl p-1 sm:p-2 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_16px_48px_rgba(245,158,11,0.04)] transition-all duration-500 overflow-hidden"
             >
-              {submissions.slice(0, 6).map((prob, idx) => (
-                <motion.div
-                  key={prob.title + idx}
-                  variants={itemVariants}
-                  className="flex flex-col h-full bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(245,158,11,0.04)] hover:border-amber-100/80 transition-all duration-500 hover:-translate-y-1.5 group relative overflow-hidden"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  
-                  {/* Problem Header */}
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <div className="flex items-start gap-2.5 min-w-0">
-                      <BookOpen className="h-5.5 w-5.5 text-amber-500 group-hover:text-orange-500 transition-colors duration-300 shrink-0 mt-0.5" />
-                      <a
-                        href={`https://leetcode.com/problems/${prob.titleSlug}/`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm sm:text-base font-black text-gray-900 tracking-tight font-sans hover:text-amber-600 transition-colors duration-200 select-all break-words relative pb-0.5 group/link"
-                      >
-                        {prob.title}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300 group-hover/link:w-full" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Solved Status & Meta */}
-                  <p className="text-xs font-semibold leading-relaxed text-gray-400 flex-1 mb-4 select-text">
-                    Successfully solved this algorithm challenge with optimized spacetime complexity.
-                  </p>
-
-                  {/* Problem Footer (Accepted indicator + Lang) */}
-                  <div className="flex items-center justify-between border-t border-slate-50 pt-4 mt-auto select-none">
-                    <span className="text-[9px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-sans uppercase tracking-wider">
-                      Accepted
-                    </span>
-
-                    {/* Language tag */}
-                    <span className={`text-[9px] font-extrabold px-2.5 py-0.5 rounded-full font-sans uppercase tracking-wider ${getProblemLanguageColor(prob.lang)}`}>
-                      {prob.lang}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="w-full overflow-x-auto scrollbar-thin">
+                <table className="w-full min-w-[700px] border-collapse text-left font-sans">
+                  <thead>
+                    <tr className="border-b border-slate-100 bg-slate-50/50 select-none">
+                      <th className="py-4 px-5 text-[10px] font-black uppercase tracking-widest text-gray-400">#</th>
+                      <th className="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Problem</th>
+                      <th className="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Status</th>
+                      <th className="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Language</th>
+                      <th className="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Time Solved</th>
+                      <th className="py-4 px-5 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {submissions.slice(0, 10).map((prob, idx) => {
+                      const probNum = String(idx + 1).padStart(2, '0')
+                      return (
+                        <motion.tr
+                          key={prob.title + idx}
+                          variants={itemVariants}
+                          className="border-b border-slate-50 hover:bg-slate-50/40 last:border-b-0 transition-colors duration-200 group"
+                        >
+                          {/* Index Column */}
+                          <td className="py-4 px-5 text-xs font-bold text-gray-400 font-mono select-none">
+                            #{probNum}
+                          </td>
+                          
+                          {/* Problem Title Column */}
+                          <td className="py-4 px-4 min-w-[250px]">
+                            <div className="flex items-center gap-2">
+                              <BookOpen className="h-4 w-4 text-amber-500/80 group-hover:text-amber-500 transition-colors duration-300 shrink-0" />
+                              <a
+                                href={`https://leetcode.com/problems/${prob.titleSlug}/`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs sm:text-sm font-black text-gray-900 hover:text-amber-600 transition-colors duration-200 select-all relative pb-0.5 group/link"
+                              >
+                                {prob.title}
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300 group-hover/link:w-full" />
+                              </a>
+                            </div>
+                          </td>
+                          
+                          {/* Status Column */}
+                          <td className="py-4 px-4 select-none">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-600 border border-emerald-100/70 font-sans uppercase tracking-wider">
+                              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                              Accepted
+                            </span>
+                          </td>
+                          
+                          {/* Language Column */}
+                          <td className="py-4 px-4 select-none">
+                            <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full font-sans uppercase tracking-wider ${getProblemLanguageColor(prob.lang)}`}>
+                              {prob.lang}
+                            </span>
+                          </td>
+                          
+                          {/* Date Solved Column */}
+                          <td className="py-4 px-4 text-xs font-bold text-gray-400 select-none">
+                            {formatSubmissionTime(prob.timestamp)}
+                          </td>
+                          
+                          {/* Action Link Column */}
+                          <td className="py-4 px-5 text-right select-none">
+                            <a
+                              href={`https://leetcode.com/problems/${prob.titleSlug}/`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-50/60 hover:bg-amber-100/90 border border-amber-100/50 hover:border-amber-200 text-[10px] font-black text-amber-700 hover:text-amber-800 tracking-wider font-sans transition-all duration-300 shadow-sm hover:shadow-[0_2px_8px_rgba(245,158,11,0.08)] cursor-pointer"
+                            >
+                              SOLVE
+                              <ArrowUpRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                            </a>
+                          </td>
+                        </motion.tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </motion.div>
           </motion.div>
         )}

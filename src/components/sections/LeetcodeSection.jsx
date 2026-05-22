@@ -104,6 +104,9 @@ function LeetcodeSection() {
   ]
 
   useEffect(() => {
+    let refreshTimer = null
+    let isMounted = true
+
     async function fetchLeetcodeData() {
       const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
       const cacheKey = `leetcode_cache_${username}`
@@ -112,26 +115,6 @@ function LeetcodeSection() {
       try {
         setLoading(true)
         setError(false)
-
-        // 1. Check LocalStorage Cache (expires in 4 hours)
-        const cached = localStorage.getItem(cacheKey)
-        const cachedTime = localStorage.getItem(cacheTimeKey)
-        const cacheDuration = 4 * 60 * 60 * 1000 // 4 hours
-        if (cached && cachedTime && (Date.now() - Number(cachedTime) < cacheDuration)) {
-          try {
-            const parsed = JSON.parse(cached)
-            setProfile(parsed.profile)
-            setSolved(parsed.solved)
-            setContest(parsed.contest)
-            setBadges(parsed.badges)
-            setSubmissions(parsed.submissions)
-            setCalendar(parsed.calendar)
-            setLoading(false)
-            return
-          } catch (e) {
-            console.warn('Failed to parse cached LeetCode data, refetching...', e)
-          }
-        }
 
         let isRateLimited = false
 
@@ -175,6 +158,8 @@ function LeetcodeSection() {
         
         const calendarData = await fetchWithFallback(`https://alfa-leetcode-api.onrender.com/${username}/calendar`, fallbackCalendar)
 
+        if (!isMounted) return
+
         setProfile(profileData)
         setSolved(solvedData)
         setContest(contestData)
@@ -196,6 +181,7 @@ function LeetcodeSection() {
 
       } catch (err) {
         console.error('Unexpected error loading LeetCode data. Resetting completely to fallbacks.', err)
+        if (!isMounted) return
         setError(true)
         setProfile(fallbackProfile)
         setSolved(fallbackSolved)
@@ -203,11 +189,33 @@ function LeetcodeSection() {
         setBadges(fallbackBadges)
         setSubmissions(fallbackSubmissions)
       } finally {
-        setLoading(false)
+        if (isMounted) {
+          setLoading(false)
+        }
       }
     }
 
     fetchLeetcodeData()
+
+    refreshTimer = setInterval(() => {
+      fetchLeetcodeData()
+    }, 10 * 60 * 1000)
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchLeetcodeData()
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      isMounted = false
+      if (refreshTimer) {
+        clearInterval(refreshTimer)
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [])
 
   // Helper date formatting

@@ -119,7 +119,7 @@ function HeroSection() {
             >
               <button
                 onClick={() => navigate('/projects')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 hover:from-violet-700 hover:via-indigo-700 hover:to-purple-700 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-[0_4px_20px_rgba(99,102,241,0.2)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.35)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:from-amber-600 hover:via-orange-600 hover:to-rose-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-[0_4px_20px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_30px_rgba(245,158,11,0.4)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
               >
                 <span>View Projects</span>
                 <ArrowRight className="h-4.5 w-4.5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -127,7 +127,7 @@ function HeroSection() {
 
               <button
                 onClick={() => window.open('/resume.pdf', '_blank')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/70 hover:bg-white border border-indigo-200/60 hover:border-indigo-300 px-6 py-3 text-sm sm:text-base font-semibold text-indigo-600 hover:text-indigo-700 shadow-sm hover:shadow-[0_4px_20px_rgba(99,102,241,0.08)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0B0F19] hover:bg-[#161D30] px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-[0_4px_20px_rgba(11,15,25,0.15)] hover:shadow-[0_8px_30px_rgba(11,15,25,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 cursor-pointer w-full sm:w-auto group"
               >
                 <Download className="h-4.5 w-4.5 group-hover:translate-y-0.5 transition-transform duration-300" />
                 <span>Download Resume</span>

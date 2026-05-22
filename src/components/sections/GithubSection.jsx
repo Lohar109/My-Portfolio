@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { createPortal } from 'react-dom'
 import {
   GitFork,
   BookOpen,
@@ -495,9 +494,16 @@ function GithubSection() {
                       onMouseEnter={(e) => setActiveTooltip({
                         count: day.count,
                         date: day.date,
-                        x: Math.min(Math.max(e.currentTarget.getBoundingClientRect().left + (e.currentTarget.getBoundingClientRect().width / 2), 16), window.innerWidth - 16),
-                        y: Math.max(e.currentTarget.getBoundingClientRect().top - 12, 12)
+                        x: e.clientX,
+                        y: e.clientY - 12
                       })}
+                      onMouseMove={(e) => setActiveTooltip((currentTooltip) => ({
+                        ...(currentTooltip || {}),
+                        count: day.count,
+                        date: day.date,
+                        x: e.clientX,
+                        y: e.clientY - 12
+                      }))}
                       onMouseLeave={() => setActiveTooltip(null)}
                     />
                   ))
@@ -529,30 +535,29 @@ function GithubSection() {
           </div>
 
           {/* Interactive Tooltip */}
-          <AnimatePresence>
-            {activeTooltip && (
-              createPortal(
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="fixed z-50 bg-gray-900 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-lg pointer-events-none font-sans"
-                  style={{
-                    left: `${activeTooltip.x}px`,
-                    top: `${activeTooltip.y}px`,
-                    transform: 'translate(-50%, -100%)'
-                  }}
-                >
-                  <div className="text-center whitespace-nowrap">
-                    <span className="text-pink-400">{activeTooltip.count} commits</span> on {formatTooltipDate(activeTooltip.date)}
-                  </div>
-                </motion.div>,
-                document.body
-              )
-            )}
-          </AnimatePresence>
         </div>
       </motion.div>
+
+      {/* Tooltip rendered outside the clipped card so hover details remain visible */}
+      <AnimatePresence>
+        {activeTooltip && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed z-[9999] bg-gray-900 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-lg pointer-events-none font-sans"
+            style={{
+              left: `${activeTooltip.x}px`,
+              top: `${activeTooltip.y}px`,
+              transform: 'translate(-50%, -100%)'
+            }}
+          >
+            <div className="text-center whitespace-nowrap">
+              <span className="text-pink-400">{activeTooltip.count} commits</span> on {formatTooltipDate(activeTooltip.date)}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Featured Repositories Title Header */}
       <motion.div

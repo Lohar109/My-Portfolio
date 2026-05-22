@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Rocket,
   ArrowRight,
@@ -44,13 +44,6 @@ function HomeFooterSection() {
     },
   ]
 
-  const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Education', path: '/education' },
-    { name: 'Skills', path: '/skills' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Contact', path: '/contact' },
-  ]
 
   const services = [
     { name: 'Full Stack Development', icon: Globe },
@@ -134,7 +127,7 @@ function HomeFooterSection() {
           </motion.div>
 
           {/* 2. Main Footer Grid */}
-          <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3 select-none">
+          <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-2 select-none">
             {/* Column 1: Brand Info */}
             <div className="flex flex-col items-start gap-6 text-left">
               <div className="flex items-center gap-3 group/logo cursor-pointer">
@@ -171,7 +164,7 @@ function HomeFooterSection() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-gray-500 shadow-sm hover:scale-115 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer ${hoverColor}`}
+                      className={`flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-gray-550 shadow-sm hover:scale-115 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer ${hoverColor}`}
                       aria-label={social.name}
                     >
                       <IconComponent className="h-5 w-5" />
@@ -181,27 +174,7 @@ function HomeFooterSection() {
               </div>
             </div>
 
-            {/* Column 2: Quick Links */}
-            <div className="flex flex-col items-start text-left md:pl-12">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-5 select-none">
-                Quick Links
-              </span>
-              <ul className="space-y-3.5 w-full">
-                {quickLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      to={link.path}
-                      className="group flex items-center gap-2.5 text-sm font-bold text-gray-500 hover:text-violet-600 transition-all duration-300 hover:translate-x-1.5"
-                    >
-                      <span className="h-1.5 w-0 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 shadow-[0_0_8px_rgba(124,58,237,0.8)] group-hover:w-3.5 opacity-0 group-hover:opacity-100 transition-all duration-350" />
-                      <span>{link.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Services */}
+            {/* Column 2: Services */}
             <div className="flex flex-col items-start text-left md:pl-12">
               <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-5 select-none">
                 Services

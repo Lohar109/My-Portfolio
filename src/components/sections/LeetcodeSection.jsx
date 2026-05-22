@@ -418,14 +418,14 @@ function LeetcodeSection() {
         {/* Profile Card Header */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
           <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left w-full">
-            {/* Avatar with amber gradient border linking to LeetCode */}
+            {/* Avatar wrapper matching GitHub's visual treatment */}
             <a
               href={`https://leetcode.com/u/${username}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="relative group cursor-pointer block shrink-0"
             >
-              <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 opacity-80 group-hover:opacity-100 blur-[2px] transition duration-300" />
+              <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 opacity-80 group-hover:opacity-100 blur-[2px] transition duration-300" />
               <img
                 src={profile?.avatar || fallbackProfile.avatar}
                 alt={profile?.name || username}

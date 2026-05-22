@@ -97,8 +97,37 @@ function GithubSection() {
         
         setRepos(enrichedRepos.length > 0 ? enrichedRepos : fallbackRepos)
 
-        // 3. Generate Exact Contribution Graph (reflecting real 1,290 commits)
-        generateRealContributions()
+        // 3. Fetch Live Contributions Data dynamically
+        try {
+          const contribRes = await fetch(`https://github-contributions-api.deno.dev/${username}.json`)
+          if (contribRes.ok) {
+            const data = await contribRes.json()
+            const levelMap = {
+              'NONE': 0,
+              'FIRST_QUARTILE': 1,
+              'SECOND_QUARTILE': 2,
+              'THIRD_QUARTILE': 3,
+              'FOURTH_QUARTILE': 4
+            }
+            
+            setContributions({
+              total: {
+                lastYear: data.totalContributions
+              },
+              contributions: data.contributions.flat().map(day => ({
+                date: day.date,
+                count: day.contributionCount,
+                level: levelMap[day.contributionLevel] ?? 0
+              })),
+              maxCommit: Math.max(...data.contributions.flat().map(d => d.contributionCount))
+            })
+          } else {
+            generateRealContributions()
+          }
+        } catch (err) {
+          console.warn('Error fetching live GitHub contributions, falling back to local dataset:', err)
+          generateRealContributions()
+        }
 
       } catch (err) {
         console.error('Error fetching GitHub data:', err)
@@ -127,11 +156,11 @@ function GithubSection() {
     const days = 371 // 53 weeks
     const contributionsList = []
     
-    const today = new Date("2026-05-22")
+    const today = new Date()
     const counts = new Array(days).fill(0)
     
-    // We want exactly 1,290 contributions total:
-    // - May 2026: 793 commits (distributed over days 1 to 22)
+    // We want exactly 1,307 contributions total:
+    // - May 2026: 810 commits (distributed over days 1 to 22, with May 22 having exactly 15 commits)
     // - April 2026: 300 commits
     // - March 2026: 197 commits
     // - Prior: 0 commits
@@ -146,8 +175,10 @@ function GithubSection() {
       let count = 0
       if (year === 2026) {
         if (month === 4) { // May 2026
-          if (day <= 22) {
-            // Distribute 793 commits beautifully over 22 days
+          if (day === 22) {
+            count = 15 // May 22nd has exactly 15 contributions!
+          } else if (day < 22) {
+            // Distribute remaining 795 commits beautifully over 21 days
             const seed = (day * 17) % 7
             if (seed === 0) count = 0
             else if (seed === 1) count = 10 + (day % 10)
@@ -178,42 +209,66 @@ function GithubSection() {
       date.setDate(today.getDate() - i)
       const year = date.getFullYear()
       const month = date.getMonth()
+      const day = date.getDate()
       const count = counts[i]
       if (year === 2026) {
-        if (month === 4) maySum += count
+        if (month === 4) {
+          if (day !== 22 && day < 22) maySum += count
+        }
         else if (month === 3) aprSum += count
         else if (month === 2) marSum += count
       }
     }
     
-    const mayScale = 793 / (maySum || 1)
+    // May 2026 remaining target: 810 - 15 = 795
+    const mayScale = 795 / (maySum || 1)
     const aprScale = 300 / (aprSum || 1)
     const marScale = 197 / (marSum || 1)
     
     let currentTotal = 0
+    let includesMay22 = false
+    
     for (let i = 0; i < days; i++) {
       const date = new Date(today)
       date.setDate(today.getDate() - i)
       const year = date.getFullYear()
       const month = date.getMonth()
+      const day = date.getDate()
       let count = counts[i]
       
       if (year === 2026) {
-        if (month === 4) count = Math.round(count * mayScale)
-        else if (month === 3) count = Math.round(count * aprScale)
-        else if (month === 2) count = Math.round(count * marScale)
+        if (month === 4 && day === 22) {
+          includesMay22 = true
+          currentTotal += 15
+        }
+        else if (month === 4 && day < 22) {
+          count = Math.round(count * mayScale)
+          counts[i] = count
+          currentTotal += count
+        }
+        else if (month === 3) {
+          count = Math.round(count * aprScale)
+          counts[i] = count
+          currentTotal += count
+        }
+        else if (month === 2) {
+          count = Math.round(count * marScale)
+          counts[i] = count
+          currentTotal += count
+        }
       }
-      counts[i] = count
-      currentTotal += count
     }
     
-    // Precision adjustment to sum up to exactly 1290
-    let diff = 1290 - currentTotal
+    // Precision adjustment to sum up to exactly 1307 (or 1292 if May 22 is not in the window)
+    const targetTotal = includesMay22 ? 1307 : 1292
+    let diff = targetTotal - currentTotal
     let idx = 0
     while (diff !== 0 && idx < days) {
       const date = new Date(today)
       date.setDate(today.getDate() - idx)
-      if (date.getFullYear() === 2026 && date.getMonth() === 4 && date.getDate() <= 22) {
+      const month = date.getMonth()
+      const day = date.getDate()
+      if (date.getFullYear() === 2026 && month === 4 && day < 22) {
         if (diff > 0) {
           counts[idx]++
           diff--
@@ -241,11 +296,19 @@ function GithubSection() {
     
     setContributions({
       total: {
-        lastYear: 1290
+        lastYear: includesMay22 ? 1307 : 1292
       },
       contributions: contributionsList,
       maxCommit: finalMax
     })
+  }
+
+  // Format YYYY-MM-DD to a timezone-agnostic beautiful date string
+  const formatTooltipDate = (dateStr) => {
+    if (!dateStr) return ''
+    const [year, month, day] = dateStr.split('-')
+    const date = new Date(Number(year), Number(month) - 1, Number(day))
+    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
   }
 
   // Get color for contribution squares (Premium purple-pink theme)
@@ -485,7 +548,7 @@ function GithubSection() {
                 }}
               >
                 <div className="text-center whitespace-nowrap">
-                  <span className="text-pink-400">{activeTooltip.count} commits</span> on {new Date(activeTooltip.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                  <span className="text-pink-400">{activeTooltip.count} commits</span> on {formatTooltipDate(activeTooltip.date)}
                 </div>
               </motion.div>
             )}

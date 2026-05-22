@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import HeroSection from '../components/sections/HeroSection.jsx'
+import MyJourneySection from '../components/sections/MyJourneySection.jsx'
 import { motion } from 'framer-motion'
 
 function Home() {
@@ -10,6 +12,7 @@ function Home() {
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       <HeroSection />
+      <MyJourneySection />
     </motion.main>
   )
 }

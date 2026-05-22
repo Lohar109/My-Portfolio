@@ -23,18 +23,9 @@ function GithubSection() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [activeTooltip, setActiveTooltip] = useState(null)
-  const [showRepos, setShowRepos] = useState(false)
+  const [showRepos, setShowRepos] = useState(true)
 
   const fallbackRepos = [
-    {
-      name: 'My-Portfolio',
-      description: "Hello, I'm Vaibhav Lohar. A Full-Stack Developer passionate about building scalable web applications and solving complex algorithmic challenges. Currently crafting seamless e-commerce experiences and mastering the art of efficient database design.",
-      language: 'React',
-      stargazers_count: 0,
-      forks_count: 0,
-      html_url: `https://github.com/${username}/My-Portfolio`,
-      homepage: 'https://localhost:5173'
-    },
     {
       name: 'ShopEase-Ecommerce',
       description: 'A robust full-stack e-commerce ecosystem featuring a customer-facing storefront and a dedicated, standalone Admin Dashboard. Designed with a decoupled architecture for enhanced security, this project integrates Supabase for seamless authentication and efficient product management.',
@@ -45,12 +36,48 @@ function GithubSection() {
       homepage: null
     },
     {
+      name: 'Generative-AI',
+      description: 'This repository is a collection of practical projects designed to master the fundamentals of Generative AI. Instead of just using tools, I\'ve built these from the ground up to understand how LLMs behave.',
+      language: 'JavaScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      html_url: `https://github.com/${username}/Generative-AI`,
+      homepage: null
+    },
+    {
+      name: 'My-Portfolio',
+      description: 'Hello, I\'m Vaibhav Lohar. A Full-Stack Developer passionate about building scalable web applications and solving complex algorithmic challenges. Currently crafting seamless e-commerce experiences and mastering the art of efficient database design.',
+      language: 'JavaScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      html_url: `https://github.com/${username}/My-Portfolio`,
+      homepage: 'https://localhost:5173'
+    },
+    {
       name: 'Problem-Solving',
       description: 'A collection of Data Structures, Algorithms, and logical coding challenges solved using JavaScript and TypeScript. Focused on consistent learning and clean code.',
-      language: 'TypeScript',
+      language: 'JavaScript',
       stargazers_count: 0,
       forks_count: 0,
       html_url: `https://github.com/${username}/Problem-Solving`,
+      homepage: null
+    },
+    {
+      name: 'Developer-Workflow',
+      description: 'A lightweight, local-first productivity dashboard for developers to track tasks, visualize progress, and manage resources.',
+      language: 'JavaScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      html_url: `https://github.com/${username}/Developer-Workflow`,
+      homepage: null
+    },
+    {
+      name: 'ShopEase-Ecom-Landing',
+      description: 'A professional, minimalist e-commerce landing page built with Semantic HTML5 and Modern CSS3. This project focuses on high-quality UI/UX, featuring a responsive product showcase, categorized navigation, and smooth hover effects.',
+      language: 'CSS',
+      stargazers_count: 0,
+      forks_count: 0,
+      html_url: `https://github.com/${username}/ShopEase-Ecom-Landing`,
       homepage: null
     }
   ]

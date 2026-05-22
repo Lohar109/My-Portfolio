@@ -10,15 +10,6 @@ const leetcodeFallbackCalendar = {
 
 const githubFallbackRepos = [
   {
-    name: 'My-Portfolio',
-    description: 'Hello, I\'m Vaibhav Lohar. A Full-Stack Developer passionate about building scalable web applications and solving complex algorithmic challenges. Currently crafting seamless e-commerce experiences and mastering the art of efficient database design.',
-    language: 'React',
-    stargazers_count: 0,
-    forks_count: 0,
-    html_url: `https://github.com/${GITHUB_USERNAME}/My-Portfolio`,
-    homepage: 'https://localhost:5173'
-  },
-  {
     name: 'ShopEase-Ecommerce',
     description: 'A robust full-stack e-commerce ecosystem featuring a customer-facing storefront and a dedicated, standalone Admin Dashboard. Designed with a decoupled architecture for enhanced security, this project integrates Supabase for seamless authentication and efficient product management.',
     language: 'JavaScript',
@@ -28,12 +19,48 @@ const githubFallbackRepos = [
     homepage: null
   },
   {
+    name: 'Generative-AI',
+    description: 'This repository is a collection of practical projects designed to master the fundamentals of Generative AI. Instead of just using tools, I\'ve built these from the ground up to understand how LLMs behave.',
+    language: 'JavaScript',
+    stargazers_count: 0,
+    forks_count: 0,
+    html_url: `https://github.com/${GITHUB_USERNAME}/Generative-AI`,
+    homepage: null
+  },
+  {
+    name: 'My-Portfolio',
+    description: 'Hello, I\'m Vaibhav Lohar. A Full-Stack Developer passionate about building scalable web applications and solving complex algorithmic challenges. Currently crafting seamless e-commerce experiences and mastering the art of efficient database design.',
+    language: 'JavaScript',
+    stargazers_count: 0,
+    forks_count: 0,
+    html_url: `https://github.com/${GITHUB_USERNAME}/My-Portfolio`,
+    homepage: 'https://localhost:5173'
+  },
+  {
     name: 'Problem-Solving',
     description: 'A collection of Data Structures, Algorithms, and logical coding challenges solved using JavaScript and TypeScript. Focused on consistent learning and clean code.',
-    language: 'TypeScript',
+    language: 'JavaScript',
     stargazers_count: 0,
     forks_count: 0,
     html_url: `https://github.com/${GITHUB_USERNAME}/Problem-Solving`,
+    homepage: null
+  },
+  {
+    name: 'Developer-Workflow',
+    description: 'A lightweight, local-first productivity dashboard for developers to track tasks, visualize progress, and manage resources.',
+    language: 'JavaScript',
+    stargazers_count: 0,
+    forks_count: 0,
+    html_url: `https://github.com/${GITHUB_USERNAME}/Developer-Workflow`,
+    homepage: null
+  },
+  {
+    name: 'ShopEase-Ecom-Landing',
+    description: 'A professional, minimalist e-commerce landing page built with Semantic HTML5 and Modern CSS3. This project focuses on high-quality UI/UX, featuring a responsive product showcase, categorized navigation, and smooth hover effects.',
+    language: 'CSS',
+    stargazers_count: 0,
+    forks_count: 0,
+    html_url: `https://github.com/${GITHUB_USERNAME}/ShopEase-Ecom-Landing`,
     homepage: null
   }
 ]
@@ -275,27 +302,57 @@ async function fetchGithubStats() {
     };
   }
 
+  let pinnedNames = [];
+  try {
+    const profilePageText = await fetchText(`https://github.com/${GITHUB_USERNAME}`);
+    const regex = /href="\/Lohar109\/([^"\/]+)"[^>]*><span class="repo">([^<]+)<\/span>/g;
+    let match;
+    while ((match = regex.exec(profilePageText)) !== null) {
+      const repoName = match[1];
+      if (!pinnedNames.includes(repoName)) {
+        pinnedNames.push(repoName);
+      }
+    }
+  } catch (err) {
+    console.error('Failed to scrape pinned repositories:', err);
+  }
+
+  // Fallback to static pinned list if scraping failed or returned empty
+  if (pinnedNames.length === 0) {
+    pinnedNames = [
+      'ShopEase-Ecommerce',
+      'Generative-AI',
+      'My-Portfolio',
+      'Problem-Solving',
+      'Developer-Workflow',
+      'ShopEase-Ecom-Landing'
+    ];
+  }
+
   let enrichedRepos = githubFallbackRepos;
   try {
-    const repos = await fetchJson(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=30`, {
+    const repos = await fetchJson(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, {
       headers: { Accept: 'application/vnd.github+json' }
     });
-    const originalRepos = repos
-      .filter((repo) => !repo.fork)
-      .sort((a, b) => {
-        if (b.stargazers_count !== a.stargazers_count) {
-          return b.stargazers_count - a.stargazers_count;
-        }
-        return new Date(b.updated_at) - new Date(a.updated_at);
-      })
-      .slice(0, 6);
 
-    if (originalRepos.length > 0) {
-      enrichedRepos = originalRepos.map((repo) => {
-        const matchingFallback = githubFallbackRepos.find((fallbackRepo) => fallbackRepo.name.toLowerCase() === repo.name.toLowerCase());
+    const matchedRepos = [];
+    pinnedNames.forEach((pinnedName) => {
+      const found = repos.find(
+        (repo) => repo.name.toLowerCase() === pinnedName.toLowerCase()
+      );
+      if (found) {
+        matchedRepos.push(found);
+      }
+    });
+
+    if (matchedRepos.length > 0) {
+      enrichedRepos = matchedRepos.map((repo) => {
+        const matchingFallback = githubFallbackRepos.find(
+          (fallbackRepo) => fallbackRepo.name.toLowerCase() === repo.name.toLowerCase()
+        );
         return {
           ...repo,
-          description: matchingFallback ? matchingFallback.description : (repo.description || 'No description provided.')
+          description: repo.description || (matchingFallback ? matchingFallback.description : 'No description provided.')
         };
       });
     }

@@ -62,7 +62,7 @@ function MyJourneySection() {
       viewport={{ once: true, margin: '-100px' }}
     >
       {/* Section Title */}
-      <div className="text-left mb-16 select-none">
+      <div className="text-left mb-10 select-none">
         <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 font-sans">
           My Journey
         </h2>

@@ -699,27 +699,7 @@ function ProjectDetail() {
             >
               <div>
                 {/* 1. Header Badges */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100/60 pb-6">
-                  {/* Left tag pill badge */}
-                  <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] font-black tracking-widest leading-none self-start ${
-                    currentStep.themeColor === 'violet' ? 'text-violet-600 bg-violet-50 border border-violet-100/60'
-                    : currentStep.themeColor === 'rose' ? 'text-rose-600 bg-rose-50 border border-rose-100/60'
-                    : currentStep.themeColor === 'amber' ? 'text-amber-700 bg-amber-50 border border-amber-100/60'
-                    : currentStep.themeColor === 'indigo' ? 'text-indigo-600 bg-indigo-50 border border-indigo-100/60'
-                    : 'text-emerald-700 bg-emerald-50 border border-emerald-100/60'
-                  }`}>
-                    {/* Circle badge indicator */}
-                    <span className={`w-4.5 h-4.5 rounded-full text-white font-mono flex items-center justify-center text-[8.5px] font-black shrink-0 ${
-                      currentStep.themeColor === 'violet' ? 'bg-violet-600'
-                      : currentStep.themeColor === 'rose' ? 'bg-rose-600'
-                      : currentStep.themeColor === 'amber' ? 'bg-amber-500'
-                      : currentStep.themeColor === 'indigo' ? 'bg-indigo-600'
-                      : 'bg-emerald-600'
-                    }`}>
-                      {timelineSteps.find((s) => s.id === activeSection)?.num || '01'}
-                    </span>
-                    <span>{timelineSteps.find((s) => s.id === activeSection)?.label.toUpperCase() || 'OVERVIEW'}</span>
-                  </div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-end gap-4 border-b border-neutral-100/60 pb-6">
 
                   {/* Right clock badge */}
                   <div className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] font-extrabold tracking-tight leading-none self-start ${

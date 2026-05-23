@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -256,49 +256,6 @@ function ProjectDetail() {
 
   const [activeSection, setActiveSection] = useState('case-study')
 
-  useEffect(() => {
-    const sections = ['case-study', 'problem', 'approach', 'solution', 'result']
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: '-25% 0px -55% 0px',
-      threshold: 0.05,
-    }
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id)
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions)
-    sections.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-
-    return () => observer.disconnect()
-  }, [slug])
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 110 // sites header gap
-      const bodyRect = document.body.getBoundingClientRect().top
-      const elementRect = element.getBoundingClientRect().top
-      const elementPosition = elementRect - bodyRect
-      const offsetPosition = elementPosition - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-      setActiveSection(id)
-    }
-  }
-
   const timelineSteps = [
     { id: 'case-study', num: '01', label: 'Case Study', icon: BookOpen },
     { id: 'problem', num: '02', label: 'Problem', icon: HelpCircle },
@@ -396,30 +353,30 @@ function ProjectDetail() {
             ))}
         </section>
 
-        {/* Two-Column split layout for Case Study details */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
+        {/* Two-Column split layout for Case Study details — Tab-based */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-stretch">
           
-          {/* Sticky vertical timeline sidebar (Left Column) */}
-          <aside className="lg:sticky lg:top-28 hidden lg:block select-none">
-            <div className="relative pl-6">
+          {/* Vertical timeline sidebar (Left Column) */}
+          <aside className="hidden lg:flex flex-col select-none">
+            <div className="relative pl-6 rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm h-full">
               {/* Vertical connector line track line */}
-              <div className="absolute left-[34px] top-6 bottom-6 w-[2px] bg-gray-200/60 z-0" />
+              <div className="absolute left-[58px] top-10 bottom-10 w-[2px] bg-gray-200/60 z-0" />
               
               {/* Steps list */}
-              <div className="space-y-7 relative z-10">
+              <div className="space-y-7 relative z-10 flex flex-col justify-center h-full">
                 {timelineSteps.map((step) => {
                   const Icon = step.icon
                   const isActive = activeSection === step.id
                   return (
                     <button
                       key={step.id}
-                      onClick={() => scrollToSection(step.id)}
+                      onClick={() => setActiveSection(step.id)}
                       className="flex items-center gap-4 text-left group cursor-pointer focus:outline-none w-full"
                     >
                       {/* Active Indicator Pointer Line */}
                       <div className="w-1.5 flex justify-center">
                         {isActive && (
-                          <span className="h-4.5 w-1 rounded-full bg-violet-600 shadow-[0_0_8px_rgba(124,58,237,0.4)]" />
+                          <span className="h-4.5 w-1 rounded-full bg-violet-600 shadow-[0_0_8px_rgba(124,58,237,0.4)] animate-pulse" />
                         )}
                       </div>
                       
@@ -452,108 +409,140 @@ function ProjectDetail() {
             </div>
           </aside>
 
-          {/* Detailed text card blocks (Right Column) */}
-          <div className="space-y-8">
+          {/* Mobile horizontal tab bar (shown on small screens) */}
+          <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+            {timelineSteps.map((step) => {
+              const Icon = step.icon
+              const isActive = activeSection === step.id
+              return (
+                <button
+                  key={step.id}
+                  onClick={() => setActiveSection(step.id)}
+                  className={`flex items-center gap-2 whitespace-nowrap rounded-2xl border px-4 py-2.5 text-xs font-bold transition-all duration-300 shrink-0 ${
+                    isActive
+                      ? 'bg-violet-600 border-violet-600 text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]'
+                      : 'bg-white border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  }`}
+                >
+                  <Icon size={14} className="stroke-[2]" />
+                  {step.label}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Single active card (Right Column) — height matches sidebar */}
+          <div className="flex flex-col">
             {/* 01: Case Study overview */}
-            <article 
-              id="case-study"
-              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
-                activeSection === 'case-study' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
-              }`}
-            >
-              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
-                <BookOpen size={20} strokeWidth={2} />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">CASE STUDY</h3>
-                <p className="mt-4 text-base leading-relaxed text-gray-600 font-medium font-sans">
-                  {caseStudy.overview}
-                </p>
-              </div>
-            </article>
+            {activeSection === 'case-study' && (
+              <article 
+                key="case-study"
+                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                    <BookOpen size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">CASE STUDY</h3>
+                </div>
+                <div className="flex-1 flex items-start">
+                  <p className="text-base leading-relaxed text-gray-600 font-medium font-sans">
+                    {caseStudy.overview}
+                  </p>
+                </div>
+              </article>
+            )}
 
             {/* 02: Problem */}
-            <article 
-              id="problem"
-              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
-                activeSection === 'problem' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
-              }`}
-            >
-              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
-                <HelpCircle size={20} strokeWidth={2} />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">PROBLEM</h3>
-                <p className="mt-4 text-base leading-relaxed text-gray-600 font-medium font-sans">
-                  {caseStudy.problem}
-                </p>
-              </div>
-            </article>
+            {activeSection === 'problem' && (
+              <article 
+                key="problem"
+                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                    <HelpCircle size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">PROBLEM</h3>
+                </div>
+                <div className="flex-1 flex items-start">
+                  <p className="text-base leading-relaxed text-gray-600 font-medium font-sans">
+                    {caseStudy.problem}
+                  </p>
+                </div>
+              </article>
+            )}
 
             {/* 03: Approach */}
-            <article 
-              id="approach"
-              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
-                activeSection === 'approach' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
-              }`}
-            >
-              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
-                <Lightbulb size={20} strokeWidth={2} />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">APPROACH</h3>
-                <div className="mt-4 space-y-3.5">
-                  {caseStudy.approach.map((step, idx) => (
-                    <p key={idx} className="text-base leading-relaxed text-gray-600 font-medium font-sans m-0">
-                      {step}
-                    </p>
-                  ))}
+            {activeSection === 'approach' && (
+              <article 
+                key="approach"
+                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                    <Lightbulb size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">APPROACH</h3>
                 </div>
-              </div>
-            </article>
+                <div className="flex-1 flex items-start">
+                  <div className="space-y-3.5">
+                    {caseStudy.approach.map((step, idx) => (
+                      <p key={idx} className="text-base leading-relaxed text-gray-600 font-medium font-sans m-0">
+                        {step}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            )}
 
             {/* 04: Solution */}
-            <article 
-              id="solution"
-              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
-                activeSection === 'solution' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
-              }`}
-            >
-              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
-                <Code2 size={20} strokeWidth={2} />
-              </div>
-              <div className="flex-1 text-left w-full">
-                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">SOLUTION</h3>
-                <div className="mt-4 space-y-4">
-                  {getSolutionPoints(project.slug).map((point, idx) => (
-                    <div key={idx} className="flex gap-3 items-start">
-                      <CheckCircle2 size={18} className="text-violet-600 mt-1 shrink-0" strokeWidth={2.5} />
-                      <p className="text-base leading-snug text-slate-800 font-bold tracking-tight font-sans m-0">
-                        {point}
-                      </p>
-                    </div>
-                  ))}
+            {activeSection === 'solution' && (
+              <article 
+                key="solution"
+                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                    <Code2 size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">SOLUTION</h3>
                 </div>
-              </div>
-            </article>
+                <div className="flex-1 flex items-start">
+                  <div className="space-y-4 w-full">
+                    {getSolutionPoints(project.slug).map((point, idx) => (
+                      <div key={idx} className="flex gap-3 items-start">
+                        <CheckCircle2 size={18} className="text-violet-600 mt-1 shrink-0" strokeWidth={2.5} />
+                        <p className="text-base leading-snug text-slate-800 font-bold tracking-tight font-sans m-0">
+                          {point}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            )}
 
             {/* 05: Result */}
-            <article 
-              id="result"
-              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
-                activeSection === 'result' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
-              }`}
-            >
-              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
-                <Rocket size={20} strokeWidth={2} />
-              </div>
-              <div className="flex-1 text-left">
-                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">RESULT</h3>
-                <p className="mt-4 text-base leading-relaxed text-gray-600 font-medium font-sans">
-                  {caseStudy.result}
-                </p>
-              </div>
-            </article>
+            {activeSection === 'result' && (
+              <article 
+                key="result"
+                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                    <Rocket size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">RESULT</h3>
+                </div>
+                <div className="flex-1 flex items-start">
+                  <p className="text-base leading-relaxed text-gray-600 font-medium font-sans">
+                    {caseStudy.result}
+                  </p>
+                </div>
+              </article>
+            )}
           </div>
         </div>
       </div>

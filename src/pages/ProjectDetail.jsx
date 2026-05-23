@@ -66,15 +66,23 @@ function getStackIcon(item) {
     case 'c++':
       return <SiCplusplus className="h-4 w-4 text-[#00599C]" />
     case 'qt framework':
+    case 'qt 6 framework':
       return <SiQt className="h-4 w-4 text-[#41CD52]" />
     case 'qt 3d':
       return <Cuboid className="h-4 w-4 text-violet-500" />
     case 'qt render':
       return <Layers3 className="h-4 w-4 text-sky-500" />
-    case 'logistics tech':
-      return <Truck className="h-4 w-4 text-emerald-600" />
+    case 'qt charts':
+      return <LineChart className="h-4 w-4 text-indigo-500" />
+    case 'json storage':
+      return <Database className="h-4 w-4 text-[#336791]" />
+    case 'gmail smtp (otp)':
+      return <Shield className="h-4 w-4 text-amber-500" />
+    case 'optimization algorithms':
     case 'optimization algos':
       return <BrainCircuit className="h-4 w-4 text-amber-600" />
+    case 'logistics tech':
+      return <Truck className="h-4 w-4 text-emerald-600" />
     case 'react':
       return <SiReact className="h-4 w-4 text-[#61DAFB]" />
     case 'node.js':

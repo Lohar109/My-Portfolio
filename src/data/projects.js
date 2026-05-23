@@ -117,11 +117,11 @@ export const projectsData = [
     role: 'Desktop Application Development',
     year: '2026',
     summary:
-      'A professional Qt-based desktop application designed for logistics and supply chain efficiency. It implements 3D space-optimization algorithms to maximize product loading capacity in trucks, trains, and warehouses, significantly reducing resource wastage.',
+      'Loading Optimisation Software is a C++ desktop application that automatically arranges cargo items inside trucks, train bogis, shipping containers, and warehouses using 3D space optimization — eliminating manual planning completely.',
     previewText:
       'Built to optimize loading capacity and reduce resource wastage across logistics operations.',
     detailIntro:
-      'Loading Optimisation Software helps logistics teams calculate efficient product arrangements for trucks, trains, and warehouses using 3D space-optimization logic.',
+      'Loading Optimisation Software is a C++ desktop application that automatically arranges cargo items inside trucks, train bogis, shipping containers, and warehouses using 3D space optimization — eliminating manual planning completely.',
     challenge:
       'The biggest challenge was translating real-world loading constraints into a desktop interface that remains practical, fast, and clear for operations teams.',
     outcome:
@@ -142,7 +142,7 @@ export const projectsData = [
     ],
     caseStudy: {
       overview:
-        'Loading Optimisation Software is a high-performance C++ desktop application engineered to streamline supply chain logistics. By utilizing advanced spatial algorithms and the Qt Framework, it transforms manual, error-prone loading processes into a precise, automated science, maximizing capacity across trucks, trains, and warehouses.',
+        'Loading Optimisation Software is a full-featured C++ desktop application built from scratch using the Qt6 framework. The software solves a real-world logistics problem — how to fit multiple different products (boxes, barrels, bags, sacks, pipes) into a container as efficiently as possible. Users can register and log in, add their own products with dimensions and weight, select any container type — truck, train bogi, shipping container, or warehouse — and the system automatically packs everything using a 3D bin-packing algorithm. The result is displayed as a real-time interactive 3D visualization where you can rotate and inspect the packed container. A pie chart shows how much of the container is filled vs empty, and users can export a detailed PDF report with product info or a layer-wise 2D breakdown of the packing layout.',
       problem:
         'Logistics operations frequently suffer from sub-optimal space utilization. Load planners must manually calculate complex 3D stacking arrangements under strict time constraints, accounting for weight limits, fragility, and container dimensions. This reliance on manual estimation leads to wasted cargo space, increased transportation costs, and delayed shipping schedules.',
       approach: [
@@ -153,11 +153,14 @@ export const projectsData = [
     },
     stack: [
       'C++',
-      'Qt Framework',
+      'Qt 6 Framework',
       'Qt 3D',
+      'Qt Charts',
       'Qt Render',
-      'Logistics Tech',
-      'Optimization Algos',
+      'JSON Storage',
+      'Gmail SMTP (OTP)',
+      'Optimization Algorithms',
+      'Logistics tech',
     ],
     previewTone:
       'bg-[linear-gradient(135deg,#3f3f46_0%,#7c2d12_48%,#f59e0b_100%)]',

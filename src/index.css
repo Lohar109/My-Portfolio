@@ -154,4 +154,22 @@ button {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Static Gradient Border Wrapper for Contact & Footer buttons */
+.static-gradient-border-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 2px; /* 2px thickness */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); /* violet-600 to indigo-600 */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.static-gradient-border-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15);
+}
+
 

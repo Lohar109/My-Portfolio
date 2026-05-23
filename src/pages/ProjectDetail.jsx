@@ -664,9 +664,6 @@ function ProjectDetail() {
                     <span className="text-[11.5px] font-extrabold text-slate-800 tracking-tight leading-none">Download Case Study</span>
                     <span className="text-[9.5px] text-slate-400 font-bold mt-1 leading-none tracking-wider">PDF · 1.2 MB</span>
                   </div>
-                  <div className="ml-auto p-1.5 rounded-lg text-violet-500 hover:scale-110 transition-transform">
-                    <ArrowLeft size={14} className="rotate-180" strokeWidth={2.5} />
-                  </div>
                 </div>
               </div>
 

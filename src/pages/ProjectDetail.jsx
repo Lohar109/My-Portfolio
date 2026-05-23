@@ -8,6 +8,14 @@ import {
   Eye,
   Layers3,
   Truck,
+  User,
+  Target,
+  TrendingUp,
+  Briefcase,
+  Users,
+  Flag,
+  Layers,
+  Code,
 } from 'lucide-react'
 import {
   SiCplusplus,
@@ -20,11 +28,13 @@ import {
   SiSupabase,
   SiTailwindcss,
   SiVercel,
+  SiDocker,
+  SiRedis,
 } from 'react-icons/si'
 import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
-import VideoFrame from '../components/ui/VideoFrame.jsx'
+import IntroVideoFrame from '../components/ui/IntroVideoFrame.jsx'
 import { projects } from '../data/projects.js'
 
 function getStackIcon(item) {
@@ -65,8 +75,47 @@ function getStackIcon(item) {
       return <FaChartLine className="h-4 w-4 text-indigo-500" />
     case 'api integration':
       return <FaNetworkWired className="h-4 w-4 text-blue-500" />
+    case 'docker':
+      return <SiDocker className="h-4 w-4 text-[#2496ED]" />
+    case 'redis':
+      return <SiRedis className="h-4 w-4 text-[#DC382D]" />
     default:
       return <Boxes className="h-4 w-4 text-gray-500" />
+  }
+}
+
+function renderFormattedTitle(title) {
+  if (!title) return ''
+  const words = title.split(' ')
+  return words.map((word, idx) => {
+    // If the word contains "Commerce" or "Agent" or "Attractor" or similar key brand words, render it with gradient highlight!
+    if (/commerce|agent|collaboration|triaging|packer|graphics/i.test(word)) {
+      return (
+        <span key={idx} className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+          {word}{' '}
+        </span>
+      )
+    }
+    return <span key={idx}>{word} </span>
+  })
+}
+
+function getHighlightIcon(label) {
+  switch (label.toLowerCase()) {
+    case 'role':
+      return <User size={16} />
+    case 'core focus':
+      return <Target size={16} />
+    case 'outcome':
+      return <TrendingUp size={16} />
+    case 'use case':
+      return <Briefcase size={16} />
+    case 'audience':
+      return <Users size={16} />
+    case 'primary goal':
+      return <Flag size={16} />
+    default:
+      return <Layers size={16} />
   }
 }
 
@@ -138,30 +187,46 @@ function ProjectDetail() {
   }
 
   return (
-    <main className="min-h-screen text-gray-900">
+    <main className="min-h-screen text-gray-900 bg-neutral-50/30">
       <SiteHeader isDetailPage />
-      <div className="mx-auto max-w-6xl px-6 pb-10 pt-28 sm:px-10 lg:px-16 lg:pb-12">
+      <div className="mx-auto max-w-6xl px-6 pb-12 pt-28 sm:px-10 lg:px-16 lg:pb-16">
+        
+        {/* Back Link styled exactly as mockup */}
         <Link
           to="/#projects"
-          className="inline-flex items-center rounded-xl bg-black px-4 py-3 text-sm font-semibold !text-white shadow-sm transition hover:bg-gray-800"
+          className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors select-none duration-250 cursor-pointer"
         >
-          Back
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Projects</span>
         </Link>
 
-        <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
-            <h1 className="text-2xl font-medium tracking-tight text-gray-900 md:text-3xl">
-              {project.title}
+        {/* Case Study Tag Capsule */}
+        <div>
+          <div className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-violet-50/50 border border-violet-100/50 px-3 py-1 text-[9px] font-extrabold uppercase tracking-widest text-violet-600 select-none">
+            <span className="h-0.5 w-3 bg-violet-500 rounded-full inline-block" />
+            <span>Case Study</span>
+          </div>
+        </div>
+
+        {/* Top Info Section: Title, Description, Stack Badges and Video Box */}
+        <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+          <div className="flex flex-col justify-center">
+            {/* Title formatted with gradient highlighted keyword */}
+            <h1 className="max-w-md text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 font-sans leading-tight mt-5">
+              {renderFormattedTitle(project.title)}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+            
+            {/* Description */}
+            <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-gray-500 font-sans font-medium">
               {project.detailIntro ?? project.summary}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            {/* Premium Outline Technology Badges */}
+            <div className="mt-8 flex flex-wrap gap-2.5 max-w-xl">
               {stackItems.map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-gray-200/50 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-xs font-semibold text-gray-700 shadow-sm hover:shadow-md transition-all duration-200 select-none cursor-default"
                 >
                   {getStackIcon(item)}
                   {item}
@@ -170,47 +235,49 @@ function ProjectDetail() {
             </div>
           </div>
 
-          <VideoFrame
-            eyebrow="Project Video"
-            caption="Placeholder for the project demo or walkthrough"
-            title="Project video placeholder"
-            description="Later we can replace this area with a real video sourced from `public/videos/projects/`."
-            toneClass="bg-[#0a0a0a]"
-          />
+          {/* Premium Video Card Container with exact IntroVideoFrame player */}
+          <div className="border border-gray-200/60 bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex flex-col gap-4.5 w-full self-stretch">
+            <div className="flex items-center justify-between border-b border-gray-100 pb-4.5">
+              <div>
+                <p className="text-[10px] font-extrabold uppercase tracking-widest text-gray-900 font-sans leading-none">
+                  PROJECT VIDEO
+                </p>
+                <p className="mt-2 text-xs text-gray-400 font-medium font-sans leading-none">
+                  Walkthrough of the project demo & functionality
+                </p>
+              </div>
+              <div className="flex gap-2 select-none">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </div>
+            </div>
+
+            {/* The exact same video box as on the Home page */}
+            <div className="w-full">
+              <IntroVideoFrame />
+            </div>
+          </div>
         </section>
 
-        <section className="mt-16 grid gap-6 lg:grid-cols-3">
-          {topInfoCards.map((item) => (
-            <article
-              key={item.label}
-              className="rounded-3xl border border-gray-200/50 bg-white p-7 shadow-sm"
-            >
-              <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
+        {/* Combined 6-column Highlights Dashboard Row */}
+        <section className="mt-8 border border-gray-200/50 bg-white rounded-3xl p-8 shadow-sm grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 sm:gap-4.5 items-start select-none w-full">
+          {[...topInfoCards, ...statsCards].map((item) => (
+            <div key={item.label} className="flex flex-col items-center text-center">
+              <span className="inline-flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-violet-50 border border-violet-100/50 text-violet-600 shadow-sm mb-3">
+                {getHighlightIcon(item.label)}
+              </span>
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-gray-900 block mb-1.5 font-sans leading-none">
                 {item.label}
-              </p>
-              <p className="mt-4 text-base leading-7 text-gray-600">
+              </span>
+              <span className="text-xs text-gray-500 font-semibold leading-relaxed font-sans max-w-[140px]">
                 {item.value}
-              </p>
-            </article>
+              </span>
+            </div>
           ))}
         </section>
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-3">
-          {statsCards.map((stat) => (
-            <article
-              key={stat.label}
-              className="rounded-3xl border border-gray-200/50 bg-white p-6 shadow-sm"
-            >
-              <p className="text-sm font-bold uppercase tracking-[0.24em] text-gray-900">
-                {stat.label}
-              </p>
-              <p className="mt-4 text-base leading-7 text-gray-600">
-                {stat.value}
-              </p>
-            </article>
-          ))}
-        </section>
-
+        {/* Case Study Details */}
         <section id="case-study" className="mt-16 grid gap-6">
           <CaseStudySection eyebrow="Case Study">
             <p>{caseStudy.overview}</p>

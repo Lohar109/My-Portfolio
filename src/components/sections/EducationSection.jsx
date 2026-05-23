@@ -14,6 +14,8 @@ const educationItems = [
     grade: '9.30 / 10',
     icon: GraduationCap,
     iconColor: 'text-[#2563EB]',
+    bgClass: 'bg-[#2563EB]/10',
+    borderClass: 'border-[#2563EB]/20',
   },
   {
     degree: 'Bachelor of Science (Computer Science)',
@@ -25,6 +27,8 @@ const educationItems = [
     grade: '9.08 / 10',
     icon: GraduationCap,
     iconColor: 'text-[#2563EB]',
+    bgClass: 'bg-[#2563EB]/10',
+    borderClass: 'border-[#2563EB]/20',
   },
   {
     degree: 'Intermediate (12th)',
@@ -36,6 +40,8 @@ const educationItems = [
     grade: '52.62%',
     icon: Building2,
     iconColor: 'text-[#128C7E]',
+    bgClass: 'bg-[#128C7E]/10',
+    borderClass: 'border-[#128C7E]/20',
   },
   {
     degree: 'High School (10th)',
@@ -47,6 +53,8 @@ const educationItems = [
     grade: '72.00%',
     icon: BookOpen,
     iconColor: 'text-[#EF4444]',
+    bgClass: 'bg-[#EF4444]/10',
+    borderClass: 'border-[#EF4444]/20',
   },
 ]
 
@@ -165,8 +173,8 @@ function EducationSection() {
                     {/* Left & Center Information */}
                     <div className="flex items-start gap-4 sm:gap-5 flex-1 text-left">
                       {/* Left icon wrapper */}
-                      <div className={`flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none ${item.iconColor}`}>
-                        <IconComponent size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+                      <div className={`flex-shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm select-none border ${item.bgClass} ${item.borderClass} ${item.iconColor}`}>
+                        <IconComponent size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
                       </div>
 
                       {/* Main education texts */}

@@ -578,10 +578,7 @@ function ProjectDetail() {
     },
   ]
 
-  const handleDownload = (e) => {
-    e.preventDefault()
-    window.print()
-  }
+
 
   return (
     <main className="min-h-screen text-gray-900 bg-neutral-50/30">
@@ -662,18 +659,7 @@ function ProjectDetail() {
                   )
                 })}
 
-                {/* Download Case Study button placed directly below Result stepper item */}
-                <div 
-                  onClick={handleDownload}
-                  className="border border-neutral-100/80 bg-neutral-50/30 p-4 rounded-2.5xl flex items-center gap-3.5 mt-8 select-none hover:bg-neutral-50 transition-colors duration-200 cursor-pointer w-full"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 shrink-0 select-none border border-violet-100/50 shadow-sm">
-                    <Download size={16} strokeWidth={2.5} />
-                  </div>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-[11.5px] font-extrabold text-slate-800 tracking-tight leading-none">Download Case Study</span>
-                  </div>
-                </div>
+
               </div>
 
             </div>

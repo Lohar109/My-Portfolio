@@ -740,7 +740,7 @@ function ProjectDetail() {
                 {activeSection === 'case-study' ? (
                   <div className="mt-2 flex flex-col gap-8 w-full animate-fadeIn">
                     {/* Upper Split Grid: Project Name & Summary (Left) vs Video (Right) */}
-                    <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-[1.0fr_1.0fr] gap-8 items-start w-full">
                       {/* Left: Title & Summary */}
                       <div className="flex flex-col min-w-0">
                         <h2 className="text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight animate-slideInUp">

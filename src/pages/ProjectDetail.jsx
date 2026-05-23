@@ -283,11 +283,11 @@ function getProjectCaseStudyDetails(slug, project) {
       durationLabel: 'Challenge Severity: High',
       title: slug === 'studioflow' ? 'Manual Inventory & GenAI Pipelines'
              : slug === 'portfolio' ? 'Static Portfolios Limit Understanding'
-             : slug === 'marketpulse' ? 'Spatial Inefficiencies & Cargo Waste'
+             : slug === 'marketpulse' ? 'Wasted Space & Manual Cargo Planning'
              : 'Operational Bottlenecks & Friction',
       summary: slug === 'studioflow' ? 'Traditional inventory management was slow, error-prone, and required extensive manual data typing.'
              : slug === 'portfolio' ? 'Static showcases fail to explain design patterns, architecture trade-offs, and custom skill matches dynamically.'
-             : slug === 'marketpulse' ? 'Planners rely on manual estimation to stack 3D cargo, leaving up to 30% of transport containers completely empty.'
+             : slug === 'marketpulse' ? 'Logistics workers manually guess how to stack cargo — wasting container space, increasing shipping trips, and making costly packing errors.'
              : 'Repetitive tasks, data isolation, and lack of real-time pipeline automation delayed daily output.',
       themeColor: 'rose',
       metricsHeading: 'KEY PAIN POINTS',
@@ -317,7 +317,7 @@ function getProjectCaseStudyDetails(slug, project) {
       techHeading: 'AFFECTED PROCESSES',
       tags: slug === 'studioflow' ? ['Manual Merchandising', 'Variant Configuration', 'Catalog Taxonomy', 'Media Processing']
             : slug === 'portfolio' ? ['Passive Reading', 'Information Retrieval', 'Context Fragmentation', 'Candidate Triage']
-            : slug === 'marketpulse' ? ['Spatial Packing Diagrams', 'Weight & Center Gravity Safety', 'Container Packing Speed', 'Supply Chain Audits']
+            : slug === 'marketpulse' ? ['Container Space Utilization', 'Cargo Weight Distribution', 'Manual Packing Time', 'Shipping Trip Count', 'Loading Plan Accuracy']
             : ['Manual Triage', 'Coordination Latency', 'Pipeline Interrupts', 'Operations Overload']
     },
     'approach': {

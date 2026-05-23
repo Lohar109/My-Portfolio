@@ -698,24 +698,8 @@ function ProjectDetail() {
               className="bg-white border border-neutral-100 rounded-[32px] p-6 sm:p-10 shadow-xl shadow-neutral-100/30 w-full h-full flex flex-col justify-between animate-fadeIn relative overflow-hidden"
             >
               <div>
-                {/* 1. Header Badges */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-end gap-4 border-b border-neutral-100/60 pb-6">
-
-                  {/* Right clock badge */}
-                  <div className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] font-extrabold tracking-tight leading-none self-start ${
-                    currentStep.themeColor === 'violet' ? 'text-violet-600 bg-violet-50/50 border border-violet-100/50'
-                    : currentStep.themeColor === 'rose' ? 'text-rose-600 bg-rose-50/50 border border-rose-100/50'
-                    : currentStep.themeColor === 'amber' ? 'text-amber-700 bg-amber-50/50 border border-amber-100/50'
-                    : currentStep.themeColor === 'indigo' ? 'text-indigo-600 bg-indigo-50/50 border border-indigo-100/50'
-                    : 'text-emerald-700 bg-emerald-50/50 border border-emerald-100/50'
-                  }`}>
-                    <Clock size={12} className="stroke-[2.5] shrink-0" />
-                    <span>{currentStep.durationLabel}</span>
-                  </div>
-                </div>
-
                 {/* 2. Main Title & Description */}
-                <h2 className="mt-6 text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight">
+                <h2 className="mt-2 text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight">
                   {currentStep.title}
                 </h2>
                 <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold">

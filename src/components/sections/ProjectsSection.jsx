@@ -706,7 +706,7 @@ function ProjectsSection() {
 
               {/* Action Buttons Row */}
               <div className="mt-8 flex items-center justify-start sm:justify-end gap-3 w-full">
-                <div className="static-gradient-border-wrapper h-10 active:scale-[0.98]">
+                <div className="thick-black-border-wrapper h-10 active:scale-[0.98]">
                   <Link
                     to={'/projects/' + shopEaseProject.slug}
                     className="h-9 px-5 rounded-[10px] bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
@@ -714,7 +714,7 @@ function ProjectsSection() {
                     Case Study
                   </Link>
                 </div>
-                <div className="static-gradient-border-wrapper h-10 w-10 active:scale-[0.98]">
+                <div className="thick-black-border-wrapper h-10 w-10 active:scale-[0.98]">
                   <a
                     href={getProjectLinks(shopEaseProject.slug).github}
                     target="_blank"
@@ -866,7 +866,7 @@ function ProjectsSection() {
                 {/* Right Side: Case Study and GitHub action buttons aligned at the bottom on desktop */}
                 <div className="flex items-center lg:items-end justify-start lg:justify-end gap-3 mt-4 lg:mt-0 shrink-0 lg:pl-6 w-full lg:w-auto lg:self-end lg:pb-1">
                   {/* View Case Study / Live Demo */}
-                  <div className="static-gradient-border-wrapper h-10 active:scale-[0.98]">
+                  <div className="thick-black-border-wrapper h-10 active:scale-[0.98]">
                     {demoUrl.startsWith('http') ? (
                       <a
                         href={demoUrl}
@@ -889,7 +889,7 @@ function ProjectsSection() {
                   </div>
 
                   {/* GitHub Repo */}
-                  <div className="static-gradient-border-wrapper h-10 w-10 active:scale-[0.98]">
+                  <div className="thick-black-border-wrapper h-10 w-10 active:scale-[0.98]">
                     <a
                       href={githubUrl}
                       target="_blank"

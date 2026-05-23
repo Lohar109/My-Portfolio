@@ -734,27 +734,33 @@ function ProjectDetail() {
 
                 {/* 4. Bottom Layout */}
                 {activeSection === 'case-study' ? (
-                  <div className="mt-8 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full animate-fadeIn">
-                    {/* Left: About Text & Tags */}
-                    <div className="flex flex-col min-w-0">
-                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                        {currentStep.aboutHeading}
-                      </h3>
-                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                        {currentStep.aboutText}
-                      </p>
+                  <div className="mt-8 flex flex-col gap-8 w-full animate-fadeIn">
+                    {/* Upper Split Grid: Text (Left) & Video (Right) */}
+                    <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full">
+                      {/* Left: About Text */}
+                      <div className="flex flex-col min-w-0">
+                        <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                          {currentStep.aboutHeading}
+                        </h3>
+                        <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                          {currentStep.aboutText}
+                        </p>
+                      </div>
 
-                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                      {/* Right: Intro Video Player Box */}
+                      <div className="w-full flex justify-center shrink-0">
+                        <IntroVideoFrame />
+                      </div>
+                    </div>
+
+                    {/* Lower Full-Width: Technologies Used */}
+                    <div className="w-full border-t border-neutral-100/70 pt-6">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
                         {currentStep.techHeading}
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
                       </div>
-                    </div>
-
-                    {/* Right: Intro Video Player Box */}
-                    <div className="w-full flex justify-center shrink-0">
-                      <IntroVideoFrame />
                     </div>
                   </div>
                 ) : activeSection === 'images' ? (
@@ -803,11 +809,14 @@ function ProjectDetail() {
                         )}
                       </div>
 
-                      <span className="mt-8 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                        {currentStep.techHeading}
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      {/* Lower Full-Width: Technologies Used */}
+                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
+                          {currentStep.techHeading}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                        </div>
                       </div>
                     </div>
 
@@ -822,11 +831,14 @@ function ProjectDetail() {
                         {currentStep.aboutText}
                       </p>
 
-                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                        {currentStep.techHeading}
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      {/* Lower Full-Width: Technologies Used */}
+                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
+                          {currentStep.techHeading}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                        </div>
                       </div>
                     </div>
                   </div>

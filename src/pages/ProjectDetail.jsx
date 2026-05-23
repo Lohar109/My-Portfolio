@@ -618,34 +618,30 @@ function ProjectDetail() {
                 </h1>
               </div>
 
-              {/* Dotted connecting line track line */}
-              <div className="absolute left-[59px] top-[100px] bottom-[100px] w-[2px] dashed-connecting-line z-0" />
-
               {/* Steps vertical container */}
               <div className="space-y-6 relative z-10 flex-1 flex flex-col justify-center">
                 {timelineSteps.map((step) => {
-                  const Icon = step.icon
                   const isActive = activeSection === step.id
+                  
+                  const indicatorColor = {
+                    'case-study': 'bg-violet-600 shadow-[0_0_8px_rgba(124,58,237,0.4)]',
+                    'problem': 'bg-rose-600 shadow-[0_0_8px_rgba(244,63,94,0.4)]',
+                    'approach': 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]',
+                    'solution': 'bg-indigo-600 shadow-[0_0_8px_rgba(79,70,229,0.4)]',
+                    'result': 'bg-emerald-600 shadow-[0_0_8px_rgba(16,185,129,0.4)]',
+                  }[step.id] || 'bg-violet-600';
+
                   return (
                     <button
                       key={step.id}
                       onClick={() => setActiveSection(step.id)}
-                      className="flex items-center gap-4 text-left group cursor-pointer focus:outline-none w-full relative"
+                      className="flex items-center gap-4 text-left group cursor-pointer focus:outline-none w-full relative py-1"
                     >
                       {/* Left pointer tick */}
                       <div className="w-1.5 flex justify-center shrink-0">
                         {isActive && (
-                          <span className="h-5 w-1 rounded-full bg-violet-600 shadow-[0_0_8px_rgba(124,58,237,0.4)] animate-pulse" />
+                          <span className={`h-5 w-1 rounded-full animate-pulse ${indicatorColor}`} />
                         )}
-                      </div>
-
-                      {/* Icon with colored circle backgrounds */}
-                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] border shadow-sm transition-all duration-300 ${
-                        isActive
-                          ? `${step.activeColor} ${step.activeRing} scale-105`
-                          : 'bg-neutral-50/50 border-neutral-100 text-neutral-400 group-hover:bg-neutral-50 group-hover:text-neutral-600 group-hover:scale-105'
-                      }`}>
-                        <Icon size={18} className="stroke-[2.5]" />
                       </div>
 
                       {/* Labels and subtext */}
@@ -655,17 +651,10 @@ function ProjectDetail() {
                         }`}>
                           {step.label}
                         </span>
-                        <span className="text-[10px] text-slate-400 font-bold mt-1.5 leading-snug whitespace-nowrap overflow-hidden text-ellipsis max-w-[125px]">
+                        <span className="text-[10px] text-slate-400 font-bold mt-1.5 leading-snug whitespace-nowrap overflow-hidden text-ellipsis max-w-[220px]">
                           {step.desc}
                         </span>
                       </div>
-
-                      {/* Far right step number */}
-                      <span className={`ml-auto font-mono text-[10px] font-black tracking-widest ${
-                        isActive ? step.stepColor : 'text-neutral-300'
-                      }`}>
-                        {step.num}
-                      </span>
                     </button>
                   )
                 })}

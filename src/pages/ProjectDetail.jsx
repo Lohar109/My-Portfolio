@@ -176,7 +176,7 @@ function ProjectDetail() {
             This case study does not exist yet.
           </h1>
           <Link
-            to="/#projects"
+            to="/projects"
             className="mt-8 inline-flex rounded-full border border-stone-700 px-5 py-3 text-sm font-semibold text-gray-900 transition hover:border-gray-400"
           >
             &lt;- Back
@@ -193,7 +193,7 @@ function ProjectDetail() {
         
         {/* Back Link styled exactly as mockup */}
         <Link
-          to="/#projects"
+          to={`/projects#${project.slug}`}
           className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors select-none duration-250 cursor-pointer"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />

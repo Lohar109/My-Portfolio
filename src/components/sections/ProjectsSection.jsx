@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects.js'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -353,6 +353,26 @@ function ProjectsSection() {
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
 
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash) {
+      const slug = hash.replace('#', '')
+      const proj = projects.find((p) => p.slug === slug)
+      if (proj && slug !== 'studioflow') {
+        setActiveFilter('All')
+        const baseOtherProjects = projects.filter((p) => p.slug !== 'studioflow')
+        const sorted = [...baseOtherProjects].sort((a, b) => {
+          return parseInt(b.year || '2026') - parseInt(a.year || '2026')
+        })
+        const index = sorted.findIndex((p) => p.slug === slug)
+        if (index !== -1) {
+          const page = Math.floor(index / 4) + 1
+          setCurrentPage(page)
+        }
+      }
+    }
+  }, [])
+
   // Group filters
   const filters = [
     { label: 'All Projects', value: 'All' },
@@ -534,7 +554,7 @@ function ProjectsSection() {
 
       {/* Featured Project Card Block */}
       {shopEaseProject && (activeFilter === 'All' || activeFilter === 'Web' || activeFilter === 'AI') && (
-        <div className="mt-8">
+        <div id={shopEaseProject.slug} className="mt-8">
           <div className="border border-gray-200 bg-white rounded-3xl p-6 md:p-8 shadow-sm flex flex-col lg:flex-row gap-8 items-stretch w-full">
 
             {/* Left Side: CSS-only SaaS Dashboard Mockup */}
@@ -819,6 +839,7 @@ function ProjectsSection() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 key={project.slug}
+                id={project.slug}
                 className="group bg-white border border-gray-200/80 rounded-3xl p-5 md:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:border-gray-300 transition-all duration-300 flex flex-col lg:flex-row gap-6 items-stretch"
               >
                 {/* Left Side: Dynamic high fidelity CSS visual preview */}

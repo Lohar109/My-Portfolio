@@ -100,22 +100,43 @@ function renderFormattedTitle(title) {
   })
 }
 
-function getHighlightIcon(label) {
+function getHighlightIconStyle(label) {
   switch (label.toLowerCase()) {
     case 'role':
-      return <User size={16} />
+      return 'bg-violet-50/50 border border-violet-100 text-violet-600'
     case 'core focus':
-      return <Target size={16} />
+      return 'bg-indigo-50/50 border border-indigo-100 text-indigo-600'
     case 'outcome':
-      return <TrendingUp size={16} />
+      return 'bg-emerald-50/50 border border-emerald-100 text-emerald-600'
     case 'use case':
-      return <Briefcase size={16} />
+      return 'bg-amber-50/50 border border-amber-100 text-[#D97706]'
     case 'audience':
-      return <Users size={16} />
+      return 'bg-rose-50/50 border border-rose-100 text-rose-600'
     case 'primary goal':
-      return <Flag size={16} />
+      return 'bg-sky-50/50 border border-sky-100 text-sky-600'
     default:
-      return <Layers size={16} />
+      return 'bg-gray-50/50 border border-gray-150 text-gray-600'
+  }
+}
+
+function getHighlightIcon(label) {
+  const iconSize = 20
+  const iconClass = "stroke-[2] transition-transform duration-300 group-hover:scale-110"
+  switch (label.toLowerCase()) {
+    case 'role':
+      return <User size={iconSize} className={iconClass} />
+    case 'core focus':
+      return <Target size={iconSize} className={iconClass} />
+    case 'outcome':
+      return <TrendingUp size={iconSize} className={iconClass} />
+    case 'use case':
+      return <Briefcase size={iconSize} className={iconClass} />
+    case 'audience':
+      return <Users size={iconSize} className={iconClass} />
+    case 'primary goal':
+      return <Flag size={iconSize} className={iconClass} />
+    default:
+      return <Layers size={iconSize} className={iconClass} />
   }
 }
 
@@ -240,8 +261,8 @@ function ProjectDetail() {
           {[...topInfoCards, ...statsCards]
             .filter((item) => item.label.toLowerCase() !== 'role')
             .map((item) => (
-              <div key={item.label} className="flex flex-col items-center text-center">
-                <span className="inline-flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-violet-50 border border-violet-100/50 text-violet-600 shadow-sm mb-3">
+              <div key={item.label} className="group flex flex-col items-center text-center">
+                <span className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border shadow-sm mb-3 select-none transition-all duration-300 ${getHighlightIconStyle(item.label)}`}>
                   {getHighlightIcon(item.label)}
                 </span>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-gray-900 block mb-1.5 font-sans leading-none">

@@ -435,7 +435,7 @@ function ProjectDetail() {
                 className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none shadow-[0_4px_12px_rgba(124,58,237,0.15)]">
                     <BookOpen size={20} strokeWidth={2} />
                   </div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">CASE STUDY</h3>
@@ -452,10 +452,10 @@ function ProjectDetail() {
             {activeSection === 'problem' && (
               <article 
                 key="problem"
-                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+                className="rounded-3xl border border-rose-200/70 bg-rose-50/15 p-7 sm:p-9 shadow-md ring-1 ring-rose-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-rose-50/50 border border-rose-100 flex items-center justify-center text-rose-600 shadow-sm select-none shadow-[0_4px_12px_rgba(225,29,72,0.12)]">
                     <HelpCircle size={20} strokeWidth={2} />
                   </div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">PROBLEM</h3>
@@ -472,10 +472,10 @@ function ProjectDetail() {
             {activeSection === 'approach' && (
               <article 
                 key="approach"
-                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+                className="rounded-3xl border border-amber-200/70 bg-amber-50/15 p-7 sm:p-9 shadow-md ring-1 ring-amber-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-amber-50/50 border border-amber-100 flex items-center justify-center text-amber-600 shadow-sm select-none shadow-[0_4px_12px_rgba(217,119,6,0.12)]">
                     <Lightbulb size={20} strokeWidth={2} />
                   </div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">APPROACH</h3>
@@ -496,10 +496,10 @@ function ProjectDetail() {
             {activeSection === 'solution' && (
               <article 
                 key="solution"
-                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+                className="rounded-3xl border border-indigo-200/70 bg-indigo-50/15 p-7 sm:p-9 shadow-md ring-1 ring-indigo-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm select-none shadow-[0_4px_12px_rgba(79,70,229,0.12)]">
                     <Code2 size={20} strokeWidth={2} />
                   </div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">SOLUTION</h3>
@@ -508,7 +508,7 @@ function ProjectDetail() {
                   <div className="space-y-4 w-full">
                     {getSolutionPoints(project.slug).map((point, idx) => (
                       <div key={idx} className="flex gap-3 items-start">
-                        <CheckCircle2 size={18} className="text-violet-600 mt-1 shrink-0" strokeWidth={2.5} />
+                        <CheckCircle2 size={18} className="text-indigo-600 mt-1 shrink-0" strokeWidth={2.5} />
                         <p className="text-base leading-snug text-slate-800 font-bold tracking-tight font-sans m-0">
                           {point}
                         </p>
@@ -523,10 +523,10 @@ function ProjectDetail() {
             {activeSection === 'result' && (
               <article 
                 key="result"
-                className="rounded-3xl border border-violet-200/70 bg-violet-50/15 p-7 sm:p-9 shadow-md ring-1 ring-violet-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
+                className="rounded-3xl border border-emerald-200/70 bg-emerald-50/15 p-7 sm:p-9 shadow-md ring-1 ring-emerald-200/20 flex flex-col gap-5 h-full animate-[fadeIn_0.35s_ease-out]"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-emerald-50/50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm select-none shadow-[0_4px_12px_rgba(5,150,105,0.12)]">
                     <Rocket size={20} strokeWidth={2} />
                   </div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">RESULT</h3>

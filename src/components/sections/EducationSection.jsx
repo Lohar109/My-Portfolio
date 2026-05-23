@@ -249,8 +249,8 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#D97706] transition-colors duration-300">
-              <Trophy size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-amber-50/50 border border-amber-100 flex items-center justify-center text-[#D97706] shadow-sm transition-colors duration-300">
+              <Trophy size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1.5 text-left">
               <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">9.30</h4>
@@ -267,8 +267,8 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#4F46E5] transition-colors duration-300">
-              <Award size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-center text-[#4F46E5] shadow-sm transition-colors duration-300">
+              <Award size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1.5 text-left">
               <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">Top 10%</h4>
@@ -285,8 +285,8 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#0D9488] transition-colors duration-300">
-              <BookOpen size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-teal-50/50 border border-teal-100 flex items-center justify-center text-[#0D9488] shadow-sm transition-colors duration-300">
+              <BookOpen size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1 text-left">
               <h4 className="text-base font-semibold text-slate-800 leading-tight font-sans">Strong Foundation</h4>
@@ -302,8 +302,8 @@ function EducationSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-transparent border-none text-[#EA580C] transition-colors duration-300">
-              <Rocket size={24} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
+            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-orange-50/50 border border-orange-100 flex items-center justify-center text-[#EA580C] shadow-sm transition-colors duration-300">
+              <Rocket size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="space-y-1 text-left">
               <h4 className="text-base font-semibold text-slate-800 leading-tight font-sans">Continuous Learner</h4>

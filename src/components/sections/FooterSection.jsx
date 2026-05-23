@@ -285,7 +285,7 @@ function FooterSection() {
               </div>
 
               {/* Submit Button with Custom Premium Animations */}
-              <div className={`premium-btn-glow-container select-none ${status === 'success' ? 'success' : ''}`}>
+              <div className={`premium-btn-glow-container select-none ${status === 'success' ? 'success' : ''} ${status === 'loading' ? 'disabled' : ''}`}>
                 <div className="premium-btn-shadow-glow" />
                 <button
                   type="submit"
@@ -296,37 +296,37 @@ function FooterSection() {
                     {status === 'loading' ? (
                       <motion.span
                         key="loading"
-                        className="flex items-center gap-2 text-white font-semibold"
+                        className="flex items-center gap-2 text-violet-600 font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Loader2 className="h-4.5 w-4.5 animate-spin text-white" />
+                        <Loader2 className="h-4.5 w-4.5 animate-spin text-violet-500" />
                         <span>Sending...</span>
                       </motion.span>
                     ) : status === 'success' ? (
                       <motion.span
                         key="success"
-                        className="flex items-center gap-2 text-white font-semibold animate-pulse"
+                        className="flex items-center gap-2 text-emerald-600 group-hover:text-white transition-colors duration-300 font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Check className="h-4.5 w-4.5 text-white animate-bounce" />
+                        <Check className="h-4.5 w-4.5 text-emerald-500 group-hover:text-white transition-colors duration-300 animate-bounce" />
                         <span>Message Sent!</span>
                       </motion.span>
                     ) : (
                       <motion.span
                         key="idle"
-                        className="flex items-center gap-2 text-white font-semibold"
+                        className="flex items-center gap-2 text-violet-600 group-hover:text-white transition-colors duration-300 font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Send className="h-4.5 w-4.5 text-white/90 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 ease-out" />
+                        <Send className="h-4.5 w-4.5 text-violet-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 ease-out" />
                         <span>Send Message</span>
                       </motion.span>
                     )}

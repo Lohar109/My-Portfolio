@@ -285,51 +285,54 @@ function FooterSection() {
               </div>
 
               {/* Submit Button with Custom Premium Animations */}
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold text-sm sm:text-base py-3 shadow-[0_4px_14px_rgba(99,102,241,0.18)] hover:shadow-[0_8px_24px_rgba(99,102,241,0.28)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none"
-              >
-                <AnimatePresence mode="wait">
-                  {status === 'loading' ? (
-                    <motion.span
-                      key="loading"
-                      className="flex items-center gap-2"
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <Loader2 className="h-4.5 w-4.5 animate-spin" />
-                      Sending...
-                    </motion.span>
-                  ) : status === 'success' ? (
-                    <motion.span
-                      key="success"
-                      className="flex items-center gap-2 text-emerald-400"
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <Check className="h-4.5 w-4.5" />
-                      Message Sent!
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="idle"
-                      className="flex items-center gap-2"
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <Send className="h-4 w-4" />
-                      Send Message
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </button>
+              <div className={`premium-btn-glow-container select-none ${status === 'success' ? 'success' : ''}`}>
+                <div className="premium-btn-shadow-glow" />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className={`premium-submit-btn group ${status === 'success' ? 'btn-success' : ''}`}
+                >
+                  <AnimatePresence mode="wait">
+                    {status === 'loading' ? (
+                      <motion.span
+                        key="loading"
+                        className="flex items-center gap-2 text-white font-semibold"
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <Loader2 className="h-4.5 w-4.5 animate-spin text-white" />
+                        <span>Sending...</span>
+                      </motion.span>
+                    ) : status === 'success' ? (
+                      <motion.span
+                        key="success"
+                        className="flex items-center gap-2 text-white font-semibold animate-pulse"
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <Check className="h-4.5 w-4.5 text-white animate-bounce" />
+                        <span>Message Sent!</span>
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="idle"
+                        className="flex items-center gap-2 text-white font-semibold"
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <Send className="h-4.5 w-4.5 text-white/90 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 ease-out" />
+                        <span>Send Message</span>
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </div>
             </form>
 
             {/* Privacy Subtext Banner */}

@@ -606,10 +606,11 @@ function ProjectDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-8 items-start w-full">
 
           {/* LEFT COLUMN: Sidebar timeline navigation */}
-          <aside className="hidden lg:flex flex-col select-none h-full min-h-[580px]">
-            <div className="relative rounded-[28px] border border-neutral-100 bg-white p-7 shadow-xl shadow-neutral-100/30 flex flex-col justify-between h-full">
-              {/* Steps vertical container - fixed top-aligned position */}
-              <div className="space-y-6 relative z-10 flex-1 flex flex-col justify-start pt-4">
+          <aside className="hidden lg:block select-none w-full">
+            <div className="relative rounded-[28px] border border-neutral-100 bg-white p-7 shadow-xl shadow-neutral-100/30 w-full">
+              
+              {/* Steps vertical container */}
+              <div className="space-y-6 relative z-10 w-full flex flex-col pt-2">
                 {timelineSteps.map((step) => {
                   const isActive = activeSection === step.id
                   
@@ -650,22 +651,22 @@ function ProjectDetail() {
                     </button>
                   )
                 })}
-              </div>
 
-              {/* Bottom download PDF card */}
-              <div 
-                onClick={handleDownload}
-                className="shrink-0 border border-neutral-100/80 bg-neutral-50/30 p-4 rounded-2.5xl flex items-center gap-3.5 mt-8 select-none hover:bg-neutral-50 transition-colors duration-200 cursor-pointer w-full"
-              >
-                <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 shrink-0 select-none border border-violet-100/50 shadow-sm">
-                  <Download size={16} strokeWidth={2.5} />
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className="text-[11.5px] font-extrabold text-slate-800 tracking-tight leading-none">Download Case Study</span>
-                  <span className="text-[9.5px] text-slate-400 font-bold mt-1 leading-none tracking-wider">PDF · 1.2 MB</span>
-                </div>
-                <div className="ml-auto p-1.5 rounded-lg text-violet-500 hover:scale-110 transition-transform">
-                  <ArrowLeft size={14} className="rotate-180" strokeWidth={2.5} />
+                {/* Download Case Study button placed directly below Result stepper item */}
+                <div 
+                  onClick={handleDownload}
+                  className="border border-neutral-100/80 bg-neutral-50/30 p-4 rounded-2.5xl flex items-center gap-3.5 mt-8 select-none hover:bg-neutral-50 transition-colors duration-200 cursor-pointer w-full"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 shrink-0 select-none border border-violet-100/50 shadow-sm">
+                    <Download size={16} strokeWidth={2.5} />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[11.5px] font-extrabold text-slate-800 tracking-tight leading-none">Download Case Study</span>
+                    <span className="text-[9.5px] text-slate-400 font-bold mt-1 leading-none tracking-wider">PDF · 1.2 MB</span>
+                  </div>
+                  <div className="ml-auto p-1.5 rounded-lg text-violet-500 hover:scale-110 transition-transform">
+                    <ArrowLeft size={14} className="rotate-180" strokeWidth={2.5} />
+                  </div>
                 </div>
               </div>
 

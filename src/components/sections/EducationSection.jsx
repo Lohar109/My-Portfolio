@@ -138,8 +138,39 @@ function EducationSection() {
 
         {/* Timeline Card Stack */}
         <div className="relative pl-12 sm:pl-20 pr-2">
-          {/* Vertical Timeline Track Line (Dashed, perfectly aligned with dots) */}
-          <div className="absolute left-[12px] sm:left-[32px] top-6 bottom-6 w-0 border-l border-dashed border-violet-300" />
+          {/* Animated vertical track line */}
+          <div className="absolute left-[12px] sm:left-[32px] top-6 bottom-6 w-[2px] z-0">
+            <svg className="w-full h-full overflow-visible">
+              <line
+                x1="1"
+                y1="0"
+                x2="1"
+                y2="100%"
+                stroke="#c084fc"
+                strokeWidth="2"
+                strokeDasharray="4 6"
+                className="animate-flow-line-vertical"
+              />
+            </svg>
+          </div>
+          <style>{`
+            @keyframes flow-vertical {
+              to {
+                stroke-dashoffset: -20;
+              }
+            }
+            @keyframes flow-horizontal {
+              to {
+                stroke-dashoffset: -18;
+              }
+            }
+            .animate-flow-line-vertical {
+              animation: flow-vertical 1.5s linear infinite;
+            }
+            .animate-flow-line-horizontal {
+              animation: flow-horizontal 1.2s linear infinite;
+            }
+          `}</style>
 
           <div className="space-y-6">
             {educationItems.map((item, index) => {
@@ -157,14 +188,27 @@ function EducationSection() {
                   {/* Timeline Connection Indicator Dot */}
                   <div className="absolute -left-[45px] sm:-left-[57px] top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
                     <div className="relative flex items-center justify-center">
-                      {/* Lighter violet halo outline */}
-                      <span className="absolute inline-flex h-8 w-8 rounded-full bg-violet-100/70 border border-violet-200 animate-ping opacity-45 pointer-events-none" />
+                      {/* Darker pulsing violet halo outline */}
+                      <span className="absolute inline-flex h-8 w-8 rounded-full bg-violet-500/30 border border-violet-400/60 animate-ping pointer-events-none" />
                       <div className="h-4.5 w-4.5 rounded-full bg-violet-600 border-[3.5px] border-white shadow-md z-10" />
                     </div>
                   </div>
 
                   {/* Horizontal Connector Line (Dashed, extending from dot center to card) */}
-                  <div className="absolute -left-[36px] sm:-left-[48px] top-1/2 -translate-y-1/2 w-[36px] sm:w-[48px] h-px border-t border-dashed border-violet-300 pointer-events-none" />
+                  <div className="absolute -left-[36px] sm:-left-[48px] top-1/2 -translate-y-1/2 w-[36px] sm:w-[48px] h-[2px] z-0 pointer-events-none">
+                    <svg className="w-full h-[2px] overflow-visible">
+                      <line
+                        x1="0"
+                        y1="1"
+                        x2="100%"
+                        y2="1"
+                        stroke="#c084fc"
+                        strokeWidth="2"
+                        strokeDasharray="4 5"
+                        className="animate-flow-line-horizontal"
+                      />
+                    </svg>
+                  </div>
 
                   {/* Horizontal Card Element */}
                   <motion.div

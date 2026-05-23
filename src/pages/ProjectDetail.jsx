@@ -209,7 +209,7 @@ function ProjectDetail() {
         </div>
 
         {/* Top Info Section: Title, Description, Stack Badges and Video Box */}
-        <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+        <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="flex flex-col justify-center">
             {/* Title formatted with gradient highlighted keyword */}
             <h1 className="max-w-md text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 font-sans leading-tight mt-5">
@@ -235,28 +235,9 @@ function ProjectDetail() {
             </div>
           </div>
 
-          {/* Premium Video Card Container with exact IntroVideoFrame player */}
-          <div className="border border-gray-200/60 bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex flex-col gap-4.5 w-full self-stretch">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4.5">
-              <div>
-                <p className="text-[10px] font-extrabold uppercase tracking-widest text-gray-900 font-sans leading-none">
-                  PROJECT VIDEO
-                </p>
-                <p className="mt-2 text-xs text-gray-400 font-medium font-sans leading-none">
-                  Walkthrough of the project demo & functionality
-                </p>
-              </div>
-              <div className="flex gap-2 select-none">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              </div>
-            </div>
-
-            {/* The exact same video box as on the Home page */}
-            <div className="w-full">
-              <IntroVideoFrame />
-            </div>
+          {/* Standalone Video Box matching the Home page exactly */}
+          <div className="w-full flex items-center justify-center">
+            <IntroVideoFrame />
           </div>
         </section>
 

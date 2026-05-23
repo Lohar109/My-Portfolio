@@ -285,48 +285,48 @@ function FooterSection() {
               </div>
 
               {/* Submit Button with Custom Premium Animations */}
-              <div className={`premium-btn-glow-container select-none ${status === 'success' ? 'success' : ''} ${status === 'loading' ? 'disabled' : ''}`}>
-                <div className="premium-btn-shadow-glow" />
+              <div className="snake-border-wrapper w-full active:scale-[0.985] select-none">
+                <div className="snake-border-glow" />
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className={`premium-submit-btn group ${status === 'success' ? 'btn-success' : ''}`}
+                  className="relative z-10 inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 text-gray-700 hover:text-violet-600 font-semibold text-sm sm:text-base py-3 transition-all duration-300 cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none group"
                 >
                   <AnimatePresence mode="wait">
                     {status === 'loading' ? (
                       <motion.span
                         key="loading"
-                        className="flex items-center gap-2 text-white/80 font-semibold"
+                        className="flex items-center gap-2 text-violet-500 font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Loader2 className="h-4.5 w-4.5 animate-spin text-white/70" />
+                        <Loader2 className="h-4.5 w-4.5 animate-spin text-violet-500" />
                         <span>Sending...</span>
                       </motion.span>
                     ) : status === 'success' ? (
                       <motion.span
                         key="success"
-                        className="flex items-center gap-2 text-white font-semibold animate-pulse"
+                        className="flex items-center gap-2 text-emerald-500 font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Check className="h-4.5 w-4.5 text-emerald-400 animate-bounce" />
+                        <Check className="h-4.5 w-4.5 text-emerald-500" />
                         <span>Message Sent!</span>
                       </motion.span>
                     ) : (
                       <motion.span
                         key="idle"
-                        className="flex items-center gap-2 text-white font-semibold"
+                        className="flex items-center gap-2"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Send className="h-4.5 w-4.5 text-white/80 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 ease-out" />
+                        <Send className="h-4 w-4 text-gray-500 group-hover:text-violet-500 transition-colors duration-300" />
                         <span>Send Message</span>
                       </motion.span>
                     )}
@@ -357,15 +357,18 @@ function FooterSection() {
               I bring ideas to life with clean code, thoughtful design, and a problem-solving mindset.
             </p>
           </div>
-          <button
-            onClick={() => {
-              navigate('/projects')
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
-            className="inline-flex items-center justify-center w-fit rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 !text-white px-[22px] py-[11px] text-xs font-bold mt-6 sm:mt-8 shadow-[0_4px_12px_rgba(99,102,241,0.15)] hover:shadow-[0_8px_20px_rgba(99,102,241,0.25)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
-          >
-            View My Work
-          </button>
+          <div className="snake-border-wrapper w-fit active:scale-[0.98] mt-6 sm:mt-8">
+            <div className="snake-border-glow" />
+            <button
+              onClick={() => {
+                navigate('/projects')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+              className="relative z-10 inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-xs font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none"
+            >
+              <span>View My Work</span>
+            </button>
+          </div>
         </div>
 
         {/* Right Col: Features list */}
@@ -515,18 +518,21 @@ function FooterSection() {
               I'm excited to hear about your project or idea. Let's create something amazing together.
             </p>
           </div>
-          <button
-            onClick={() => {
-              const nameInput = document.getElementsByName('name')[0]
-              if (nameInput) {
-                nameInput.focus()
-                nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' })
-              }
-            }}
-            className="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold text-xs sm:text-sm py-3 px-4 shadow-[0_4px_14px_rgba(99,102,241,0.18)] hover:shadow-[0_8px_24px_rgba(99,102,241,0.28)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer mt-6"
-          >
-            Start a Conversation
-          </button>
+          <div className="snake-border-wrapper w-full active:scale-[0.98] mt-6">
+            <div className="snake-border-glow" />
+            <button
+              onClick={() => {
+                const nameInput = document.getElementsByName('name')[0]
+                if (nameInput) {
+                  nameInput.focus()
+                  nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                }
+              }}
+              className="relative z-10 inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 py-3 px-4 text-xs sm:text-sm font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none"
+            >
+              <span>Start a Conversation</span>
+            </button>
+          </div>
         </div>
 
       </div>

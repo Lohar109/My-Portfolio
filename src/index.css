@@ -152,10 +152,8 @@ button {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  background: #ffffff;
-  /* Premium border clipping simulation */
-  border: 1.5px solid transparent;
-  background-clip: padding-box;
+  background: #090a0f; /* Deep charcoal/black */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: inline-flex;
   width: 100%;
   align-items: center;
@@ -163,68 +161,67 @@ button {
   padding: 13px 24px;
   font-size: 15px;
   font-weight: 600;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #ffffff;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Outer Gradient Border Layer */
-.premium-submit-btn::after {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-  z-index: -2;
-  transition: all 0.4s ease;
-}
-
-/* Sliding Fluid Gradient Background */
-.premium-submit-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: -1;
-  border-radius: 10.5px;
-}
-
-/* Premium Button Ambient Glow Behind it */
+/* White/Silver Ambient Glow Behind the Button */
 .premium-btn-shadow-glow {
   position: absolute;
   inset: 4px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-  filter: blur(14px);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 80%);
+  filter: blur(12px);
   opacity: 0;
   z-index: 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+}
+
+/* Silver Shimmer Streak Overlay */
+.premium-submit-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Hover States */
 .premium-btn-glow-container:hover .premium-submit-btn {
   transform: translateY(-2.5px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+  background: #12131a; /* slightly lighter charcoal */
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-.premium-btn-glow-container:hover .premium-submit-btn::before {
-  transform: scaleX(1);
+.premium-btn-glow-container:hover .premium-submit-btn::after {
+  left: 200%;
+  transition: left 0.85s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .premium-btn-glow-container:hover .premium-btn-shadow-glow {
-  transform: translateY(3px) scale(1.03);
-  filter: blur(18px);
-  opacity: 0.45;
+  transform: translateY(3px) scale(1.05);
+  filter: blur(15px);
+  opacity: 1; /* shows the clean white halo */
 }
 
 /* Active Pressed State */
 .premium-btn-glow-container:active {
-  transform: scale(0.985);
+  transform: scale(0.98);
 }
 
 .premium-btn-glow-container:active .premium-submit-btn {
@@ -233,21 +230,14 @@ button {
 
 /* Success State Override for Premium Submit Button */
 .premium-submit-btn.btn-success {
-  background: #ffffff !important;
-}
-
-.premium-submit-btn.btn-success::after {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
-}
-
-.premium-submit-btn.btn-success::before {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  background: #064e3b !important; /* deep emerald green background */
+  border-color: rgba(16, 185, 129, 0.3) !important;
 }
 
 .premium-btn-glow-container.success .premium-btn-shadow-glow {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 80%) !important;
 }
 
 .premium-btn-glow-container.success:hover .premium-btn-shadow-glow {
-  opacity: 0.45 !important;
+  opacity: 1 !important;
 }

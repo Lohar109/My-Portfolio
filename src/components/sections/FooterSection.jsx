@@ -296,37 +296,37 @@ function FooterSection() {
                     {status === 'loading' ? (
                       <motion.span
                         key="loading"
-                        className="flex items-center gap-2 text-violet-600 font-semibold"
+                        className="flex items-center gap-2 text-white/80 font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Loader2 className="h-4.5 w-4.5 animate-spin text-violet-500" />
+                        <Loader2 className="h-4.5 w-4.5 animate-spin text-white/70" />
                         <span>Sending...</span>
                       </motion.span>
                     ) : status === 'success' ? (
                       <motion.span
                         key="success"
-                        className="flex items-center gap-2 text-emerald-600 group-hover:text-white transition-colors duration-300 font-semibold"
+                        className="flex items-center gap-2 text-white font-semibold animate-pulse"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Check className="h-4.5 w-4.5 text-emerald-500 group-hover:text-white transition-colors duration-300 animate-bounce" />
+                        <Check className="h-4.5 w-4.5 text-emerald-400 animate-bounce" />
                         <span>Message Sent!</span>
                       </motion.span>
                     ) : (
                       <motion.span
                         key="idle"
-                        className="flex items-center gap-2 text-violet-600 group-hover:text-white transition-colors duration-300 font-semibold"
+                        className="flex items-center gap-2 text-white font-semibold"
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <Send className="h-4.5 w-4.5 text-violet-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 ease-out" />
+                        <Send className="h-4.5 w-4.5 text-white/80 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 ease-out" />
                         <span>Send Message</span>
                       </motion.span>
                     )}

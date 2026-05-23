@@ -59,7 +59,6 @@ import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
 import IntroVideoFrame from '../components/ui/IntroVideoFrame.jsx'
-import CaseStudyMockup from '../components/ui/CaseStudyMockup.jsx'
 import { projects } from '../data/projects.js'
 
 function getStackIcon(item) {
@@ -507,7 +506,6 @@ function ProjectDetail() {
   const project = projects.find((entry) => entry.slug === slug)
 
   const [activeSection, setActiveSection] = useState('case-study')
-  const [selectedImageTab, setSelectedImageTab] = useState('case-study')
 
   if (!project) {
     return (
@@ -728,9 +726,7 @@ function ProjectDetail() {
 
                 {/* 4. Bottom Layout */}
                 {activeSection === 'images' ? (
-                  <div className="mt-8 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full animate-fadeIn">
-                    
-                    {/* Left: Description & Interactive State Selector */}
+                  <div className="mt-8 w-full animate-fadeIn">
                     <div className="flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
                         {currentStep.aboutHeading}
@@ -739,56 +735,48 @@ function ProjectDetail() {
                         {currentStep.aboutText}
                       </p>
 
-                      {/* Premium Mini-Tab Selector for Image States */}
-                      <span className="mt-6 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                        Select Interface View
-                      </span>
-                      <div className="flex flex-col gap-2 mb-6">
-                        {[
-                          { id: 'case-study', label: '01 Overview Dashboard', color: 'violet', hoverColor: 'hover:border-violet-300 hover:text-violet-600', activeBg: 'bg-violet-50 border-violet-200 text-violet-700 font-black' },
-                          { id: 'problem', label: '02 Bottleneck Alert State', color: 'rose', hoverColor: 'hover:border-rose-300 hover:text-rose-600', activeBg: 'bg-rose-50 border-rose-200 text-rose-700 font-black' },
-                          { id: 'approach', label: '03 Pipeline Architecture', color: 'amber', hoverColor: 'hover:border-amber-300 hover:text-amber-600', activeBg: 'bg-amber-50 border-amber-200 text-amber-700 font-black' },
-                          { id: 'solution', label: '04 Terminal & Source Code', color: 'indigo', hoverColor: 'hover:border-indigo-300 hover:text-indigo-600', activeBg: 'bg-indigo-50 border-indigo-200 text-indigo-700 font-black' },
-                          { id: 'result', label: '05 Performance Success Report', color: 'emerald', hoverColor: 'hover:border-emerald-300 hover:text-emerald-600', activeBg: 'bg-emerald-50 border-emerald-200 text-emerald-700 font-black' },
-                        ].map((subTab) => {
-                          const isSubActive = selectedImageTab === subTab.id
-                          return (
-                            <button
-                              key={subTab.id}
-                              onClick={() => setSelectedImageTab(subTab.id)}
-                              className={`w-full text-left px-4 py-2.5 rounded-xl border text-xs font-bold transition-all duration-205 select-none cursor-pointer outline-none focus:outline-none focus-visible:outline-none focus:ring-0 ${
-                                isSubActive
-                                  ? subTab.activeBg
-                                  : `bg-white border-neutral-100 text-slate-600 ${subTab.hoverColor}`
-                              }`}
-                            >
-                              {subTab.label}
-                            </button>
-                          )
-                        })}
+                      {/* Premium Image Grid / Placeholder for User's Custom Images */}
+                      <div className="mt-8">
+                        {project.images && project.images.length > 0 ? (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {project.images.map((imgSrc, idx) => (
+                              <div 
+                                key={idx} 
+                                className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[4/3] shadow-sm hover:shadow-md transition-all duration-300"
+                              >
+                                <img 
+                                  src={imgSrc} 
+                                  alt={`${project.title} screenshot ${idx + 1}`}
+                                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                  loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                  <span className="text-white text-xs font-bold font-sans">
+                                    View Image {idx + 1}
+                                  </span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="border-2 border-dashed border-neutral-200 rounded-[24px] p-8 sm:p-12 text-center flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50/80 transition-all select-none">
+                            <div className="w-12 h-12 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center mb-4 border border-violet-100/50">
+                              <LayoutGrid size={20} strokeWidth={2.5} />
+                            </div>
+                            <h4 className="text-sm font-extrabold text-slate-800 font-sans tracking-tight">No Custom Images Added Yet</h4>
+                            <p className="text-xs text-slate-400 mt-2 max-w-sm font-semibold leading-relaxed font-sans">
+                              Add image paths (e.g. <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">"/images/your-screenshot.png"</code>) to <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">src/data/projects.js</code> under the <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] font-black font-sans">images</code> key for this project to showcase your custom gallery here!
+                            </p>
+                          </div>
+                        )}
                       </div>
 
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                      <span className="mt-8 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
                         {currentStep.techHeading}
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
                       </div>
-                    </div>
-
-                    {/* Right: Mockup Illustration Graphic */}
-                    <div className="w-full flex justify-center shrink-0 animate-fadeIn" key={selectedImageTab}>
-                      <CaseStudyMockup 
-                        tab={selectedImageTab} 
-                        slug={project.slug} 
-                        themeColor={{
-                          'case-study': 'violet',
-                          'problem': 'rose',
-                          'approach': 'amber',
-                          'solution': 'indigo',
-                          'result': 'emerald',
-                        }[selectedImageTab] || 'violet'} 
-                      />
                     </div>
 
                   </div>

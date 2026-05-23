@@ -190,10 +190,14 @@ function getSolutionPoints(slug) {
       ]
     case 'marketpulse':
       return [
-        'Custom 3D bin-packing space optimization algorithm',
-        'High-fidelity real-time 3D loading plans via Qt 3D',
-        'Relational load dimension calculations under weight limits',
-        'Interactive C++ desktop interface with zero-latency render'
+        'Custom 3D bin-packing algorithm in C++',
+        'Real-time Qt3D loading visualization',
+        'Gmail SMTP email OTP on registration',
+        'Layer-wise & product PDF export',
+        'JSON-based persistent data storage',
+        'Qt Charts fill percentage pie chart',
+        '5 product types with icon support',
+        'Duplicate & weight validation'
       ]
     case 'campus-connect':
       return [
@@ -370,9 +374,11 @@ function getProjectCaseStudyDetails(slug, project) {
       durationLabel: 'Deploy State: Live Production',
       title: slug === 'studioflow' ? 'Multimodal Parser & Real-time Console'
              : slug === 'portfolio' ? 'Context-grounded Assistant Interface'
-             : slug === 'marketpulse' ? 'Native Qt 3D Container Console'
+             : slug === 'marketpulse' ? 'Complete C++ Desktop App — From Login to 3D Loading Plan'
              : 'Polished Interactive Dashboard',
-      summary: 'A completely realized, production-ready system with highly responsive micro-interactions and smooth operational tools.',
+      summary: slug === 'marketpulse'
+        ? 'A fully working desktop application with user registration, email OTP, product management, container selection, live 3D packing, and PDF export — all built in C++ with Qt6.'
+        : 'A completely realized, production-ready system with highly responsive micro-interactions and smooth operational tools.',
       themeColor: 'indigo',
       metricsHeading: 'CORE CAPABILITIES',
       metrics: slug === 'studioflow' ? [
@@ -397,7 +403,9 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Fast', label: 'Aggressive Query Caching', icon: 'Cpu', color: 'indigo' }
       ],
       aboutHeading: 'Key Technical Implementation',
-      aboutText: 'The resulting system unifies automated processing with intuitive UI dashboards. We combined lightning-fast server endpoints with clean component state loops to deliver zero-friction user feedback.\n\nThe layout includes robust exception catch boundaries, security validations, and reactive elements to provide a beautiful, seamless execution experience.',
+      aboutText: slug === 'marketpulse'
+        ? 'The software works end to end. A user first registers with their name, company name, email, mobile number, and password. Email verification uses a 6-digit OTP sent via Gmail SMTP directly from the app — built using Qt\'s SSL socket. After login, users can add and save products with name, type (box, bag, barrel, sack, pipe), dimensions in centimeters, weight in kg, and quantity — all stored in a local JSON file. Users can also save multiple trucks, containers, train bogis, and warehouses. When loading, you select a container, pick products from your saved list (or enter them directly), assign a unique color to each product type, and hit "Add in Container." The algorithm runs instantly and the 3D view updates live. Users can add or remove products one at a time and watch the container re-pack in real time. A pie chart shows filled vs empty percentage. Finally, two types of PDF reports can be exported — one showing the product summary with type icons and colors, and one showing a layer-wise 2D visual of every Z-depth layer in the container.'
+        : 'The resulting system unifies automated processing with intuitive UI dashboards. We combined lightning-fast server endpoints with clean component state loops to deliver zero-friction user feedback.\n\nThe layout includes robust exception catch boundaries, security validations, and reactive elements to provide a beautiful, seamless execution experience.',
       techHeading: 'ENGINEERING ASSETS',
       tags: getSolutionPoints(slug)
     },

@@ -285,8 +285,7 @@ function FooterSection() {
               </div>
 
               {/* Submit Button with Custom Premium Animations */}
-              <div className="snake-border-wrapper w-full active:scale-[0.985] select-none">
-                <div className="snake-border-glow" />
+              <div className="static-gradient-border-wrapper w-full active:scale-[0.985] select-none">
                 <button
                   type="submit"
                   disabled={status === 'loading'}
@@ -357,8 +356,7 @@ function FooterSection() {
               I bring ideas to life with clean code, thoughtful design, and a problem-solving mindset.
             </p>
           </div>
-          <div className="snake-border-wrapper w-fit active:scale-[0.98] mt-6 sm:mt-8">
-            <div className="snake-border-glow" />
+          <div className="static-gradient-border-wrapper w-fit active:scale-[0.98] mt-6 sm:mt-8">
             <button
               onClick={() => {
                 navigate('/projects')
@@ -518,8 +516,7 @@ function FooterSection() {
               I'm excited to hear about your project or idea. Let's create something amazing together.
             </p>
           </div>
-          <div className="snake-border-wrapper w-full active:scale-[0.98] mt-6">
-            <div className="snake-border-glow" />
+          <div className="static-gradient-border-wrapper w-full active:scale-[0.98] mt-6">
             <button
               onClick={() => {
                 const nameInput = document.getElementsByName('name')[0]

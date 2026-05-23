@@ -59,7 +59,6 @@ import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
 import IntroVideoFrame from '../components/ui/IntroVideoFrame.jsx'
-import CaseStudyMockup from '../components/ui/CaseStudyMockup.jsx'
 import { projects } from '../data/projects.js'
 
 function getStackIcon(item) {
@@ -717,50 +716,24 @@ function ProjectDetail() {
                   {currentStep.summary}
                 </p>
 
-                {/* 4. Bottom Split Layout / Full Width Layout */}
-                {activeSection === 'case-study' ? (
-                  <div className="mt-8 grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] gap-8 items-start w-full animate-fadeIn">
-                    {/* Left: About Text & Tags */}
-                    <div className="flex flex-col min-w-0">
-                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                        {currentStep.aboutHeading}
-                      </h3>
-                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                        {currentStep.aboutText}
-                      </p>
+                {/* 4. Bottom Full Width Layout */}
+                <div className="mt-8 w-full animate-fadeIn">
+                  <div className="flex flex-col min-w-0">
+                    <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                      {currentStep.aboutHeading}
+                    </h3>
+                    <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                      {currentStep.aboutText}
+                    </p>
 
-                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                        {currentStep.techHeading}
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
-                      </div>
-                    </div>
-
-                    {/* Right: Mockup Illustration Graphic */}
-                    <div className="w-full flex justify-center shrink-0">
-                      <CaseStudyMockup tab={activeSection} slug={project.slug} themeColor={currentStep.themeColor} />
+                    <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                      {currentStep.techHeading}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
                     </div>
                   </div>
-                ) : (
-                  <div className="mt-8 w-full animate-fadeIn">
-                    <div className="flex flex-col min-w-0">
-                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                        {currentStep.aboutHeading}
-                      </h3>
-                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                        {currentStep.aboutText}
-                      </p>
-
-                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                        {currentStep.techHeading}
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
-                      </div>
-                    </div>
-                  </div>
-                )}
+                </div>
               </div>
             </article>
           </div>

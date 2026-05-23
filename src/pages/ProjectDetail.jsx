@@ -608,18 +608,8 @@ function ProjectDetail() {
           {/* LEFT COLUMN: Sidebar timeline navigation */}
           <aside className="hidden lg:flex flex-col select-none h-full min-h-[580px]">
             <div className="relative rounded-[28px] border border-neutral-100 bg-white p-7 shadow-xl shadow-neutral-100/30 flex flex-col justify-between h-full">
-              {/* Sidebar top heading */}
-              <div className="shrink-0 mb-6 pb-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-neutral-400">
-                  Case Study
-                </span>
-                <h1 className="text-lg font-black tracking-tight text-slate-800 mt-1 leading-snug">
-                  {project.title}
-                </h1>
-              </div>
-
-              {/* Steps vertical container */}
-              <div className="space-y-6 relative z-10 flex-1 flex flex-col justify-center">
+              {/* Steps vertical container - fixed top-aligned position */}
+              <div className="space-y-6 relative z-10 flex-1 flex flex-col justify-start pt-4">
                 {timelineSteps.map((step) => {
                   const isActive = activeSection === step.id
                   
@@ -637,11 +627,13 @@ function ProjectDetail() {
                       onClick={() => setActiveSection(step.id)}
                       className="flex items-center gap-4 text-left group cursor-pointer focus:outline-none w-full relative py-1"
                     >
-                      {/* Left pointer tick */}
-                      <div className="w-1.5 flex justify-center shrink-0">
-                        {isActive && (
-                          <span className={`h-5 w-1 rounded-full animate-pulse ${indicatorColor}`} />
-                        )}
+                      {/* Left pointer tick - fixed layout space to prevent horizontal shifting */}
+                      <div className="w-2 flex justify-center shrink-0">
+                        <span className={`h-5 w-1 rounded-full transition-all duration-300 ${
+                          isActive 
+                            ? `${indicatorColor} opacity-100 scale-100 animate-pulse` 
+                            : 'bg-transparent opacity-0 scale-0'
+                        }`} />
                       </div>
 
                       {/* Labels and subtext */}

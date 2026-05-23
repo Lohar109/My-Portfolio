@@ -591,8 +591,8 @@ function ProjectDetail() {
       {/* Container matching mockup page sizing */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-24">
 
-        {/* Top bar back link outside layout grid */}
-        <div className="mb-6">
+        {/* Top bar back link outside layout grid (Mobile only) */}
+        <div className="mb-6 lg:hidden">
           <Link
             to={`/projects#${project.slug}`}
             className="group inline-flex items-center gap-2 text-sm font-bold text-violet-600 hover:text-violet-700 transition-colors select-none duration-250 cursor-pointer"
@@ -607,6 +607,17 @@ function ProjectDetail() {
 
           {/* LEFT COLUMN: Sidebar timeline navigation */}
           <aside className="hidden lg:block select-none w-full lg:sticky lg:top-[100px]">
+            {/* Desktop sticky back link */}
+            <div className="mb-6">
+              <Link
+                to={`/projects#${project.slug}`}
+                className="group inline-flex items-center gap-2 text-sm font-bold text-violet-600 hover:text-violet-700 transition-colors select-none duration-250 cursor-pointer"
+              >
+                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                <span>Back to Projects</span>
+              </Link>
+            </div>
+            
             <div className="relative rounded-[28px] border border-neutral-100 bg-white p-7 shadow-xl shadow-neutral-100/30 w-full">
               
               {/* Steps vertical container */}

@@ -59,6 +59,7 @@ import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
 import IntroVideoFrame from '../components/ui/IntroVideoFrame.jsx'
+import CaseStudyMockup from '../components/ui/CaseStudyMockup.jsx'
 import { projects } from '../data/projects.js'
 
 function getStackIcon(item) {
@@ -422,6 +423,17 @@ function getProjectCaseStudyDetails(slug, project) {
             : slug === 'portfolio' ? ['Recruiter Engagement', 'Developer Showcase Speed', 'Fact Grounded AI', 'Portfolio Reach']
             : slug === 'marketpulse' ? ['Logistics Fuel Consumption', 'Dispatch Planning Throughput', 'Fleet Operational Overhead', 'Safety Regulation Standards']
             : ['Automation Coverage', 'Processing Throughput', 'System Reliability', 'User Ergonomics']
+    },
+    'images': {
+      badge: '06 IMAGES',
+      durationLabel: 'Media Assets: Interactive',
+      title: 'Interactive Design & Interface Mockups',
+      summary: 'Explore the high-fidelity user interface states, systems pipelines, and real-time visualization dashboards engineered for this project.',
+      themeColor: 'violet',
+      aboutHeading: 'Interface & Architecture Mockups',
+      aboutText: 'This interactive gallery showcases the primary operational states of the platform. Switch between the different views to see live charts, bottleneck flowcharts, pipeline architecture schemes, interactive terminal mockups, and performance reports.',
+      techHeading: 'VISUAL ASSETS',
+      tags: ['System Mockups', 'State Visualizations', 'Interactive Previews', 'UI Prototypes']
     }
   };
 
@@ -495,6 +507,7 @@ function ProjectDetail() {
   const project = projects.find((entry) => entry.slug === slug)
 
   const [activeSection, setActiveSection] = useState('case-study')
+  const [selectedImageTab, setSelectedImageTab] = useState('case-study')
 
   if (!project) {
     return (
@@ -575,6 +588,17 @@ function ProjectDetail() {
       activeText: 'text-emerald-600',
       activeRing: 'shadow-[0_4px_14px_rgba(16,185,129,0.3)]',
       stepColor: 'text-emerald-500',
+    },
+    {
+      id: 'images',
+      num: '06',
+      label: 'Images',
+      desc: 'Visual mockups & screenshots',
+      icon: LayoutGrid,
+      activeColor: 'bg-violet-600 border-violet-600 text-white',
+      activeText: 'text-violet-600',
+      activeRing: 'shadow-[0_4px_14px_rgba(124,58,237,0.35)]',
+      stepColor: 'text-violet-500',
     },
   ]
 
@@ -702,24 +726,91 @@ function ProjectDetail() {
                   {currentStep.summary}
                 </p>
 
-                {/* 4. Bottom Full Width Layout */}
-                <div className="mt-8 w-full animate-fadeIn">
-                  <div className="flex flex-col min-w-0">
-                    <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                      {currentStep.aboutHeading}
-                    </h3>
-                    <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                      {currentStep.aboutText}
-                    </p>
+                {/* 4. Bottom Layout */}
+                {activeSection === 'images' ? (
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full animate-fadeIn">
+                    
+                    {/* Left: Description & Interactive State Selector */}
+                    <div className="flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                        {currentStep.aboutText}
+                      </p>
 
-                    <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                      {currentStep.techHeading}
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      {/* Premium Mini-Tab Selector for Image States */}
+                      <span className="mt-6 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                        Select Interface View
+                      </span>
+                      <div className="flex flex-col gap-2 mb-6">
+                        {[
+                          { id: 'case-study', label: '01 Overview Dashboard', color: 'violet', hoverColor: 'hover:border-violet-300 hover:text-violet-600', activeBg: 'bg-violet-50 border-violet-200 text-violet-700 font-black' },
+                          { id: 'problem', label: '02 Bottleneck Alert State', color: 'rose', hoverColor: 'hover:border-rose-300 hover:text-rose-600', activeBg: 'bg-rose-50 border-rose-200 text-rose-700 font-black' },
+                          { id: 'approach', label: '03 Pipeline Architecture', color: 'amber', hoverColor: 'hover:border-amber-300 hover:text-amber-600', activeBg: 'bg-amber-50 border-amber-200 text-amber-700 font-black' },
+                          { id: 'solution', label: '04 Terminal & Source Code', color: 'indigo', hoverColor: 'hover:border-indigo-300 hover:text-indigo-600', activeBg: 'bg-indigo-50 border-indigo-200 text-indigo-700 font-black' },
+                          { id: 'result', label: '05 Performance Success Report', color: 'emerald', hoverColor: 'hover:border-emerald-300 hover:text-emerald-600', activeBg: 'bg-emerald-50 border-emerald-200 text-emerald-700 font-black' },
+                        ].map((subTab) => {
+                          const isSubActive = selectedImageTab === subTab.id
+                          return (
+                            <button
+                              key={subTab.id}
+                              onClick={() => setSelectedImageTab(subTab.id)}
+                              className={`w-full text-left px-4 py-2.5 rounded-xl border text-xs font-bold transition-all duration-205 select-none cursor-pointer outline-none focus:outline-none focus-visible:outline-none focus:ring-0 ${
+                                isSubActive
+                                  ? subTab.activeBg
+                                  : `bg-white border-neutral-100 text-slate-600 ${subTab.hoverColor}`
+                              }`}
+                            >
+                              {subTab.label}
+                            </button>
+                          )
+                        })}
+                      </div>
+
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                        {currentStep.techHeading}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      </div>
+                    </div>
+
+                    {/* Right: Mockup Illustration Graphic */}
+                    <div className="w-full flex justify-center shrink-0 animate-fadeIn" key={selectedImageTab}>
+                      <CaseStudyMockup 
+                        tab={selectedImageTab} 
+                        slug={project.slug} 
+                        themeColor={{
+                          'case-study': 'violet',
+                          'problem': 'rose',
+                          'approach': 'amber',
+                          'solution': 'indigo',
+                          'result': 'emerald',
+                        }[selectedImageTab] || 'violet'} 
+                      />
+                    </div>
+
+                  </div>
+                ) : (
+                  <div className="mt-8 w-full animate-fadeIn">
+                    <div className="flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                        {currentStep.aboutText}
+                      </p>
+
+                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                        {currentStep.techHeading}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </article>
           </div>

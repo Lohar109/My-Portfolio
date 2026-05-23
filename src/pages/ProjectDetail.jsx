@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -16,6 +17,12 @@ import {
   Flag,
   Layers,
   Code,
+  BookOpen,
+  HelpCircle,
+  Lightbulb,
+  Code2,
+  Rocket,
+  CheckCircle2,
 } from 'lucide-react'
 import {
   SiCplusplus,
@@ -140,6 +147,67 @@ function getHighlightIcon(label) {
   }
 }
 
+function getSolutionPoints(slug) {
+  switch (slug) {
+    case 'studioflow':
+      return [
+        'AI-powered product data extraction from images & voice',
+        'Automated categorization & intelligent inventory mapping',
+        'Real-time dashboard for catalog & inventory operations',
+        'Scalable microservice architecture with clean API layer'
+      ]
+    case 'portfolio':
+      return [
+        'LangChain-based RAG pipeline with real-time vector search',
+        'Context-aware developer journey and project intelligence',
+        'Streamlined React assistant interface with fluid animations',
+        'Multi-model routing with strict intent guardrails'
+      ]
+    case 'marketpulse':
+      return [
+        'Custom 3D bin-packing space optimization algorithm',
+        'High-fidelity real-time 3D loading plans via Qt 3D',
+        'Relational load dimension calculations under weight limits',
+        'Interactive C++ desktop interface with zero-latency render'
+      ]
+    case 'campus-connect':
+      return [
+        'Centralized academic tracking for attendance and notices',
+        'Relational student database mapping under PostgreSQL',
+        'Role-based faculty dashboard controls and notices queue',
+        'Fast state synchronization across classroom assignment modules'
+      ]
+    case 'insight-board':
+      return [
+        'Near real-time operational KPI analytics tracker',
+        'Supabase-backed live database query updates',
+        'Lightweight React dashboard with modular review widgets',
+        'Zero-overhead Vercel integration for quick releases'
+      ]
+    case 'support-flow':
+      return [
+        'AI-assisted ticket categorization and intent routing',
+        'Generative contextual draft suggestions for support agents',
+        'Clean Express API layer with high-burst queue workers',
+        'Cloudinary integration for structured media attachment tracking'
+      ]
+    case 'media-ops':
+      return [
+        'High-volume file ingestion and automated tag pipeline',
+        'Cloudinary image transformation and responsive delivery presets',
+        'Supabase-based search catalog for real-time asset retrieval',
+        'Modular React console showing publication and storage capacity'
+      ]
+    default:
+      return [
+        'Scalable frontend architecture with modular React components',
+        'Robust data layers designed for secure context isolation',
+        'Polished responsive layouts with micro-interaction states',
+        'Modern code testing, validation, and zero-downtime release pipelines'
+      ]
+  }
+}
+
 function ProjectDetail() {
   const { slug } = useParams()
   const project = projects.find((entry) => entry.slug === slug)
@@ -185,6 +253,59 @@ function ProjectDetail() {
       project?.caseStudy?.result ??
       'The delivered solution improved usability, reduced repetitive manual work, and created a strong base for future iterations.',
   }
+
+  const [activeSection, setActiveSection] = useState('case-study')
+
+  useEffect(() => {
+    const sections = ['case-study', 'problem', 'approach', 'solution', 'result']
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-25% 0px -55% 0px',
+      threshold: 0.05,
+    }
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions)
+    sections.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [slug])
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      const offset = 110 // sites header gap
+      const bodyRect = document.body.getBoundingClientRect().top
+      const elementRect = element.getBoundingClientRect().top
+      const elementPosition = elementRect - bodyRect
+      const offsetPosition = elementPosition - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+      setActiveSection(id)
+    }
+  }
+
+  const timelineSteps = [
+    { id: 'case-study', num: '01', label: 'Case Study', icon: BookOpen },
+    { id: 'problem', num: '02', label: 'Problem', icon: HelpCircle },
+    { id: 'approach', num: '03', label: 'Approach', icon: Lightbulb },
+    { id: 'solution', num: '04', label: 'Solution', icon: Code2 },
+    { id: 'result', num: '05', label: 'Result', icon: Rocket },
+  ]
 
   if (!project) {
     return (
@@ -275,29 +396,166 @@ function ProjectDetail() {
             ))}
         </section>
 
-        {/* Case Study Details */}
-        <section id="case-study" className="mt-16 grid gap-6">
-          <CaseStudySection eyebrow="Case Study">
-            <p>{caseStudy.overview}</p>
-          </CaseStudySection>
+        {/* Two-Column split layout for Case Study details */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
+          
+          {/* Sticky vertical timeline sidebar (Left Column) */}
+          <aside className="lg:sticky lg:top-28 hidden lg:block select-none">
+            <div className="relative pl-6">
+              {/* Vertical connector line track line */}
+              <div className="absolute left-[34px] top-6 bottom-6 w-[2px] bg-gray-200/60 z-0" />
+              
+              {/* Steps list */}
+              <div className="space-y-7 relative z-10">
+                {timelineSteps.map((step) => {
+                  const Icon = step.icon
+                  const isActive = activeSection === step.id
+                  return (
+                    <button
+                      key={step.id}
+                      onClick={() => scrollToSection(step.id)}
+                      className="flex items-center gap-4 text-left group cursor-pointer focus:outline-none w-full"
+                    >
+                      {/* Active Indicator Pointer Line */}
+                      <div className="w-1.5 flex justify-center">
+                        {isActive && (
+                          <span className="h-4.5 w-1 rounded-full bg-violet-600 shadow-[0_0_8px_rgba(124,58,237,0.4)]" />
+                        )}
+                      </div>
+                      
+                      {/* Icon container in rounded-xl block */}
+                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border shadow-sm transition-all duration-300 ${
+                        isActive
+                          ? 'bg-violet-600 border-violet-600 text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)] scale-105'
+                          : 'bg-white border-gray-200 text-gray-400 group-hover:border-gray-300 group-hover:text-gray-600 group-hover:scale-105'
+                      }`}>
+                        <Icon size={18} className="stroke-[2]" />
+                      </div>
 
-          <CaseStudySection eyebrow="Problem">
-            <p>{caseStudy.problem}</p>
-          </CaseStudySection>
+                      {/* Number & label description stack */}
+                      <div className="flex flex-col">
+                        <span className={`text-[10px] font-extrabold uppercase tracking-widest leading-none transition-colors duration-200 ${
+                          isActive ? 'text-violet-600' : 'text-gray-400'
+                        }`}>
+                          {step.num}
+                        </span>
+                        <span className={`text-sm font-bold tracking-tight mt-1 leading-none transition-colors duration-200 ${
+                          isActive ? 'text-slate-800' : 'text-gray-400 group-hover:text-gray-700'
+                        }`}>
+                          {step.label}
+                        </span>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </aside>
 
-          <CaseStudySection
-            eyebrow="Approach"
-            contentClassName="space-y-2 [&>p]:m-0"
-          >
-            {caseStudy.approach.map((step) => (
-              <p key={step}>{step}</p>
-            ))}
-          </CaseStudySection>
+          {/* Detailed text card blocks (Right Column) */}
+          <div className="space-y-8">
+            {/* 01: Case Study overview */}
+            <article 
+              id="case-study"
+              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
+                activeSection === 'case-study' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
+              }`}
+            >
+              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                <BookOpen size={20} strokeWidth={2} />
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">CASE STUDY</h3>
+                <p className="mt-4 text-base leading-relaxed text-gray-600 font-medium font-sans">
+                  {caseStudy.overview}
+                </p>
+              </div>
+            </article>
 
-          <CaseStudySection eyebrow="Result">
-            <p>{caseStudy.result}</p>
-          </CaseStudySection>
-        </section>
+            {/* 02: Problem */}
+            <article 
+              id="problem"
+              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
+                activeSection === 'problem' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
+              }`}
+            >
+              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                <HelpCircle size={20} strokeWidth={2} />
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">PROBLEM</h3>
+                <p className="mt-4 text-base leading-relaxed text-gray-600 font-medium font-sans">
+                  {caseStudy.problem}
+                </p>
+              </div>
+            </article>
+
+            {/* 03: Approach */}
+            <article 
+              id="approach"
+              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
+                activeSection === 'approach' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
+              }`}
+            >
+              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                <Lightbulb size={20} strokeWidth={2} />
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">APPROACH</h3>
+                <div className="mt-4 space-y-3.5">
+                  {caseStudy.approach.map((step, idx) => (
+                    <p key={idx} className="text-base leading-relaxed text-gray-600 font-medium font-sans m-0">
+                      {step}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            {/* 04: Solution */}
+            <article 
+              id="solution"
+              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
+                activeSection === 'solution' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
+              }`}
+            >
+              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                <Code2 size={20} strokeWidth={2} />
+              </div>
+              <div className="flex-1 text-left w-full">
+                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">SOLUTION</h3>
+                <div className="mt-4 space-y-4">
+                  {getSolutionPoints(project.slug).map((point, idx) => (
+                    <div key={idx} className="flex gap-3 items-start">
+                      <CheckCircle2 size={18} className="text-violet-600 mt-1 shrink-0" strokeWidth={2.5} />
+                      <p className="text-base leading-snug text-slate-800 font-bold tracking-tight font-sans m-0">
+                        {point}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            {/* 05: Result */}
+            <article 
+              id="result"
+              className={`rounded-3xl border border-gray-200/50 bg-white p-7 sm:p-8 shadow-sm flex flex-col md:flex-row gap-5 items-start transition-all duration-500 ${
+                activeSection === 'result' ? 'bg-violet-50/15 border-violet-200/70 shadow-md ring-1 ring-violet-200/20' : ''
+              }`}
+            >
+              <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-violet-50/50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-sm select-none">
+                <Rocket size={20} strokeWidth={2} />
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-xs font-bold uppercase tracking-[0.24em] text-gray-900 leading-none">RESULT</h3>
+                <p className="mt-4 text-base leading-relaxed text-gray-600 font-medium font-sans">
+                  {caseStudy.result}
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </main>
   )

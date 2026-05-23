@@ -257,11 +257,11 @@ function ProjectDetail() {
   const [activeSection, setActiveSection] = useState('case-study')
 
   const timelineSteps = [
-    { id: 'case-study', num: '01', label: 'Case Study', icon: BookOpen },
-    { id: 'problem', num: '02', label: 'Problem', icon: HelpCircle },
-    { id: 'approach', num: '03', label: 'Approach', icon: Lightbulb },
-    { id: 'solution', num: '04', label: 'Solution', icon: Code2 },
-    { id: 'result', num: '05', label: 'Result', icon: Rocket },
+    { id: 'case-study', num: '01', label: 'Case Study', icon: BookOpen, color: 'bg-violet-50/50 border-violet-100 text-violet-600', activeRing: 'shadow-[0_4px_12px_rgba(124,58,237,0.25)]' },
+    { id: 'problem', num: '02', label: 'Problem', icon: HelpCircle, color: 'bg-rose-50/50 border-rose-100 text-rose-600', activeRing: 'shadow-[0_4px_12px_rgba(225,29,72,0.2)]' },
+    { id: 'approach', num: '03', label: 'Approach', icon: Lightbulb, color: 'bg-amber-50/50 border-amber-100 text-amber-600', activeRing: 'shadow-[0_4px_12px_rgba(217,119,6,0.2)]' },
+    { id: 'solution', num: '04', label: 'Solution', icon: Code2, color: 'bg-indigo-50/50 border-indigo-100 text-indigo-600', activeRing: 'shadow-[0_4px_12px_rgba(79,70,229,0.25)]' },
+    { id: 'result', num: '05', label: 'Result', icon: Rocket, color: 'bg-emerald-50/50 border-emerald-100 text-emerald-600', activeRing: 'shadow-[0_4px_12px_rgba(5,150,105,0.2)]' },
   ]
 
   if (!project) {
@@ -380,11 +380,11 @@ function ProjectDetail() {
                         )}
                       </div>
                       
-                      {/* Icon container in rounded-xl block */}
-                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border shadow-sm transition-all duration-300 ${
+                      {/* Icon container — unique color per step, matching highlights style */}
+                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border shadow-sm transition-all duration-300 ${step.color} ${
                         isActive
-                          ? 'bg-violet-600 border-violet-600 text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)] scale-105'
-                          : 'bg-white border-gray-200 text-gray-400 group-hover:border-gray-300 group-hover:text-gray-600 group-hover:scale-105'
+                          ? `${step.activeRing} scale-105`
+                          : 'opacity-60 group-hover:opacity-100 group-hover:scale-105'
                       }`}>
                         <Icon size={18} className="stroke-[2]" />
                       </div>

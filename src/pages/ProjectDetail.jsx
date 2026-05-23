@@ -637,7 +637,7 @@ function ProjectDetail() {
                     <button
                       key={step.id}
                       onClick={() => setActiveSection(step.id)}
-                      className="flex items-center gap-4 text-left group cursor-pointer focus:outline-none w-full relative py-1"
+                      className="flex items-center gap-4 text-left group cursor-pointer outline-none focus:outline-none focus-visible:outline-none focus:ring-0 w-full relative py-1"
                     >
                       {/* Left pointer tick - fixed layout space to prevent horizontal shifting */}
                       <div className="w-2 flex justify-center shrink-0">
@@ -689,7 +689,7 @@ function ProjectDetail() {
                 <button
                   key={step.id}
                   onClick={() => setActiveSection(step.id)}
-                  className={`flex items-center gap-2.5 whitespace-nowrap rounded-2xl border px-4 py-3 text-xs font-black transition-all duration-300 shrink-0 ${
+                  className={`flex items-center gap-2.5 whitespace-nowrap rounded-2xl border px-4 py-3 text-xs font-black transition-all duration-300 shrink-0 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 ${
                     isActive
                       ? 'bg-violet-600 border-violet-600 text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]'
                       : 'bg-white border-neutral-150 text-slate-500 hover:border-neutral-300 hover:text-slate-800'
@@ -717,75 +717,50 @@ function ProjectDetail() {
                   {currentStep.summary}
                 </p>
 
-                {/* 3. Horizontal Stats metrics box */}
-                <div className="mt-8">
-                  <div className="border border-neutral-100/80 bg-slate-50/30 p-5 rounded-[24px] grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-4 items-center w-full select-none shadow-sm">
-                    {currentStep.metrics.map((metric, idx) => {
-                      const MetricIcon = iconMap[metric.icon] || Cpu
+                {/* 4. Bottom Split Layout / Full Width Layout */}
+                {activeSection === 'case-study' ? (
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] gap-8 items-start w-full animate-fadeIn">
+                    {/* Left: About Text & Tags */}
+                    <div className="flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                        {currentStep.aboutText}
+                      </p>
 
-                      const circleColors = {
-                        violet: 'bg-violet-50 text-violet-600 border-violet-100 shadow-violet-100/20',
-                        rose: 'bg-rose-50 text-rose-600 border-rose-100 shadow-rose-100/20',
-                        amber: 'bg-amber-50 text-amber-600 border-amber-100 shadow-amber-100/20',
-                        indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 shadow-indigo-100/20',
-                        emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100 shadow-emerald-100/20',
-                        blue: 'bg-sky-50 text-sky-600 border-sky-100 shadow-sky-100/20',
-                      }[metric.color] || 'bg-violet-50 text-violet-600 border-violet-100'
+                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                        {currentStep.techHeading}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      </div>
+                    </div>
 
-                      const textColors = {
-                        violet: 'text-violet-600',
-                        rose: 'text-rose-600',
-                        amber: 'text-amber-600',
-                        indigo: 'text-indigo-600',
-                        emerald: 'text-emerald-600',
-                        blue: 'text-sky-600',
-                      }[metric.color] || 'text-violet-600'
-
-                      return (
-                        <div key={idx} className="flex items-center gap-3.5 group/metric select-none">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border shadow-sm transition-all duration-300 group-hover/metric:scale-105 ${circleColors}`}>
-                            <MetricIcon size={16} strokeWidth={2.5} />
-                          </div>
-                          <div className="flex flex-col min-w-0">
-                            <span className={`text-base sm:text-lg font-black tracking-tight leading-none ${textColors}`}>
-                              {metric.value}
-                            </span>
-                            <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-500 mt-1 leading-snug whitespace-nowrap overflow-hidden text-ellipsis max-w-[95px] tracking-tight">
-                              {metric.label}
-                            </span>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* 4. Bottom Split Layout (Text/Tags & Mockup Illustration) */}
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] gap-8 items-start w-full">
-
-                  {/* Left: About Text & Tags */}
-                  <div className="flex flex-col min-w-0">
-                    <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                      {currentStep.aboutHeading}
-                    </h3>
-                    <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                      {currentStep.aboutText}
-                    </p>
-
-                    <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                      {currentStep.techHeading}
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                    {/* Right: Mockup Illustration Graphic */}
+                    <div className="w-full flex justify-center shrink-0">
+                      <CaseStudyMockup tab={activeSection} slug={project.slug} themeColor={currentStep.themeColor} />
                     </div>
                   </div>
+                ) : (
+                  <div className="mt-8 w-full animate-fadeIn">
+                    <div className="flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                        {currentStep.aboutText}
+                      </p>
 
-                  {/* Right: Mockup Illustration Graphic */}
-                  <div className="w-full flex justify-center shrink-0">
-                    <CaseStudyMockup tab={activeSection} slug={project.slug} themeColor={currentStep.themeColor} />
+                      <span className="mt-7 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
+                        {currentStep.techHeading}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      </div>
+                    </div>
                   </div>
-
-                </div>
+                )}
               </div>
             </article>
           </div>

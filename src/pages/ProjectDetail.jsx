@@ -724,27 +724,40 @@ function ProjectDetail() {
               className="bg-white border border-neutral-100 rounded-[32px] p-6 sm:p-10 shadow-xl shadow-neutral-100/30 w-full h-full flex flex-col justify-between animate-fadeIn relative overflow-hidden"
             >
               <div>
-                {/* 2. Main Title & Description */}
-                <h2 className="mt-2 text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight">
-                  {currentStep.title}
-                </h2>
-                <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold">
-                  {currentStep.summary}
-                </p>
+                {/* 2. Main Title & Description (rendered full-width only for non-Overview sections) */}
+                {activeSection !== 'case-study' && (
+                  <>
+                    <h2 className="mt-2 text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight">
+                      {currentStep.title}
+                    </h2>
+                    <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold">
+                      {currentStep.summary}
+                    </p>
+                  </>
+                )}
 
                 {/* 4. Bottom Layout */}
                 {activeSection === 'case-study' ? (
-                  <div className="mt-8 flex flex-col gap-8 w-full animate-fadeIn">
-                    {/* Upper Split Grid: Text (Left) & Video (Right) */}
+                  <div className="mt-2 flex flex-col gap-8 w-full animate-fadeIn">
+                    {/* Upper Split Grid: Project Name, Summary, & About Text (Left) vs Video (Right) */}
                     <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full">
-                      {/* Left: About Text */}
+                      {/* Left: Title, Summary, & About Text */}
                       <div className="flex flex-col min-w-0">
-                        <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                          {currentStep.aboutHeading}
-                        </h3>
-                        <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                          {currentStep.aboutText}
+                        <h2 className="text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight animate-slideInUp">
+                          {currentStep.title}
+                        </h2>
+                        <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold animate-slideInUp anim-delay-100">
+                          {currentStep.summary}
                         </p>
+
+                        <div className="mt-8 flex flex-col min-w-0 animate-slideInUp anim-delay-200">
+                          <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                            {currentStep.aboutHeading}
+                          </h3>
+                          <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                            {currentStep.aboutText}
+                          </p>
+                        </div>
                       </div>
 
                       {/* Right: Intro Video Player Box */}

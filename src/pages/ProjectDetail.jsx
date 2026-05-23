@@ -35,6 +35,11 @@ import {
   Check,
   Download,
   LayoutGrid,
+  Shield,
+  GitFork,
+  Lock,
+  Search,
+  Award,
 } from 'lucide-react'
 import {
   SiCplusplus,

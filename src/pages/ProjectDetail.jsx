@@ -606,7 +606,7 @@ function ProjectDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-8 items-start w-full">
 
           {/* LEFT COLUMN: Sidebar timeline navigation */}
-          <aside className="hidden lg:block select-none w-full">
+          <aside className="hidden lg:block select-none w-full lg:sticky lg:top-[100px]">
             <div className="relative rounded-[28px] border border-neutral-100 bg-white p-7 shadow-xl shadow-neutral-100/30 w-full">
               
               {/* Steps vertical container */}

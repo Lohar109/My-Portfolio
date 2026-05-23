@@ -739,9 +739,9 @@ function ProjectDetail() {
                 {/* 4. Bottom Layout */}
                 {activeSection === 'case-study' ? (
                   <div className="mt-2 flex flex-col gap-8 w-full animate-fadeIn">
-                    {/* Upper Split Grid: Project Name, Summary, & About Text (Left) vs Video (Right) */}
-                    <div className="grid grid-cols-1 md:grid-cols-[0.95fr_1.05fr] gap-8 items-start w-full">
-                      {/* Left: Title, Summary, & About Text */}
+                    {/* Upper Split Grid: Project Name & Summary (Left) vs Video (Right) */}
+                    <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-start w-full">
+                      {/* Left: Title & Summary */}
                       <div className="flex flex-col min-w-0">
                         <h2 className="text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight animate-slideInUp">
                           {currentStep.title}
@@ -749,21 +749,22 @@ function ProjectDetail() {
                         <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold animate-slideInUp anim-delay-100">
                           {currentStep.summary}
                         </p>
-
-                        <div className="mt-8 flex flex-col min-w-0 animate-slideInUp anim-delay-200">
-                          <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                            {currentStep.aboutHeading}
-                          </h3>
-                          <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                            {currentStep.aboutText}
-                          </p>
-                        </div>
                       </div>
 
                       {/* Right: Intro Video Player Box */}
                       <div className="w-full flex justify-center shrink-0">
                         <IntroVideoFrame />
                       </div>
+                    </div>
+
+                    {/* Middle Full-Width: About the Project */}
+                    <div className="w-full flex flex-col min-w-0 animate-slideInUp anim-delay-200">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
+                        {currentStep.aboutText}
+                      </p>
                     </div>
 
                     {/* Lower Full-Width: Technologies Used */}

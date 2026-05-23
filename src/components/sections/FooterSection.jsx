@@ -288,7 +288,7 @@ function FooterSection() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-black hover:bg-gray-800 text-white font-semibold text-sm sm:text-base py-3 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.99] cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold text-sm sm:text-base py-3 shadow-[0_4px_14px_rgba(99,102,241,0.18)] hover:shadow-[0_8px_24px_rgba(99,102,241,0.28)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] cursor-pointer disabled:opacity-85 disabled:cursor-not-allowed select-none"
               >
                 <AnimatePresence mode="wait">
                   {status === 'loading' ? (
@@ -359,7 +359,7 @@ function FooterSection() {
               navigate('/projects')
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="inline-flex items-center justify-center w-fit rounded-xl border border-black bg-black !text-white hover:bg-neutral-800 px-4 py-3 text-xs font-bold mt-6 sm:mt-8 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center w-fit rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 !text-white px-[22px] py-[11px] text-xs font-bold mt-6 sm:mt-8 shadow-[0_4px_12px_rgba(99,102,241,0.15)] hover:shadow-[0_8px_20px_rgba(99,102,241,0.25)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
           >
             View My Work
           </button>
@@ -520,7 +520,7 @@ function FooterSection() {
                 nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' })
               }
             }}
-            className="inline-flex w-full items-center justify-center rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-xs sm:text-sm py-3 px-4 shadow-lg shadow-black/10 hover:shadow-black/20 transition-all duration-200 active:scale-[0.98] cursor-pointer mt-6"
+            className="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold text-xs sm:text-sm py-3 px-4 shadow-[0_4px_14px_rgba(99,102,241,0.18)] hover:shadow-[0_8px_24px_rgba(99,102,241,0.28)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer mt-6"
           >
             Start a Conversation
           </button>

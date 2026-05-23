@@ -106,7 +106,7 @@ function getProjectLinks(slug) {
     case 'portfolio':
       return {
         github: 'https://github.com/Lohar109/My-Portfolio',
-        demo: '/'
+        demo: '/projects/portfolio'
       }
     case 'marketpulse':
       return {

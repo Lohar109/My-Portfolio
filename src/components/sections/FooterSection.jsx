@@ -121,8 +121,8 @@ function FooterSection() {
                 className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-250"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-transparent border-none text-[#2563EB]">
-                    <Mail size={22} strokeWidth={2} />
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#2563EB]/10 border border-[#2563EB]/20 text-[#2563EB] shadow-sm select-none">
+                    <Mail size={20} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
@@ -144,8 +144,8 @@ function FooterSection() {
                 className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-250"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-transparent border-none text-[#128C7E]">
-                    <Phone size={22} strokeWidth={2} />
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#128C7E]/10 border border-[#128C7E]/20 text-[#128C7E] shadow-sm select-none">
+                    <Phone size={20} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
@@ -167,8 +167,8 @@ function FooterSection() {
                 className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-transparent border-none text-[#EF4444]">
-                    <MapPin size={22} strokeWidth={2} />
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#EF4444] shadow-sm select-none">
+                    <MapPin size={20} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
@@ -187,8 +187,8 @@ function FooterSection() {
                 className="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white/70 p-4.5 shadow-sm backdrop-blur-sm"
               >
                 <div className="flex items-center">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-transparent border-none text-emerald-500">
-                    <Calendar size={22} strokeWidth={2} />
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#10B981]/10 border border-[#10B981]/20 text-emerald-500 shadow-sm select-none">
+                    <Calendar size={20} strokeWidth={2} />
                   </span>
                   <div className="ml-4 flex flex-col">
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">

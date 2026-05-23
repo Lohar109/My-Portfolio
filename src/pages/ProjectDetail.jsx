@@ -662,7 +662,6 @@ function ProjectDetail() {
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[11.5px] font-extrabold text-slate-800 tracking-tight leading-none">Download Case Study</span>
-                    <span className="text-[9.5px] text-slate-400 font-bold mt-1 leading-none tracking-wider">PDF · 1.2 MB</span>
                   </div>
                 </div>
               </div>

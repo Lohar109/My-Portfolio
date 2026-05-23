@@ -719,10 +719,6 @@ function ProjectDetail() {
 
                 {/* 3. Horizontal Stats metrics box */}
                 <div className="mt-8">
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2.5 font-sans">
-                    {currentStep.metricsHeading}
-                  </span>
-
                   <div className="border border-neutral-100/80 bg-slate-50/30 p-5 rounded-[24px] grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-4 items-center w-full select-none shadow-sm">
                     {currentStep.metrics.map((metric, idx) => {
                       const MetricIcon = iconMap[metric.icon] || Cpu

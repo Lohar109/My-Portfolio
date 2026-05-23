@@ -391,12 +391,7 @@ function ProjectDetail() {
 
                       {/* Number & label description stack */}
                       <div className="flex flex-col">
-                        <span className={`text-[10px] font-extrabold uppercase tracking-widest leading-none transition-colors duration-200 ${
-                          isActive ? 'text-violet-600' : 'text-gray-400'
-                        }`}>
-                          {step.num}
-                        </span>
-                        <span className={`text-sm font-bold tracking-tight mt-1 leading-none transition-colors duration-200 ${
+                        <span className={`text-sm font-bold tracking-tight leading-none transition-colors duration-200 ${
                           isActive ? 'text-slate-800' : 'text-gray-400 group-hover:text-gray-700'
                         }`}>
                           {step.label}

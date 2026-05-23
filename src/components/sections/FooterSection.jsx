@@ -451,7 +451,7 @@ function FooterSection() {
               href="https://github.com/Lohar109"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-[0_3px_8px_rgba(99,102,241,0.15)] hover:shadow-[0_6px_14px_rgba(99,102,241,0.25)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 shadow-sm hover:shadow-md hover:border-violet-200 hover:text-violet-600 hover:scale-105 active:scale-95 transition-all duration-200"
               aria-label="GitHub"
             >
               <FaGithub className="h-4.5 w-4.5" />
@@ -460,14 +460,14 @@ function FooterSection() {
               href="https://www.linkedin.com/in/vaibhav-lohar-ba7824315"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-[0_3px_8px_rgba(99,102,241,0.15)] hover:shadow-[0_6px_14px_rgba(99,102,241,0.25)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 shadow-sm hover:shadow-md hover:border-violet-200 hover:text-violet-600 hover:scale-105 active:scale-95 transition-all duration-200"
               aria-label="LinkedIn"
             >
-              <FaLinkedinIn className="h-4.5 w-4.5" />
+              <FaLinkedinIn className="h-4.5 w-4.5 text-[#0A66C2]" />
             </a>
             <a
               href={`mailto:${emailAddress}`}
-              className="flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-[0_3px_8px_rgba(99,102,241,0.15)] hover:shadow-[0_6px_14px_rgba(99,102,241,0.25)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 shadow-sm hover:shadow-md hover:border-violet-200 hover:text-violet-600 hover:scale-105 active:scale-95 transition-all duration-200"
               aria-label="Email"
             >
               <Mail className="h-4.5 w-4.5" />

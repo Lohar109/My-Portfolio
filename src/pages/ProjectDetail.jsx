@@ -200,13 +200,7 @@ function ProjectDetail() {
           <span>Back to Projects</span>
         </Link>
 
-        {/* Case Study Tag Capsule */}
-        <div>
-          <div className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-violet-50/50 border border-violet-100/50 px-3 py-1 text-[9px] font-extrabold uppercase tracking-widest text-violet-600 select-none">
-            <span className="h-0.5 w-3 bg-violet-500 rounded-full inline-block" />
-            <span>Case Study</span>
-          </div>
-        </div>
+
 
         {/* Top Info Section: Title, Description, Stack Badges and Video Box */}
         <section className="mt-4 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">

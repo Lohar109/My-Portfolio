@@ -328,9 +328,11 @@ function getProjectCaseStudyDetails(slug, project) {
                      : 'Design: Decoupled API',
       title: slug === 'studioflow' ? 'Scalable AI & Database Decoupling'
              : slug === 'portfolio' ? 'Semantic Mapping & Prompt Routing'
-             : slug === 'marketpulse' ? 'Algorithmic Optimization & GPU Rendering'
+             : slug === 'marketpulse' ? 'Extreme Point Algorithm with Real-Time 3D Rendering'
              : 'Flexible Services & Loose Coupling',
-      summary: 'Establishing strict operational boundaries, modular hooks, and atomic transactions to guarantee high system stability.',
+      summary: slug === 'marketpulse'
+        ? 'Used a geometric 3D bin-packing algorithm to automatically place products inside containers without overlapping, and visualized the result live using Qt3D.'
+        : 'Establishing strict operational boundaries, modular hooks, and atomic transactions to guarantee high system stability.',
       themeColor: 'amber',
       metricsHeading: 'STRATEGIC PILLARS',
       metrics: slug === 'studioflow' ? [
@@ -354,10 +356,14 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Indexed', label: 'Database Access Tuning', icon: 'Database', color: 'amber' },
         { value: 'CI/CD', label: 'Test Pipeline Validation', icon: 'Cpu', color: 'amber' }
       ],
-      aboutHeading: 'System Architecture & Engineering',
-      aboutText: 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
+      aboutHeading: slug === 'marketpulse' ? 'How it works' : 'System Architecture & Engineering',
+      aboutText: slug === 'marketpulse'
+        ? 'The core of this software is the Extreme Point Method — a 3D bin-packing algorithm that I implemented in C++. The idea is simple: we start with one empty slot at position (0, 0, 0) inside the container. When a product is placed at that point, three new candidate positions are generated — one along the X axis (to the right of the placed box), one along the Y axis (on top of it), and one along the Z axis (behind it). The next product tries each of these points one by one. Before placing, the algorithm checks two things — first, whether the product fits within the container boundaries, and second, whether it overlaps with any already placed product. If both checks pass, it gets placed and three more points are added. This continues until all products are placed or no valid position is found. The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.'
+        : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
       techHeading: 'DESIGN PRINCIPLES',
-      tags: ['Loose Coupling', 'Typesafe Schemas', 'Atomic Processing', 'Defensive Coding']
+      tags: slug === 'marketpulse'
+        ? ['Extreme Point Algorithm', '3D Bin Packing', 'Overlap Detection', 'Qt3D Real-Time Rendering', 'JSON Persistence', 'OTP Email Verification']
+        : ['Loose Coupling', 'Typesafe Schemas', 'Atomic Processing', 'Defensive Coding']
     },
     'solution': {
       badge: '04 SOLUTION',

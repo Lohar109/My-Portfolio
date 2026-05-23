@@ -241,21 +241,23 @@ function ProjectDetail() {
           </div>
         </section>
 
-        {/* Combined 6-column Highlights Dashboard Row */}
-        <section className="mt-8 border border-gray-200/50 bg-white rounded-3xl p-8 shadow-sm grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 sm:gap-4.5 items-start select-none w-full">
-          {[...topInfoCards, ...statsCards].map((item) => (
-            <div key={item.label} className="flex flex-col items-center text-center">
-              <span className="inline-flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-violet-50 border border-violet-100/50 text-violet-600 shadow-sm mb-3">
-                {getHighlightIcon(item.label)}
-              </span>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-gray-900 block mb-1.5 font-sans leading-none">
-                {item.label}
-              </span>
-              <span className="text-xs text-gray-500 font-semibold leading-relaxed font-sans max-w-[140px]">
-                {item.value}
-              </span>
-            </div>
-          ))}
+        {/* Combined 5-column Highlights Dashboard Row */}
+        <section className="mt-8 border border-gray-200/50 bg-white rounded-3xl p-8 shadow-sm grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-4.5 items-start select-none w-full">
+          {[...topInfoCards, ...statsCards]
+            .filter((item) => item.label.toLowerCase() !== 'role')
+            .map((item) => (
+              <div key={item.label} className="flex flex-col items-center text-center">
+                <span className="inline-flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-violet-50 border border-violet-100/50 text-violet-600 shadow-sm mb-3">
+                  {getHighlightIcon(item.label)}
+                </span>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-gray-900 block mb-1.5 font-sans leading-none">
+                  {item.label}
+                </span>
+                <span className="text-xs text-gray-500 font-semibold leading-relaxed font-sans max-w-[140px]">
+                  {item.value}
+                </span>
+              </div>
+            ))}
         </section>
 
         {/* Case Study Details */}

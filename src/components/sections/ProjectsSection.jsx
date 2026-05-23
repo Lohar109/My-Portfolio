@@ -706,21 +706,25 @@ function ProjectsSection() {
 
               {/* Action Buttons Row */}
               <div className="mt-8 flex items-center justify-start sm:justify-end gap-3 w-full">
-                <Link
-                  to={'/projects/' + shopEaseProject.slug}
-                  className="h-10 px-5 rounded-xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
-                >
-                  Case Study
-                </Link>
-                <a
-                  href={getProjectLinks(shopEaseProject.slug).github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-10 w-10 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 shrink-0 cursor-pointer"
-                  title="GitHub Repository"
-                >
-                  <FaGithub size={16} />
-                </a>
+                <div className="static-gradient-border-wrapper h-10 active:scale-[0.98]">
+                  <Link
+                    to={'/projects/' + shopEaseProject.slug}
+                    className="h-9 px-5 rounded-[10px] bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
+                  >
+                    Case Study
+                  </Link>
+                </div>
+                <div className="static-gradient-border-wrapper h-10 w-10 active:scale-[0.98]">
+                  <a
+                    href={getProjectLinks(shopEaseProject.slug).github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-9 w-9 rounded-[10px] bg-white flex items-center justify-center text-gray-700 hover:text-violet-600 transition-all duration-205 shrink-0 cursor-pointer select-none"
+                    title="GitHub Repository"
+                  >
+                    <FaGithub size={16} />
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -862,36 +866,40 @@ function ProjectsSection() {
                 {/* Right Side: Case Study and GitHub action buttons aligned at the bottom on desktop */}
                 <div className="flex items-center lg:items-end justify-start lg:justify-end gap-3 mt-4 lg:mt-0 shrink-0 lg:pl-6 w-full lg:w-auto lg:self-end lg:pb-1">
                   {/* View Case Study / Live Demo */}
-                  {demoUrl.startsWith('http') ? (
-                    <a
-                      href={demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="h-10 px-5 rounded-xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
-                      title="Live Demo"
-                    >
-                      <span>Case Study</span>
-                    </a>
-                  ) : (
-                    <Link
-                      to={demoUrl}
-                      className="h-10 px-5 rounded-xl border border-gray-200 bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
-                      title="View Case Study"
-                    >
-                      <span>Case Study</span>
-                    </Link>
-                  )}
+                  <div className="static-gradient-border-wrapper h-10 active:scale-[0.98]">
+                    {demoUrl.startsWith('http') ? (
+                      <a
+                        href={demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-9 px-5 rounded-[10px] bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
+                        title="Live Demo"
+                      >
+                        <span>Case Study</span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={demoUrl}
+                        className="h-9 px-5 rounded-[10px] bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
+                        title="View Case Study"
+                      >
+                        <span>Case Study</span>
+                      </Link>
+                    )}
+                  </div>
 
                   {/* GitHub Repo */}
-                  <a
-                    href={githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="h-10 w-10 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:text-black hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all duration-200 shrink-0 cursor-pointer"
-                    title="GitHub Repository"
-                  >
-                    <FaGithub size={16} />
-                  </a>
+                  <div className="static-gradient-border-wrapper h-10 w-10 active:scale-[0.98]">
+                    <a
+                      href={githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="h-9 w-9 rounded-[10px] bg-white flex items-center justify-center text-gray-700 hover:text-violet-600 transition-all duration-205 shrink-0 cursor-pointer select-none"
+                      title="GitHub Repository"
+                    >
+                      <FaGithub size={16} />
+                    </a>
+                  </div>
                 </div>
 
               </motion.article>

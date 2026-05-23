@@ -412,8 +412,10 @@ function getProjectCaseStudyDetails(slug, project) {
     'result': {
       badge: '05 RESULTS',
       durationLabel: 'Business Impact: Exceptional',
-      title: 'Measurable Outcomes & Growth',
-      summary: 'The final system completely eliminated manual friction, drastically accelerated operations, and created a scalable foundation.',
+      title: slug === 'marketpulse' ? 'Won Competition · Got 4.8 LPA Job Offer as a Student' : 'Measurable Outcomes & Growth',
+      summary: slug === 'marketpulse'
+        ? 'This project was selected as the best submission in a C++ challenge by Webtech Developers Pvt. Ltd., Pune — earning a full-time job offer which I chose to decline to complete my MCA.'
+        : 'The final system completely eliminated manual friction, drastically accelerated operations, and created a scalable foundation.',
       themeColor: 'emerald',
       metricsHeading: 'MEASURED OUTCOMES',
       metrics: slug === 'studioflow' ? [
@@ -442,7 +444,7 @@ function getProjectCaseStudyDetails(slug, project) {
       techHeading: 'IMPACT AREAS',
       tags: slug === 'studioflow' ? ['E-Commerce Merchandising', 'Stock Management Speed', 'Catalog Taxonomy', 'Data Quality Control']
             : slug === 'portfolio' ? ['Recruiter Engagement', 'Developer Showcase Speed', 'Fact Grounded AI', 'Portfolio Reach']
-            : slug === 'marketpulse' ? ['Logistics Fuel Consumption', 'Dispatch Planning Throughput', 'Fleet Operational Overhead', 'Safety Regulation Standards']
+            : slug === 'marketpulse' ? ['Won coding competition', '4.8 LPA job offer received', 'Manual loading time — seconds', 'Zero packing overlap errors', 'PDF report export', 'Industry recognized project']
             : ['Automation Coverage', 'Processing Throughput', 'System Reliability', 'User Ergonomics']
     },
     'images': {

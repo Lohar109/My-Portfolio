@@ -150,7 +150,7 @@ export const projectsData = [
         'The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.',
       ],
       result:
-        'The software drastically reduces planning time from hours to seconds while significantly increasing average container fill rates. By maximizing spatial efficiency, the tool helps logistics companies reduce the number of required trips, directly cutting down operational costs and their carbon footprint through an intuitive desktop interface.',
+        'Webtech Developers Pvt. Ltd., Pune held a coding challenge asking students to build a project in C++. This software was selected as the winner. The company was impressed enough to extend a 4.8 LPA full-time job offer — which I respectfully declined because my MCA exams were ongoing and they required an immediate joiner. On the technical side, the software turns a process that used to take manual planning into an instant automated decision. Cargo managers can load up to 10 different product types at once, see the packing result in real time in 3D, check the fill percentage on a pie chart, and export a printable PDF report — all within a few clicks. The software removes all guesswork from container loading and gives a visual, data-backed loading plan instantly.',
     },
     stack: [
       'C++',

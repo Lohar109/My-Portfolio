@@ -82,7 +82,7 @@ function IntroVideoFrame() {
       {/* Main Borderless Video Player Container */}
       <div 
         ref={playerRef}
-        className="group relative aspect-[16/11.5] w-full overflow-hidden rounded-[2rem] border border-gray-150 bg-black shadow-[0_32px_64px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_40px_80px_-10px_rgba(99,102,241,0.15)]"
+        className="group relative aspect-[16/12.5] w-full overflow-hidden rounded-[2rem] border border-gray-150 bg-black shadow-[0_32px_64px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_40px_80px_-10px_rgba(99,102,241,0.15)]"
       >
         {/* Actual Video Element */}
         <video

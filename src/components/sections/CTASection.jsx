@@ -64,9 +64,9 @@ export default function CTASection() {
 
   return (
     <section className="relative px-6 pb-24 sm:px-10 lg:px-16 overflow-hidden">
-      {/* Decorative premium dark card frame */}
+      {/* Decorative premium light card frame matching the app style */}
       <motion.div 
-        className="mx-auto max-w-6xl rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-white/10 p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl"
+        className="mx-auto max-w-6xl rounded-[2.5rem] bg-gradient-to-br from-white/95 to-slate-50/95 border border-slate-200/50 p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.025)]"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -74,7 +74,7 @@ export default function CTASection() {
       >
         {/* Slow-rotating background fluid blurs */}
         <motion.div 
-          className="absolute top-[-50px] right-[-50px] w-96 h-96 rounded-full bg-violet-600/15 blur-[120px] -z-10 pointer-events-none"
+          className="absolute top-[-50px] right-[-50px] w-96 h-96 rounded-full bg-violet-200/35 blur-[100px] -z-10 pointer-events-none"
           animate={{
             x: [0, 30, 0],
             y: [0, -40, 0],
@@ -86,7 +86,7 @@ export default function CTASection() {
           }}
         />
         <motion.div 
-          className="absolute bottom-[-100px] left-[-100px] w-96 h-96 rounded-full bg-indigo-600/15 blur-[120px] -z-10 pointer-events-none"
+          className="absolute bottom-[-100px] left-[-100px] w-96 h-96 rounded-full bg-indigo-200/35 blur-[100px] -z-10 pointer-events-none"
           animate={{
             x: [0, -35, 0],
             y: [0, 45, 0],
@@ -98,30 +98,30 @@ export default function CTASection() {
           }}
         />
 
-        {/* Ambient starry grid background pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
+        {/* Ambient grid background pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
           
           {/* Left Column: CTA Context */}
           <div className="lg:col-span-6 flex flex-col items-start text-left space-y-6">
             {/* Pulse Badge */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-violet-500/10 border border-violet-500/20 text-violet-300 select-none animate-pulse">
-              <Sparkles className="h-3.5 w-3.5 text-violet-400" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-violet-50 border border-violet-100 text-violet-600 select-none animate-pulse">
+              <Sparkles className="h-3.5 w-3.5 text-violet-500" />
               Available for Collaborations
             </span>
 
             {/* Dynamic heading */}
-            <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-white leading-tight font-sans">
+            <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-900 leading-tight font-sans">
               Let's Build Something{' '}
               <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">
                 Amazing Together
               </span>
             </h2>
 
             {/* Premium description */}
-            <p className="text-slate-400 text-base sm:text-[17px] leading-relaxed font-medium max-w-lg">
+            <p className="text-slate-500 text-base sm:text-[17px] leading-relaxed font-semibold max-w-lg">
               Have a visionary idea, a scalable platform to build, or a complex system to optimize? Let's team up to design high-performance applications, interactive 3D interfaces, and custom AI agents.
             </p>
 
@@ -130,7 +130,7 @@ export default function CTASection() {
               {/* Primary Contact Button */}
               <button 
                 onClick={() => navigate('/contact')}
-                className="group relative flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-sm px-7 py-4 shadow-lg shadow-violet-600/25 hover:shadow-violet-600/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
+                className="group relative flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-sm px-7 py-4 shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
               >
                 <span>Start a Project</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-255" />
@@ -139,7 +139,7 @@ export default function CTASection() {
               {/* Secondary Projects Button */}
               <button 
                 onClick={() => navigate('/projects')}
-                className="group flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm px-7 py-4 backdrop-blur-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
+                className="group flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-750 font-bold text-sm px-7 py-4 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer shadow-sm"
               >
                 <span>Explore Portfolio</span>
               </button>

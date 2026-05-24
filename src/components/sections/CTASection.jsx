@@ -7,14 +7,58 @@ export default function CTASection() {
   const navigate = useNavigate()
   const [hoveredNode, setHoveredNode] = useState(null)
 
+  const part1 = "Let's Build Something "
+  const part2 = "Amazing Together"
+  const [typedPart1, setTypedPart1] = useState("")
+  const [typedPart2, setTypedPart2] = useState("")
+  const [hasStarted, setHasStarted] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 }
+    )
+
+    const element = document.getElementById("cta-section-card")
+    if (element) {
+      observer.observe(element)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!hasStarted) return
+
+    let i = 0
+    const interval = setInterval(() => {
+      if (i < part1.length) {
+        setTypedPart1(part1.substring(0, i + 1))
+      } else if (i < part1.length + part2.length) {
+        setTypedPart2(part2.substring(0, i - part1.length + 1))
+      } else {
+        clearInterval(interval)
+      }
+      i++
+    }, 60)
+
+    return () => clearInterval(interval)
+  }, [hasStarted])
+
   // Floating nodes data
   const nodes = [
     {
       id: 'ai',
       label: 'AI Agent',
       icon: Cpu,
-      color: 'text-rose-400 border-rose-500/20 bg-rose-500/10 shadow-rose-500/15',
-      glow: 'shadow-[0_0_20px_rgba(244,63,94,0.3)]',
+      color: 'text-rose-500 border-rose-200/85',
+      hoverBorder: 'group-hover:border-rose-400/85',
+      glow: 'shadow-[0_0_20px_rgba(244,63,94,0.15)]',
       x: 45,
       y: 35,
       delay: 0,
@@ -24,8 +68,9 @@ export default function CTASection() {
       id: 'web3d',
       label: '3D Web',
       icon: Globe,
-      color: 'text-sky-400 border-sky-500/20 bg-sky-500/10 shadow-sky-500/15',
-      glow: 'shadow-[0_0_20px_rgba(56,189,248,0.3)]',
+      color: 'text-sky-500 border-sky-200/85',
+      hoverBorder: 'group-hover:border-sky-400/85',
+      glow: 'shadow-[0_0_20px_rgba(56,189,248,0.15)]',
       x: 295,
       y: 40,
       delay: 0.8,
@@ -35,8 +80,9 @@ export default function CTASection() {
       id: 'fullstack',
       label: 'Full-Stack',
       icon: Code2,
-      color: 'text-violet-400 border-violet-500/20 bg-violet-500/10 shadow-violet-500/15',
-      glow: 'shadow-[0_0_20px_rgba(139,92,246,0.3)]',
+      color: 'text-violet-500 border-violet-200/85',
+      hoverBorder: 'group-hover:border-violet-400/85',
+      glow: 'shadow-[0_0_20px_rgba(139,92,246,0.15)]',
       x: 275,
       y: 220,
       delay: 1.5,
@@ -46,8 +92,9 @@ export default function CTASection() {
       id: 'db',
       label: 'Scalable DB',
       icon: Database,
-      color: 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10 shadow-emerald-500/15',
-      glow: 'shadow-[0_0_20px_rgba(16,185,129,0.3)]',
+      color: 'text-emerald-500 border-emerald-200/85',
+      hoverBorder: 'group-hover:border-emerald-400/85',
+      glow: 'shadow-[0_0_20px_rgba(16,185,129,0.15)]',
       x: 55,
       y: 215,
       delay: 2.2,
@@ -59,14 +106,15 @@ export default function CTASection() {
     x: 160,
     y: 130,
     label: 'YOUR IDEA',
-    color: 'text-purple-400 border-purple-500/30 bg-purple-500/15 shadow-purple-500/20'
+    color: 'text-purple-600 border-purple-200 bg-white'
   }
 
   return (
     <section className="relative px-6 pb-24 sm:px-10 lg:px-16 overflow-hidden">
       {/* Decorative premium light card frame matching the app style */}
       <motion.div 
-        className="mx-auto max-w-6xl rounded-[2.5rem] bg-gradient-to-br from-white/95 to-slate-50/95 border border-slate-200/50 p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.025)]"
+        id="cta-section-card"
+        className="mx-auto max-w-6xl rounded-[2.5rem] bg-[#f5f5f7] border border-slate-200 p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.015)]"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -111,13 +159,21 @@ export default function CTASection() {
               Available for Collaborations
             </span>
 
-            {/* Dynamic heading */}
-            <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-900 leading-tight font-sans">
-              Let's Build Something{' '}
-              <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">
-                Amazing Together
-              </span>
+            {/* Dynamic heading with typing animation */}
+            <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-900 leading-tight font-sans min-h-[90px] sm:min-h-[120px] select-none">
+              {typedPart1}
+              {typedPart1.length < part1.length && (
+                <span className="animate-blink font-light text-violet-500">|</span>
+              )}
+              {typedPart1.length === part1.length && <br className="hidden sm:block" />}
+              {typedPart1.length === part1.length && (
+                <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">
+                  {typedPart2}
+                </span>
+              )}
+              {typedPart1.length === part1.length && typedPart2.length < part2.length && (
+                <span className="animate-blink font-light text-violet-500">|</span>
+              )}
             </h2>
 
             {/* Premium description */}
@@ -128,27 +184,32 @@ export default function CTASection() {
             {/* Call to Actions */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4">
               {/* Primary Contact Button */}
-              <button 
-                onClick={() => navigate('/contact')}
-                className="group relative flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-sm px-7 py-4 shadow-lg shadow-violet-600/20 hover:shadow-violet-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
-              >
-                <span>Start a Project</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-255" />
-              </button>
+              <div className="snake-border-wrapper w-full sm:w-auto active:scale-[0.98]">
+                <div className="snake-border-glow" />
+                <button 
+                  onClick={() => navigate('/contact')}
+                  className="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none group"
+                >
+                  <span>Start a Project</span>
+                </button>
+              </div>
 
               {/* Secondary Projects Button */}
-              <button 
-                onClick={() => navigate('/projects')}
-                className="group flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-750 font-bold text-sm px-7 py-4 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer shadow-sm"
-              >
-                <span>Explore Portfolio</span>
-              </button>
+              <div className="snake-border-wrapper w-full sm:w-auto active:scale-[0.98]">
+                <div className="snake-border-glow" />
+                <button 
+                  onClick={() => navigate('/projects')}
+                  className="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none group"
+                >
+                  <span>Explore Portfolio</span>
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Right Column: Fusing Collaboration Core (Interactive Grid) */}
           <div className="lg:col-span-6 flex items-center justify-center select-none w-full">
-            <div className="relative w-full max-w-[400px] aspect-[400/340] bg-slate-950/40 rounded-3xl border border-white/5 p-4 overflow-hidden backdrop-blur-sm shadow-inner">
+            <div className="relative w-full max-w-[400px] aspect-[400/340] bg-[#f5f5f7] rounded-3xl border border-slate-200 p-4 overflow-hidden shadow-inner">
               
               {/* Starry glowing SVGs connecting floating nodes to core */}
               <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
@@ -181,7 +242,7 @@ export default function CTASection() {
                       y1={node.y + 28} 
                       x2={centerNode.x + 40} 
                       y2={centerNode.y + 40}
-                      stroke="rgba(255, 255, 255, 0.08)"
+                      stroke="rgba(15, 23, 42, 0.08)"
                       strokeWidth="1.5"
                       strokeDasharray="4 4"
                     />
@@ -259,12 +320,12 @@ export default function CTASection() {
                     onMouseLeave={() => setHoveredNode(null)}
                   >
                     {/* Icon sphere box */}
-                    <div className={`w-14 h-14 rounded-[1.25rem] border flex items-center justify-center transition-all duration-300 relative bg-[#090D1A]/95 ${node.color} ${hoveredNode === node.id ? node.glow + ' scale-110 border-white/20' : 'border-white/10'}`}>
+                    <div className={`w-14 h-14 rounded-[1.25rem] border flex items-center justify-center transition-all duration-300 relative bg-white ${node.color} ${node.hoverBorder} ${hoveredNode === node.id ? node.glow + ' scale-110' : 'shadow-sm'}`}>
                       <Icon className="w-6 h-6 stroke-[1.8]" />
                     </div>
 
                     {/* Node text tag */}
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-white transition-colors duration-200">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-900 transition-colors duration-200">
                       {node.label}
                     </span>
                   </motion.div>
@@ -287,11 +348,11 @@ export default function CTASection() {
                 <div className={`absolute -inset-1.5 rounded-full blur-[8px] opacity-60 transition-opacity duration-300 bg-purple-500/25 ${hoveredNode ? 'opacity-90' : ''}`} />
 
                 {/* Core Circle Box */}
-                <div className={`w-[80px] h-[80px] rounded-full border flex flex-col items-center justify-center text-center relative bg-[#0C101F]/95 select-none transition-all duration-300 ${centerNode.color} ${hoveredNode ? 'shadow-[0_0_25px_rgba(168,85,247,0.4)] border-purple-400/40 scale-105' : 'border-purple-500/20'}`}>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-purple-200">
+                <div className={`w-[80px] h-[80px] rounded-full border flex flex-col items-center justify-center text-center relative bg-white select-none transition-all duration-300 ${centerNode.color} ${hoveredNode ? 'shadow-[0_0_25px_rgba(168,85,247,0.15)] border-purple-400 scale-105' : 'border-purple-200/80 shadow-sm'}`}>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-purple-600">
                     YOUR
                   </span>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-white mt-0.5">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-800 mt-0.5">
                     IDEA
                   </span>
                 </div>
@@ -315,6 +376,13 @@ const styleRule = (
     }
     .animate-flow-dash {
       animation: flow-dash 1.25s linear infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .animate-blink {
+      animation: blink 0.8s infinite;
     }
   `}</style>
 )

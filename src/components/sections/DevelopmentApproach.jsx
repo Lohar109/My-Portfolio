@@ -78,7 +78,7 @@ export default function DevelopmentApproach() {
   }
 
   return (
-    <section className="relative px-6 py-24 sm:px-10 lg:px-16 bg-white border-t border-slate-100 overflow-hidden">
+    <section className="relative px-6 py-24 sm:px-10 lg:px-16 bg-slate-50/40 border-t border-slate-100 overflow-hidden">
       {/* Ambient decorative blurs matching the app style */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 rounded-full bg-violet-300/10 blur-3xl -z-10 pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-indigo-300/10 blur-3xl -z-10 pointer-events-none" />
@@ -117,8 +117,8 @@ export default function DevelopmentApproach() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {/* Horizontal Connecting Dash Line (Desktop Only) */}
-          <div className="absolute top-[48px] left-[10%] right-[10%] h-[1.5px] border-t-2 border-dashed border-slate-200/70 -z-10 hidden md:block" />
+          {/* Horizontal Connecting Dash Line (Desktop Only) - Centered at 40px (half of h-20) */}
+          <div className="absolute top-[40px] left-[10%] right-[10%] h-[1.5px] border-t-2 border-dashed border-slate-200/70 -z-10 hidden md:block" />
 
           {approachSteps.map((step, idx) => {
             const Icon = step.icon
@@ -130,12 +130,12 @@ export default function DevelopmentApproach() {
               >
                 {/* Vertical Connecting Dash Line (Mobile Only) */}
                 {idx < approachSteps.length - 1 && (
-                  <div className="absolute top-[96px] bottom-[-48px] left-1/2 w-[1.5px] border-l-2 border-dashed border-slate-200/70 -z-10 md:hidden -translate-x-1/2" />
+                  <div className="absolute top-[80px] bottom-[-48px] left-1/2 w-[1.5px] border-l-2 border-dashed border-slate-200/70 -z-10 md:hidden -translate-x-1/2" />
                 )}
 
                 {/* Styled Step Icon Circle Box */}
                 <motion.div 
-                  className={`w-24 h-24 rounded-[2rem] border ${step.bgColor} ${step.glowColor} flex items-center justify-center relative bg-white transition-all duration-300 shadow-md select-none cursor-default`}
+                  className={`w-20 h-20 rounded-[1.5rem] border ${step.bgColor} ${step.glowColor} flex items-center justify-center relative bg-white transition-all duration-300 shadow-md select-none cursor-default`}
                   whileHover={{ 
                     scale: 1.12,
                     y: -4,
@@ -143,11 +143,11 @@ export default function DevelopmentApproach() {
                   transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                 >
                   {/* Neon Glow backdrop */}
-                  <div className={`absolute -inset-1 rounded-[2rem] blur opacity-0 group-hover:opacity-15 transition-opacity duration-300 -z-10 ${step.iconGlow}`} />
+                  <div className={`absolute -inset-1 rounded-[1.5rem] blur opacity-0 group-hover:opacity-15 transition-opacity duration-300 -z-10 ${step.iconGlow}`} />
 
                   {/* Inner Icon circle */}
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${step.iconGlow} transition-transform duration-300 group-hover:scale-105`}>
-                    <Icon className={`w-7.5 h-7.5 ${step.color} stroke-[2.2]`} />
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${step.iconGlow} transition-transform duration-300 group-hover:scale-105`}>
+                    <Icon className={`w-5.5 h-5.5 ${step.color} stroke-[2.2]`} />
                   </div>
                 </motion.div>
 

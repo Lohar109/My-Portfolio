@@ -117,8 +117,128 @@ export default function DevelopmentApproach() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {/* Horizontal Connecting Dash Line (Desktop Only) - Centered at 40px (half of h-20) */}
-          <div className="absolute top-[40px] left-[10%] right-[10%] h-[1.5px] border-t-2 border-dashed border-slate-200/70 -z-10 hidden md:block" />
+          {/* Horizontal Connecting Flowing Line (Desktop Only) */}
+          <svg className="hidden md:block absolute top-[40px] left-0 right-0 w-full h-[6px] overflow-visible -z-10">
+            {/* Background base dashed gray line */}
+            <line x1="10%" y1="3" x2="90%" y2="3" stroke="#e2e8f0" strokeWidth="2" strokeDasharray="4 6" />
+
+            {/* Glowing animated line segments with scrolling flow dash effect */}
+            {/* Segment 1: Understand to Plan (10% to 30%) */}
+            <motion.line
+              x1="10%" y1="3" x2="30%" y2="3"
+              stroke="url(#glow-gradient)" strokeWidth="2.5"
+              strokeDasharray="4 6"
+              className="animate-flow-dash"
+              initial={{ pathLength: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 1],
+                opacity: [1, 1, 0]
+              }}
+              transition={{ 
+                duration: 1.25, 
+                ease: 'easeInOut', 
+                delay: 0, 
+                repeat: Infinity, 
+                repeatDelay: 4.75 
+              }}
+            />
+            {/* Segment 2: Plan to Build (30% to 50%) */}
+            <motion.line
+              x1="30%" y1="3" x2="50%" y2="3"
+              stroke="url(#glow-gradient)" strokeWidth="2.5"
+              strokeDasharray="4 6"
+              className="animate-flow-dash"
+              initial={{ pathLength: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 1],
+                opacity: [1, 1, 0]
+              }}
+              transition={{ 
+                duration: 1.25, 
+                ease: 'easeInOut', 
+                delay: 1.25, 
+                repeat: Infinity, 
+                repeatDelay: 4.75 
+              }}
+            />
+            {/* Segment 3: Build to Test (50% to 70%) */}
+            <motion.line
+              x1="50%" y1="3" x2="70%" y2="3"
+              stroke="url(#glow-gradient)" strokeWidth="2.5"
+              strokeDasharray="4 6"
+              className="animate-flow-dash"
+              initial={{ pathLength: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 1],
+                opacity: [1, 1, 0]
+              }}
+              transition={{ 
+                duration: 1.25, 
+                ease: 'easeInOut', 
+                delay: 2.5, 
+                repeat: Infinity, 
+                repeatDelay: 4.75 
+              }}
+            />
+            {/* Segment 4: Test to Deploy (70% to 90%) */}
+            <motion.line
+              x1="70%" y1="3" x2="90%" y2="3"
+              stroke="url(#glow-gradient)" strokeWidth="2.5"
+              strokeDasharray="4 6"
+              className="animate-flow-dash"
+              initial={{ pathLength: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 1],
+                opacity: [1, 1, 0]
+              }}
+              transition={{ 
+                duration: 1.25, 
+                ease: 'easeInOut', 
+                delay: 3.75, 
+                repeat: Infinity, 
+                repeatDelay: 4.75 
+              }}
+            />
+
+            {/* Glowing moving comet that runs across the entire timeline! */}
+            <motion.circle
+              r="4.5"
+              initial={{ cx: '10%', fill: '#8b5cf6' }}
+              animate={{
+                cx: ['10%', '30%', '50%', '70%', '90%', '90%'],
+                fill: ['#8b5cf6', '#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#f59e0b'],
+                opacity: [1, 1, 1, 1, 1, 0]
+              }}
+              transition={{
+                duration: 5,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatDelay: 1,
+              }}
+              className="filter drop-shadow-[0_0_8px_rgba(139,92,246,0.85)]"
+            />
+            
+            <defs>
+              <linearGradient id="glow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#8b5cf6" />
+                <stop offset="25%" stopColor="#f43f5e" />
+                <stop offset="50%" stopColor="#3b82f6" />
+                <stop offset="75%" stopColor="#10b981" />
+                <stop offset="100%" stopColor="#f59e0b" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <style>{`
+            @keyframes flow-dash {
+              to {
+                stroke-dashoffset: -20;
+              }
+            }
+            .animate-flow-dash {
+              animation: flow-dash 1.25s linear infinite;
+            }
+          `}</style>
 
           {approachSteps.map((step, idx) => {
             const Icon = step.icon
@@ -128,9 +248,35 @@ export default function DevelopmentApproach() {
                 className="flex flex-col items-center text-center group relative w-full"
                 variants={itemVariants}
               >
-                {/* Vertical Connecting Dash Line (Mobile Only) */}
+                {/* Vertical Connecting Line with Sequential Flow (Mobile Only) */}
                 {idx < approachSteps.length - 1 && (
-                  <div className="absolute top-[80px] bottom-[-48px] left-1/2 w-[1.5px] border-l-2 border-dashed border-slate-200/70 -z-10 md:hidden -translate-x-1/2" />
+                  <div className="absolute top-[80px] bottom-[-48px] left-1/2 w-[2px] -z-10 md:hidden -translate-x-1/2 bg-slate-200/50 overflow-hidden">
+                    {/* Background dashed overlay to keep it dashed */}
+                    <div className="absolute inset-0 border-l border-dashed border-slate-300" />
+                    
+                    {/* Flowing overlay */}
+                    <motion.div
+                      className={`w-full origin-top ${
+                        idx === 0 ? 'bg-violet-500 shadow-[0_0_8px_#8b5cf6]'
+                        : idx === 1 ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]'
+                        : idx === 2 ? 'bg-blue-500 shadow-[0_0_8px_#3b82f6]'
+                        : 'bg-emerald-500 shadow-[0_0_8px_#10b981]'
+                      }`}
+                      initial={{ scaleY: 0 }}
+                      animate={{
+                        scaleY: [0, 1, 1],
+                        opacity: [1, 1, 0]
+                      }}
+                      transition={{
+                        duration: 1.25,
+                        ease: 'easeInOut',
+                        delay: idx * 1.25,
+                        repeat: Infinity,
+                        repeatDelay: 4.75
+                      }}
+                      style={{ height: '100%' }}
+                    />
+                  </div>
                 )}
 
                 {/* Styled Step Icon Circle Box */}

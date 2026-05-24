@@ -15,8 +15,8 @@ export default function CTASection() {
       icon: Cpu,
       color: 'text-rose-400 border-rose-500/20 bg-rose-500/10 shadow-rose-500/15',
       glow: 'shadow-[0_0_20px_rgba(244,63,94,0.3)]',
-      x: 60,
-      y: 40,
+      x: 45,
+      y: 35,
       delay: 0,
       duration: 5
     },
@@ -26,8 +26,8 @@ export default function CTASection() {
       icon: Globe,
       color: 'text-sky-400 border-sky-500/20 bg-sky-500/10 shadow-sky-500/15',
       glow: 'shadow-[0_0_20px_rgba(56,189,248,0.3)]',
-      x: 340,
-      y: 60,
+      x: 295,
+      y: 40,
       delay: 0.8,
       duration: 6
     },
@@ -37,8 +37,8 @@ export default function CTASection() {
       icon: Code2,
       color: 'text-violet-400 border-violet-500/20 bg-violet-500/10 shadow-violet-500/15',
       glow: 'shadow-[0_0_20px_rgba(139,92,246,0.3)]',
-      x: 300,
-      y: 280,
+      x: 275,
+      y: 220,
       delay: 1.5,
       duration: 5.5
     },
@@ -48,16 +48,16 @@ export default function CTASection() {
       icon: Database,
       color: 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10 shadow-emerald-500/15',
       glow: 'shadow-[0_0_20px_rgba(16,185,129,0.3)]',
-      x: 50,
-      y: 260,
+      x: 55,
+      y: 215,
       delay: 2.2,
       duration: 6.5
     }
   ]
 
   const centerNode = {
-    x: 200,
-    y: 170,
+    x: 160,
+    y: 130,
     label: 'YOUR IDEA',
     color: 'text-purple-400 border-purple-500/30 bg-purple-500/15 shadow-purple-500/20'
   }
@@ -148,25 +148,25 @@ export default function CTASection() {
 
           {/* Right Column: Fusing Collaboration Core (Interactive Grid) */}
           <div className="lg:col-span-6 flex items-center justify-center select-none w-full">
-            <div className="relative w-full max-w-[400px] aspect-[400/320] bg-slate-950/40 rounded-3xl border border-white/5 p-4 overflow-hidden backdrop-blur-sm shadow-inner">
+            <div className="relative w-full max-w-[400px] aspect-[400/340] bg-slate-950/40 rounded-3xl border border-white/5 p-4 overflow-hidden backdrop-blur-sm shadow-inner">
               
               {/* Starry glowing SVGs connecting floating nodes to core */}
               <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
                 {/* Defs for neon gradients */}
                 <defs>
-                  <linearGradient id="glow-grad-ai" x1="60" y1="40" x2="200" y2="170" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="glow-grad-ai" x1="73" y1="63" x2="200" y2="170" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#f43f5e" />
                     <stop offset="100%" stopColor="#c084fc" />
                   </linearGradient>
-                  <linearGradient id="glow-grad-web3d" x1="340" y1="60" x2="200" y2="170" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="glow-grad-web3d" x1="323" y1="68" x2="200" y2="170" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#38bdf8" />
                     <stop offset="100%" stopColor="#c084fc" />
                   </linearGradient>
-                  <linearGradient id="glow-grad-fullstack" x1="300" y1="280" x2="200" y2="170" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="glow-grad-fullstack" x1="303" y1="248" x2="200" y2="170" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#8b5cf6" />
                     <stop offset="100%" stopColor="#c084fc" />
                   </linearGradient>
-                  <linearGradient id="glow-grad-db" x1="50" y1="260" x2="200" y2="170" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="glow-grad-db" x1="83" y1="243" x2="200" y2="170" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#10b981" />
                     <stop offset="100%" stopColor="#c084fc" />
                   </linearGradient>
@@ -177,10 +177,10 @@ export default function CTASection() {
                   <g key={`lines-${node.id}`}>
                     {/* Faint base dashed connecting track */}
                     <line 
-                      x1={node.x + 30} 
-                      y1={node.y + 30} 
+                      x1={node.x + 28} 
+                      y1={node.y + 28} 
                       x2={centerNode.x + 40} 
-                      y2={centerNode.y + 30}
+                      y2={centerNode.y + 40}
                       stroke="rgba(255, 255, 255, 0.08)"
                       strokeWidth="1.5"
                       strokeDasharray="4 4"
@@ -188,10 +188,10 @@ export default function CTASection() {
 
                     {/* Flowing animated gradient lines when hovered or active */}
                     <motion.line 
-                      x1={node.x + 30} 
-                      y1={node.y + 30} 
+                      x1={node.x + 28} 
+                      y1={node.y + 28} 
                       x2={centerNode.x + 40} 
-                      y2={centerNode.y + 30}
+                      y2={centerNode.y + 40}
                       stroke={`url(#glow-grad-${node.id})`}
                       strokeWidth="1.5"
                       strokeDasharray="4 6"
@@ -213,8 +213,8 @@ export default function CTASection() {
                         : '#10b981'
                       }
                       animate={{
-                        cx: [node.x + 30, centerNode.x + 40],
-                        cy: [node.y + 30, centerNode.y + 30],
+                        cx: [node.x + 28, centerNode.x + 40],
+                        cy: [node.y + 28, centerNode.y + 40],
                         opacity: [0, 1, 1, 0]
                       }}
                       transition={{

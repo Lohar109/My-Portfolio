@@ -124,10 +124,31 @@ export default function DevelopmentApproach() {
       {/* Global SVG Definitions for gradients */}
       <svg className="absolute w-0 h-0" aria-hidden="true">
         <defs>
-          <linearGradient id="journey-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#a855f7" />
-            <stop offset="50%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#6366f1" />
+          {/* Multi-color gradient matching the horizontal progression of icon centers (10% to 90%) */}
+          <linearGradient id="approach-journey-gradient" x1="10%" y1="0%" x2="90%" y2="0%" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#8b5cf6" />
+            <stop offset="25%" stopColor="#f43f5e" />
+            <stop offset="50%" stopColor="#3b82f6" />
+            <stop offset="75%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#f59e0b" />
+          </linearGradient>
+
+          {/* Vertical segment gradients for mobile linking step color stops */}
+          <linearGradient id="segment-0-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#8b5cf6" />
+            <stop offset="100%" stopColor="#f43f5e" />
+          </linearGradient>
+          <linearGradient id="segment-1-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#f43f5e" />
+            <stop offset="100%" stopColor="#3b82f6" />
+          </linearGradient>
+          <linearGradient id="segment-2-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#10b981" />
+          </linearGradient>
+          <linearGradient id="segment-3-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#f59e0b" />
           </linearGradient>
         </defs>
       </svg>
@@ -171,82 +192,14 @@ export default function DevelopmentApproach() {
           viewport={{ once: true, amount: 0.2 }}
         >
           {/* Horizontal Connecting Flowing Line (Desktop Only) */}
-          <svg 
-            key={cycle}
-            className="hidden md:block absolute top-[40px] left-0 right-0 w-full h-[6px] overflow-visible -z-10"
-          >
-            {/* Glowing animated line segments with scrolling flow dash effect */}
-            {/* Segment 1: Understand to Plan (10% to 30%) */}
-            <motion.line
-              x1="10%" y1="3" x2="30%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2.5"
+          <svg className="hidden md:block absolute top-[40px] left-0 right-0 w-full h-[6px] overflow-visible -z-10">
+            {/* Continuous flowing dashed line matching colors perfectly */}
+            <line
+              x1="10%" y1="3" x2="90%" y2="3"
+              stroke="url(#approach-journey-gradient)" strokeWidth="2"
               strokeDasharray="4 6"
               className="animate-flow-dash"
-              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
-              initial={{ pathLength: 0 }}
-              animate={{ 
-                pathLength: [0, 0, 1, 1, 0]
-              }}
-              transition={{ 
-                duration: 8.5, 
-                ease: 'linear', 
-                times: [0, 0.0588, 0.1765, 0.9882, 1],
-                repeat: Infinity
-              }}
-            />
-            {/* Segment 2: Plan to Build (30% to 50%) */}
-            <motion.line
-              x1="30%" y1="3" x2="50%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2.5"
-              strokeDasharray="4 6"
-              className="animate-flow-dash"
-              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
-              initial={{ pathLength: 0 }}
-              animate={{ 
-                pathLength: [0, 0, 1, 1, 0]
-              }}
-              transition={{ 
-                duration: 8.5, 
-                ease: 'linear', 
-                times: [0, 0.2353, 0.3529, 0.9882, 1],
-                repeat: Infinity
-              }}
-            />
-            {/* Segment 3: Build to Test (50% to 70%) */}
-            <motion.line
-              x1="50%" y1="3" x2="70%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2.5"
-              strokeDasharray="4 6"
-              className="animate-flow-dash"
-              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
-              initial={{ pathLength: 0 }}
-              animate={{ 
-                pathLength: [0, 0, 1, 1, 0]
-              }}
-              transition={{ 
-                duration: 8.5, 
-                ease: 'linear', 
-                times: [0, 0.4118, 0.5294, 0.9882, 1],
-                repeat: Infinity
-              }}
-            />
-            {/* Segment 4: Test to Deploy (70% to 90%) */}
-            <motion.line
-              x1="70%" y1="3" x2="90%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2.5"
-              strokeDasharray="4 6"
-              className="animate-flow-dash"
-              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
-              initial={{ pathLength: 0 }}
-              animate={{ 
-                pathLength: [0, 0, 1, 1, 0]
-              }}
-              transition={{ 
-                duration: 8.5, 
-                ease: 'linear', 
-                times: [0, 0.5882, 0.7059, 0.9882, 1],
-                repeat: Infinity
-              }}
+              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.25))' }}
             />
           </svg>
 
@@ -269,37 +222,21 @@ export default function DevelopmentApproach() {
                 className="flex flex-col items-center text-center group relative w-full"
                 variants={itemVariants}
               >
-                {/* Vertical Connecting Line with Sequential Flow (Mobile Only) */}
+                {/* Vertical Connecting Line (Mobile Only) */}
                 {idx < approachSteps.length - 1 && (
                   <div className="absolute top-[80px] bottom-[-48px] left-1/2 w-[10px] -z-10 md:hidden -translate-x-1/2 overflow-visible">
-                    <svg key={cycle} className="w-[10px] h-full overflow-visible">
-                      {/* Sequential flowing colored line */}
-                      <motion.line
+                    <svg className="w-[10px] h-full overflow-visible">
+                      {/* Vertical line segment colored with segment gradient */}
+                      <line
                         x1="5"
                         y1="0"
                         x2="5"
                         y2="100%"
-                        stroke="url(#journey-gradient)"
-                        strokeWidth="2.5"
+                        stroke={`url(#segment-${idx}-gradient)`}
+                        strokeWidth="2"
                         strokeDasharray="4 6"
                         className="animate-flow-dash"
-                        style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
-                        initial={{ pathLength: 0 }}
-                        animate={{ 
-                          pathLength: [0, 0, 1, 1, 0]
-                        }}
-                        transition={{ 
-                          duration: 8.5, 
-                          ease: 'linear',
-                          times: idx === 0
-                            ? [0, 0.0588, 0.1765, 0.9882, 1]
-                            : idx === 1
-                            ? [0, 0.2353, 0.3529, 0.9882, 1]
-                            : idx === 2
-                            ? [0, 0.4118, 0.5294, 0.9882, 1]
-                            : [0, 0.5882, 0.7059, 0.9882, 1],
-                          repeat: Infinity
-                        }}
+                        style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.25))' }}
                       />
                     </svg>
                   </div>

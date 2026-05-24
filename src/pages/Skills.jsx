@@ -1,4 +1,5 @@
 import SkillsSection from '../components/sections/SkillsSection.jsx'
+import DevelopmentApproach from '../components/sections/DevelopmentApproach.jsx'
 import { motion } from 'framer-motion'
 
 function Skills() {
@@ -11,6 +12,7 @@ function Skills() {
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       <SkillsSection />
+      <DevelopmentApproach />
     </motion.main>
   )
 }

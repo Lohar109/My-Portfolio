@@ -3,7 +3,9 @@ import HeroSection from '../components/sections/HeroSection.jsx'
 import MyJourneySection from '../components/sections/MyJourneySection.jsx'
 import GithubSection from '../components/sections/GithubSection.jsx'
 import LeetcodeSection from '../components/sections/LeetcodeSection.jsx'
+import CTASection from '../components/sections/CTASection.jsx'
 import { motion } from 'framer-motion'
+
 function Home() {
   return (
     <motion.main
@@ -16,6 +18,7 @@ function Home() {
       <MyJourneySection />
       <GithubSection />
       <LeetcodeSection />
+      <CTASection />
     </motion.main>
   )
 }

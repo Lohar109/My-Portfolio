@@ -151,13 +151,8 @@ export default function DevelopmentApproach() {
                   </div>
                 </motion.div>
 
-                {/* Step Number Badge */}
-                <span className={`text-[13px] font-extrabold tracking-wider ${step.color} mt-6 leading-none block font-sans`}>
-                  {step.num}
-                </span>
-
                 {/* Step Title */}
-                <h4 className="text-base font-bold text-slate-800 mt-2.5 leading-snug tracking-tight font-sans group-hover:text-slate-900 transition-colors duration-200">
+                <h4 className="text-base font-bold text-slate-800 mt-6 leading-snug tracking-tight font-sans group-hover:text-slate-900 transition-colors duration-200">
                   {step.label}
                 </h4>
 

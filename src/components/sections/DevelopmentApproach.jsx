@@ -175,16 +175,14 @@ export default function DevelopmentApproach() {
             key={cycle}
             className="hidden md:block absolute top-[40px] left-0 right-0 w-full h-[6px] overflow-visible -z-10"
           >
-            {/* Background base dashed gray line */}
-            <line x1="10%" y1="3" x2="90%" y2="3" stroke="#e2e8f0" strokeWidth="2" strokeDasharray="4 6" />
-
             {/* Glowing animated line segments with scrolling flow dash effect */}
             {/* Segment 1: Understand to Plan (10% to 30%) */}
             <motion.line
               x1="10%" y1="3" x2="30%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2"
+              stroke="url(#journey-gradient)" strokeWidth="2.5"
               strokeDasharray="4 6"
               className="animate-flow-dash"
+              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
               initial={{ pathLength: 0 }}
               animate={{ 
                 pathLength: [0, 0, 1, 1, 0]
@@ -199,9 +197,10 @@ export default function DevelopmentApproach() {
             {/* Segment 2: Plan to Build (30% to 50%) */}
             <motion.line
               x1="30%" y1="3" x2="50%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2"
+              stroke="url(#journey-gradient)" strokeWidth="2.5"
               strokeDasharray="4 6"
               className="animate-flow-dash"
+              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
               initial={{ pathLength: 0 }}
               animate={{ 
                 pathLength: [0, 0, 1, 1, 0]
@@ -216,9 +215,10 @@ export default function DevelopmentApproach() {
             {/* Segment 3: Build to Test (50% to 70%) */}
             <motion.line
               x1="50%" y1="3" x2="70%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2"
+              stroke="url(#journey-gradient)" strokeWidth="2.5"
               strokeDasharray="4 6"
               className="animate-flow-dash"
+              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
               initial={{ pathLength: 0 }}
               animate={{ 
                 pathLength: [0, 0, 1, 1, 0]
@@ -233,9 +233,10 @@ export default function DevelopmentApproach() {
             {/* Segment 4: Test to Deploy (70% to 90%) */}
             <motion.line
               x1="70%" y1="3" x2="90%" y2="3"
-              stroke="url(#journey-gradient)" strokeWidth="2"
+              stroke="url(#journey-gradient)" strokeWidth="2.5"
               strokeDasharray="4 6"
               className="animate-flow-dash"
+              style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
               initial={{ pathLength: 0 }}
               animate={{ 
                 pathLength: [0, 0, 1, 1, 0]
@@ -272,16 +273,6 @@ export default function DevelopmentApproach() {
                 {idx < approachSteps.length - 1 && (
                   <div className="absolute top-[80px] bottom-[-48px] left-1/2 w-[10px] -z-10 md:hidden -translate-x-1/2 overflow-visible">
                     <svg key={cycle} className="w-[10px] h-full overflow-visible">
-                      {/* Background base dashed gray line */}
-                      <line
-                        x1="5"
-                        y1="0"
-                        x2="5"
-                        y2="100%"
-                        stroke="#e2e8f0"
-                        strokeWidth="2"
-                        strokeDasharray="4 6"
-                      />
                       {/* Sequential flowing colored line */}
                       <motion.line
                         x1="5"
@@ -289,9 +280,10 @@ export default function DevelopmentApproach() {
                         x2="5"
                         y2="100%"
                         stroke="url(#journey-gradient)"
-                        strokeWidth="2"
+                        strokeWidth="2.5"
                         strokeDasharray="4 6"
                         className="animate-flow-dash"
+                        style={{ filter: 'drop-shadow(0 0 3px rgba(139, 92, 246, 0.45))' }}
                         initial={{ pathLength: 0 }}
                         animate={{ 
                           pathLength: [0, 0, 1, 1, 0]

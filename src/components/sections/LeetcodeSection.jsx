@@ -752,7 +752,7 @@ function LeetcodeSection() {
       {/* Recent Solved Problems Title Accordion */}
       <motion.div
         variants={itemVariants}
-        className="flex items-center gap-3 mb-6 select-none"
+        className="flex items-center gap-3 mb-12 select-none"
       >
         <Layers className="h-4.5 w-4.5 text-amber-500 shrink-0" />
         <h4 className="text-xs sm:text-sm font-black text-gray-900 font-sans uppercase tracking-wider shrink-0">

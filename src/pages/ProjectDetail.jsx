@@ -384,26 +384,36 @@ function getLoadingOptimizationApproach(slug) {
     steps: [
       {
         icon: Target,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
         title: 'Problem research',
         description: 'Understood the bin-packing problem and studied the Extreme Point method.',
       },
       {
         icon: Code2,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
         title: 'Algorithm in C++',
         description: 'Implemented 3D placement logic with overlap detection and boundary checks.',
       },
       {
         icon: Cuboid,
+        iconColor: 'text-indigo-600',
+        iconBg: 'bg-indigo-50',
         title: 'Qt3D rendering',
         description: 'Rendered placed boxes in real-time 3D with orbit camera controls.',
       },
       {
         icon: LayoutGrid,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
         title: 'UI & features',
         description: 'Built login, product forms, container selection, pie chart, and saved data system.',
       },
       {
         icon: FileDown,
+        iconColor: 'text-amber-600',
+        iconBg: 'bg-amber-50',
         title: 'PDF export & testing',
         description: 'Added layer-wise 2D export, product summary PDF, and tested all edge cases.',
       },
@@ -411,21 +421,29 @@ function getLoadingOptimizationApproach(slug) {
     principles: [
       {
         icon: GitFork,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
         title: 'Algorithm first',
         description: 'Core logic before UI.',
       },
       {
         icon: Eye,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
         title: 'Visual feedback',
         description: 'Every action shows in 3D live.',
       },
       {
         icon: Database,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
         title: 'Data persistence',
         description: 'JSON saves all sessions.',
       },
       {
         icon: Shield,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
         title: 'Input validation',
         description: 'No duplicates or invalid data.',
       },
@@ -1055,7 +1073,7 @@ function ProjectDetail() {
                               </div>
                             )}
 
-                            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-violet-50 text-violet-600 shadow-sm ring-1 ring-violet-100/80">
+                            <div className={`inline-flex h-14 w-14 items-center justify-center rounded-full ${step.iconBg} ${step.iconColor} shadow-sm ring-1 ring-black/5`}>
                               <Icon size={22} strokeWidth={2.3} />
                             </div>
 
@@ -1081,7 +1099,7 @@ function ProjectDetail() {
                           return (
                             <div key={item.title} className="rounded-2xl border border-[#ece8db] bg-[#f7f5ee] px-4 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                               <div className="flex items-start gap-3">
-                                <div className="mt-0.5 text-violet-600 shrink-0">
+                                <div className={`mt-0.5 shrink-0 ${item.iconColor}`}>
                                   <Icon size={18} strokeWidth={2.4} />
                                 </div>
                                 <div>

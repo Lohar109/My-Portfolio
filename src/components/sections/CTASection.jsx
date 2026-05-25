@@ -180,7 +180,7 @@ export default function CTASection() {
             </span>
 
             {/* Dynamic heading with typing loop animation */}
-            <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-900 leading-tight font-sans min-h-[90px] sm:min-h-[120px] select-none">
+            <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-900 leading-tight font-sans min-h-[56px] sm:min-h-[80px] select-none">
               {typedPart1}
               {charCount < part1.length && (
                 <span className="animate-blink font-light text-violet-500">|</span>

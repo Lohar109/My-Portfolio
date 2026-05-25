@@ -934,6 +934,48 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
+                ) : activeSection === 'problem' ? (
+                  <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
+                    <div className="w-full flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line max-w-4xl">
+                        {currentStep.aboutText}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+                      {currentStep.problemCards?.map((card) => {
+                        const Icon = card.icon
+                        return (
+                          <div
+                            key={card.title}
+                            className="group rounded-[24px] border border-neutral-200/70 bg-white p-5 sm:p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300"
+                          >
+                            <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${card.iconBg} ${card.iconColor} ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105`}>
+                              <Icon size={20} strokeWidth={2.25} />
+                            </div>
+                            <h4 className="mt-4 text-[17px] font-bold tracking-tight text-slate-800 font-sans">
+                              {card.title}
+                            </h4>
+                            <p className="mt-2 text-[14px] leading-relaxed text-slate-600 font-medium font-sans">
+                              {card.description}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                    <div className="w-full border-t border-neutral-100/70 pt-6">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
+                        {currentStep.techHeading}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                      </div>
+                    </div>
+                  </div>
                 ) : activeSection === 'images' ? (
                   <div className="mt-8 w-full animate-fadeIn">
                     <div className="flex flex-col min-w-0">
@@ -954,48 +996,16 @@ function ProjectDetail() {
                                 className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[4/3] shadow-sm hover:shadow-md transition-all duration-300"
                               >
                                 <img 
-                          ) : activeSection === 'problem' ? (
-                          <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
-                            <div className="w-full flex flex-col min-w-0">
-                              <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                                {currentStep.aboutHeading}
-                              </h3>
-                              <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line max-w-4xl">
-                                {currentStep.aboutText}
-                              </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
-                              {currentStep.problemCards?.map((card) => {
-                                const Icon = card.icon
-                                return (
-                                  <div
-                                    key={card.title}
-                                    className="group rounded-[24px] border border-neutral-200/70 bg-white p-5 sm:p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300"
-                                  >
-                                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${card.iconBg} ${card.iconColor} ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105`}>
-                                      <Icon size={20} strokeWidth={2.25} />
-                                    </div>
-                                    <h4 className="mt-4 text-[17px] font-bold tracking-tight text-slate-800 font-sans">
-                                      {card.title}
-                                    </h4>
-                                    <p className="mt-2 text-[14px] leading-relaxed text-slate-600 font-medium font-sans">
-                                      {card.description}
-                                    </p>
-                                  </div>
-                                )
-                              })}
-                            </div>
-
-                            <div className="w-full border-t border-neutral-100/70 pt-6">
-                              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
-                                {currentStep.techHeading}
-                              </span>
-                              <div className="flex flex-wrap gap-2">
-                                {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
-                              </div>
-                            </div>
                                   src={imgSrc} 
+                                  alt={`${project.title} screenshot ${idx + 1}`}
+                                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                  loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                  <span className="text-white text-xs font-bold font-sans">
+                                    View Image {idx + 1}
+                                  </span>
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -1022,7 +1032,6 @@ function ProjectDetail() {
                         </div>
                       </div>
                     </div>
-
                   </div>
                 ) : (
                   <div className="mt-8 w-full animate-fadeIn">

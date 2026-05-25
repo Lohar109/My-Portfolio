@@ -789,6 +789,7 @@ function ProjectDetail() {
   const project = projects.find((entry) => entry.slug === slug)
 
   const [activeSection, setActiveSection] = useState('case-study')
+  const [carouselIndex, setCarouselIndex] = useState(0)
 
   if (!project) {
     return (
@@ -1263,25 +1264,57 @@ function ProjectDetail() {
                       {/* Premium Image Grid / Placeholder for User's Custom Images */}
                       <div className="mt-8">
                         {project.images && project.images.length > 0 ? (
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {project.images.map((imgSrc, idx) => (
-                              <div 
-                                key={idx} 
-                                className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[4/3] shadow-sm hover:shadow-md transition-all duration-300"
-                              >
-                                <img 
-                                  src={imgSrc} 
-                                  alt={`${project.title} screenshot ${idx + 1}`}
-                                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          <div className="w-full flex flex-col items-center">
+                            <div className="relative w-full max-w-4xl">
+                              <div className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[16/9] shadow-sm">
+                                <img
+                                  src={project.images[carouselIndex].src}
+                                  alt={`${project.title} screenshot ${carouselIndex + 1}`}
+                                  className="w-full h-full object-cover"
                                   loading="lazy"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                  <span className="text-white text-xs font-bold font-sans">
-                                    View Image {idx + 1}
-                                  </span>
+
+                                {/* Left button */}
+                                <button
+                                  onClick={() => setCarouselIndex((i) => (i - 1 + project.images.length) % project.images.length)}
+                                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow hover:bg-white"
+                                  aria-label="Previous image"
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
+                                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                                  </svg>
+                                </button>
+
+                                {/* Right button */}
+                                <button
+                                  onClick={() => setCarouselIndex((i) => (i + 1) % project.images.length)}
+                                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow hover:bg-white"
+                                  aria-label="Next image"
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
+                                    <path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                                  </svg>
+                                </button>
+
+                                <div className="absolute left-0 right-0 bottom-0 p-4 bg-gradient-to-t from-black/40 to-transparent text-white opacity-100">
+                                  <div className="text-sm font-bold">{project.images[carouselIndex].caption}</div>
+                                  <div className="text-[11px] text-white/80 mt-1">Image {carouselIndex + 1} of {project.images.length}</div>
                                 </div>
                               </div>
-                            ))}
+
+                              {/* Thumbnails / indicators */}
+                              <div className="mt-4 flex items-center gap-2 justify-center overflow-x-auto py-2">
+                                {project.images.map((img, i) => (
+                                  <button
+                                    key={i}
+                                    onClick={() => setCarouselIndex(i)}
+                                    className={`rounded-md overflow-hidden border ${i === carouselIndex ? 'ring-2 ring-violet-500' : 'border-neutral-200'} bg-white`}
+                                  >
+                                    <img src={img.src} alt={`thumb-${i+1}`} className="h-14 w-20 object-cover" />
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
                           </div>
                         ) : (
                           <div className="border-2 border-dashed border-neutral-200 rounded-[24px] p-8 sm:p-12 text-center flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50/80 transition-all select-none">

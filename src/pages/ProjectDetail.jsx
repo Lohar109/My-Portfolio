@@ -1302,18 +1302,7 @@ function ProjectDetail() {
                                 </div>
                               </div>
 
-                              {/* Thumbnails / indicators */}
-                              <div className="mt-4 flex items-center gap-2 justify-center overflow-x-auto py-2">
-                                {project.images.map((img, i) => (
-                                  <button
-                                    key={i}
-                                    onClick={() => setCarouselIndex(i)}
-                                    className={`rounded-md overflow-hidden border ${i === carouselIndex ? 'ring-2 ring-violet-500' : 'border-neutral-200'} bg-white`}
-                                  >
-                                    <img src={img.src} alt={`thumb-${i+1}`} className="h-14 w-20 object-cover" />
-                                  </button>
-                                ))}
-                              </div>
+                              {/* (Thumbnails removed per request) */}
                             </div>
                           </div>
                         ) : (

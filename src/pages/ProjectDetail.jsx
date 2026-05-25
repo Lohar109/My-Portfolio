@@ -1209,6 +1209,17 @@ function ProjectDetail() {
                       </div>
                     </div>
 
+                    <div className="mt-6">
+                      <div className="rounded-2xl border border-[#ece8db] bg-[#f7f5ee] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] flex items-start gap-4">
+                        <div className="flex-shrink-0 text-violet-600 mt-0.5">
+                          <Sparkles size={20} strokeWidth={1.8} />
+                        </div>
+                        <p className="text-[14px] leading-relaxed text-slate-700 font-medium max-w-4xl">
+                          Loading Optimization Software brings automation and visual clarity to every stage of cargo planning — helping teams load smarter, faster, and with complete documentation.
+                        </p>
+                      </div>
+                    </div>
+
                     <div className="w-full border-t border-neutral-100/70 pt-6 mt-4">
                       <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
                         {currentStep.techHeading}
@@ -1305,6 +1316,71 @@ function ProjectDetail() {
                       <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
                         {currentStep.aboutText}
                       </p>
+
+                      {activeSection === 'result' && project.slug === 'marketpulse' && (
+                        <div className="mt-6">
+                          <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.06em] text-slate-700">
+                            {currentStep.metricsHeading}
+                          </h4>
+
+                          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {currentStep.metrics.map((m) => (
+                              <div key={m.label} className="rounded-2xl border border-neutral-100 bg-white p-5 shadow-sm">
+                                <div className="text-[26px] font-extrabold text-slate-800">{m.value}</div>
+                                <div className="mt-1 text-xs text-slate-500 font-semibold">{m.label}</div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.06em] text-slate-700 mt-6">
+                            BUSINESS OUTCOMES
+                          </h4>
+
+                          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div className="rounded-2xl border border-neutral-100 bg-white p-5 shadow-sm flex items-start gap-3">
+                              <div className="text-amber-500 mt-1"><Clock size={18} /></div>
+                              <div>
+                                <h5 className="text-[14px] font-bold text-slate-800">Time saved</h5>
+                                <p className="mt-1 text-xs text-slate-500">Hours of manual planning reduced to seconds.</p>
+                              </div>
+                            </div>
+
+                            <div className="rounded-2xl border border-neutral-100 bg-white p-5 shadow-sm flex items-start gap-3">
+                              <div className="text-indigo-600 mt-1"><Truck size={18} /></div>
+                              <div>
+                                <h5 className="text-[14px] font-bold text-slate-800">Fewer trips</h5>
+                                <p className="mt-1 text-xs text-slate-500">Better fill rate means less trips per shipment.</p>
+                              </div>
+                            </div>
+
+                            <div className="rounded-2xl border border-neutral-100 bg-white p-5 shadow-sm flex items-start gap-3">
+                              <div className="text-violet-600 mt-1"><FileDown size={18} /></div>
+                              <div>
+                                <h5 className="text-[14px] font-bold text-slate-800">Documented plans</h5>
+                                <p className="mt-1 text-xs text-slate-500">PDF reports replace verbal instructions.</p>
+                              </div>
+                            </div>
+
+                            <div className="rounded-2xl border border-neutral-100 bg-white p-5 shadow-sm flex items-start gap-3">
+                              <div className="text-rose-600 mt-1"><Award size={18} /></div>
+                              <div>
+                                <h5 className="text-[14px] font-bold text-slate-800">Industry recognition</h5>
+                                <p className="mt-1 text-xs text-slate-500">Impressed Webtech Developers enough for a job offer.</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-6 rounded-2xl border border-[#ece8db] bg-[#f7f5ee] px-6 py-4 flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center">
+                              <User size={16} />
+                            </div>
+                            <div>
+                              <p className="text-[14px] text-slate-800 font-medium">“This was the best project submitted in the challenge — it solved a real problem, worked end-to-end, and showed strong technical depth in C++ and 3D rendering.”</p>
+                              <a className="mt-2 inline-block text-violet-600 font-medium" href="#">Webtech Developers Pvt. Ltd., Pune</a>
+                            </div>
+                          </div>
+                        </div>
+                      )}
 
                       {/* Lower Full-Width: Technologies Used */}
                       <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">

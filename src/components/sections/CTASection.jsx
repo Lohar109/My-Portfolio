@@ -9,9 +9,14 @@ export default function CTASection() {
 
   const part1 = "Let's Build Something "
   const part2 = "Amazing Together"
-  const [typedPart1, setTypedPart1] = useState("")
-  const [typedPart2, setTypedPart2] = useState("")
+  const [charCount, setCharCount] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const [hasStarted, setHasStarted] = useState(false)
+
+  // Compute typed substrings dynamically
+  const typedPart1 = part1.substring(0, Math.min(charCount, part1.length))
+  const typedPart2 = part2.substring(0, Math.max(0, charCount - part1.length))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,22 +38,37 @@ export default function CTASection() {
   }, [])
 
   useEffect(() => {
-    if (!hasStarted) return
+    if (!hasStarted || isPaused) return
 
-    let i = 0
-    const interval = setInterval(() => {
-      if (i < part1.length) {
-        setTypedPart1(part1.substring(0, i + 1))
-      } else if (i < part1.length + part2.length) {
-        setTypedPart2(part2.substring(0, i - part1.length + 1))
+    const totalLength = part1.length + part2.length
+    const speed = isDeleting ? 30 : 60 // backspace faster than typing
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        if (charCount < totalLength) {
+          setCharCount(prev => prev + 1)
+        } else {
+          setIsPaused(true)
+          setTimeout(() => {
+            setIsDeleting(true)
+            setIsPaused(false)
+          }, 3000) // pause for 3s when fully typed
+        }
       } else {
-        clearInterval(interval)
+        if (charCount > 0) {
+          setCharCount(prev => prev - 1)
+        } else {
+          setIsDeleting(false)
+          setIsPaused(true)
+          setTimeout(() => {
+            setIsPaused(false)
+          }, 1000) // pause for 1s when fully deleted
+        }
       }
-      i++
-    }, 60)
+    }, speed)
 
-    return () => clearInterval(interval)
-  }, [hasStarted])
+    return () => clearTimeout(timer)
+  }, [hasStarted, charCount, isDeleting, isPaused])
 
   // Floating nodes data
   const nodes = [
@@ -159,19 +179,19 @@ export default function CTASection() {
               Available for Collaborations
             </span>
 
-            {/* Dynamic heading with typing animation */}
+            {/* Dynamic heading with typing loop animation */}
             <h2 className="text-3xl sm:text-4.5xl font-extrabold tracking-tight text-slate-900 leading-tight font-sans min-h-[90px] sm:min-h-[120px] select-none">
               {typedPart1}
-              {typedPart1.length < part1.length && (
+              {charCount < part1.length && (
                 <span className="animate-blink font-light text-violet-500">|</span>
               )}
-              {typedPart1.length === part1.length && <br className="hidden sm:block" />}
-              {typedPart1.length === part1.length && (
+              {charCount >= part1.length && <br className="hidden sm:block" />}
+              {charCount >= part1.length && (
                 <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">
                   {typedPart2}
                 </span>
               )}
-              {typedPart1.length === part1.length && typedPart2.length < part2.length && (
+              {charCount >= part1.length && (
                 <span className="animate-blink font-light text-violet-500">|</span>
               )}
             </h2>

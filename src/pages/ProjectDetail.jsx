@@ -237,6 +237,146 @@ function getSolutionPoints(slug) {
   }
 }
 
+function getProblemCards(slug) {
+  switch (slug) {
+    case 'marketpulse':
+      return [
+        {
+          icon: Boxes,
+          iconColor: 'text-amber-700',
+          iconBg: 'bg-amber-50',
+          title: 'Manual cargo packing',
+          description: 'Workers manually decided product placement, which led to wrong stacking, wasted volume, and rework.',
+        },
+        {
+          icon: LayoutGrid,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'Wasted container space',
+          description: 'No optimal arrangement meant containers were never fully filled, increasing the number of trips needed.',
+        },
+        {
+          icon: AlertTriangle,
+          iconColor: 'text-indigo-700',
+          iconBg: 'bg-indigo-50',
+          title: 'Weight distribution errors',
+          description: 'Without a system, items were placed incorrectly, creating imbalanced loads that risked damage in transit.',
+        },
+        {
+          icon: Eye,
+          iconColor: 'text-emerald-700',
+          iconBg: 'bg-emerald-50',
+          title: 'No visual loading plan',
+          description: 'There was no tool to visualize how products fit together in 3D before loading began.',
+        },
+        {
+          icon: Clock,
+          iconColor: 'text-sky-700',
+          iconBg: 'bg-sky-50',
+          title: 'No fill-rate tracking',
+          description: 'Teams had no way to know what percentage of a container was used, so overpacking and underpacking were common.',
+        },
+        {
+          icon: FileDown,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'No reportable output',
+          description: 'Loading plans existed only in workers\' heads, so nothing could be saved, printed, or shared with the team.',
+        },
+      ]
+    case 'portfolio':
+      return [
+        {
+          icon: Search,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'Static navigation',
+          description: 'Visitors had to manually scan pages to find the right skills, projects, or experience.',
+        },
+        {
+          icon: Layers,
+          iconColor: 'text-indigo-700',
+          iconBg: 'bg-indigo-50',
+          title: 'Fragmented context',
+          description: 'The site did not connect projects, stack, and achievements into a single reasoning flow.',
+        },
+        {
+          icon: Clock,
+          iconColor: 'text-amber-700',
+          iconBg: 'bg-amber-50',
+          title: 'Slow evaluation',
+          description: 'Recruiters and collaborators spent too long gathering enough information to understand fit.',
+        },
+        {
+          icon: AlertTriangle,
+          iconColor: 'text-emerald-700',
+          iconBg: 'bg-emerald-50',
+          title: 'Weak intent matching',
+          description: 'A normal portfolio could not adapt answers to the user\'s actual question or context.',
+        },
+        {
+          icon: Eye,
+          iconColor: 'text-sky-700',
+          iconBg: 'bg-sky-50',
+          title: 'No reasoning layer',
+          description: 'The site lacked a semantic layer to explain the work behind each decision in the project.',
+        },
+        {
+          icon: FileDown,
+          iconColor: 'text-violet-700',
+          iconBg: 'bg-violet-50',
+          title: 'No shareable snapshot',
+          description: 'There was no structured summary that could be exported or quickly reused in a conversation.',
+        },
+      ]
+    default:
+      return [
+        {
+          icon: Clock,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'Manual workflow delays',
+          description: 'Repeated manual steps slowed down daily execution and reduced overall output.',
+        },
+        {
+          icon: AlertTriangle,
+          iconColor: 'text-indigo-700',
+          iconBg: 'bg-indigo-50',
+          title: 'Operational friction',
+          description: 'Teams had to switch contexts too often, which made the process harder to manage.',
+        },
+        {
+          icon: Layers,
+          iconColor: 'text-amber-700',
+          iconBg: 'bg-amber-50',
+          title: 'Lack of clarity',
+          description: 'Information was spread across systems instead of being presented in one clear view.',
+        },
+        {
+          icon: Eye,
+          iconColor: 'text-emerald-700',
+          iconBg: 'bg-emerald-50',
+          title: 'Limited visibility',
+          description: 'Without a visual system, it was difficult to understand the state of the work at a glance.',
+        },
+        {
+          icon: FileDown,
+          iconColor: 'text-sky-700',
+          iconBg: 'bg-sky-50',
+          title: 'No exportable trail',
+          description: 'There was no clean way to save the process into a usable report or handoff format.',
+        },
+        {
+          icon: Boxes,
+          iconColor: 'text-violet-700',
+          iconBg: 'bg-violet-50',
+          title: 'Fragmented execution',
+          description: 'The workflow depended on scattered manual decisions instead of one coordinated system.',
+        },
+      ]
+  }
+}
+
 function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'
@@ -318,6 +458,7 @@ function getProjectCaseStudyDetails(slug, project) {
       ],
       aboutHeading: 'Understanding the Problem',
       aboutText: defaultProblemText,
+      problemCards: getProblemCards(slug),
       techHeading: 'AFFECTED PROCESSES',
       tags: slug === 'studioflow' ? ['Manual Merchandising', 'Variant Configuration', 'Catalog Taxonomy', 'Media Processing']
             : slug === 'portfolio' ? ['Passive Reading', 'Information Retrieval', 'Context Fragmentation', 'Candidate Triage']
@@ -813,16 +954,48 @@ function ProjectDetail() {
                                 className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[4/3] shadow-sm hover:shadow-md transition-all duration-300"
                               >
                                 <img 
+                          ) : activeSection === 'problem' ? (
+                          <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
+                            <div className="w-full flex flex-col min-w-0">
+                              <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                                {currentStep.aboutHeading}
+                              </h3>
+                              <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line max-w-4xl">
+                                {currentStep.aboutText}
+                              </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+                              {currentStep.problemCards?.map((card) => {
+                                const Icon = card.icon
+                                return (
+                                  <div
+                                    key={card.title}
+                                    className="group rounded-[24px] border border-neutral-200/70 bg-white p-5 sm:p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300"
+                                  >
+                                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${card.iconBg} ${card.iconColor} ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105`}>
+                                      <Icon size={20} strokeWidth={2.25} />
+                                    </div>
+                                    <h4 className="mt-4 text-[17px] font-bold tracking-tight text-slate-800 font-sans">
+                                      {card.title}
+                                    </h4>
+                                    <p className="mt-2 text-[14px] leading-relaxed text-slate-600 font-medium font-sans">
+                                      {card.description}
+                                    </p>
+                                  </div>
+                                )
+                              })}
+                            </div>
+
+                            <div className="w-full border-t border-neutral-100/70 pt-6">
+                              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
+                                {currentStep.techHeading}
+                              </span>
+                              <div className="flex flex-wrap gap-2">
+                                {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                              </div>
+                            </div>
                                   src={imgSrc} 
-                                  alt={`${project.title} screenshot ${idx + 1}`}
-                                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                  loading="lazy"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                  <span className="text-white text-xs font-bold font-sans">
-                                    View Image {idx + 1}
-                                  </span>
-                                </div>
                               </div>
                             ))}
                           </div>

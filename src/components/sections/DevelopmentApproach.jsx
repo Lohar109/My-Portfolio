@@ -120,7 +120,7 @@ export default function DevelopmentApproach() {
   }
 
   return (
-    <section className="relative px-6 py-24 sm:px-10 lg:px-16 bg-slate-50/40 border-t border-slate-100 overflow-hidden">
+    <section className="relative px-6 pt-12 pb-24 sm:px-10 lg:px-16 bg-slate-50/40 border-t border-slate-100 overflow-hidden">
       {/* Global SVG Definitions for gradients */}
       <svg className="absolute w-0 h-0" aria-hidden="true">
         <defs>

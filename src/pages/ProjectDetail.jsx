@@ -377,6 +377,62 @@ function getProblemCards(slug) {
   }
 }
 
+function getLoadingOptimizationApproach(slug) {
+  if (slug !== 'marketpulse') return null
+
+  return {
+    steps: [
+      {
+        icon: Target,
+        title: 'Problem research',
+        description: 'Understood the bin-packing problem and studied the Extreme Point method.',
+      },
+      {
+        icon: Code2,
+        title: 'Algorithm in C++',
+        description: 'Implemented 3D placement logic with overlap detection and boundary checks.',
+      },
+      {
+        icon: Cuboid,
+        title: 'Qt3D rendering',
+        description: 'Rendered placed boxes in real-time 3D with orbit camera controls.',
+      },
+      {
+        icon: LayoutGrid,
+        title: 'UI & features',
+        description: 'Built login, product forms, container selection, pie chart, and saved data system.',
+      },
+      {
+        icon: FileDown,
+        title: 'PDF export & testing',
+        description: 'Added layer-wise 2D export, product summary PDF, and tested all edge cases.',
+      },
+    ],
+    principles: [
+      {
+        icon: GitFork,
+        title: 'Algorithm first',
+        description: 'Core logic before UI.',
+      },
+      {
+        icon: Eye,
+        title: 'Visual feedback',
+        description: 'Every action shows in 3D live.',
+      },
+      {
+        icon: Database,
+        title: 'Data persistence',
+        description: 'JSON saves all sessions.',
+      },
+      {
+        icon: Shield,
+        title: 'Input validation',
+        description: 'No duplicates or invalid data.',
+      },
+    ],
+  }
+}
+
 function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'
@@ -505,6 +561,7 @@ function getProjectCaseStudyDetails(slug, project) {
       aboutText: slug === 'marketpulse'
         ? 'The core of this software is the Extreme Point Method — a 3D bin-packing algorithm that I implemented in C++. The idea is simple: we start with one empty slot at position (0, 0, 0) inside the container. When a product is placed at that point, three new candidate positions are generated — one along the X axis (to the right of the placed box), one along the Y axis (on top of it), and one along the Z axis (behind it). The next product tries each of these points one by one. Before placing, the algorithm checks two things — first, whether the product fits within the container boundaries, and second, whether it overlaps with any already placed product. If both checks pass, it gets placed and three more points are added. This continues until all products are placed or no valid position is found. The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.'
         : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
+      loadingOptimizationApproach: getLoadingOptimizationApproach(slug),
       techHeading: 'DESIGN PRINCIPLES',
       tags: slug === 'marketpulse'
         ? ['Extreme Point Algorithm', '3D Bin Packing', 'Overlap Detection', 'Qt3D Real-Time Rendering', 'JSON Persistence', 'OTP Email Verification']
@@ -976,6 +1033,80 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
+                ) : project.slug === 'marketpulse' && activeSection === 'approach' ? (
+                  <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
+                    <div className="w-full flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line max-w-4xl">
+                        {currentStep.aboutText}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-4 items-start">
+                      {currentStep.loadingOptimizationApproach?.steps.map((step, idx) => {
+                        const Icon = step.icon
+                        return (
+                          <div key={step.title} className="relative flex flex-col items-center text-center px-2">
+                            {idx < currentStep.loadingOptimizationApproach.steps.length - 1 && (
+                              <div className="hidden lg:flex absolute top-10 left-[calc(50%+2.75rem)] right-[-1.25rem] items-center justify-center text-slate-300 text-2xl font-light select-none pointer-events-none">
+                                →
+                              </div>
+                            )}
+
+                            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-violet-50 text-violet-600 shadow-sm ring-1 ring-violet-100/80">
+                              <Icon size={22} strokeWidth={2.3} />
+                            </div>
+
+                            <h4 className="mt-5 text-[17px] font-bold tracking-tight text-slate-800 font-sans leading-snug">
+                              {step.title}
+                            </h4>
+                            <p className="mt-2 text-[14px] leading-relaxed text-slate-600 font-medium font-sans max-w-[15rem]">
+                              {step.description}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                    <div className="pt-2">
+                      <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.18em] text-slate-600">
+                        KEY PRINCIPLES FOLLOWED
+                      </h4>
+
+                      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                        {currentStep.loadingOptimizationApproach?.principles.map((item) => {
+                          const Icon = item.icon
+                          return (
+                            <div key={item.title} className="rounded-2xl border border-[#ece8db] bg-[#f7f5ee] px-4 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+                              <div className="flex items-start gap-3">
+                                <div className="mt-0.5 text-violet-600 shrink-0">
+                                  <Icon size={18} strokeWidth={2.4} />
+                                </div>
+                                <div>
+                                  <h5 className="text-[16px] font-bold tracking-tight text-slate-800 font-sans">
+                                    {item.title}
+                                  </h5>
+                                  <p className="mt-1 text-[13px] leading-relaxed text-slate-600 font-medium font-sans">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
+
+                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
+                          {currentStep.techHeading}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
+                        </div>
+                      </div>
+                    </div>
                 ) : activeSection === 'problem' ? (
                   <div className="mt-8 w-full animate-fadeIn">
                     <div className="flex flex-col min-w-0">

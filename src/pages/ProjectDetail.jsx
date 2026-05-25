@@ -1107,6 +1107,7 @@ function ProjectDetail() {
                         </div>
                       </div>
                     </div>
+                  </div>
                 ) : activeSection === 'problem' ? (
                   <div className="mt-8 w-full animate-fadeIn">
                     <div className="flex flex-col min-w-0">

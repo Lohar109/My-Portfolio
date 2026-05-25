@@ -1159,7 +1159,7 @@ function ProjectDetail() {
                         })}
                       </div>
 
-                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-4">
                         <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
                           {currentStep.techHeading}
                         </span>
@@ -1209,7 +1209,7 @@ function ProjectDetail() {
                       </div>
                     </div>
 
-                    <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                    <div className="w-full border-t border-neutral-100/70 pt-6 mt-4">
                       <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
                         {currentStep.techHeading}
                       </span>
@@ -1229,7 +1229,7 @@ function ProjectDetail() {
                       </p>
 
                       {/* Lower Full-Width: Technologies Used */}
-                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-4">
                         <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
                           {currentStep.techHeading}
                         </span>
@@ -1286,7 +1286,7 @@ function ProjectDetail() {
                       </div>
 
                       {/* Lower Full-Width: Technologies Used */}
-                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-4">
                         <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
                           {currentStep.techHeading}
                         </span>

@@ -451,6 +451,48 @@ function getLoadingOptimizationApproach(slug) {
   }
 }
 
+function getCoreCapabilities(slug) {
+  if (slug !== 'marketpulse') return null
+
+  return [
+    {
+      icon: Cuboid,
+      iconColor: 'text-violet-600',
+      iconBg: 'bg-violet-50',
+      title: '3D loading viewer',
+      description: 'Real-time 3D visualization of packed products in the container with orbit camera rotation.',
+    },
+    {
+      icon: BrainCircuit,
+      iconColor: 'text-emerald-600',
+      iconBg: 'bg-emerald-50',
+      title: 'Auto bin-packing',
+      description: 'Extreme Point algorithm places all products automatically — no manual placement needed.',
+    },
+    {
+      icon: LineChart,
+      iconColor: 'text-amber-600',
+      iconBg: 'bg-amber-50',
+      title: 'Fill rate pie chart',
+      description: 'Live pie chart shows filled vs empty container space percentage after every product is added.',
+    },
+    {
+      icon: FileDown,
+      iconColor: 'text-rose-600',
+      iconBg: 'bg-rose-50',
+      title: 'PDF report export',
+      description: 'Export product summary PDF or layer-wise 2D breakdown of every Z-depth layer in the container.',
+    },
+    {
+      icon: User,
+      iconColor: 'text-sky-600',
+      iconBg: 'bg-sky-50',
+      title: 'Login with OTP',
+      description: 'Full registration and login system with 6-digit email OTP verification via Gmail SMTP.',
+    },
+  ]
+}
+
 function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'
@@ -623,6 +665,7 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'The software works end to end. A user first registers with their name, company name, email, mobile number, and password. Email verification uses a 6-digit OTP sent via Gmail SMTP directly from the app — built using Qt\'s SSL socket. After login, users can add and save products with name, type (box, bag, barrel, sack, pipe), dimensions in centimeters, weight in kg, and quantity — all stored in a local JSON file. Users can also save multiple trucks, containers, train bogis, and warehouses. When loading, you select a container, pick products from your saved list (or enter them directly), assign a unique color to each product type, and hit "Add in Container." The algorithm runs instantly and the 3D view updates live. Users can add or remove products one at a time and watch the container re-pack in real time. A pie chart shows filled vs empty percentage. Finally, two types of PDF reports can be exported — one showing the product summary with type icons and colors, and one showing a layer-wise 2D visual of every Z-depth layer in the container.'
         : 'The resulting system unifies automated processing with intuitive UI dashboards. We combined lightning-fast server endpoints with clean component state loops to deliver zero-friction user feedback.\n\nThe layout includes robust exception catch boundaries, security validations, and reactive elements to provide a beautiful, seamless execution experience.',
       techHeading: 'ENGINEERING ASSETS',
+      coreCapabilities: getCoreCapabilities(slug),
       tags: getSolutionPoints(slug)
     },
     'result': {
@@ -1123,6 +1166,55 @@ function ProjectDetail() {
                         <div className="flex flex-wrap gap-2">
                           {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : project.slug === 'marketpulse' && activeSection === 'solution' ? (
+                  <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
+                    <div className="w-full flex flex-col min-w-0">
+                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
+                        {currentStep.aboutHeading}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line max-w-4xl">
+                        {currentStep.aboutText}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.08em] text-slate-700">
+                        {currentStep.metricsHeading}
+                      </h4>
+
+                      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {currentStep.coreCapabilities?.map((cap) => {
+                          const Icon = cap.icon
+                          return (
+                            <div key={cap.title} className="rounded-2xl border border-neutral-100 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition">
+                              <div className="flex items-start gap-4">
+                                <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${cap.iconBg} ${cap.iconColor} shadow-sm ring-1 ring-black/5`}>
+                                  <Icon size={20} strokeWidth={2.2} />
+                                </div>
+                                <div className="flex-1">
+                                  <h5 className="text-[16px] font-bold tracking-tight text-slate-800 font-sans">
+                                    {cap.title}
+                                  </h5>
+                                  <p className="mt-1 text-[13px] leading-relaxed text-slate-600 font-medium font-sans">
+                                    {cap.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="w-full border-t border-neutral-100/70 pt-6 mt-8">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
+                        {currentStep.techHeading}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
                       </div>
                     </div>
                   </div>

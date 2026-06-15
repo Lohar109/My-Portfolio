@@ -1,15 +1,6 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  GraduationCap,
-  Building2,
-  BookOpen,
-  Star,
-  Trophy,
-  Award,
-  Rocket,
   FileText,
-  ArrowRight,
   BrainCircuit,
   Code2,
   Database,
@@ -17,9 +8,8 @@ import {
   Cloud,
   FileDown
 } from 'lucide-react';
-import { SiGit, SiPostgresql, SiReact, SiDocker } from 'react-icons/si';
 import subjectsIllustration from '../../assets/subjects_illustration.png';
-import { notesData, cheatSheetsData } from '../../data/notes.js';
+import { notesData } from '../../data/notes.js';
 
 const iconMap = {
   brain: BrainCircuit,
@@ -30,7 +20,6 @@ const iconMap = {
 };
 
 function NotesSection() {
-  const [showAllCheatSheets, setShowAllCheatSheets] = useState(false);
 
   return (
     <motion.section
@@ -243,168 +232,7 @@ function NotesSection() {
                   </a>
                 </motion.div>
               );
-            })}
           </div>
-        </div>
-
-        {/* Highlights Section */}
-        <motion.div
-          className="flex items-center gap-3 mt-16 mb-8 px-2"
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <Star size={20} className="text-violet-600 stroke-[2.2]" />
-          <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Notebook Stats & Quality</h3>
-        </motion.div>
-
-        {/* Highlights Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Card 1 */}
-          <motion.div
-            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-amber-50/50 border border-amber-100 flex items-center justify-center text-[#D97706] shadow-sm transition-colors duration-300">
-              <Trophy size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <div className="space-y-1.5 text-left">
-              <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">5 Files</h4>
-              <p className="text-sm font-semibold text-[#1E293B] tracking-tight leading-none">Curated Notebooks</p>
-              <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">High-quality technical content</p>
-            </div>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div
-            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-center text-[#4F46E5] shadow-sm transition-colors duration-300">
-              <Award size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <div className="space-y-1.5 text-left">
-              <h4 className="text-3xl font-bold text-slate-800 leading-none font-sans tracking-tight">5.0 MB</h4>
-              <p className="text-sm font-semibold text-[#1E293B] tracking-tight leading-none">Total Footprint</p>
-              <p className="text-xs font-medium text-gray-400 leading-normal pt-0.5">Optimized vector-rendered PDFs</p>
-            </div>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div
-            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-teal-50/50 border border-teal-100 flex items-center justify-center text-[#0D9488] shadow-sm transition-colors duration-300">
-              <BookOpen size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <div className="space-y-1 text-left">
-              <h4 className="text-base font-semibold text-slate-800 leading-tight font-sans">5 Key Domains</h4>
-              <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Frontend, Backend, Databases, DevOps, and Machine Learning</p>
-            </div>
-          </motion.div>
-
-          {/* Card 4 */}
-          <motion.div
-            className="group bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-orange-50/50 border border-orange-100 flex items-center justify-center text-[#EA580C] shadow-sm transition-colors duration-300">
-              <Rocket size={20} className="stroke-[2] transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <div className="space-y-1 text-left">
-              <h4 className="text-base font-semibold text-slate-800 leading-tight font-sans">Open Source Access</h4>
-              <p className="text-xs font-medium text-gray-400 leading-relaxed pt-1">Freely shared to download, study, compile, and redistribute</p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Cheat Sheets Section */}
-        <motion.div
-          className="flex items-center justify-between mt-16 mb-8 px-2"
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center gap-3">
-            <FileText size={20} className="text-violet-600 stroke-[2.2]" />
-            <h3 className="text-xl font-bold text-slate-800 tracking-tight font-sans">Quick Notes & Cheat Sheets</h3>
-          </div>
-          
-          <button
-            onClick={() => setShowAllCheatSheets(!showAllCheatSheets)}
-            className="group flex items-center gap-1.5 text-xs font-bold text-black hover:text-slate-700 transition-colors cursor-pointer select-none"
-          >
-            {showAllCheatSheets ? 'Show Less' : 'View All Cheat Sheets'}
-            <ArrowRight size={14} className={`transition-transform duration-250 ${showAllCheatSheets ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
-          </button>
-        </motion.div>
-
-        {/* Cheat Sheets Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {cheatSheetsData.slice(0, showAllCheatSheets ? 4 : 4).map((cert, idx) => (
-            <a
-              key={idx}
-              href={cert.pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-white border border-slate-100 rounded-3xl p-5.5 shadow-[0_4px_24px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_36px_rgba(139,92,246,0.05)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between min-h-[175px] cursor-pointer"
-            >
-              <div className="flex items-start gap-4 text-left">
-                {/* Brand Icons */}
-                {cert.iconType === 'git' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-orange-50/50 border border-orange-100 flex items-center justify-center text-[#F05032] shadow-sm">
-                    <SiGit size={20} className="transition-transform duration-300 group-hover:scale-110" />
-                  </div>
-                )}
-                {cert.iconType === 'sql' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50/50 border border-blue-100 flex items-center justify-center text-[#4169E1] shadow-sm">
-                    <SiPostgresql size={20} className="transition-transform duration-300 group-hover:scale-110" />
-                  </div>
-                )}
-                {cert.iconType === 'react' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-cyan-50/50 border border-cyan-100 flex items-center justify-center text-[#61DAFB] shadow-sm">
-                    <SiReact size={20} className="transition-transform duration-300 group-hover:scale-110" />
-                  </div>
-                )}
-                {cert.iconType === 'docker' && (
-                  <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-blue-50/50 border border-blue-100 flex items-center justify-center text-[#2496ED] shadow-sm">
-                    <SiDocker size={20} className="transition-transform duration-300 group-hover:scale-110" />
-                  </div>
-                )}
-
-                <div className="space-y-0.5">
-                  <h5 className="text-xs font-bold text-slate-800 leading-snug group-hover:text-violet-700 transition-colors">{cert.title}</h5>
-                  <p className="text-[11px] font-semibold text-gray-500 leading-snug">{cert.provider}</p>
-                </div>
-              </div>
-
-              {/* Card Footer tags */}
-              <div className="flex items-center justify-between mt-4">
-                <span className="bg-gray-50 border border-gray-150 px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                  PDF
-                </span>
-                <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1">
-                  {cert.year}
-                  <ArrowRight size={10} className="transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </div>
-            </a>
-          ))}
         </div>
 
         {/* Bottom Quote & Signature Block */}

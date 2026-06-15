@@ -85,17 +85,17 @@ function NotesSection() {
             return (
               <motion.div
                 key={index}
-                className="group relative bg-white border border-slate-200 rounded-2xl p-6.5 sm:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:-translate-y-2.5 flex flex-col justify-between text-left"
+                className="group relative bg-white border border-slate-200 rounded-2xl p-6.5 sm:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between text-left"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
               >
                 {/* Behind Page 2 (Medium offset) */}
-                <div className="absolute inset-0 bg-white border border-slate-200 rounded-2xl shadow-sm translate-x-1.5 translate-y-1.5 -z-10 group-hover:translate-x-2.5 group-hover:translate-y-2.5 transition-transform duration-300 ease-out" />
+                <div className="absolute inset-0 bg-white border border-slate-200 rounded-2xl shadow-sm translate-x-1 translate-y-1 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300 ease-out" />
                 
                 {/* Behind Page 3 (Deepest offset) */}
-                <div className="absolute inset-0 bg-white border border-slate-150 rounded-2xl shadow-xs translate-x-3 translate-y-3 -z-20 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-300 ease-out" />
+                <div className="absolute inset-0 bg-white border border-slate-150 rounded-2xl shadow-xs translate-x-2 translate-y-2 -z-20 group-hover:translate-x-4 group-hover:translate-y-4 transition-transform duration-300 ease-out" />
 
                 {/* Inner background layer for grid paper and decorative glow */}
                 <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none -z-[5]">

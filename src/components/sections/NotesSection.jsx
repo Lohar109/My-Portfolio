@@ -118,7 +118,7 @@ function NotesSection() {
                 <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-end">
                   <div className="flex items-center gap-3">
                     {/* View/Read button */}
-                    <div className="thick-black-border-wrapper h-10 active:scale-[0.98]">
+                    <div className="thick-black-border-wrapper no-hover-lift h-10 active:scale-[0.98]">
                       <a
                         href={item.pdfUrl}
                         target="_blank"
@@ -131,7 +131,7 @@ function NotesSection() {
                     </div>
 
                     {/* Download button */}
-                    <div className="thick-black-border-wrapper h-10 w-10 active:scale-[0.98]">
+                    <div className="thick-black-border-wrapper no-hover-lift h-10 w-10 active:scale-[0.98]">
                       <a
                         href={item.pdfUrl}
                         download

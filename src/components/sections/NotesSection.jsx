@@ -236,47 +236,7 @@ function NotesSection() {
           </div>
         </div>
 
-        {/* Bottom Quote & Signature Block */}
-        <motion.div
-          className="relative mt-20 bg-gradient-to-br from-white via-violet-50/20 to-indigo-50/30 border border-violet-100/70 rounded-3xl p-8 sm:p-10 shadow-[0_16px_36px_-12px_rgba(139,92,246,0.05)] overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Subtle Decorative SVGs & Glows in background */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-violet-200/10 to-indigo-200/10 rounded-full blur-2xl pointer-events-none" />
-          <svg className="absolute right-0 bottom-0 top-0 h-full w-2/3 opacity-25 pointer-events-none" viewBox="0 0 200 100" preserveAspectRatio="none">
-            <path d="M0,70 Q50,30 100,70 T200,70" fill="none" stroke="#8B5CF6" strokeWidth="0.4" strokeDasharray="3 3" />
-            <path d="M0,50 Q60,10 120,60 T200,40" fill="none" stroke="#6366F1" strokeWidth="0.5" />
-          </svg>
 
-          {/* Left Block: Quote Text */}
-          <div className="flex-1 flex items-start gap-4 text-left z-10">
-            <span className="text-6xl font-serif text-violet-400/40 leading-none select-none -mt-3">“</span>
-            <p className="text-base sm:text-lg font-medium text-slate-700 leading-relaxed max-w-2xl font-sans">
-              True learning doesn't stop with memory; it lives in the detailed drafts, structured summaries, and cheat sheets we compile to master our crafts.
-            </p>
-          </div>
-
-          {/* Right Block: Signature */}
-          <div className="flex-shrink-0 flex flex-col items-center md:items-end gap-1.5 z-10 select-none">
-            <div className="relative inline-block select-none cursor-default group/signature">
-              <span 
-                className="text-4xl font-normal tracking-wide text-violet-600 block leading-none transform -rotate-2 hover:scale-105 transition-transform duration-300" 
-                style={{ 
-                  fontFamily: "'Great Vibes', 'Sacramento', 'Dancing Script', cursive",
-                  display: 'inline-block'
-                }}
-              >
-                Vaibhav Lohar
-              </span>
-              <svg className="w-[130px] sm:w-[150px] h-3 text-violet-400/50 mt-1.5 mx-auto md:mr-1" viewBox="0 0 100 10" preserveAspectRatio="none" fill="none">
-                <path d="M5,5 Q35,1 70,7 T95,3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </motion.section>
   );

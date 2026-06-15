@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
+import { FileDown, ExternalLink, BookOpen } from 'lucide-react';
 import subjectsIllustration from '../../assets/subjects_illustration.png';
+import { notesData } from '../../data/notes.js';
 
 function NotesSection() {
   return (
     <motion.section
       id="notes"
-      className="relative px-6 pt-6 pb-16 sm:px-12 lg:px-24 bg-transparent overflow-hidden"
+      className="relative px-6 pt-6 pb-20 sm:px-12 lg:px-24 bg-transparent overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -16,7 +18,7 @@ function NotesSection() {
 
       <div className="mx-auto max-w-6xl">
         {/* Two-Column Header Section */}
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-2">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 mb-16">
           <div className="lg:col-span-6 space-y-6 text-left">
             {/* Main Title */}
             <motion.h2
@@ -38,11 +40,11 @@ function NotesSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              A curated selection of technical references, notebooks, and quick cheat sheets detailing key engineering concepts and system designs.
+              Click below to view, read, or download the comprehensive PDF notes covering essential computer science subjects and technologies.
             </motion.p>
           </div>
 
-          {/* Right Column: Premium 3D-like Illustration */}
+          {/* Right Column: Premium Illustration */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
             <motion.div
               className="relative w-full max-w-[420px] md:max-w-[460px] aspect-[4/3] flex items-center justify-center"
@@ -62,6 +64,92 @@ function NotesSection() {
               />
             </motion.div>
           </div>
+        </div>
+
+        {/* Section Header */}
+        <motion.div
+          className="flex items-center gap-3 mb-8 px-2 text-left"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-50 text-violet-600 border border-violet-100 shadow-sm">
+            <BookOpen size={16} strokeWidth={2.2} className="stroke-[2.2]" />
+          </div>
+          <h3 className="text-lg font-bold text-slate-800 tracking-tight">Available PDF Notes</h3>
+        </motion.div>
+
+        {/* Grid stack for the PDF items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {notesData.map((item, index) => {
+            return (
+              <motion.div
+                key={index}
+                className="group bg-white border border-gray-150/40 rounded-3xl p-6.5 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(139,92,246,0.08)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between text-left relative overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+              >
+                {/* Decorative glow inside card */}
+                <div className="absolute top-0 right-0 -mr-12 -mt-12 h-32 w-32 rounded-full bg-gradient-to-br from-violet-200/10 to-indigo-200/10 blur-xl pointer-events-none group-hover:scale-110 transition-transform duration-500" />
+
+                <div>
+                  {/* Category Badge & Size */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className={`inline-flex items-center rounded-lg px-2.5 py-1 text-[11px] font-bold tracking-wide ${item.bgClass} ${item.borderClass} ${item.iconColor}`}>
+                      {item.category}
+                    </span>
+                    <span className="text-xs font-bold text-gray-400">
+                      {item.grade}
+                    </span>
+                  </div>
+
+                  {/* Title & Subject */}
+                  <h4 className="text-xl font-bold text-slate-800 group-hover:text-violet-700 transition-colors duration-250 leading-snug">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm font-semibold text-gray-500 mt-2 leading-relaxed">
+                    {item.subject}
+                  </p>
+                </div>
+
+                {/* Footer and action buttons */}
+                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-100 px-3 py-1 text-xs font-bold text-emerald-600 shadow-sm">
+                    <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-emerald-400"></span>
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                    </span>
+                    {item.status}
+                  </span>
+
+                  <div className="flex items-center gap-3">
+                    {/* Download button */}
+                    <a
+                      href={item.pdfUrl}
+                      download
+                      className="flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 hover:border-slate-350 transition duration-300 cursor-pointer shadow-sm"
+                      title="Download PDF"
+                    >
+                      <FileDown size={18} />
+                    </a>
+
+                    {/* View/Read button */}
+                    <a
+                      href={item.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 rounded-2xl bg-black text-white hover:bg-black/90 px-4 py-2.5 text-xs font-bold transition duration-300 shadow-md hover:scale-[1.02] cursor-pointer"
+                    >
+                      <span>Read PDF</span>
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </motion.section>

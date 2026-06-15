@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FileDown, ExternalLink, BookOpen } from 'lucide-react';
+import { ArrowDown, BookOpen } from 'lucide-react';
 import subjectsIllustration from '../../assets/subjects_illustration.png';
 import { notesData } from '../../data/notes.js';
 
@@ -115,15 +115,7 @@ function NotesSection() {
                 </div>
 
                 {/* Footer and action buttons */}
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-100 px-3 py-1 text-xs font-bold text-emerald-600 shadow-sm">
-                    <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-emerald-400"></span>
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                    </span>
-                    {item.status}
-                  </span>
-
+                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-end">
                   <div className="flex items-center gap-3">
                     {/* View/Read button */}
                     <div className="thick-black-border-wrapper h-10 active:scale-[0.98]">
@@ -135,7 +127,6 @@ function NotesSection() {
                         title="Read PDF"
                       >
                         <span>Read PDF</span>
-                        <ExternalLink size={13} />
                       </a>
                     </div>
 
@@ -147,7 +138,7 @@ function NotesSection() {
                         className="h-9 w-9 rounded-[10px] bg-white flex items-center justify-center text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
                         title="Download PDF"
                       >
-                        <FileDown size={16} />
+                        <ArrowDown size={16} className="stroke-[3]" />
                       </a>
                     </div>
                   </div>

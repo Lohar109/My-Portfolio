@@ -232,6 +232,7 @@ function NotesSection() {
                   </a>
                 </motion.div>
               );
+            })}
           </div>
         </div>
 

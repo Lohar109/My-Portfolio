@@ -85,16 +85,38 @@ function NotesSection() {
             return (
               <motion.div
                 key={index}
-                className="group bg-white border border-gray-150/40 rounded-3xl p-6.5 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(139,92,246,0.08)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between text-left relative overflow-hidden"
+                className="group relative bg-white border border-slate-200 rounded-2xl p-6.5 sm:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:-translate-y-2.5 flex flex-col justify-between text-left"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
               >
-                {/* Decorative glow inside card */}
-                <div className="absolute top-0 right-0 -mr-12 -mt-12 h-32 w-32 rounded-full bg-gradient-to-br from-violet-200/10 to-indigo-200/10 blur-xl pointer-events-none group-hover:scale-110 transition-transform duration-500" />
+                {/* Behind Page 2 (Medium offset) */}
+                <div className="absolute inset-0 bg-white border border-slate-200 rounded-2xl shadow-sm translate-x-1.5 translate-y-1.5 -z-10 group-hover:translate-x-2.5 group-hover:translate-y-2.5 transition-transform duration-300 ease-out" />
+                
+                {/* Behind Page 3 (Deepest offset) */}
+                <div className="absolute inset-0 bg-white border border-slate-150 rounded-2xl shadow-xs translate-x-3 translate-y-3 -z-20 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-300 ease-out" />
 
-                <div>
+                {/* Inner background layer for grid paper and decorative glow */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none -z-[5]">
+                  {/* Lined Grid Paper Pattern */}
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:20px_20px] opacity-60" />
+                  
+                  {/* Decorative glow inside card */}
+                  <div className="absolute top-0 right-0 -mr-12 -mt-12 h-32 w-32 rounded-full bg-gradient-to-br from-violet-200/10 to-indigo-200/10 blur-xl group-hover:scale-125 transition-transform duration-500" />
+                </div>
+
+                {/* Spine crease line to look like a bound book/manual */}
+                <div className="absolute left-0 top-0 bottom-0 w-[5px] bg-slate-50/50 border-r border-slate-200/30 pointer-events-none rounded-l-2xl -z-[5]" />
+                <div className="absolute left-[5px] top-0 bottom-0 w-[1px] bg-slate-200/10 pointer-events-none -z-[5]" />
+
+                {/* PDF Tag at top-left corner */}
+                <div className="absolute -top-2 left-6 bg-red-600 text-white text-[9px] font-black tracking-widest px-2 py-0.5 rounded shadow-xs uppercase select-none z-10">
+                  PDF
+                </div>
+
+                {/* Main Card Content */}
+                <div className="relative z-10 pl-2">
                   {/* Category Badge & Size */}
                   <div className="flex items-center justify-between mb-5">
                     <span className={`inline-flex items-center rounded-lg px-2.5 py-1 text-[11px] font-bold tracking-wide ${item.bgClass} ${item.borderClass} ${item.iconColor}`}>
@@ -115,7 +137,7 @@ function NotesSection() {
                 </div>
 
                 {/* Footer and action buttons */}
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-end">
+                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-end relative z-10 pl-2">
                   <div className="flex items-center gap-3">
                     {/* View/Read button */}
                     <div className="thick-black-border-wrapper no-hover-lift h-10 active:scale-[0.98]">

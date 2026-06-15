@@ -158,6 +158,11 @@ button:focus, button:active, button:focus-visible {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+.thick-black-border-wrapper.no-hover-lift:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 /* Static Gradient Border Wrapper for Contact & Footer buttons */
 .static-gradient-border-wrapper {
   position: relative;

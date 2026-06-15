@@ -125,26 +125,31 @@ function NotesSection() {
                   </span>
 
                   <div className="flex items-center gap-3">
-                    {/* Download button */}
-                    <a
-                      href={item.pdfUrl}
-                      download
-                      className="flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 hover:border-slate-350 transition duration-300 cursor-pointer shadow-sm"
-                      title="Download PDF"
-                    >
-                      <FileDown size={18} />
-                    </a>
-
                     {/* View/Read button */}
-                    <a
-                      href={item.pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-2xl bg-black text-white hover:bg-black/90 px-4 py-2.5 text-xs font-bold transition duration-300 shadow-md hover:scale-[1.02] cursor-pointer"
-                    >
-                      <span>Read PDF</span>
-                      <ExternalLink size={14} />
-                    </a>
+                    <div className="thick-black-border-wrapper h-10 active:scale-[0.98]">
+                      <a
+                        href={item.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-9 px-5 rounded-[10px] bg-white flex items-center justify-center gap-2 text-xs md:text-sm font-bold text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
+                        title="Read PDF"
+                      >
+                        <span>Read PDF</span>
+                        <ExternalLink size={13} />
+                      </a>
+                    </div>
+
+                    {/* Download button */}
+                    <div className="thick-black-border-wrapper h-10 w-10 active:scale-[0.98]">
+                      <a
+                        href={item.pdfUrl}
+                        download
+                        className="h-9 w-9 rounded-[10px] bg-white flex items-center justify-center text-gray-700 hover:text-violet-600 transition-all duration-205 cursor-pointer select-none"
+                        title="Download PDF"
+                      >
+                        <FileDown size={16} />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </motion.div>

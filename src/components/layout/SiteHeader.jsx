@@ -29,6 +29,7 @@ function SiteHeader() {
     { label: 'Education', href: '/education' },
     { label: 'Skills', href: '/skills' },
     { label: 'Projects', href: '/projects' },
+    { label: 'Notes', href: '/notes' },
     { label: 'Contact', href: '/contact' },
   ]
 

@@ -4,6 +4,7 @@ import Education from './pages/Education.jsx'
 import Skills from './pages/Skills.jsx'
 import Projects from './pages/Projects.jsx'
 import Contact from './pages/Contact.jsx'
+import Notes from './pages/Notes.jsx'
 import ProjectDetail from './pages/ProjectDetail.jsx'
 import ScrollToTop from './components/layout/ScrollToTop.jsx'
 import SiteHeader from './components/layout/SiteHeader.jsx'
@@ -27,6 +28,7 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>

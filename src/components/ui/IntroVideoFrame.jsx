@@ -11,7 +11,7 @@ function IntroVideoFrame() {
   const videoRef = useRef(null)
   const playerRef = useRef(null)
 
-  const videoUrl = 'https://assets.mixkit.co/videos/preview/mixkit-developer-working-on-his-computer-34282-large.mp4'
+  const videoUrl = '/videos/intro/intro.mp4'
 
   useEffect(() => {
     if (videoRef.current) {

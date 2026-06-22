@@ -69,7 +69,7 @@ function FooterSection() {
     setStatus('loading')
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${emailAddress}`, {
+      const response = await fetch('https://formsubmit.co/ajax/9397f0e7b176e8e09564641d80993d95', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,9 @@ function FooterSection() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          subject: formData.subject || 'New Contact Form Submission',
+          _replyto: formData.email,
+          _subject: formData.subject || `Message from ${formData.name} via Portfolio`,
+          _template: 'box',
           message: formData.message
         })
       })

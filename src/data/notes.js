@@ -26,5 +26,19 @@ export const notesData = [
     iconColor: 'text-[#2563EB]',
     bgClass: 'bg-[#2563EB]/10',
     borderClass: 'border-[#2563EB]/20',
+  },
+  {
+    title: 'HTML & Web Design Reference Manual',
+    subject: 'HTML5 Semantics, Document Structure, Elements & Modern Best Practices',
+    category: 'Frontend Development',
+    timeline: 'June 2026',
+    status: 'Available',
+    metric: 'File Size',
+    grade: '733 KB',
+    pdfUrl: '/Notes/HTML.pdf',
+    icon: 'code',
+    iconColor: 'text-[#E34F26]',
+    bgClass: 'bg-[#E34F26]/10',
+    borderClass: 'border-[#E34F26]/20',
   }
 ];

@@ -58,7 +58,6 @@ import {
 import { FaChartLine, FaNetworkWired } from 'react-icons/fa'
 import SiteHeader from '../components/layout/SiteHeader.jsx'
 import CaseStudySection from '../components/ui/CaseStudySection.jsx'
-import IntroVideoFrame from '../components/ui/IntroVideoFrame.jsx'
 import { projects } from '../data/projects.js'
 
 function getStackIcon(item) {
@@ -1015,22 +1014,14 @@ function ProjectDetail() {
                 {/* 4. Bottom Layout */}
                 {activeSection === 'case-study' ? (
                   <div className="mt-2 flex flex-col gap-8 w-full animate-fadeIn">
-                    {/* Upper Split Grid: Project Name & Summary (Left) vs Video (Right) */}
-                    <div className="grid grid-cols-1 md:grid-cols-[1.0fr_1.0fr] gap-8 items-start w-full">
-                      {/* Left: Title & Summary */}
-                      <div className="flex flex-col min-w-0">
-                        <h2 className="text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight animate-slideInUp">
-                          {currentStep.title}
-                        </h2>
-                        <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold animate-slideInUp anim-delay-100">
-                          {currentStep.summary}
-                        </p>
-                      </div>
-
-                      {/* Right: Intro Video Player Box */}
-                      <div className="w-full flex justify-center shrink-0">
-                        <IntroVideoFrame />
-                      </div>
+                    {/* Project Name & Summary */}
+                    <div className="flex flex-col min-w-0 w-full">
+                      <h2 className="text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight animate-slideInUp">
+                        {currentStep.title}
+                      </h2>
+                      <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold animate-slideInUp anim-delay-100">
+                        {currentStep.summary}
+                      </p>
                     </div>
 
                     {/* Middle Full-Width: About the Project */}

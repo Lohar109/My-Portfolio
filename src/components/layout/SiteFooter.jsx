@@ -71,11 +71,11 @@ function SiteFooter() {
             </span>
             <div className="space-y-3.5 text-left w-full">
               <a 
-                href="mailto:vaibhavlohar109@gmail.com" 
+                href="mailto:vaibhavlohar010@gmail.com" 
                 className="flex items-center gap-2.5 text-sm font-semibold text-gray-550 hover:text-slate-800 transition-colors"
               >
                 <Mail size={16} className="text-gray-400" />
-                <span className="truncate">vaibhavlohar109@gmail.com</span>
+                <span className="truncate">vaibhavlohar010@gmail.com</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/vaibhav-lohar-ba7824315" 

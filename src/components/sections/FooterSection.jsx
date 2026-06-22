@@ -22,7 +22,7 @@ import {
 } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 
-const emailAddress = 'vaibhavlohar109@gmail.com'
+const emailAddress = 'vaibhavlohar010@gmail.com'
 
 function FooterSection() {
   const navigate = useNavigate()
@@ -62,23 +62,45 @@ function FooterSection() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!formData.name || !formData.email || !formData.message) return
 
     setStatus('loading')
 
-    // Simulate direct contact dispatch with premium micro-animation delay
-    setTimeout(() => {
-      setStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${emailAddress}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'New Contact Form Submission',
+          message: formData.message
+        })
       })
-      setTimeout(() => setStatus('idle'), 3500)
-    }, 1800)
+
+      if (response.ok) {
+        setStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        })
+        setTimeout(() => setStatus('idle'), 3500)
+      } else {
+        setStatus('idle')
+        alert('Something went wrong sending your message. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setStatus('idle')
+      alert('Network error. Please check your connection and try again.')
+    }
   }
 
   return (

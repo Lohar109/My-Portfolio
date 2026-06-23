@@ -1327,7 +1327,7 @@ function ProjectDetail() {
             >
               <div>
                 {/* 2. Main Title & Description (rendered full-width only for non-Overview sections) */}
-                {activeSection !== 'case-study' && (
+                {activeSection !== 'case-study' && activeSection !== 'images' && (
                   <>
                     <h2 className="mt-2 text-2.5xl sm:text-3xl font-black tracking-tight text-slate-800 font-sans leading-tight">
                       {currentStep.title}
@@ -1610,82 +1610,58 @@ function ProjectDetail() {
                     </div>
                   </div>
                 ) : activeSection === 'images' ? (
-                  <div className="mt-8 w-full animate-fadeIn">
-                    <div className="flex flex-col min-w-0">
-                      <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
-                        {currentStep.aboutHeading}
-                      </h3>
-                      <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed text-slate-500 font-semibold font-sans whitespace-pre-line">
-                        {currentStep.aboutText}
-                      </p>
+                  <div className="w-full animate-fadeIn">
+                    {project.images && project.images.length > 0 ? (
+                      <div className="w-full flex flex-col items-center">
+                        <div className="relative w-full max-w-4xl">
+                          <div className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[16/9] shadow-sm">
+                            <img
+                              src={project.images[carouselIndex].src}
+                              alt={`${project.title} screenshot ${carouselIndex + 1}`}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
 
-                      {/* Premium Image Grid / Placeholder for User's Custom Images */}
-                      <div className="mt-8">
-                        {project.images && project.images.length > 0 ? (
-                          <div className="w-full flex flex-col items-center">
-                            <div className="relative w-full max-w-4xl">
-                              <div className="group relative rounded-2xl overflow-hidden border border-neutral-100 bg-neutral-50 aspect-[16/9] shadow-sm">
-                                <img
-                                  src={project.images[carouselIndex].src}
-                                  alt={`${project.title} screenshot ${carouselIndex + 1}`}
-                                  className="w-full h-full object-cover"
-                                  loading="lazy"
-                                />
+                            {/* Left button */}
+                            <button
+                              onClick={() => setCarouselIndex((i) => (i - 1 + project.images.length) % project.images.length)}
+                              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow hover:bg-white"
+                              aria-label="Previous image"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
+                                <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                              </svg>
+                            </button>
 
-                                {/* Left button */}
-                                <button
-                                  onClick={() => setCarouselIndex((i) => (i - 1 + project.images.length) % project.images.length)}
-                                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow hover:bg-white"
-                                  aria-label="Previous image"
-                                >
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
-                                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                                  </svg>
-                                </button>
+                            {/* Right button */}
+                            <button
+                              onClick={() => setCarouselIndex((i) => (i + 1) % project.images.length)}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow hover:bg-white"
+                              aria-label="Next image"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
+                                <path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                              </svg>
+                            </button>
 
-                                {/* Right button */}
-                                <button
-                                  onClick={() => setCarouselIndex((i) => (i + 1) % project.images.length)}
-                                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow hover:bg-white"
-                                  aria-label="Next image"
-                                >
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
-                                    <path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-                                  </svg>
-                                </button>
-
-                                <div className="absolute left-0 right-0 bottom-0 p-4 bg-gradient-to-t from-black/40 to-transparent text-white opacity-100">
-                                  <div className="text-sm font-bold">{project.images[carouselIndex].caption}</div>
-                                  <div className="text-[11px] text-white/80 mt-1">Image {carouselIndex + 1} of {project.images.length}</div>
-                                </div>
-                              </div>
-
-                              {/* (Thumbnails removed per request) */}
+                            <div className="absolute left-0 right-0 bottom-0 p-4 bg-gradient-to-t from-black/40 to-transparent text-white opacity-100">
+                              <div className="text-sm font-bold">{project.images[carouselIndex].caption}</div>
+                              <div className="text-[11px] text-white/80 mt-1">Image {carouselIndex + 1} of {project.images.length}</div>
                             </div>
                           </div>
-                        ) : (
-                          <div className="border-2 border-dashed border-neutral-200 rounded-[24px] p-8 sm:p-12 text-center flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50/80 transition-all select-none">
-                            <div className="w-12 h-12 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center mb-4 border border-violet-100/50">
-                              <LayoutGrid size={20} strokeWidth={2.5} />
-                            </div>
-                            <h4 className="text-sm font-extrabold text-slate-800 font-sans tracking-tight">No Custom Images Added Yet</h4>
-                            <p className="text-xs text-slate-400 mt-2 max-w-sm font-semibold leading-relaxed font-sans">
-                              Add image paths (e.g. <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">"/images/your-screenshot.png"</code>) to <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">src/data/projects.js</code> under the <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">images</code> key for this project to showcase your custom gallery here!
-                            </p>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Lower Full-Width: Technologies Used */}
-                      <div className="w-full border-t border-neutral-100/70 pt-6 mt-4">
-                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-3 font-sans">
-                          {currentStep.techHeading}
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                          {currentStep.tags.map((tag) => renderTag(tag, currentStep.themeColor))}
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="border-2 border-dashed border-neutral-200 rounded-[24px] p-8 sm:p-12 text-center flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50/80 transition-all select-none">
+                        <div className="w-12 h-12 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center mb-4 border border-violet-100/50">
+                          <LayoutGrid size={20} strokeWidth={2.5} />
+                        </div>
+                        <h4 className="text-sm font-extrabold text-slate-800 font-sans tracking-tight">No Custom Images Added Yet</h4>
+                        <p className="text-xs text-slate-400 mt-2 max-w-sm font-semibold leading-relaxed font-sans">
+                          Add image paths (e.g. <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">"/images/your-screenshot.png"</code>) to <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">src/data/projects.js</code> under the <code className="bg-white border border-neutral-150 px-1.5 py-0.5 rounded text-[10px] text-violet-600 font-mono">images</code> key for this project to showcase your custom gallery here!
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="mt-8 w-full animate-fadeIn">

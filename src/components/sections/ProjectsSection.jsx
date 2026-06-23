@@ -451,10 +451,10 @@ function ProjectsSection() {
     }
     if (activeFilter === 'AI') {
       return (
-        /\b(ai|genai|rag)\b/i.test(project.summary || '') ||
-        project.slug === 'portfolio' ||
-        project.slug === 'support-flow' ||
-        project.slug === 'studioflow'
+        project.slug !== 'studioflow' &&
+        (/\b(ai|genai|rag)\b/i.test(project.summary || '') ||
+          project.slug === 'portfolio' ||
+          project.slug === 'support-flow')
       )
     }
     if (activeFilter === 'Tools') {
@@ -599,7 +599,7 @@ function ProjectsSection() {
       </div>
 
       {/* Featured Project Card Block */}
-      {shopEaseProject && (activeFilter === 'All' || activeFilter === 'Web' || activeFilter === 'AI') && (
+      {shopEaseProject && (activeFilter === 'All' || activeFilter === 'Web') && (
         <div id={shopEaseProject.slug} className="mt-8">
           <div className="border border-gray-200 bg-white rounded-3xl p-6 md:p-8 shadow-sm flex flex-col lg:flex-row gap-8 items-stretch w-full">
 

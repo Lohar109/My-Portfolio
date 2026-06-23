@@ -127,13 +127,14 @@ function HeroSection() {
 
               <div className="snake-border-wrapper w-full sm:w-auto active:scale-[0.98]">
                 <div className="snake-border-glow" />
-                <button
-                  onClick={() => window.open('/resume.pdf', '_blank')}
+                <a
+                  href="/Resume/Vaibhav Lohar.pdf"
+                  download="Vaibhav Lohar Resume.pdf"
                   className="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none group"
                 >
                   <Download className="h-4.5 w-4.5 group-hover:translate-y-0.5 transition-transform duration-300" />
                   <span>Download Resume</span>
-                </button>
+                </a>
               </div>
             </motion.div>
 

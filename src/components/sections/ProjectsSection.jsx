@@ -451,9 +451,7 @@ function ProjectsSection() {
     }
     if (activeFilter === 'AI') {
       return (
-        project.summary?.toLowerCase().includes('ai') ||
-        project.summary?.toLowerCase().includes('genai') ||
-        project.summary?.toLowerCase().includes('rag') ||
+        /\b(ai|genai|rag)\b/i.test(project.summary || '') ||
         project.slug === 'portfolio' ||
         project.slug === 'support-flow' ||
         project.slug === 'studioflow'

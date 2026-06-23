@@ -395,8 +395,6 @@ function renderProjectVisual(project) {
 
 function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All')
-  const [sortBy, setSortBy] = useState('latest')
-  const [sortDropdownOpen, setSortDropdownOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
@@ -472,18 +470,9 @@ function ProjectsSection() {
   const shopEaseProject = projects.find((p) => p.slug === 'studioflow')
   const otherProjects = filteredProjects.filter((p) => p.slug !== 'studioflow')
 
-  // Sort other projects
+  // Sort other projects by year (latest first)
   const sortedProjects = [...otherProjects].sort((a, b) => {
-    if (sortBy === 'latest') {
-      return parseInt(b.year || '2026') - parseInt(a.year || '2026')
-    }
-    if (sortBy === 'oldest') {
-      return parseInt(a.year || '2026') - parseInt(b.year || '2026')
-    }
-    if (sortBy === 'alphabetical') {
-      return a.title.localeCompare(b.title)
-    }
-    return 0
+    return parseInt(b.year || '2026') - parseInt(a.year || '2026')
   })
 
   // Paginate other projects
@@ -798,75 +787,11 @@ function ProjectsSection() {
         </div>
       )}
 
-      {/* All Projects Header with Sort Option */}
-      <div className="mt-16 flex items-center justify-between border-b border-gray-100 pb-5">
+      {/* All Projects Header */}
+      <div className="mt-16 border-b border-gray-100 pb-5">
         <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight">
           All Projects
         </h3>
-
-        {/* Sort Dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-            className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-xs md:text-sm font-semibold text-gray-700 hover:bg-gray-50 flex items-center gap-2 transition-all duration-200 select-none shadow-sm cursor-pointer"
-          >
-            <ListFilter size={15} />
-            <span>
-              {sortBy === 'latest' && 'Latest First'}
-              {sortBy === 'oldest' && 'Oldest First'}
-              {sortBy === 'alphabetical' && 'Alphabetical'}
-            </span>
-            <ChevronDown size={14} className={`text-gray-400 transition-transform duration-200 ${sortDropdownOpen ? 'rotate-180' : ''}`} />
-          </button>
-
-          <AnimatePresence>
-            {sortDropdownOpen && (
-              <>
-                {/* Backdrop to close */}
-                <div className="fixed inset-0 z-10" onClick={() => setSortDropdownOpen(false)} />
-
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-44 bg-white border border-gray-150 rounded-xl shadow-lg py-1.5 z-20 overflow-hidden"
-                >
-                  <button
-                    onClick={() => {
-                      setSortBy('latest');
-                      setCurrentPage(1);
-                      setSortDropdownOpen(false);
-                    }}
-                    className={`w-full text-left px-4 py-2 text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors duration-155 ${sortBy === 'latest' ? 'text-blue-600 bg-blue-50/40' : 'text-gray-700'}`}
-                  >
-                    Latest First
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSortBy('oldest');
-                      setCurrentPage(1);
-                      setSortDropdownOpen(false);
-                    }}
-                    className={`w-full text-left px-4 py-2 text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors duration-155 ${sortBy === 'oldest' ? 'text-blue-600 bg-blue-50/40' : 'text-gray-700'}`}
-                  >
-                    Oldest First
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSortBy('alphabetical');
-                      setCurrentPage(1);
-                      setSortDropdownOpen(false);
-                    }}
-                    className={`w-full text-left px-4 py-2 text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors duration-155 ${sortBy === 'alphabetical' ? 'text-blue-600 bg-blue-50/40' : 'text-gray-700'}`}
-                  >
-                    Alphabetical
-                  </button>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
-        </div>
       </div>
 
       {/* Horizontal Cards for Other Projects */}

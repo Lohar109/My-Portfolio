@@ -133,6 +133,11 @@ function getProjectLinks(slug) {
         github: 'https://github.com/Lohar109/MediaOps-Studio',
         demo: '/projects/media-ops'
       }
+    case 'shopease-landing':
+      return {
+        github: 'https://github.com/Lohar109/ShopEase-Ecom-Landing',
+        demo: 'https://shopease-ecom-landing.onrender.com'
+      }
     default:
       return {
         github: 'https://github.com/Lohar109',
@@ -338,6 +343,47 @@ function renderProjectVisual(project) {
         </div>
       )
 
+    case 'shopease-landing':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#fafafa] to-[#f4f4f5] flex flex-col justify-between p-3 select-none overflow-hidden border border-slate-200/50">
+          {/* Mock Header */}
+          <div className="flex items-center justify-between border-b border-slate-100 pb-1.5 gap-2">
+            <span className="text-[9px] font-black text-slate-800 tracking-tight">SHOPEASE</span>
+            <div className="flex-1 bg-white border border-slate-200/80 rounded px-1.5 py-0.5 text-[6px] text-slate-400 flex items-center gap-1 max-w-[60px]">
+              <Search size={6} />
+              <span>Search...</span>
+            </div>
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-500 animate-pulse" />
+          </div>
+
+          {/* Categories Row */}
+          <div className="grid grid-cols-3 gap-1 my-1.5">
+            <div className="bg-white border border-slate-200/50 rounded p-1 flex flex-col items-center gap-0.5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <span className="text-[8px]">👕</span>
+              <span className="text-[5px] font-bold text-slate-500 leading-none">Fashion</span>
+            </div>
+            <div className="bg-white border border-slate-200/50 rounded p-1 flex flex-col items-center gap-0.5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <span className="text-[8px]">💻</span>
+              <span className="text-[5px] font-bold text-slate-500 leading-none">Tech</span>
+            </div>
+            <div className="bg-white border border-slate-200/50 rounded p-1 flex flex-col items-center gap-0.5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <span className="text-[8px]">🏠</span>
+              <span className="text-[5px] font-bold text-slate-500 leading-none">Home</span>
+            </div>
+          </div>
+
+          {/* Featured Product Block */}
+          <div className="bg-white border border-slate-200/60 rounded-lg p-1.5 flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.04)] mb-0.5">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[7px] font-extrabold text-slate-800 leading-none">Minimalist Lamp</span>
+              <span className="text-[6px] font-bold text-violet-600 leading-none">$49.99</span>
+            </div>
+            <div className="h-6 w-6 rounded bg-gradient-to-tr from-violet-100 to-indigo-50 border border-violet-200/30 flex items-center justify-center text-[8px] font-bold text-violet-700">
+              💡
+            </div>
+          </div>
+        </div>
+      )
     default:
       return (
         <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">

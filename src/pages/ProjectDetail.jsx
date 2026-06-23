@@ -173,6 +173,13 @@ function getHighlightIcon(label) {
 
 function getSolutionPoints(slug) {
   switch (slug) {
+    case 'shopease-landing':
+      return [
+        'Semantic HTML5 structure for high SEO indexability',
+        'Responsive layouts using modern CSS Flexbox and Grid',
+        'Lightweight vanilla implementations with smooth hover transitions',
+        'Accessible inputs and forms with native HTML5 validation'
+      ]
     case 'studioflow':
       return [
         'AI-powered product data extraction from images & voice',
@@ -238,6 +245,37 @@ function getSolutionPoints(slug) {
 
 function getProblemCards(slug) {
   switch (slug) {
+    case 'shopease-landing':
+      return [
+        {
+          icon: LayoutGrid,
+          iconColor: 'text-violet-700',
+          iconBg: 'bg-violet-50',
+          title: 'Non-Semantic HTML',
+          description: 'Many e-commerce pages use unstructured div tags, which hurts search indexing and accessibility.',
+        },
+        {
+          icon: Shield,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'Poor accessibility',
+          description: 'Images without alt texts and unlabeled inputs make interactive grids unusable for screen readers.',
+        },
+        {
+          icon: Clock,
+          iconColor: 'text-amber-700',
+          iconBg: 'bg-amber-50',
+          title: 'Slow page load times',
+          description: 'Heavy UI scripts blocking DOM parsing cause poor search rankings and drop in user retention.',
+        },
+        {
+          icon: Layers,
+          iconColor: 'text-emerald-700',
+          iconBg: 'bg-emerald-50',
+          title: 'Inflexible CSS layouts',
+          description: 'Rigid responsive wrappers breaking on mobile devices damage trust in the e-commerce storefront.',
+        },
+      ]
     case 'marketpulse':
       return [
         {

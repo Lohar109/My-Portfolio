@@ -138,6 +138,11 @@ function getProjectLinks(slug) {
         github: 'https://github.com/Lohar109/ShopEase-Ecom-Landing',
         demo: '/projects/shopease-landing'
       }
+    case 'developer-workflow':
+      return {
+        github: 'https://github.com/Lohar109/Developer-Workflow',
+        demo: '/projects/developer-workflow'
+      }
     default:
       return {
         github: 'https://github.com/Lohar109',
@@ -380,6 +385,48 @@ function renderProjectVisual(project) {
             </div>
             <div className="h-6 w-6 rounded bg-gradient-to-tr from-violet-100 to-indigo-50 border border-violet-200/30 flex items-center justify-center text-[8px] font-bold text-violet-700">
               💡
+            </div>
+          </div>
+        </div>
+      )
+    case 'developer-workflow':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0b0f19] to-[#111827] flex flex-col justify-between p-3 select-none overflow-hidden border border-slate-800/40">
+          {/* Header Panel */}
+          <div className="flex items-center justify-between border-b border-slate-800/60 pb-1.5 gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded bg-indigo-600 text-white text-[6px] font-black flex items-center justify-center">DW</span>
+              <span className="text-[8px] font-bold text-slate-200">Workflow</span>
+            </div>
+            <span className="text-[6.5px] font-black bg-indigo-500/20 text-indigo-400 px-1 py-0.2 rounded uppercase">Streak: 12d 🔥</span>
+          </div>
+
+          {/* Task Progress Panel */}
+          <div className="bg-slate-900/60 border border-slate-800/50 rounded-lg p-1.5 flex flex-col gap-1 shadow-sm">
+            <div className="flex justify-between text-[6px] text-slate-400 font-bold">
+              <span>TODAY'S PROGRESS</span>
+              <span>75%</span>
+            </div>
+            <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+              <div className="bg-indigo-500 h-full w-[75%]" />
+            </div>
+          </div>
+
+          {/* Tasks List Mini View */}
+          <div className="flex flex-col gap-1 mt-0.5">
+            <div className="bg-slate-900/40 border border-slate-800/30 rounded p-1 flex items-center justify-between">
+              <span className="text-[6.5px] font-semibold text-slate-300 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                Implement localStorage API
+              </span>
+              <span className="text-[5px] font-black text-slate-500">Done</span>
+            </div>
+            <div className="bg-slate-900/40 border border-slate-800/30 rounded p-1 flex items-center justify-between">
+              <span className="text-[6.5px] font-semibold text-slate-300 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                Integrate Chart.js graphs
+              </span>
+              <span className="text-[5px] font-black text-indigo-400">In Progress</span>
             </div>
           </div>
         </div>

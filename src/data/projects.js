@@ -198,6 +198,57 @@ export const projectsData = [
     previewTone:
       'bg-[linear-gradient(135deg,#3f3f46_0%,#7c2d12_48%,#f59e0b_100%)]',
   },
+  {
+    slug: 'shopease-landing',
+    isFeatured: true,
+    title: 'ShopEase E-Commerce Landing Page',
+    category: 'Web UI / UX',
+    role: 'Frontend Developer',
+    year: '2026',
+    summary:
+      'A premium, minimalist e-commerce landing page designed with semantic HTML5 structure, responsive CSS Grid/Flexbox layouts, and optimized SEO metadata.',
+    previewText:
+      'Focuses on clean structure, modern aesthetics, accessibility, and high performance.',
+    detailIntro:
+      'ShopEase E-Commerce Landing Page is a premium, minimalist storefront interface built from scratch to showcase modern design standards, optimal SEO indexability, and high-performance frontend engineering.',
+    challenge:
+      'Creating a pixel-perfect, highly responsive e-commerce layout without relying on external heavy frontend frameworks, ensuring maximum performance.',
+    outcome:
+      'Delivered a lightweight, semantic page with high lighthouse scores and fluid responsive adaptations.',
+    topInfoCards: [
+      { label: 'Role', value: 'Frontend Developer' },
+      { label: 'Core Focus', value: 'Semantic HTML5 & Responsive Design' },
+      { label: 'Outcome', value: 'SEO-ready frontend architecture with 100% responsiveness' },
+    ],
+    stats: [
+      { label: 'Use Case', value: 'Storefront UI showcase' },
+      { label: 'Audience', value: 'Developers and designer teams' },
+      { label: 'Primary Goal', value: 'Demonstrate semantic coding standards' },
+    ],
+    caseStudy: {
+      overview:
+        'ShopEase was built to demonstrate how standard HTML5 semantic elements paired with clean CSS design patterns can create an extremely fast, accessible, and beautiful landing page. By eliminating bulky frameworks, the storefront loads instantly and remains robust across all screen dimensions.',
+      problem:
+        'Modern landing pages are often bogged down by excessive JavaScript bundles, non-semantic HTML structures (div soup), and lack of accessibility compliance. This results in slow load times, poor search engine indexability, and sub-optimal user experiences on mobile devices.',
+      approach: [
+        'Structured the storefront layout using descriptive HTML5 tags such as header, nav, main, section, and footer to optimize page accessibility and search engine crawls.',
+        'Crafted modular responsive layouts utilizing modern CSS Flexbox and Grid, avoiding large UI frameworks to keep style payloads minimal.',
+        'Optimized site assets and deferred scripts to ensure non-blocking renders and maintain high performance scores.',
+      ],
+      result:
+        'The final deployment on Render displays a lightweight, pixel-perfect UI. It serves as a solid foundation for e-commerce sites, achieving high semantic quality, inclusive design via strict alt text bindings, and responsive adaptations.',
+    },
+    stack: [
+      'HTML5',
+      'CSS3',
+      'Responsive Design',
+      'SEO Optimization',
+      'Google Fonts',
+      'Render',
+    ],
+    previewTone:
+      'bg-[linear-gradient(135deg,#7c3aed_0%,#c084fc_50%,#e9d5ff_100%)]',
+  },
 ];
 
 export const projects = projectsData;

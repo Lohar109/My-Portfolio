@@ -37,6 +37,7 @@ import {
   LayoutGrid,
   Shield,
   GitFork,
+  ExternalLink,
   Lock,
   Search,
   Award,
@@ -821,6 +822,36 @@ function renderTag(item, themeColor) {
   )
 }
 
+function getProjectExternalLinks(slug) {
+  switch (slug) {
+    case 'studioflow':
+      return {
+        github: 'https://github.com/Lohar109/ShopEase-Ecommerce',
+        demo: 'https://shop-ease-ecommerce-delta.vercel.app/'
+      }
+    case 'portfolio':
+      return {
+        github: 'https://github.com/Lohar109/My-Portfolio',
+        demo: null
+      }
+    case 'marketpulse':
+      return {
+        github: 'https://github.com/Lohar109/Loading-Optimisation-Software',
+        demo: null
+      }
+    case 'shopease-landing':
+      return {
+        github: 'https://github.com/Lohar109/ShopEase-Ecom-Landing',
+        demo: 'https://shopease-ecom-landing.onrender.com'
+      }
+    default:
+      return {
+        github: null,
+        demo: null
+      }
+  }
+}
+
 function ProjectDetail() {
   const { slug } = useParams()
   const project = projects.find((entry) => entry.slug === slug)
@@ -850,6 +881,7 @@ function ProjectDetail() {
   }
 
   const caseStudyDetails = getProjectCaseStudyDetails(project.slug, project)
+  const externalLinks = getProjectExternalLinks(project.slug)
   const currentStep = caseStudyDetails[activeSection] || caseStudyDetails['case-study']
 
   const timelineSteps = [
@@ -1060,6 +1092,38 @@ function ProjectDetail() {
                       <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-500 font-sans font-semibold animate-slideInUp anim-delay-100">
                         {currentStep.summary}
                       </p>
+
+                      {/* External Action Links (Live Site & GitHub) */}
+                      {(externalLinks.demo || externalLinks.github) && (
+                        <div className="mt-5 flex flex-wrap gap-4 animate-slideInUp anim-delay-150 select-none">
+                          {externalLinks.demo && (
+                            <div className="thick-black-border-wrapper h-9 active:scale-[0.98]">
+                              <a
+                                href={externalLinks.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="h-8 px-4 rounded-[8px] bg-white flex items-center justify-center gap-1.5 text-xs font-bold text-gray-700 hover:text-violet-600 transition-all duration-200 cursor-pointer select-none"
+                              >
+                                <ExternalLink size={12} />
+                                <span>Visit Live Site</span>
+                              </a>
+                            </div>
+                          )}
+                          {externalLinks.github && (
+                            <div className="thick-black-border-wrapper h-9 active:scale-[0.98]">
+                              <a
+                                href={externalLinks.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="h-8 px-4 rounded-[8px] bg-white flex items-center justify-center gap-1.5 text-xs font-bold text-gray-700 hover:text-violet-600 transition-all duration-200 cursor-pointer select-none"
+                              >
+                                <GitFork size={12} />
+                                <span>View Source Code</span>
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
 
                     {/* Middle Full-Width: About the Project */}

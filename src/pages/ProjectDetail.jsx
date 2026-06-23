@@ -1462,7 +1462,7 @@ function ProjectDetail() {
                         return (
                           <div key={step.title} className="relative flex flex-col items-center text-center px-2">
                             {idx < currentStep.approachDetails.steps.length - 1 && (
-                              <div className="hidden lg:flex absolute top-10 left-[calc(50%+2.75rem)] right-[-1.25rem] items-center justify-center text-slate-300 text-2xl font-light select-none pointer-events-none">
+                              <div className="hidden lg:flex absolute top-0 h-14 left-[calc(50%+2.75rem)] right-[-1.25rem] items-center justify-center text-slate-300 text-2xl font-light select-none pointer-events-none">
                                 →
                               </div>
                             )}

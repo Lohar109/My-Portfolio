@@ -299,6 +299,14 @@ export const projectsData = [
       'FontAwesome',
       'LocalStorage API',
     ],
+    images: [
+      { src: '/Developer Workflow/Screenshot 2026-06-23 192926.png', caption: 'Developer Workflow Dashboard' },
+      { src: '/Developer Workflow/Screenshot 2026-06-23 192936.png', caption: 'Weekly Productivity Analytics' },
+      { src: '/Developer Workflow/Screenshot 2026-06-23 192949.png', caption: 'Saved Notes & Resource Links' },
+      { src: '/Developer Workflow/Screenshot 2026-06-23 193007.png', caption: 'Profile Settings Customization' },
+      { src: '/Developer Workflow/Screenshot 2026-06-23 193019.png', caption: 'Midnight Theme Settings' },
+      { src: '/Developer Workflow/Screenshot 2026-06-23 193033.png', caption: 'Backup and JSON Data Export' },
+    ],
     previewTone:
       'bg-[linear-gradient(135deg,#090d16_0%,#1e1b4b_50%,#4338ca_100%)]',
   },

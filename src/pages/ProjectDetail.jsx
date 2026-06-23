@@ -836,7 +836,7 @@ function getProjectExternalLinks(slug) {
       }
     case 'marketpulse':
       return {
-        github: 'https://github.com/Lohar109/Loading-Optimisation-Software',
+        github: 'https://github.com/Lohar109/Loading-Optimization-Software',
         demo: null
       }
     case 'shopease-landing':

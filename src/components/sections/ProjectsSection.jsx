@@ -136,7 +136,7 @@ function getProjectLinks(slug) {
     case 'shopease-landing':
       return {
         github: 'https://github.com/Lohar109/ShopEase-Ecom-Landing',
-        demo: 'https://shopease-ecom-landing.onrender.com'
+        demo: '/projects/shopease-landing'
       }
     default:
       return {

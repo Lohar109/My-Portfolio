@@ -442,6 +442,8 @@ function ProjectsSection() {
         project.category?.toLowerCase().includes('dashboard') ||
         project.category?.toLowerCase().includes('workflow') ||
         project.slug === 'studioflow' ||
+        project.slug === 'portfolio' ||
+        project.slug === 'shopease-landing' ||
         project.slug === 'campus-connect' ||
         project.slug === 'insight-board' ||
         project.slug === 'media-ops'

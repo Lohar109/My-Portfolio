@@ -249,6 +249,59 @@ export const projectsData = [
     previewTone:
       'bg-[linear-gradient(135deg,#7c3aed_0%,#c084fc_50%,#e9d5ff_100%)]',
   },
+  {
+    slug: 'developer-workflow',
+    isFeatured: true,
+    title: 'Developer Workflow',
+    category: 'Web Application',
+    role: 'Frontend Developer',
+    year: '2026',
+    summary:
+      'Developer Workflow is a browser-based productivity suite built for developers — helping them track daily tasks, manage learning resources, and visualize productivity trends, all powered by local storage with zero backend.',
+    previewText:
+      'Sleek client-side dashboard with progress metrics, weekly analytics, and custom light/midnight theming.',
+    detailIntro:
+      'Developer Workflow is a browser-based productivity suite built for developers — helping them track daily tasks, manage learning resources, and visualize productivity trends, all powered by local storage with zero backend.',
+    challenge:
+      'Creating a complete persistent workflow suite with data export, base64 file attachment support, and rich analytics graphs entirely on the client-side with zero server infrastructure.',
+    outcome:
+      'Delivered a lightweight, zero-friction developer companion that loads instantly and keeps user data 100% private.',
+    topInfoCards: [
+      { label: 'Role', value: 'Frontend Developer' },
+      { label: 'Core Focus', value: 'Local-First Architecture & Data Visualization' },
+      { label: 'Outcome', value: 'Offline-first dashboard with 0ms server overhead' },
+    ],
+    stats: [
+      { label: 'Use Case', value: 'Personal productivity companion' },
+      { label: 'Audience', value: 'Software developers and self-learners' },
+      { label: 'Primary Goal', value: 'Track tasks, links, and study streaks locally' },
+    ],
+    caseStudy: {
+      overview:
+        'Developer Workflow is a fully client-side web application built from scratch using HTML5, CSS3, and Vanilla JavaScript. It solves a real problem developers face every day — keeping track of what they need to learn, what tasks are pending, and how consistently they are working. Users can add tasks, attach files to them, mark them complete, and see a real-time progress bar. A separate Analytics page powered by Chart.js shows a weekly productivity bar chart, total tasks done, current daily streak, and learning hours — all calculated from local storage data. Users can also save important resource links and quick notes directly on the dashboard. A Profile page lets developers set their name, bio, and social links (GitHub, LinkedIn, Portfolio), and a Settings page allows switching between a Midnight (dark) and Light theme, toggling dashboard widgets, and exporting or resetting all data.',
+      problem:
+        'Developers often have to manage their daily learning goals, code tasks, reference links, and quick notes across multiple disconnected tools — sticky notes, browser bookmarks, Notion pages, to-do apps. None of these tools are built specifically for a developer\'s workflow. There is no built-in way to attach a file to a task, track a learning streak, or visualize how productive a week has been. The result is missed tasks, lost links, forgotten notes, and zero visibility into progress over time. The problem is especially painful for students and self-learners who need a lightweight, always-available tool that requires no login, no internet dependency, and no complex setup.',
+      approach: [
+        'Decided on a localStorage-first, zero-backend approach and designed the multi-page structure with shared CSS.',
+        'Built task CRUD with file attachment using FileReader API, real-time progress bar, and pending tasks panel.',
+        'Implemented streak calculation, weekly bar chart with Chart.js, and date-based history search with filtered results.',
+        'Added profile picture upload (base64), social links, bio, theme switching (Midnight/Light), and widget toggle controls.',
+        'Built JSON export/import for full data backup, polished responsive CSS with CSS variables for theming, and deployed on Render.',
+      ],
+      result:
+        'Developer Workflow solves a very real personal pain point — having a single, always-available, no-login tool to track daily development tasks and learning consistency. The app removes the need to use heavy tools like Notion or Jira for simple personal task tracking. Because everything is stored in localStorage, the app works offline and loads instantly. The streak tracker and weekly chart make productivity visible in a way that motivates consistent daily work. The file attachment feature means important reference documents stay linked directly to the tasks they belong to, and nothing gets lost. The JSON export ensures data is never locked inside the browser — users can back it up anytime.',
+    },
+    stack: [
+      'HTML5',
+      'CSS3',
+      'Vanilla JavaScript (ES6+)',
+      'Chart.js',
+      'FontAwesome',
+      'LocalStorage API',
+    ],
+    previewTone:
+      'bg-[linear-gradient(135deg,#090d16_0%,#1e1b4b_50%,#4338ca_100%)]',
+  },
 ];
 
 export const projects = projectsData;

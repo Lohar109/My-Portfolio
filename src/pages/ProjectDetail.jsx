@@ -301,32 +301,46 @@ function getProblemCards(slug) {
     case 'shopease-landing':
       return [
         {
-          icon: LayoutGrid,
+          icon: Boxes,
           iconColor: 'text-violet-700',
           iconBg: 'bg-violet-50',
-          title: 'Non-Semantic HTML',
-          description: 'Many e-commerce pages use unstructured div tags, which hurts search indexing and accessibility.',
+          title: 'Template-heavy, bloated code',
+          description: 'Most e-commerce UIs rely on Bootstrap or templates — leading to unnecessary CSS overhead and hard-to-customize layouts.',
         },
         {
           icon: Shield,
           iconColor: 'text-rose-700',
           iconBg: 'bg-rose-50',
-          title: 'Poor accessibility',
-          description: 'Images without alt texts and unlabeled inputs make interactive grids unusable for screen readers.',
+          title: 'Poor accessibility standards',
+          description: 'Landing pages built without semantic HTML have no alt text, unlabeled inputs, and no screen reader support — excluding users.',
         },
         {
-          icon: Clock,
+          icon: Sparkles,
           iconColor: 'text-amber-700',
           iconBg: 'bg-amber-50',
-          title: 'Slow page load times',
-          description: 'Heavy UI scripts blocking DOM parsing cause poor search rankings and drop in user retention.',
+          title: 'No glassmorphism product UI',
+          description: 'Standard product card designs look dated. A modern frosted-glass card effect with smooth hover animations was missing.',
         },
         {
           icon: Layers,
           iconColor: 'text-emerald-700',
           iconBg: 'bg-emerald-50',
-          title: 'Inflexible CSS layouts',
-          description: 'Rigid responsive wrappers breaking on mobile devices damage trust in the e-commerce storefront.',
+          title: 'No mobile-first responsiveness',
+          description: 'Many hand-coded landing pages break on mobile because Flexbox and Grid media queries are not properly implemented.',
+        },
+        {
+          icon: Search,
+          iconColor: 'text-sky-700',
+          iconBg: 'bg-sky-50',
+          title: 'Zero SEO consideration',
+          description: 'Pages built without meta description, keywords, and viewport tags are invisible to search engines and social previews.',
+        },
+        {
+          icon: Code2,
+          iconColor: 'text-indigo-700',
+          iconBg: 'bg-indigo-50',
+          title: 'No reusable frontend foundation',
+          description: 'Without a clean, structured HTML/CSS base, adding JavaScript interactivity or a backend later becomes complex and messy.',
         },
       ]
     case 'marketpulse':
@@ -706,6 +720,129 @@ function getDeveloperWorkflowCoreCapabilities(slug) {
   ]
 }
 
+function getShopEaseApproach(slug) {
+  if (slug !== 'shopease-landing') return null
+
+  return {
+    steps: [
+      {
+        icon: LayoutGrid,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Semantic HTML structure',
+        description: 'Laid out the full page skeleton using HTML5 semantic tags with proper aria-labels and accessibility attributes.',
+      },
+      {
+        icon: Code2,
+        iconColor: 'text-indigo-600',
+        iconBg: 'bg-indigo-50',
+        title: 'CSS variables & base styles',
+        description: 'Defined the color system with CSS custom properties and wrote reset styles and base typography with Poppins.',
+      },
+      {
+        icon: Sparkles,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Navigation & hero section',
+        description: 'Built the sticky glassmorphism header with Flexbox, search form, nav links, and the bold hero CTA section.',
+      },
+      {
+        icon: Layers,
+        iconColor: 'text-amber-600',
+        iconBg: 'bg-amber-50',
+        title: 'Grid layouts & product cards',
+        description: 'Implemented the category flex grid, featured products CSS Grid with glassmorphism cards, and hover lift effects.',
+      },
+      {
+        icon: Rocket,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'Newsletter, reviews & responsiveness',
+        description: 'Added the newsletter form with validation, customer review cards, and full mobile media queries at 768px.',
+      },
+    ],
+    principles: [
+      {
+        icon: BookOpen,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Semantic first',
+        description: 'HTML5 tags before styling; structure before visual design.',
+      },
+      {
+        icon: Layers,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
+        title: 'Zero dependencies',
+        description: 'No Bootstrap, no jQuery, no framework; pure HTML and CSS only.',
+      },
+      {
+        icon: Shield,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Accessibility built in',
+        description: 'alt text, aria-labels, sr-only labels, and semantic structure from line one.',
+      },
+      {
+        icon: Sparkles,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'CSS-only responsiveness',
+        description: 'Flexbox and Grid with auto-fit handle layout changes without a single line of JavaScript.',
+      },
+    ],
+  }
+}
+
+function getShopEaseCoreCapabilities(slug) {
+  if (slug !== 'shopease-landing') return null
+
+  return [
+    {
+      icon: LayoutGrid,
+      iconColor: 'text-violet-600',
+      iconBg: 'bg-violet-50',
+      title: 'Sticky Glassmorphism Header',
+      description: 'Frosted-glass sticky nav with logo, pill-shaped search bar, and smooth hover transitions on all links.',
+    },
+    {
+      icon: Layers,
+      iconColor: 'text-emerald-600',
+      iconBg: 'bg-emerald-50',
+      title: 'Responsive Category Grid',
+      description: 'Flexbox category cards with smooth translateY lift-up hover effect — works on all screen sizes.',
+    },
+    {
+      icon: Sparkles,
+      iconColor: 'text-amber-600',
+      iconBg: 'bg-amber-50',
+      title: 'Glassmorphism Product Cards',
+      description: 'CSS Grid product showcase with backdrop-filter frosted-glass cards, product images, pricing, and full-width Buy Now buttons.',
+    },
+    {
+      icon: Shield,
+      iconColor: 'text-rose-600',
+      iconBg: 'bg-rose-50',
+      title: 'Newsletter with HTML5 Validation',
+      description: 'Email subscription form with native type="email" and required validation — no JavaScript needed.',
+    },
+    {
+      icon: Users,
+      iconColor: 'text-sky-600',
+      iconBg: 'bg-sky-50',
+      title: 'Customer Reviews Section',
+      description: 'Responsive 3-column review grid with avatar images, reviewer names, and italic testimonial quotes.',
+    },
+    {
+      icon: Rocket,
+      iconColor: 'text-rose-600',
+      iconBg: 'bg-rose-50',
+      title: 'Full Mobile Responsiveness',
+      description: 'CSS media queries at 768px stack the nav, collapse all grids to single column, and make all forms full-width.',
+    },
+  ]
+}
+
 function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'
@@ -740,6 +877,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: '<250ms', label: 'Render Latency', icon: 'Activity', color: 'emerald' },
         { value: '80%', label: 'Planning Time Saved', icon: 'Clock', color: 'amber' },
         { value: '15%', label: 'Fuel Savings', icon: 'Truck', color: 'blue' }
+      ] : slug === 'shopease-landing' ? [
+        { value: '0', label: 'External Frameworks', icon: 'Layers', color: 'violet' },
+        { value: '7', label: 'Product Categories', icon: 'LayoutGrid', color: 'emerald' },
+        { value: '3', label: 'Glassmorphism Cards', icon: 'Sparkles', color: 'amber' },
+        { value: '100%', label: 'CSS Mobile Responsive', icon: 'Shield', color: 'blue' }
       ] : slug === 'developer-workflow' ? [
         { value: '0 ms', label: 'Server Load Time', icon: 'Clock', color: 'indigo' },
         { value: '100%', label: 'Offline Capable', icon: 'Shield', color: 'emerald' },
@@ -762,11 +904,13 @@ function getProjectCaseStudyDetails(slug, project) {
       title: slug === 'studioflow' ? 'Manual Inventory & GenAI Pipelines'
              : slug === 'portfolio' ? 'Static Portfolios Limit Understanding'
              : slug === 'marketpulse' ? 'Wasted Space & Manual Cargo Planning'
+             : slug === 'shopease-landing' ? 'No Professional UI Foundation for E-Commerce'
              : slug === 'developer-workflow' ? 'Scattered Tools & No Developer-Specific Tracker'
              : 'Operational Bottlenecks & Friction',
       summary: slug === 'studioflow' ? 'Traditional inventory management was slow, error-prone, and required extensive manual data typing.'
              : slug === 'portfolio' ? 'Static showcases fail to explain design patterns, architecture trade-offs, and custom skill matches dynamically.'
              : slug === 'marketpulse' ? 'Logistics workers manually guess how to stack cargo — wasting container space, increasing shipping trips, and making costly packing errors.'
+             : slug === 'shopease-landing' ? 'Most beginner e-commerce sites are built with templates or Bootstrap — lacking clean semantic structure, accessibility, and a truly professional design.'
              : slug === 'developer-workflow' ? 'Developers juggle tasks across multiple apps with no single place to track daily progress, attach resources, and visualize consistency.'
              : 'Repetitive tasks, data isolation, and lack of real-time pipeline automation delayed daily output.',
       themeColor: 'rose',
@@ -786,6 +930,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Hours', label: 'Manual Cargo Math', icon: 'Clock', color: 'rose' },
         { value: 'Critical', label: 'Overweight Container Risks', icon: 'AlertTriangle', color: 'rose' },
         { value: 'Delayed', label: 'Dispatch Planning Lag', icon: 'Activity', color: 'rose' }
+      ] : slug === 'shopease-landing' ? [
+        { value: 'Bloat', label: 'Template Overhead', icon: 'Boxes', color: 'rose' },
+        { value: 'Poor', label: 'Accessibility Rules', icon: 'Shield', color: 'rose' },
+        { value: 'None', label: 'Mobile Optimization', icon: 'Layers', color: 'rose' },
+        { value: 'Zero', label: 'SEO Consideration', icon: 'Search', color: 'rose' }
       ] : slug === 'developer-workflow' ? [
         { value: '5+', label: 'Disconnected Tools', icon: 'Boxes', color: 'rose' },
         { value: 'Manual', label: 'Streak Tracking', icon: 'AlertTriangle', color: 'rose' },
@@ -804,6 +953,7 @@ function getProjectCaseStudyDetails(slug, project) {
       tags: slug === 'studioflow' ? ['Manual Merchandising', 'Variant Configuration', 'Catalog Taxonomy', 'Media Processing']
             : slug === 'portfolio' ? ['Passive Reading', 'Information Retrieval', 'Context Fragmentation', 'Candidate Triage']
             : slug === 'marketpulse' ? ['Container Space Utilization', 'Cargo Weight Distribution', 'Manual Packing Time', 'Shipping Trip Count', 'Loading Plan Accuracy']
+            : slug === 'shopease-landing' ? ['E-Commerce UI Foundation', 'Mobile Responsiveness', 'Accessibility Compliance', 'SEO Readiness', 'Product Card Design', 'Newsletter Capture']
             : slug === 'developer-workflow' ? ['Daily Task Management', 'Learning Streak Tracking', 'Resource & Link Organization', 'Productivity Visualization', 'File Attachment to Tasks', 'Developer Habit Building']
             : ['Manual Triage', 'Coordination Latency', 'Pipeline Interrupts', 'Operations Overload']
     },
@@ -812,15 +962,19 @@ function getProjectCaseStudyDetails(slug, project) {
       durationLabel: slug === 'studioflow' ? 'Architecture: Multimodal API'
                      : slug === 'portfolio' ? 'Search: Hybrid RAG'
                      : slug === 'marketpulse' ? 'Core: 3D Bin-Packing'
+                     : slug === 'shopease-landing' ? 'Architecture: Zero-Dependency'
                      : slug === 'developer-workflow' ? 'Architecture: Local-First'
                      : 'Design: Decoupled API',
       title: slug === 'studioflow' ? 'Scalable AI & Database Decoupling'
              : slug === 'portfolio' ? 'Semantic Mapping & Prompt Routing'
              : slug === 'marketpulse' ? 'Extreme Point Algorithm with Real-Time 3D Rendering'
+             : slug === 'shopease-landing' ? 'Semantic-First, Zero-Dependency Frontend Architecture'
              : slug === 'developer-workflow' ? 'Local-First, Zero-Backend Productivity Architecture'
              : 'Flexible Services & Loose Coupling',
       summary: slug === 'marketpulse'
         ? 'Used a geometric 3D bin-packing algorithm to automatically place products inside containers without overlapping, and visualized the result live using Qt3D.'
+        : slug === 'shopease-landing'
+        ? 'Built entirely with HTML5 and CSS3 — no frameworks, no libraries — following accessibility, SEO, and glassmorphism design standards from the ground up.'
         : slug === 'developer-workflow'
         ? 'Built entirely in the browser using localStorage as the data layer — no server, no login, no dependency.'
         : 'Establishing strict operational boundaries, modular hooks, and atomic transactions to guarantee high system stability.',
@@ -841,6 +995,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'C++', label: 'High-Performance Core', icon: 'Cpu', color: 'amber' },
         { value: 'Shader', label: 'Hardware Render Pipeline', icon: 'Activity', color: 'amber' },
         { value: 'Dynamic', label: 'Center of Gravity Logic', icon: 'Layers', color: 'amber' }
+      ] : slug === 'shopease-landing' ? [
+        { value: 'HTML5', label: 'Semantic First', icon: 'BookOpen', color: 'amber' },
+        { value: 'Pure CSS', label: 'Zero Bloat', icon: 'Layers', color: 'amber' },
+        { value: 'WCAG', label: 'Accessibility Built-in', icon: 'Shield', color: 'amber' },
+        { value: 'Auto-Fit', label: 'Grid Responsiveness', icon: 'Sparkles', color: 'amber' }
       ] : slug === 'developer-workflow' ? [
         { value: 'Local', label: 'localStorage DB', icon: 'Database', color: 'amber' },
         { value: 'Zero', label: 'Auth Friction', icon: 'User', color: 'amber' },
@@ -854,18 +1013,24 @@ function getProjectCaseStudyDetails(slug, project) {
       ],
       aboutHeading: slug === 'marketpulse' ? 'How it works'
                   : slug === 'developer-workflow' ? 'How It Works'
+                  : slug === 'shopease-landing' ? 'How It Works'
                   : 'System Architecture & Engineering',
       aboutText: slug === 'marketpulse'
         ? 'The core of this software is the Extreme Point Method — a 3D bin-packing algorithm that I implemented in C++. The idea is simple: we start with one empty slot at position (0, 0, 0) inside the container. When a product is placed at that point, three new candidate positions are generated — one along the X axis (to the right of the placed box), one along the Y axis (on top of it), and one along the Z axis (behind it). The next product tries each of these points one by one. Before placing, the algorithm checks two things — first, whether the product fits within the container boundaries, and second, whether it overlaps with any already placed product. If both checks pass, it gets placed and three more points are added. This continues until all products are placed or no valid position is found. The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.'
+        : slug === 'shopease-landing'
+        ? 'The entire layout is built using HTML5 semantic tags — header, nav, main, section, footer — giving the page a clear document structure for both browsers and screen readers. CSS custom properties (--bg-color, --text-color, --primary-color, --card-bg, --card-border) define the entire color system, making future theming or dark mode a one-line change per variable. The navigation uses CSS Flexbox with justify-content: space-between for the logo, search form, and nav links. The category grid and product showcase use CSS Grid with auto-fit and minmax() — meaning the layout automatically adjusts from 3 columns to 1 column as the screen shrinks, with no JavaScript required. The glassmorphism effect on product cards is achieved using background: rgba(255,255,255,0.45), backdrop-filter: blur(12px), and a semi-transparent border — creating a frosted-glass look that sits on top of the gradient background. The sticky header uses position: sticky with backdrop-filter: blur(8px) so it stays at the top while remaining visually light. The newsletter form uses HTML5 type="email" and required attributes for built-in client-side validation. A .sr-only class hides form labels visually while keeping them accessible to screen readers.'
         : slug === 'developer-workflow'
         ? 'The core design decision was to make this app work completely offline in the browser using the localStorage API as a persistent data store. All tasks, resources, notes, profile data, and settings are saved as JSON strings in localStorage under named keys (devfocus-tasks, devfocus-resources, devfocus-notes, dev-profile-data, devfocus-settings). The dashboard reads from and writes to these keys on every action. For the Analytics page, Chart.js reads the task completion timestamps and builds a 7-day bar chart dynamically. The streak counter scans completion dates in reverse to find consecutive days. The date picker feature filters tasks and resources by completion date using JavaScript\'s Date comparison. For file attachments, the FileReader API converts uploaded files to base64 data URLs and stores them inside the task object — meaning files are also saved in localStorage and can be re-downloaded any time without a server.'
         : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
       approachDetails: slug === 'marketpulse' ? getLoadingOptimizationApproach(slug)
                        : slug === 'developer-workflow' ? getDeveloperWorkflowApproach(slug)
+                       : slug === 'shopease-landing' ? getShopEaseApproach(slug)
                        : null,
       techHeading: 'DESIGN PRINCIPLES',
       tags: slug === 'marketpulse'
         ? ['Extreme Point Algorithm', '3D Bin Packing', 'Overlap Detection', 'Qt3D Real-Time Rendering', 'JSON Persistence', 'OTP Email Verification']
+        : slug === 'shopease-landing'
+        ? ['HTML5 Semantic Architecture', 'CSS Custom Properties (Variables)', 'Glassmorphism UI Pattern', 'CSS Grid Auto-Fit Layout', 'Flexbox Navigation', 'Mobile-First Media Queries', 'SEO Meta Tags', 'WCAG Accessibility Standards']
         : slug === 'developer-workflow'
         ? ['localStorage as Database', 'FileReader API for File Attachments', 'Chart.js Visualization', 'CSS Variables for Theming', 'Multi-page SPA Architecture', 'Date-based History Filtering']
         : ['Loose Coupling', 'Typesafe Schemas', 'Atomic Processing', 'Defensive Coding']
@@ -876,10 +1041,13 @@ function getProjectCaseStudyDetails(slug, project) {
       title: slug === 'studioflow' ? 'Multimodal Parser & Real-time Console'
              : slug === 'portfolio' ? 'Context-grounded Assistant Interface'
              : slug === 'marketpulse' ? 'Complete C++ Desktop App — From Login to 3D Loading Plan'
+             : slug === 'shopease-landing' ? 'Complete E-Commerce Landing Page — From Hero to Footer'
              : slug === 'developer-workflow' ? 'Complete Developer Dashboard — From Tasks to Analytics'
              : 'Polished Interactive Dashboard',
       summary: slug === 'marketpulse'
         ? 'A fully working desktop application with user registration, email OTP, product management, container selection, live 3D packing, and PDF export — all built in C++ with Qt6.'
+        : slug === 'shopease-landing'
+        ? 'A fully hand-coded, zero-dependency landing page with sticky nav, glassmorphism product cards, responsive grid, newsletter validation, and SEO meta tags — built in pure HTML5 and CSS3.'
         : slug === 'developer-workflow'
         ? 'A fully working browser app with task tracking, file attachments, productivity charts, daily streak, theme switching, and data export — all in Vanilla JS with no backend.'
         : 'A completely realized, production-ready system with highly responsive micro-interactions and smooth operational tools.',
@@ -900,6 +1068,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Sensor', label: 'Center of Gravity Sensor', icon: 'Activity', color: 'indigo' },
         { value: 'Excel', label: 'Exportable Packing Plans', icon: 'FileDown', color: 'indigo' },
         { value: 'C++', label: 'Native Signal-Slot UI', icon: 'Cpu', color: 'indigo' }
+      ] : slug === 'shopease-landing' ? [
+        { value: 'Glass', label: 'Frosted Nav & Cards', icon: 'Sparkles', color: 'indigo' },
+        { value: 'Auto-Fit', label: 'Fluid CSS Grid', icon: 'LayoutGrid', color: 'indigo' },
+        { value: 'HTML5', label: 'Native Form Validation', icon: 'Shield', color: 'indigo' },
+        { value: 'SEO', label: 'Open Graph Metadata', icon: 'Search', color: 'indigo' }
       ] : slug === 'developer-workflow' ? [
         { value: 'Vanilla', label: 'ES6+ Implementation', icon: 'Code2', color: 'indigo' },
         { value: 'Base64', label: 'File Storage Mode', icon: 'FileDown', color: 'indigo' },
@@ -914,28 +1087,36 @@ function getProjectCaseStudyDetails(slug, project) {
       aboutHeading: 'Key Technical Implementation',
       aboutText: slug === 'marketpulse'
         ? 'The software works end to end. A user first registers with their name, company name, email, mobile number, and password. Email verification uses a 6-digit OTP sent via Gmail SMTP directly from the app — built using Qt\'s SSL socket. After login, users can add and save products with name, type (box, bag, barrel, sack, pipe), dimensions in centimeters, weight in kg, and quantity — all stored in a local JSON file. Users can also save multiple trucks, containers, train bogis, and warehouses. When loading, you select a container, pick products from your saved list (or enter them directly), assign a unique color to each product type, and hit "Add in Container." The algorithm runs instantly and the 3D view updates live. Users can add or remove products one at a time and watch the container re-pack in real time. A pie chart shows filled vs empty percentage. Finally, two types of PDF reports can be exported — one showing the product summary with type icons and colors, and one showing a layer-wise 2D visual of every Z-depth layer in the container.'
+        : slug === 'shopease-landing'
+        ? 'The page works as a complete, professional e-commerce frontend foundation. The sticky header uses backdrop-filter: blur(8px) with rgba transparency so it looks frosted over the content as users scroll. The search form inside the nav uses pill-shaped border-radius on each side of the input and button so they join into one seamless element. The category cards use a hover translateY(-8px) transition for a smooth lift effect. The product grid uses grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) — meaning it automatically becomes 3 columns on desktop, 2 columns on tablet, and 1 column on mobile with zero media query needed for the grid itself. Each product card uses backdrop-filter: blur(12px) with a semi-transparent white background and a translucent border for the glassmorphism effect. The newsletter input uses type="email" and required attributes — the browser blocks submission and shows a native error if the email is invalid or empty. All buttons share a base style with a translateY(-3px) hover lift and box-shadow transition. The CSS uses a linear-gradient background on the body (from #f3f4f6 to #e5e7eb) that gives the glassmorphism cards their frosted contrast. The footer is minimal and centered, and the full page collapses cleanly on mobile at 768px with the nav stacking vertically, the newsletter form going full-width, and all grids reducing to a single column.'
         : slug === 'developer-workflow'
         ? 'The app works end to end. A developer opens the dashboard and immediately sees their personalized welcome message and profile picture (fetched from localStorage). They add tasks with an optional file attachment — the FileReader API reads the file, converts it to a base64 data URL, and stores it inside the task object in localStorage, so it persists across page refreshes and can be re-downloaded anytime. Completed tasks are timestamped with an ISO date string, which the Analytics page uses to build the weekly bar chart, calculate the current daily streak, and allow date-based history search. The Settings page uses CSS custom properties (--accent-color, --bg-color) to switch instantly between Midnight dark mode and Light mode — the theme is saved to localStorage and applied on every page load via an inline script before the body renders, preventing any flash of unstyled content. The data export feature serializes all localStorage keys into a single JSON file which the user can download as a backup.'
         : 'The resulting system unifies automated processing with intuitive UI dashboards. We combined lightning-fast server endpoints with clean component state loops to deliver zero-friction user feedback.\n\nThe layout includes robust exception catch boundaries, security validations, and reactive elements to provide a beautiful, seamless execution experience.',
       techHeading: 'ENGINEERING ASSETS',
       coreCapabilities: slug === 'marketpulse' ? getCoreCapabilities(slug)
                         : slug === 'developer-workflow' ? getDeveloperWorkflowCoreCapabilities(slug)
+                        : slug === 'shopease-landing' ? getShopEaseCoreCapabilities(slug)
                         : null,
       solutionBannerText: slug === 'marketpulse'
         ? 'Loading Optimization Software brings automation and visual clarity to every stage of cargo planning — helping teams load smarter, faster, and with complete documentation.'
         : slug === 'developer-workflow'
         ? 'Developer Workflow brings structure and visibility to your daily developer routine — keeping tasks, attachments, reference links, and weekly consistency metrics in a single private local space.'
+        : slug === 'shopease-landing'
+        ? 'ShopEase brings a pixel-perfect, WCAG-compliant frontend design with a frosted-glass glassmorphism aesthetic and auto-fit responsive grids — built entirely with zero external CSS frameworks.'
         : '',
       tags: getSolutionPoints(slug)
     },
     'result': {
       badge: '05 RESULTS',
-      durationLabel: slug === 'developer-workflow' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
+      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
       title: slug === 'marketpulse' ? 'Won Competition · Got 4.8 LPA Job Offer as a Student'
+             : slug === 'shopease-landing' ? 'Live & Deployed — A Professional Frontend Foundation'
              : slug === 'developer-workflow' ? 'Deployed & Live — Used as a Personal Productivity Tool'
              : 'Measurable Outcomes & Growth',
       summary: slug === 'marketpulse'
         ? 'This project was selected as the best submission in a C++ challenge by Webtech Developers Pvt. Ltd., Pune — earning a full-time job offer which I chose to decline to complete my MCA.'
+        : slug === 'shopease-landing'
+        ? 'ShopEase is live at shopease-ecom-landing.onrender.com as a clean, professional e-commerce frontend — demonstrating that a modern, accessible, responsive landing page needs zero libraries or frameworks.'
         : slug === 'developer-workflow'
         ? 'Developer Workflow is live at developer-workflow.onrender.com and serves as a fully functional personal productivity app — built and deployed from scratch with zero dependencies except Chart.js.'
         : 'The final system completely eliminated manual friction, drastically accelerated operations, and created a scalable foundation.',
@@ -956,6 +1137,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: '<250ms', label: 'Render Latency', icon: 'Activity', color: 'emerald' },
         { value: '80%', label: 'Planning Time Saved', icon: 'Clock', color: 'emerald' },
         { value: '15%', label: 'Fuel Savings', icon: 'Truck', color: 'emerald' }
+      ] : slug === 'shopease-landing' ? [
+        { value: '0', label: 'External CSS Frameworks', icon: 'Layers', color: 'emerald' },
+        { value: '7', label: 'Product Categories', icon: 'LayoutGrid', color: 'emerald' },
+        { value: '3', label: 'Featured Product Cards', icon: 'Sparkles', color: 'emerald' },
+        { value: '100%', label: 'Mobile Responsive CSS', icon: 'Shield', color: 'emerald' }
       ] : slug === 'developer-workflow' ? [
         { value: '0 ms', label: 'Server Load Time', icon: 'Clock', color: 'emerald' },
         { value: '100%', label: 'Offline Capable', icon: 'Shield', color: 'emerald' },
@@ -974,6 +1160,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { title: 'Fewer trips', description: 'Better fill rate means less trips per shipment.', icon: 'Truck', iconColor: 'text-indigo-600' },
         { title: 'Documented plans', description: 'PDF reports replace verbal instructions.', icon: 'FileDown', iconColor: 'text-violet-600' },
         { title: 'Industry recognition', description: 'Impressed Webtech Developers enough for a job offer.', icon: 'Award', iconColor: 'text-rose-600' }
+      ] : slug === 'shopease-landing' ? [
+        { title: 'Instant scalability', description: 'Clean semantic HTML structure is ready for JavaScript cart logic and backend API integration without refactoring.', icon: 'Cpu', iconColor: 'text-violet-600' },
+        { title: 'SEO ready from day one', description: 'Meta description, keywords, viewport, and Open Graph tags built in at the start.', icon: 'Search', iconColor: 'text-sky-600' },
+        { title: 'Accessible to all users', description: 'aria-labels, alt text, sr-only labels, and semantic tags pass basic WCAG accessibility checks.', icon: 'Shield', iconColor: 'text-emerald-500' },
+        { title: 'Premium visual design', description: 'Glassmorphism product cards and smooth hover animations create a professional, modern look with pure CSS.', icon: 'Sparkles', iconColor: 'text-amber-500' }
       ] : slug === 'developer-workflow' ? [
         { title: 'Time saved', description: 'Developers spend zero time on setup — no account, no config, just open and use.', icon: 'Clock', iconColor: 'text-amber-500' },
         { title: 'Habit visibility', description: 'Streak counter and weekly chart make daily consistency visible and measurable.', icon: 'Sparkles', iconColor: 'text-emerald-500' },
@@ -984,6 +1175,10 @@ function getProjectCaseStudyDetails(slug, project) {
         quote: '“This was the best project submitted in the challenge — it solved a real problem, worked end-to-end, and showed strong technical depth in C++ and 3D rendering.”',
         author: 'Webtech Developers Pvt. Ltd., Pune',
         link: '#'
+      } : slug === 'shopease-landing' ? {
+        quote: '“Wanted to prove that a clean, modern, accessible e-commerce UI doesn\'t need Bootstrap or a framework — just well-written HTML and CSS.”',
+        author: 'Vaibhav Lohar, Developer',
+        link: null
       } : slug === 'developer-workflow' ? {
         quote: '“Built this to solve my own problem — I needed a fast, no-login tool to track what I\'m learning and how consistent I\'m being. It\'s now part of my daily workflow.”',
         author: 'Vaibhav Lohar, Developer',
@@ -993,6 +1188,7 @@ function getProjectCaseStudyDetails(slug, project) {
       tags: slug === 'studioflow' ? ['E-Commerce Merchandising', 'Stock Management Speed', 'Catalog Taxonomy', 'Data Quality Control']
             : slug === 'portfolio' ? ['Recruiter Engagement', 'Developer Showcase Speed', 'Fact Grounded AI', 'Portfolio Reach']
             : slug === 'marketpulse' ? ['Won coding competition', '4.8 LPA job offer received', 'Manual loading time — seconds', 'Zero packing overlap errors', 'PDF report export', 'Industry recognized project']
+            : slug === 'shopease-landing' ? ['Live deployed on Render', 'Zero external CSS frameworks', 'Glassmorphism UI with backdrop-filter', 'CSS Grid auto-fit product layout', 'WCAG-compliant accessibility patterns', 'SEO meta tags and Open Graph', 'Full mobile responsiveness via media queries', 'HTML5 email validation on newsletter form']
             : slug === 'developer-workflow' ? ['Live deployed on Render', 'Zero backend, zero login', 'File attachments via FileReader API', 'Streak tracking with date comparison', 'Chart.js weekly productivity chart', 'Full JSON data export', 'Midnight & Light theme support']
             : ['Automation Coverage', 'Processing Throughput', 'System Reliability', 'User Ergonomics']
     },
@@ -1403,7 +1599,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow') && activeSection === 'problem' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && activeSection === 'problem' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1445,7 +1641,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow') && activeSection === 'approach' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && activeSection === 'approach' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1524,7 +1720,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow') && activeSection === 'solution' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && activeSection === 'solution' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1673,7 +1869,7 @@ function ProjectDetail() {
                         {currentStep.aboutText}
                       </p>
 
-                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow') && (
+                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && (
                         <div className="mt-6">
                           <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.06em] text-slate-700">
                             {currentStep.metricsHeading}

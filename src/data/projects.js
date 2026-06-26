@@ -246,6 +246,12 @@ export const projectsData = [
       'Google Fonts',
       'Render',
     ],
+    images: [
+      { src: '/Shopease Landing images/Screenshot 2026-06-26 204704.png', caption: 'ShopEase E-Commerce Landing Page Hero Section' },
+      { src: '/Shopease Landing images/Screenshot 2026-06-26 204712.png', caption: 'Responsive Shop by Category Grid' },
+      { src: '/Shopease Landing images/Screenshot 2026-06-26 204728.png', caption: 'Featured Glassmorphism Product Cards' },
+      { src: '/Shopease Landing images/Screenshot 2026-06-26 204756.png', caption: 'Mobile Responsive Layout & Newsletter Section' },
+    ],
     previewTone:
       'bg-[linear-gradient(135deg,#7c3aed_0%,#c084fc_50%,#e9d5ff_100%)]',
   },

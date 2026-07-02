@@ -36,30 +36,30 @@ function LeetcodeSection() {
     username: 'VaibhavL',
     name: 'VaibhavLohar',
     avatar: 'https://assets.leetcode.com/users/VaibhavL/avatar_1770435598.png',
-    ranking: 118083
+    ranking: 93081
   }
   const fallbackSolved = {
-    solvedProblem: 623,
-    easySolved: 196,
-    mediumSolved: 333,
-    hardSolved: 94,
+    solvedProblem: 694,
+    easySolved: 207,
+    mediumSolved: 375,
+    hardSolved: 112,
     totalSubmissionNum: [
-      { difficulty: 'All', count: 629, submissions: 941 },
-      { difficulty: 'Easy', count: 196, submissions: 262 },
-      { difficulty: 'Medium', count: 336, submissions: 499 },
-      { difficulty: 'Hard', count: 97, submissions: 180 }
+      { difficulty: 'All', count: 694, submissions: 1085 },
+      { difficulty: 'Easy', count: 207, submissions: 320 },
+      { difficulty: 'Medium', count: 375, submissions: 550 },
+      { difficulty: 'Hard', count: 112, submissions: 215 }
     ]
   }
   const fallbackContest = {
-    contestAttend: 12,
-    contestRating: 2009.7567617198652,
-    contestGlobalRanking: 20314,
-    totalParticipants: 874287,
-    contestTopPercentage: 2.42,
+    contestAttend: 15,
+    contestRating: 2088,
+    contestGlobalRanking: 13689,
+    totalParticipants: 874830,
+    contestTopPercentage: 1.64,
     contestBadges: { name: 'Knight' }
   }
   const fallbackBadges = {
-    badgesCount: 14,
+    badgesCount: 16,
     badges: [
       { id: '10301958', displayName: 'Knight', icon: '/static/images/badges/knight.png', creationDate: '2026-05-06' },
       { id: '10252754', displayName: '100 Days Badge 2026', icon: 'https://assets.leetcode.com/static_assets/others/100_1080_1080.png', creationDate: '2026-05-03' },
@@ -79,8 +79,8 @@ function LeetcodeSection() {
   }
   const fallbackCalendar = {
     activeYears: [2026],
-    streak: 119,
-    totalActiveDays: 119,
+    streak: 141,
+    totalActiveDays: 159,
     submissionCalendar: '{"1769212800": 5, "1769299200": 32, "1769385600": 4, "1769472000": 5, "1769558400": 6, "1769644800": 5, "1769731200": 5, "1769817600": 17, "1769904000": 8, "1769990400": 5, "1770076800": 5, "1770163200": 5, "1770249600": 6, "1770336000": 11, "1770422400": 6, "1770508800": 15, "1770595200": 5, "1770681600": 5, "1770768000": 8, "1770854400": 5, "1770940800": 5, "1771027200": 8, "1771113600": 9, "1771200000": 5, "1771286400": 7, "1771372800": 7, "1771459200": 1, "1771545600": 10, "1771632000": 5, "1771718400": 19, "1771804800": 3, "1771891200": 4, "1771977600": 5, "1772064000": 8, "1772150400": 13, "1772236800": 11, "1772323200": 15, "1772409600": 9, "1772496000": 17, "1772582400": 2, "1772668800": 1, "1772755200": 1, "1772841600": 1, "1772928000": 6, "1773014400": 2, "1773100800": 12, "1773187200": 7, "1773273600": 5, "1773360000": 8, "1773446400": 5, "1773532800": 5, "1773619200": 5, "1773705600": 7, "1773792000": 17, "1773878400": 42, "1773964800": 5, "1774051200": 8, "1774137600": 19, "1774224000": 35, "1774310400": 15, "1774396800": 11, "1774483200": 14, "1774569600": 9, "1774656000": 12, "1774742400": 8, "1774828800": 10, "1774915200": 8, "1775001600": 36, "1775088000": 7, "1775174400": 6, "1775260800": 4, "1775347200": 9, "1775433600": 10, "1775520000": 10, "1775606400": 10, "1775692800": 14, "1775779200": 12, "1775865600": 18, "1775952000": 14, "1776038400": 10, "1776124800": 5, "1776211200": 4, "1776297600": 5, "1776384000": 11, "1776470400": 1, "1776556800": 5, "1776643200": 1, "1776729600": 5, "1776816000": 3, "1776902400": 1, "1776988800": 16, "1777075200": 11, "1777161600": 1, "1777248000": 1, "1777334400": 14, "1777420800": 6, "1777507200": 6, "1777593600": 8, "1777680000": 4, "1777766400": 7, "1777852800": 6, "1777939200": 6, "1778025600": 2, "1778112000": 7, "1778198400": 7, "1778284800": 6, "1778371200": 8, "1778457600": 6, "1778544000": 1, "1778630400": 1, "1778716800": 1, "1778803200": 1, "1778889600": 1, "1778976000": 1, "1779062400": 1, "1779148800": 1, "1779235200": 1, "1779321600": 1, "1779408000": 4}'
   }
   const fallbackBadgeMap = new Map(fallbackBadges.badges.map((badge) => [badge.displayName, badge]))
@@ -674,7 +674,11 @@ function LeetcodeSection() {
             <div className="flex items-center gap-3 select-none flex-wrap">
               <div className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[11px] font-extrabold">
                 <CheckCircle className="h-3.5 w-3.5" />
-                {(solved?.totalSubmissionNum?.[0]?.submissions || 941)} Submissions in 12 months
+                {(solved?.totalSubmissionNum?.[0]?.submissions || 1085)} Submissions in 12 months
+              </div>
+              <div className="flex items-center gap-1.5 bg-sky-50 border border-sky-100 text-sky-700 px-3 py-1 rounded-full text-[11px] font-extrabold">
+                <Calendar className="h-3.5 w-3.5" />
+                {(calendar?.totalActiveDays || fallbackCalendar.totalActiveDays)} Active Days
               </div>
               <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-100 text-amber-700 px-3 py-1 rounded-full text-[11px] font-extrabold animate-pulse">
                 <Flame className="h-3.5 w-3.5 fill-amber-500 stroke-amber-500" />

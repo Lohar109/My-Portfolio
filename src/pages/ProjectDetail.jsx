@@ -1087,12 +1087,14 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'marketpulse' ? 'Wasted Space & Manual Cargo Planning'
              : slug === 'shopease-landing' ? 'No Professional UI Foundation for E-Commerce'
              : slug === 'developer-workflow' ? 'Scattered Tools & No Developer-Specific Tracker'
+             : slug === 'careerpilot-ai' ? 'Job Search Exhaustion & ATS Disconnects'
              : 'Operational Bottlenecks & Friction',
       summary: slug === 'studioflow' ? 'Traditional inventory management was slow, error-prone, and required extensive manual data typing.'
              : slug === 'portfolio' ? 'Static showcases fail to explain design patterns, architecture trade-offs, and custom skill matches dynamically.'
              : slug === 'marketpulse' ? 'Logistics workers manually guess how to stack cargo — wasting container space, increasing shipping trips, and making costly packing errors.'
              : slug === 'shopease-landing' ? 'Most beginner e-commerce sites are built with templates or Bootstrap — lacking clean semantic structure, accessibility, and a truly professional design.'
              : slug === 'developer-workflow' ? 'Developers juggle tasks across multiple apps with no single place to track daily progress, attach resources, and visualize consistency.'
+             : slug === 'careerpilot-ai' ? 'Candidates spend hours tailoring resumes and cover letters for each job description, while traditional interview prep lacks real-time, personalized feedback loops.'
              : 'Repetitive tasks, data isolation, and lack of real-time pipeline automation delayed daily output.',
       themeColor: 'rose',
       metricsHeading: 'KEY PAIN POINTS',
@@ -1116,6 +1118,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Poor', label: 'Accessibility Rules', icon: 'Shield', color: 'rose' },
         { value: 'None', label: 'Mobile Optimization', icon: 'Layers', color: 'rose' },
         { value: 'Zero', label: 'SEO Consideration', icon: 'Search', color: 'rose' }
+      ] : slug === 'careerpilot-ai' ? [
+        { value: 'Hours', label: 'Spent Tailoring Resumes', icon: 'Clock', color: 'rose' },
+        { value: 'Low', label: 'ATS Compatibility Scores', icon: 'AlertTriangle', color: 'rose' },
+        { value: 'None', label: 'Real-time Mock Feedback', icon: 'Terminal', color: 'rose' },
+        { value: 'Cluttered', label: 'Application Trackers', icon: 'Layers', color: 'rose' }
       ] : slug === 'developer-workflow' ? [
         { value: '5+', label: 'Disconnected Tools', icon: 'Boxes', color: 'rose' },
         { value: 'Manual', label: 'Streak Tracking', icon: 'AlertTriangle', color: 'rose' },
@@ -1135,6 +1142,7 @@ function getProjectCaseStudyDetails(slug, project) {
             : slug === 'portfolio' ? ['Passive Reading', 'Information Retrieval', 'Context Fragmentation', 'Candidate Triage']
             : slug === 'marketpulse' ? ['Container Space Utilization', 'Cargo Weight Distribution', 'Manual Packing Time', 'Shipping Trip Count', 'Loading Plan Accuracy']
             : slug === 'shopease-landing' ? ['E-Commerce UI Foundation', 'Mobile Responsiveness', 'Accessibility Compliance', 'SEO Readiness', 'Product Card Design', 'Newsletter Capture']
+            : slug === 'careerpilot-ai' ? ['Resume Customization', 'ATS Formatting & Keyword Optimization', 'Cover Letter Composition', 'Mock Interview Practice', 'Skill Gap Discovery', 'Job Search Pipeline Management']
             : slug === 'developer-workflow' ? ['Daily Task Management', 'Learning Streak Tracking', 'Resource & Link Organization', 'Productivity Visualization', 'File Attachment to Tasks', 'Developer Habit Building']
             : ['Manual Triage', 'Coordination Latency', 'Pipeline Interrupts', 'Operations Overload']
     },

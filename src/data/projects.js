@@ -316,6 +316,58 @@ export const projectsData = [
     previewTone:
       'bg-[linear-gradient(135deg,#090d16_0%,#1e1b4b_50%,#4338ca_100%)]',
   },
+  {
+    slug: 'careerpilot-ai',
+    isFeatured: true,
+    title: 'CareerPilot-AI',
+    category: 'AI / ML & SaaS Product',
+    role: 'Full Stack & AI System Design',
+    year: '2026',
+    summary:
+      'An AI-powered career guidance and job hunting operating system. It features resume parsing, automated cover letter generation, customized skill roadmap creation, and interactive AI interview coaching.',
+    previewText:
+      'Built as an intelligent career navigator that analyzes professional profiles, maps skill gaps, and prepares candidates for interviews using interactive AI feedback loop systems.',
+    detailIntro:
+      'CareerPilot-AI is an intelligent career optimization platform designed to streamline job matching, profile tailoring, and interview readiness through generative AI.',
+    challenge:
+      'Parsing unstructured resumes, mapping career paths dynamically, and providing realistic mock interviews with contextual feedback.',
+    outcome:
+      'Delivered a cohesive system that saves candidates hours of search/customization time and raises interview performance.',
+    topInfoCards: [
+      { label: 'Role', value: 'Full Stack & AI System Design' },
+      { label: 'Core Focus', value: 'LLM Prompt Routing & Semantic Embeddings' },
+      { label: 'Outcome', value: 'Highly personalized career coaching & ATS optimization' },
+    ],
+    stats: [
+      { label: 'Use Case', value: 'Interactive career platform' },
+      { label: 'Audience', value: 'Job applicants and developers' },
+      { label: 'Primary Goal', value: 'Provide resume tailoring and realistic mock interviews' },
+    ],
+    caseStudy: {
+      overview:
+        'CareerPilot-AI was developed to remove the manual friction in the job search process. By using advanced LLM routing and vector embedding alignment, the platform automates resume ATS scoring, cover letter tailoring, and mock interviews, giving candidates an all-in-one preparation suite.',
+      problem:
+        'Job seekers spend hours custom-tailoring resumes and writing cover letters for every application. Furthermore, practicing for interviews lacks realism, and candidates receive little to no feedback on how well their skills match the job description, resulting in high search friction and poor interview conversion rates.',
+      approach: [
+        'Built a modular React/Vite admin dashboard backed by a Node.js and Express API server.',
+        'Integrated LangChain for multi-model prompt routing, sending specific user tasks (e.g. cover letter drafting vs. mock interview follow-ups) to specialized agents.',
+        'Implemented semantic alignment algorithms using OpenAI embeddings to calculate ATS compatibility and highlight keyword gaps.',
+      ],
+      result:
+        'The final deployment creates a unified, local-friendly, and powerful career operating system. It significantly reduces application tailoring time and boosts candidate confidence through interactive mock interview simulators.',
+    },
+    stack: [
+      'React',
+      'Node.js',
+      'Express',
+      'Groq API',
+      'LangChain',
+      'PostgreSQL',
+      'Tailwind CSS',
+    ],
+    previewTone:
+      'bg-[linear-gradient(135deg,#1e1b4b_0%,#312e81_50%,#4f46e5_100%)]',
+  },
 ];
 
 export const projects = projectsData;

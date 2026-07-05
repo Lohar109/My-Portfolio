@@ -1532,6 +1532,11 @@ function getProjectExternalLinks(slug) {
         github: 'https://github.com/Lohar109/Developer-Workflow',
         demo: 'https://developer-workflow.onrender.com'
       }
+    case 'careerpilot-ai':
+      return {
+        github: 'https://github.com/Lohar109/CareerPilot-AI',
+        demo: 'https://careerpilot-ai.onrender.com'
+      }
     default:
       return {
         github: null,
@@ -1834,7 +1839,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && activeSection === 'problem' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && activeSection === 'problem' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1876,7 +1881,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && activeSection === 'approach' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && activeSection === 'approach' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1955,7 +1960,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && activeSection === 'solution' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && activeSection === 'solution' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -2104,7 +2109,7 @@ function ProjectDetail() {
                         {currentStep.aboutText}
                       </p>
 
-                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing') && (
+                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && (
                         <div className="mt-6">
                           <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.06em] text-slate-700">
                             {currentStep.metricsHeading}

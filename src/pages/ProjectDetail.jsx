@@ -1370,7 +1370,7 @@ function getProjectCaseStudyDetails(slug, project) {
         : slug === 'developer-workflow'
         ? 'Developer Workflow is live at developer-workflow.onrender.com and serves as a fully functional personal productivity app — built and deployed from scratch with zero dependencies except Chart.js.'
         : slug === 'careerpilot-ai'
-        ? 'CareerPilot-AI is live at careerpilot-ai.onrender.com, providing candidates with a powerful AI operating system to optimize their application success rate.'
+        ? 'CareerPilot AI is live at career-pilot-ai-ochre.vercel.app, providing candidates with a powerful AI operating system to optimize their application success rate.'
         : 'The final system completely eliminated manual friction, drastically accelerated operations, and created a scalable foundation.',
       themeColor: 'emerald',
       metricsHeading: 'MEASURED OUTCOMES',
@@ -1567,7 +1567,7 @@ function getProjectExternalLinks(slug) {
     case 'careerpilot-ai':
       return {
         github: 'https://github.com/Lohar109/CareerPilot-AI',
-        demo: 'https://careerpilot-ai.onrender.com'
+        demo: 'https://career-pilot-ai-ochre.vercel.app/'
       }
     default:
       return {

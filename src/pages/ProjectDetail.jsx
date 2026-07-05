@@ -174,6 +174,13 @@ function getHighlightIcon(label) {
 
 function getSolutionPoints(slug) {
   switch (slug) {
+    case 'careerpilot-ai':
+      return [
+        'LangChain multi-agent prompt routing server',
+        'OpenAI embeddings alignment & ATS scoring algorithms',
+        'Interactive real-time mock interview simulator',
+        'Custom step-by-step skill roadmap generator'
+      ]
     case 'shopease-landing':
       return [
         'Semantic HTML5 structure for high SEO indexability',
@@ -296,6 +303,51 @@ function getProblemCards(slug) {
           iconBg: 'bg-violet-50',
           title: 'Heavy tools for a simple need',
           description: 'Existing tools like Notion or Jira are overkill for personal daily developer workflow — too complex to set up and maintain.',
+        },
+      ]
+    case 'careerpilot-ai':
+      return [
+        {
+          icon: Boxes,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'Manual resume tailoring',
+          description: 'Customizing resumes for every single job description is incredibly time-consuming and tedious.',
+        },
+        {
+          icon: Shield,
+          iconColor: 'text-amber-700',
+          iconBg: 'bg-amber-50',
+          title: 'Generic cover letters',
+          description: 'Standard templates lack personalization, failing to highlight matching achievements for specific roles.',
+        },
+        {
+          icon: Terminal,
+          iconColor: 'text-indigo-700',
+          iconBg: 'bg-indigo-50',
+          title: 'No realistic interview practice',
+          description: 'General practice questions do not simulate real-time, role-specific follow-up questions.',
+        },
+        {
+          icon: BrainCircuit,
+          iconColor: 'text-emerald-700',
+          iconBg: 'bg-emerald-50',
+          title: 'Unstructured skill roadmaps',
+          description: "Candidates don't know exactly what skills to learn next to bridge the gap for their target roles.",
+        },
+        {
+          icon: Search,
+          iconColor: 'text-sky-700',
+          iconBg: 'bg-sky-50',
+          title: 'Poor ATS optimization',
+          description: 'Resumes fail to pass through Applicant Tracking Systems because keywords and formats are mismatching.',
+        },
+        {
+          icon: Layers,
+          iconColor: 'text-violet-700',
+          iconBg: 'bg-violet-50',
+          title: 'Disconnected tools',
+          description: 'Juggling between resume makers, AI tools, and spreadsheets results in a messy job search flow.',
         },
       ]
     case 'shopease-landing':
@@ -970,6 +1022,7 @@ function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'
                  : slug === 'marketpulse' ? '5 Months'
+                 : slug === 'careerpilot-ai' ? '3 Months'
                  : '3 Months';
 
   const defaultOverviewText = project?.caseStudy?.overview ?? 'Overview of this modular project.';
@@ -983,7 +1036,7 @@ function getProjectCaseStudyDetails(slug, project) {
       durationLabel: `Project Duration: ${duration}`,
       title: project?.title ?? 'Overview',
       summary: project?.detailIntro ?? project?.summary ?? 'Enterprise scalability review.',
-      themeColor: slug === 'developer-workflow' ? 'indigo' : 'violet',
+      themeColor: slug === 'developer-workflow' || slug === 'careerpilot-ai' ? 'indigo' : 'violet',
       metricsHeading: 'PROJECT IMPACT',
       metrics: slug === 'studioflow' ? [
         { value: '40%', label: 'Faster Onboarding', icon: 'TrendingUp', color: 'violet' },
@@ -1005,6 +1058,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: '7', label: 'Product Categories', icon: 'LayoutGrid', color: 'emerald' },
         { value: '3', label: 'Glassmorphism Cards', icon: 'Sparkles', color: 'amber' },
         { value: '100%', label: 'CSS Mobile Responsive', icon: 'Shield', color: 'blue' }
+      ] : slug === 'careerpilot-ai' ? [
+        { value: '85%', label: 'Interview Prep Boost', icon: 'Terminal', color: 'violet' },
+        { value: '4x', label: 'Faster Resume Tailor', icon: 'Layers', color: 'emerald' },
+        { value: '15+', label: 'Custom Career Paths', icon: 'LayoutGrid', color: 'amber' },
+        { value: '<2s', label: 'Response Latency', icon: 'Clock', color: 'blue' }
       ] : slug === 'developer-workflow' ? [
         { value: '0 ms', label: 'Server Load Time', icon: 'Clock', color: 'indigo' },
         { value: '100%', label: 'Offline Capable', icon: 'Shield', color: 'emerald' },

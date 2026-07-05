@@ -32,6 +32,7 @@ import {
   Database,
   LineChart,
   FileDown,
+  FileText,
   Check,
   Download,
   LayoutGrid,
@@ -1050,11 +1051,149 @@ function getCareerPilotCoreCapabilities(slug) {
   ]
 }
 
+function getMantra4ChangeApproach(slug) {
+  if (slug !== 'mantra4change-pbl') return null
+
+  return {
+    steps: [
+      {
+        icon: FileDown,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Data Pipeline First',
+        description: 'Built a CSV parser to ingest monthly school-level (PBL, attendance) and grant-level data into typed structures.',
+      },
+      {
+        icon: Lock,
+        iconColor: 'text-indigo-600',
+        iconBg: 'bg-indigo-50',
+        title: 'Deterministic Risk Engine',
+        description: 'Implemented a risk classification function mapping attendance rate to On Track / Behind / At Risk / Critical.',
+      },
+      {
+        icon: Terminal,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'REST API Layer',
+        description: 'Built Express routes for PBL summaries, district breakdowns, comparisons, and grant reports with multi-faceted filtering.',
+      },
+      {
+        icon: LayoutGrid,
+        iconColor: 'text-amber-600',
+        iconBg: 'bg-amber-50',
+        title: 'Dashboard Frontend',
+        description: 'Built React + Recharts pages (Dashboard, Districts, Grant Report) with custom hooks to render live KPIs and charts.',
+      },
+      {
+        icon: Sparkles,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'AI Narrative Layer',
+        description: 'Added a "Generate AI Report" flow sending facts to Claude, with a deterministic text fallback if API key is missing.',
+      },
+      {
+        icon: Eye,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
+        title: 'Deployment & Demo',
+        description: 'Shipped the frontend on Vercel and the backend on Render as a fully working live demo.',
+      },
+    ],
+    principles: [
+      {
+        icon: Shield,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Facts Before Narrative',
+        description: 'KPIs computed with pure math before Claude writes prose; AI never invents or alters any numbers.',
+      },
+      {
+        icon: CheckCircle2,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
+        title: 'Deterministic Risk Logic',
+        description: 'Risk thresholds are fixed, transparent code rules (e.g. On Track >= 75%) rather than opaque black-box models.',
+      },
+      {
+        icon: Layers,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Graceful Degradation',
+        description: 'The app works fully without an Anthropic key; the narrative feature simply falls back to a plain computed text summary.',
+      },
+      {
+        icon: GitFork,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'Typed, Filterable Contracts',
+        description: 'Every Express route supports query parameters with shared TypeScript types between frontend and backend.',
+      },
+    ],
+  }
+}
+
+function getMantra4ChangeCoreCapabilities(slug) {
+  if (slug !== 'mantra4change-pbl') return null
+
+  return [
+    {
+      icon: LayoutGrid,
+      iconColor: 'text-violet-600',
+      iconBg: 'bg-violet-50',
+      title: 'PBL Summary Dashboard',
+      description: 'Live KPIs (attendance, completion, evidence submissions) filterable by month, district, block, and subject.',
+    },
+    {
+      icon: CheckCircle2,
+      iconColor: 'text-emerald-600',
+      iconBg: 'bg-emerald-50',
+      title: 'Automatic Risk Classification',
+      description: 'Schools instantly tagged On Track, Behind, At Risk, or Critical based on fixed attendance rate thresholds.',
+    },
+    {
+      icon: Layers,
+      iconColor: 'text-amber-600',
+      iconBg: 'bg-amber-50',
+      title: 'District & Block Breakdown',
+      description: 'Side-by-side performance comparisons across districts and blocks using custom Recharts bar and pie charts.',
+    },
+    {
+      icon: Activity,
+      iconColor: 'text-rose-600',
+      iconBg: 'bg-rose-50',
+      title: 'Month-over-Month Comparison',
+      description: 'Tracks trends in attendance rates and PBL completion to show improvements or declines over time.',
+    },
+    {
+      icon: FileText,
+      iconColor: 'text-sky-600',
+      iconBg: 'bg-sky-50',
+      title: 'Grant Report Generator',
+      description: 'Aggregates finance utilization, program performance, and media/documentation assets into a cohesive view.',
+    },
+    {
+      icon: Sparkles,
+      iconColor: 'text-indigo-600',
+      iconBg: 'bg-indigo-50',
+      title: 'AI Narrative Generation',
+      description: 'Generates donor-ready descriptions via Anthropic Claude API, strictly grounded in pre-computed CSV facts.',
+    },
+    {
+      icon: Eye,
+      iconColor: 'text-purple-600',
+      iconBg: 'bg-purple-50',
+      title: 'Leadership Review Summary',
+      description: 'High-level dashboard view designed for NGO leadership to review program success metrics quickly.',
+    },
+  ]
+}
+
 function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'
                  : slug === 'marketpulse' ? '5 Months'
                  : slug === 'careerpilot-ai' ? '3 Months'
+                 : slug === 'mantra4change-pbl' ? '3 Months'
                  : '3 Months';
 
   const defaultOverviewText = project?.caseStudy?.overview ?? 'Overview of this modular project.';
@@ -1068,7 +1207,7 @@ function getProjectCaseStudyDetails(slug, project) {
       durationLabel: `Project Duration: ${duration}`,
       title: project?.title ?? 'Overview',
       summary: project?.detailIntro ?? project?.summary ?? 'Enterprise scalability review.',
-      themeColor: slug === 'developer-workflow' || slug === 'careerpilot-ai' ? 'indigo' : 'violet',
+      themeColor: slug === 'developer-workflow' || slug === 'careerpilot-ai' ? 'indigo' : slug === 'mantra4change-pbl' ? 'emerald' : 'violet',
       metricsHeading: 'PROJECT IMPACT',
       metrics: slug === 'studioflow' ? [
         { value: '40%', label: 'Faster Onboarding', icon: 'TrendingUp', color: 'violet' },
@@ -1095,6 +1234,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: '4x', label: 'Faster Resume Tailor', icon: 'Layers', color: 'emerald' },
         { value: '15+', label: 'Custom Career Paths', icon: 'LayoutGrid', color: 'amber' },
         { value: '<2s', label: 'Response Latency', icon: 'Clock', color: 'blue' }
+      ] : slug === 'mantra4change-pbl' ? [
+        { value: '60+', label: 'Schools Tracked', icon: 'LayoutGrid', color: 'violet' },
+        { value: '5', label: 'Districts Monitored', icon: 'Layers', color: 'emerald' },
+        { value: '100%', label: 'Risk Flag Consistency', icon: 'Shield', color: 'amber' },
+        { value: '90%', label: 'Less Manual Reporting', icon: 'Clock', color: 'blue' }
       ] : slug === 'developer-workflow' ? [
         { value: '0 ms', label: 'Server Load Time', icon: 'Clock', color: 'indigo' },
         { value: '100%', label: 'Offline Capable', icon: 'Shield', color: 'emerald' },
@@ -1120,6 +1264,7 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'shopease-landing' ? 'No Professional UI Foundation for E-Commerce'
              : slug === 'developer-workflow' ? 'Scattered Tools & No Developer-Specific Tracker'
              : slug === 'careerpilot-ai' ? 'Job Search Exhaustion & ATS Disconnects'
+             : slug === 'mantra4change-pbl' ? 'Manual, Spreadsheet-driven Program Monitoring'
              : 'Operational Bottlenecks & Friction',
       summary: slug === 'studioflow' ? 'Traditional inventory management was slow, error-prone, and required extensive manual data typing.'
              : slug === 'portfolio' ? 'Static showcases fail to explain design patterns, architecture trade-offs, and custom skill matches dynamically.'
@@ -1127,6 +1272,7 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'shopease-landing' ? 'Most beginner e-commerce sites are built with templates or Bootstrap — lacking clean semantic structure, accessibility, and a truly professional design.'
              : slug === 'developer-workflow' ? 'Developers juggle tasks across multiple apps with no single place to track daily progress, attach resources, and visualize consistency.'
              : slug === 'careerpilot-ai' ? 'Candidates spend hours tailoring resumes and cover letters for each job description, while traditional interview prep lacks real-time, personalized feedback loops.'
+             : slug === 'mantra4change-pbl' ? 'Education program teams collect monthly attendance and PBL activity data from many schools by hand, but have no automated way to see which schools are falling behind or to turn that data into a report leadership or donors can actually read.'
              : 'Repetitive tasks, data isolation, and lack of real-time pipeline automation delayed daily output.',
       themeColor: 'rose',
       metricsHeading: 'KEY PAIN POINTS',
@@ -1155,6 +1301,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Low', label: 'ATS Compatibility Scores', icon: 'AlertTriangle', color: 'rose' },
         { value: 'None', label: 'Real-time Mock Feedback', icon: 'Terminal', color: 'rose' },
         { value: 'Cluttered', label: 'Application Trackers', icon: 'Layers', color: 'rose' }
+      ] : slug === 'mantra4change-pbl' ? [
+        { value: 'Spreadsheet', label: 'Manual Monitoring Flow', icon: 'FileText', color: 'rose' },
+        { value: 'Inconsistent', label: 'Risk Classifications', icon: 'AlertTriangle', color: 'rose' },
+        { value: 'Days', label: 'Donor Narrative Writing', icon: 'Clock', color: 'rose' },
+        { value: '0%', label: 'Real-time Intervention', icon: 'Activity', color: 'rose' }
       ] : slug === 'developer-workflow' ? [
         { value: '5+', label: 'Disconnected Tools', icon: 'Boxes', color: 'rose' },
         { value: 'Manual', label: 'Streak Tracking', icon: 'AlertTriangle', color: 'rose' },
@@ -1175,6 +1326,7 @@ function getProjectCaseStudyDetails(slug, project) {
             : slug === 'marketpulse' ? ['Container Space Utilization', 'Cargo Weight Distribution', 'Manual Packing Time', 'Shipping Trip Count', 'Loading Plan Accuracy']
             : slug === 'shopease-landing' ? ['E-Commerce UI Foundation', 'Mobile Responsiveness', 'Accessibility Compliance', 'SEO Readiness', 'Product Card Design', 'Newsletter Capture']
             : slug === 'careerpilot-ai' ? ['Resume Customization', 'ATS Formatting & Keyword Optimization', 'Cover Letter Composition', 'Mock Interview Practice', 'Skill Gap Discovery', 'Job Search Pipeline Management']
+            : slug === 'mantra4change-pbl' ? ['School Attendance Monitoring', 'District Performance Visibility', 'Grant & Donor Reporting', 'Risk Classification Consistency', 'Month-over-Month Tracking', 'Evidence Documentation']
             : slug === 'developer-workflow' ? ['Daily Task Management', 'Learning Streak Tracking', 'Resource & Link Organization', 'Productivity Visualization', 'File Attachment to Tasks', 'Developer Habit Building']
             : ['Manual Triage', 'Coordination Latency', 'Pipeline Interrupts', 'Operations Overload']
     },
@@ -1186,6 +1338,7 @@ function getProjectCaseStudyDetails(slug, project) {
                      : slug === 'shopease-landing' ? 'Architecture: Zero-Dependency'
                      : slug === 'developer-workflow' ? 'Architecture: Local-First'
                      : slug === 'careerpilot-ai' ? 'Core: LangChain Agent Routing'
+                     : slug === 'mantra4change-pbl' ? 'Architecture: Facts-Then-Narrative'
                      : 'Design: Decoupled API',
       title: slug === 'studioflow' ? 'Scalable AI & Database Decoupling'
              : slug === 'portfolio' ? 'Semantic Mapping & Prompt Routing'
@@ -1193,6 +1346,7 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'shopease-landing' ? 'Semantic-First, Zero-Dependency Frontend Architecture'
              : slug === 'developer-workflow' ? 'Local-First, Zero-Backend Productivity Architecture'
              : slug === 'careerpilot-ai' ? 'Multi-Agent Prompt Routing & Vector Embeddings Alignment'
+             : slug === 'mantra4change-pbl' ? 'Deterministic Risk Engine & Fact-Grounded Narrative Pipeline'
              : 'Flexible Services & Loose Coupling',
       summary: slug === 'marketpulse'
         ? 'Used a geometric 3D bin-packing algorithm to automatically place products inside containers without overlapping, and visualized the result live using Qt3D.'
@@ -1202,6 +1356,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'Built entirely in the browser using localStorage as the data layer — no server, no login, no dependency.'
         : slug === 'careerpilot-ai'
         ? 'Utilized a multi-agent system with LangChain to route different user requests (such as interview prep versus resume analysis) to specialized generative models, using semantic alignment for skill scoring.'
+        : slug === 'mantra4change-pbl'
+        ? 'Every KPI and risk status is calculated first using auditable code from raw CSV data. Only then does the system optionally invoke Claude to generate reports, strictly grounding the AI to prevent hallucination.'
         : 'Establishing strict operational boundaries, modular hooks, and atomic transactions to guarantee high system stability.',
       themeColor: 'amber',
       metricsHeading: 'STRATEGIC PILLARS',
@@ -1230,6 +1386,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'OpenAI', label: 'Semantic Matcher', icon: 'Search', color: 'amber' },
         { value: 'React', label: 'Interactive Dashboard', icon: 'LayoutGrid', color: 'amber' },
         { value: 'Guard', label: 'Hallucination Blockers', icon: 'Shield', color: 'amber' }
+      ] : slug === 'mantra4change-pbl' ? [
+        { value: 'Claude', label: 'Anthropic Claude API', icon: 'Cpu', color: 'amber' },
+        { value: 'Math', label: 'Deterministic Risk Rules', icon: 'Check', color: 'amber' },
+        { value: 'React', label: 'Recharts Visuals', icon: 'LayoutGrid', color: 'amber' },
+        { value: 'CSV', label: 'School Ingestion Pipeline', icon: 'Database', color: 'amber' }
       ] : slug === 'developer-workflow' ? [
         { value: 'Local', label: 'localStorage DB', icon: 'Database', color: 'amber' },
         { value: 'Zero', label: 'Auth Friction', icon: 'User', color: 'amber' },
@@ -1245,6 +1406,7 @@ function getProjectCaseStudyDetails(slug, project) {
                   : slug === 'developer-workflow' ? 'How It Works'
                   : slug === 'shopease-landing' ? 'How It Works'
                   : slug === 'careerpilot-ai' ? 'How It Works'
+                  : slug === 'mantra4change-pbl' ? 'How It Works'
                   : 'System Architecture & Engineering',
       aboutText: slug === 'marketpulse'
         ? 'The core of this software is the Extreme Point Method — a 3D bin-packing algorithm that I implemented in C++. The idea is simple: we start with one empty slot at position (0, 0, 0) inside the container. When a product is placed at that point, three new candidate positions are generated — one along the X axis (to the right of the placed box), one along the Y axis (on top of it), and one along the Z axis (behind it). The next product tries each of these points one by one. Before placing, the algorithm checks two things — first, whether the product fits within the container boundaries, and second, whether it overlaps with any already placed product. If both checks pass, it gets placed and three more points are added. This continues until all products are placed or no valid position is found. The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.'
@@ -1254,11 +1416,14 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'The core design decision was to make this app work completely offline in the browser using the localStorage API as a persistent data store. All tasks, resources, notes, profile data, and settings are saved as JSON strings in localStorage under named keys (devfocus-tasks, devfocus-resources, devfocus-notes, dev-profile-data, devfocus-settings). The dashboard reads from and writes to these keys on every action. For the Analytics page, Chart.js reads the task completion timestamps and builds a 7-day bar chart dynamically. The streak counter scans completion dates in reverse to find consecutive days. The date picker feature filters tasks and resources by completion date using JavaScript\'s Date comparison. For file attachments, the FileReader API converts uploaded files to base64 data URLs and stores them inside the task object — meaning files are also saved in localStorage and can be re-downloaded any time without a server.'
         : slug === 'careerpilot-ai'
         ? 'The system begins by parsing uploaded resume PDF files. The backend extracts the raw text blocks and transforms them into a structured JSON profile containing sections for education, experience, and skills. When a user inputs a target job description, the system calculates a semantic similarity score using vector embeddings (OpenAI text-embedding-ada-002) to map the overlap between the resume and the job requirements. Based on the calculated gap, a LangChain-powered prompt router determines the best model configuration to use for downstream tasks. For cover letter generation, the request is routed to a GPT-4o agent optimized for template alignment and professional tone. For mock interviews, the system initiates a conversational state loop where the agent asks realistic technical or behavioral questions, records user responses, and prompts context-aware follow-ups based on the user\'s answers. A separate evaluation agent rates each response, checking for accuracy, formatting, and keywords compatibility, compiling the scoring metrics into exportable PDF summaries.'
+        : slug === 'mantra4change-pbl'
+        ? 'Every monthly monitoring dashboard calculation — from attendance rates to school risk flags — is computed using deterministic code from CSV data. This data is read and parsed by the backend to form structured tables before any summary or visualization is triggered. For donor grant reports, the app calls the Anthropic Claude API to generate a narrative. The request prompt is strictly grounded: the system passes only pre-calculated figures and lists (e.g. "attendance was 82.3% and 4 schools were critical") and explicitly forbids Claude from inventing or altering any metrics. If no API key is set, the pipeline degrades gracefully to a plain computed text fallback so that no feature breaks. On the frontend, custom hooks manage filter selections (district, block, subject, month) to dynamically compute and redraw bar and pie charts using Recharts.'
         : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
       approachDetails: slug === 'marketpulse' ? getLoadingOptimizationApproach(slug)
                        : slug === 'developer-workflow' ? getDeveloperWorkflowApproach(slug)
                        : slug === 'shopease-landing' ? getShopEaseApproach(slug)
                        : slug === 'careerpilot-ai' ? getCareerPilotApproach(slug)
+                       : slug === 'mantra4change-pbl' ? getMantra4ChangeApproach(slug)
                        : null,
       techHeading: 'DESIGN PRINCIPLES',
       tags: slug === 'marketpulse'
@@ -1269,6 +1434,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? ['localStorage as Database', 'FileReader API for File Attachments', 'Chart.js Visualization', 'CSS Variables for Theming', 'Multi-page SPA Architecture', 'Date-based History Filtering']
         : slug === 'careerpilot-ai'
         ? ['LangChain Prompt Router', 'Multi-Agent State Orchestrator', 'Vector Embeddings Semantic Alignment', 'PDF Text Parsing & JSON Mapping', 'Conversational Feedback Loops', 'Mock Interview Simulator']
+        : slug === 'mantra4change-pbl'
+        ? ['Deterministic Risk Engine', 'Facts-Then-Narrative AI Pattern', 'CSV-to-Dashboard Pipeline', 'District/Block Filtering', 'Graceful AI Fallback', 'REST API with Typed Contracts']
         : ['Loose Coupling', 'Typesafe Schemas', 'Atomic Processing', 'Defensive Coding']
     },
     'solution': {
@@ -1280,6 +1447,7 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'shopease-landing' ? 'Complete E-Commerce Landing Page — From Hero to Footer'
              : slug === 'developer-workflow' ? 'Complete Developer Dashboard — From Tasks to Analytics'
              : slug === 'careerpilot-ai' ? 'Complete AI Career Companion — From Profile Parsing to Offer'
+             : slug === 'mantra4change-pbl' ? 'Complete Program Monitoring Portal — From CSV to AI Narratives'
              : 'Polished Interactive Dashboard',
       summary: slug === 'marketpulse'
         ? 'A fully working desktop application with user registration, email OTP, product management, container selection, live 3D packing, and PDF export — all built in C++ with Qt6.'
@@ -1289,6 +1457,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'A fully working browser app with task tracking, file attachments, productivity charts, daily streak, theme switching, and data export — all in Vanilla JS with no backend.'
         : slug === 'careerpilot-ai'
         ? 'A unified career management platform featuring ATS resume scoring, personalized cover letter generation, interactive mock interviews, and visual application pipelines.'
+        : slug === 'mantra4change-pbl'
+        ? 'A fully working analytics dashboard with automated CSV ingestion, fixed rule-based risk flags, district level comparative charts, and a Claude narrative generator.'
         : 'A completely realized, production-ready system with highly responsive micro-interactions and smooth operational tools.',
       themeColor: 'indigo',
       metricsHeading: 'CORE CAPABILITIES',
@@ -1317,6 +1487,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Cover', label: 'Tailored Letter Composer', icon: 'FileDown', color: 'indigo' },
         { value: 'Mock', label: 'Live Interview simulator', icon: 'Terminal', color: 'indigo' },
         { value: 'Roadmap', label: 'AI Study Guide planner', icon: 'BrainCircuit', color: 'indigo' }
+      ] : slug === 'mantra4change-pbl' ? [
+        { value: 'Vite', label: 'Fast Responsive Portal', icon: 'LayoutGrid', color: 'indigo' },
+        { value: 'Claude', label: 'Narrative Generation API', icon: 'Sparkles', color: 'indigo' },
+        { value: 'CSV', label: 'Automatic File Ingest', icon: 'Database', color: 'indigo' },
+        { value: 'Recharts', label: 'Program Performance Charts', icon: 'LineChart', color: 'indigo' }
       ] : slug === 'developer-workflow' ? [
         { value: 'Vanilla', label: 'ES6+ Implementation', icon: 'Code2', color: 'indigo' },
         { value: 'Base64', label: 'File Storage Mode', icon: 'FileDown', color: 'indigo' },
@@ -1337,12 +1512,14 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'The app works end to end. A developer opens the dashboard and immediately sees their personalized welcome message and profile picture (fetched from localStorage). They add tasks with an optional file attachment — the FileReader API reads the file, converts it to a base64 data URL, and stores it inside the task object in localStorage, so it persists across page refreshes and can be re-downloaded anytime. Completed tasks are timestamped with an ISO date string, which the Analytics page uses to build the weekly bar chart, calculate the current daily streak, and allow date-based history search. The Settings page uses CSS custom properties (--accent-color, --bg-color) to switch instantly between Midnight dark mode and Light mode — the theme is saved to localStorage and applied on every page load via an inline script before the body renders, preventing any flash of unstyled content. The data export feature serializes all localStorage keys into a single JSON file which the user can download as a backup.'
         : slug === 'careerpilot-ai'
         ? 'The platform works as a comprehensive career coach. A user uploads their current resume, and the ATS analyzer immediately displays a compatibility score alongside keyword optimization lists and layout tips. The cover letter generator creates custom documents targeted at specific job listings. The mock interview module initiates an interactive session: the AI asks a question, records the user\'s text or voice answer, and generates context-aware follow-up queries. An evaluation block scores each response, checks for ATS keyword inclusion, and outlines key talking points. Users can also generate personalized learning paths (AI Skill Roadmaps) containing links and milestones to acquire missing skills. The Kanban Board helps track progress across various interview stages, and all optimized documents and performance reports can be downloaded as clean PDFs.'
-        : 'The resulting system unifies automated processing with intuitive UI dashboards. We combined lightning-fast server endpoints with clean component state loops to deliver zero-friction user feedback.\n\nThe layout includes robust exception catch boundaries, security validations, and reactive elements to provide a beautiful, seamless execution experience.',
+        : slug === 'mantra4change-pbl'
+        ? 'The system unifies automated CSV ingestion with human-in-the-loop narrative generation. It processes field-level data into normalized tables, runs deterministic risk algorithms to flag specific schools, and uses a prompt-engineered Claude API wrapper to generate professional grant reports—strictly grounded in verified data metrics.'
       techHeading: 'ENGINEERING ASSETS',
       coreCapabilities: slug === 'marketpulse' ? getCoreCapabilities(slug)
                         : slug === 'developer-workflow' ? getDeveloperWorkflowCoreCapabilities(slug)
                         : slug === 'shopease-landing' ? getShopEaseCoreCapabilities(slug)
                         : slug === 'careerpilot-ai' ? getCareerPilotCoreCapabilities(slug)
+                        : slug === 'mantra4change-pbl' ? getMantra4ChangeCoreCapabilities(slug)
                         : null,
       solutionBannerText: slug === 'marketpulse'
         ? 'Loading Optimization Software brings automation and visual clarity to every stage of cargo planning — helping teams load smarter, faster, and with complete documentation.'
@@ -1352,16 +1529,19 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'ShopEase brings a pixel-perfect, WCAG-compliant frontend design with a frosted-glass glassmorphism aesthetic and auto-fit responsive grids — built entirely with zero external CSS frameworks.'
         : slug === 'careerpilot-ai'
         ? 'CareerPilot-AI brings prompt routing, ATS parsing alignment, and mock interview simulators to your job hunt — helping you prepare smarter and customize applications in seconds.'
+        : slug === 'mantra4change-pbl'
+        ? 'Mantra4Change PBL Dashboard brings automated risk tracking, multi-district analytics, and Claude-powered donor report narratives to education program monitoring.'
         : '',
       tags: getSolutionPoints(slug)
     },
     'result': {
       badge: '05 RESULTS',
-      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' || slug === 'careerpilot-ai' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
+      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' || slug === 'careerpilot-ai' || slug === 'mantra4change-pbl' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
       title: slug === 'marketpulse' ? 'Won Competition · Got 4.8 LPA Job Offer as a Student'
              : slug === 'shopease-landing' ? 'Live & Deployed — A Professional Frontend Foundation'
              : slug === 'developer-workflow' ? 'Deployed & Live — Used as a Personal Productivity Tool'
              : slug === 'careerpilot-ai' ? 'Live & Deployed — Helping Candidates Navigate Careers'
+             : slug === 'mantra4change-pbl' ? 'Live & Deployed — Monitoring PBL Programs Across Districts'
              : 'Measurable Outcomes & Growth',
       summary: slug === 'marketpulse'
         ? 'This project was selected as the best submission in a C++ challenge by Webtech Developers Pvt. Ltd., Pune — earning a full-time job offer which I chose to decline to complete my MCA.'
@@ -1371,6 +1551,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'Developer Workflow is live at developer-workflow.onrender.com and serves as a fully functional personal productivity app — built and deployed from scratch with zero dependencies except Chart.js.'
         : slug === 'careerpilot-ai'
         ? 'CareerPilot AI is live at career-pilot-ai-ochre.vercel.app, providing candidates with a powerful AI operating system to optimize their application success rate.'
+        : slug === 'mantra4change-pbl'
+        ? 'Mantra4Change PBL Dashboard is live, allowing NGO managers to instantly visualize program execution metrics and generate draft grant reports from field data.'
         : 'The final system completely eliminated manual friction, drastically accelerated operations, and created a scalable foundation.',
       themeColor: 'emerald',
       metricsHeading: 'MEASURED OUTCOMES',
@@ -1399,6 +1581,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: '87%', label: 'ATS Score Achieved', icon: 'Shield', color: 'emerald' },
         { value: '15+', label: 'Custom Roadmaps Built', icon: 'LayoutGrid', color: 'emerald' },
         { value: '<2s', label: 'Response Generation', icon: 'LineChart', color: 'emerald' }
+      ] : slug === 'mantra4change-pbl' ? [
+        { value: '60+', label: 'Schools Monitored', icon: 'LayoutGrid', color: 'emerald' },
+        { value: '100%', label: 'Risk Flag Accuracy', icon: 'Shield', color: 'emerald' },
+        { value: '10x', label: 'Faster Reporting', icon: 'Clock', color: 'emerald' },
+        { value: '5', label: 'Districts Visualized', icon: 'Layers', color: 'emerald' }
       ] : slug === 'developer-workflow' ? [
         { value: '0 ms', label: 'Server Load Time', icon: 'Clock', color: 'emerald' },
         { value: '100%', label: 'Offline Capable', icon: 'Shield', color: 'emerald' },
@@ -1432,6 +1619,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { title: 'Realistic Interviewing', description: 'Helps candidates prepare for live conversations with context-aware follow-up prompts.', icon: 'Terminal', iconColor: 'text-emerald-500' },
         { title: 'Visual Organization', description: 'Kanban boards keep applications, interviews, and offers organized.', icon: 'LayoutGrid', iconColor: 'text-indigo-600' },
         { title: 'Exportable Outcomes', description: 'Saves reports and custom resumes as PDFs for offline submission.', icon: 'FileDown', iconColor: 'text-violet-600' }
+      ] : slug === 'mantra4change-pbl' ? [
+        { title: 'Automated Interventions', description: 'At-risk schools are instantly flagged, allowing timely remedial support.', icon: 'CheckCircle2', iconColor: 'text-amber-500' },
+        { title: 'Comparative Analytics', description: 'Allows NGO leadership to compare district and block execution side-by-side.', icon: 'LineChart', iconColor: 'text-indigo-600' },
+        { title: 'Fact-Grounded Narratives', description: 'Claude narrates pre-computed CSV stats without hallucinations.', icon: 'Sparkles', iconColor: 'text-emerald-500' },
+        { title: 'Donor Ready Reporting', description: 'Reduces manual grant reporting work by over 90%.', icon: 'FileText', iconColor: 'text-rose-600' }
       ] : null,
       testimonial: slug === 'marketpulse' ? {
         quote: '“This was the best project submitted in the challenge — it solved a real problem, worked end-to-end, and showed strong technical depth in C++ and 3D rendering.”',
@@ -1449,6 +1641,10 @@ function getProjectCaseStudyDetails(slug, project) {
         quote: '“Developed this tool to simplify job hunting — it automates the tedious tailoring work and provides realistic practice sessions.”',
         author: 'Vaibhav Lohar, Developer',
         link: null
+      } : slug === 'mantra4change-pbl' ? {
+        quote: '“Built this prototype to demonstrate how NGOs can move from spreadsheet exhaustion to live program intelligence dashboards and automated donor narratives.”',
+        author: 'Vaibhav Lohar, Developer',
+        link: null
       } : null,
       techHeading: 'IMPACT AREAS',
       tags: slug === 'studioflow' ? ['E-Commerce Merchandising', 'Stock Management Speed', 'Catalog Taxonomy', 'Data Quality Control']
@@ -1456,6 +1652,7 @@ function getProjectCaseStudyDetails(slug, project) {
             : slug === 'marketpulse' ? ['Won coding competition', '4.8 LPA job offer received', 'Manual loading time — seconds', 'Zero packing overlap errors', 'PDF report export', 'Industry recognized project']
             : slug === 'shopease-landing' ? ['Live deployed on Render', 'Zero external CSS frameworks', 'Glassmorphism UI with backdrop-filter', 'CSS Grid auto-fit product layout', 'WCAG-compliant accessibility patterns', 'SEO meta tags and Open Graph', 'Full mobile responsiveness via media queries', 'HTML5 email validation on newsletter form']
             : slug === 'careerpilot-ai' ? ['Live Deployed on Render', 'Vercel static client host', 'ATS optimizations achieved', 'Conversational feedback scoring', 'LangChain agent routing pipelines', 'PDF report compilation']
+            : slug === 'mantra4change-pbl' ? ['Automated Risk Flagging', 'District Performance Visibility', 'Faster Grant Reporting', 'Explainable AI Narrative Pipeline', 'Deployed Live Demo', 'Scalable Architecture Blueprint']
             : slug === 'developer-workflow' ? ['Live deployed on Render', 'Zero backend, zero login', 'File attachments via FileReader API', 'Streak tracking with date comparison', 'Chart.js weekly productivity chart', 'Full JSON data export', 'Midnight & Light theme support']
             : ['Automation Coverage', 'Processing Throughput', 'System Reliability', 'User Ergonomics']
     },
@@ -1568,6 +1765,11 @@ function getProjectExternalLinks(slug) {
       return {
         github: 'https://github.com/Lohar109/CareerPilot-AI',
         demo: 'https://career-pilot-ai-ochre.vercel.app/'
+      }
+    case 'mantra4change-pbl':
+      return {
+        github: 'https://github.com/Lohar109/Mantra4Change-PBL-Dashboard',
+        demo: 'https://mantra4change-pbl-dashboard.vercel.app/'
       }
     default:
       return {
@@ -1871,7 +2073,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && activeSection === 'problem' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && activeSection === 'problem' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1913,7 +2115,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && activeSection === 'approach' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && activeSection === 'approach' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -1924,7 +2126,7 @@ function ProjectDetail() {
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-4 items-start">
+                    <div className={`grid grid-cols-1 ${currentStep.approachDetails?.steps.length === 6 ? 'lg:grid-cols-6' : 'lg:grid-cols-5'} gap-5 lg:gap-4 items-start`}>
                       {currentStep.approachDetails?.steps.map((step, idx) => {
                         const Icon = step.icon
                         return (
@@ -1992,7 +2194,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && activeSection === 'solution' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && activeSection === 'solution' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -2141,7 +2343,7 @@ function ProjectDetail() {
                         {currentStep.aboutText}
                       </p>
 
-                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai') && (
+                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && (
                         <div className="mt-6">
                           <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.06em] text-slate-700">
                             {currentStep.metricsHeading}

@@ -143,6 +143,11 @@ function getProjectLinks(slug) {
         github: 'https://github.com/Lohar109/Developer-Workflow',
         demo: '/projects/developer-workflow'
       }
+    case 'careerpilot-ai':
+      return {
+        github: 'https://github.com/Lohar109/CareerPilot-AI',
+        demo: '/projects/careerpilot-ai'
+      }
     default:
       return {
         github: 'https://github.com/Lohar109',
@@ -427,7 +432,37 @@ function renderProjectVisual(project) {
                 Integrate Chart.js graphs
               </span>
               <span className="text-[5px] font-black text-indigo-400">In Progress</span>
+          </div>
+        </div>
+      )
+    case 'careerpilot-ai':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] to-[#0f172a] flex flex-col justify-between p-3 select-none overflow-hidden border border-slate-800/40">
+          {/* Header Panel */}
+          <div className="flex items-center justify-between border-b border-slate-800/60 pb-1.5 gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded bg-blue-600 text-white text-[6px] font-black flex items-center justify-center">CP</span>
+              <span className="text-[8px] font-bold text-slate-200">CareerPilot AI</span>
             </div>
+            <span className="text-[6.5px] font-black bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded uppercase">ATS Score: 87% 🚀</span>
+          </div>
+
+          {/* AI Match Stats */}
+          <div className="flex gap-2 items-center my-1 flex-1">
+            <div className="flex-1 bg-slate-900/60 border border-slate-800/50 rounded-lg p-1.5 flex flex-col justify-center gap-0.5 shadow-sm">
+              <span className="text-[5px] font-bold text-slate-400 uppercase leading-none">Target Role</span>
+              <span className="text-[7px] font-extrabold text-slate-200 leading-none mt-0.5 whitespace-nowrap">AI Software Engineer</span>
+            </div>
+            <div className="h-9 w-9 rounded-lg bg-slate-900/60 border border-slate-800/50 flex flex-col items-center justify-center shadow-sm shrink-0">
+              <span className="text-[8px] font-black text-emerald-400 leading-none">92%</span>
+              <span className="text-[4px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">MATCH</span>
+            </div>
+          </div>
+
+          {/* Prompt Routing Log */}
+          <div className="bg-slate-950/60 border border-slate-800/60 rounded p-1 text-[5.5px] font-mono text-blue-300 flex justify-between items-center">
+            <span>[agent] Routing to resume_tailor_agent...</span>
+            <span className="text-emerald-400">DONE</span>
           </div>
         </div>
       )
@@ -491,7 +526,8 @@ function ProjectsSection() {
         project.slug === 'shopease-landing' ||
         project.slug === 'campus-connect' ||
         project.slug === 'insight-board' ||
-        project.slug === 'media-ops'
+        project.slug === 'media-ops' ||
+        project.slug === 'careerpilot-ai'
       )
     }
     if (activeFilter === 'AI') {
@@ -499,7 +535,8 @@ function ProjectsSection() {
         project.slug !== 'studioflow' &&
         (/\b(ai|genai|rag)\b/i.test(project.summary || '') ||
           project.slug === 'portfolio' ||
-          project.slug === 'support-flow')
+          project.slug === 'support-flow' ||
+          project.slug === 'careerpilot-ai')
       )
     }
     if (activeFilter === 'Tools') {

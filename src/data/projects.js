@@ -319,51 +319,54 @@ export const projectsData = [
   {
     slug: 'careerpilot-ai',
     isFeatured: true,
-    title: 'CareerPilot-AI',
+    title: 'CareerPilot AI',
     category: 'AI / ML & SaaS Product',
     role: 'Full Stack & AI System Design',
     year: '2026',
     summary:
-      'An AI-powered career guidance and job hunting operating system. It features resume parsing, automated cover letter generation, customized skill roadmap creation, and interactive AI interview coaching.',
+      "AI-powered career intelligence platform that analyzes a user's resume, GitHub profile, and portfolio to deliver personalized career guidance, resume feedback, mock interviews, and a real-time job-readiness score.",
     previewText:
-      'Built as an intelligent career navigator that analyzes professional profiles, maps skill gaps, and prepares candidates for interviews using interactive AI feedback loop systems.',
+      "Built as an intelligent career navigator that aggregates resume, GitHub profile, and portfolio into a unified live showcase with real-time job readiness scores and AI coaching.",
     detailIntro:
-      'CareerPilot-AI is an intelligent career optimization platform designed to streamline job matching, profile tailoring, and interview readiness through generative AI.',
+      'CareerPilot AI is a full-stack SaaS platform built with Next.js and Supabase that acts as a personal "career co-pilot." It pulls together a user\'s resume, GitHub activity, and portfolio into one unified profile, then uses Google\'s Gemini AI to generate an ATS-style resume score, a GitHub code-quality analysis, a personalized learning roadmap, AI-driven mock interviews, and job-match scoring against real job descriptions.',
     challenge:
-      'Parsing unstructured resumes, mapping career paths dynamically, and providing realistic mock interviews with contextual feedback.',
+      'Scattered and generic career guidance, lack of a unified candidate view, contextless resume feedback, unrealistic interview practice, and incomplete signaling for recruiters.',
     outcome:
-      'Delivered a cohesive system that saves candidates hours of search/customization time and raises interview performance.',
+      'Consolidated a fragmented job-search workflow into a unified authenticated dashboard with production-grade practices, including Row-Level Security, encrypted tokens, background job processing, and full mobile responsiveness.',
     topInfoCards: [
       { label: 'Role', value: 'Full Stack & AI System Design' },
-      { label: 'Core Focus', value: 'LLM Prompt Routing & Semantic Embeddings' },
-      { label: 'Outcome', value: 'Highly personalized career coaching & ATS optimization' },
+      { label: 'Core Focus', value: 'Multi-Agent Analysis & Vector Embeddings' },
+      { label: 'Outcome', value: 'Unified career intelligence dashboard & ATS scoring' },
     ],
     stats: [
-      { label: 'Use Case', value: 'Interactive career platform' },
+      { label: 'Use Case', value: 'Career intelligence SaaS platform' },
       { label: 'Audience', value: 'Job applicants and developers' },
-      { label: 'Primary Goal', value: 'Provide resume tailoring and realistic mock interviews' },
+      { label: 'Primary Goal', value: 'Provide resume scoring, GitHub analysis, and mock interviews' },
     ],
     caseStudy: {
       overview:
-        'CareerPilot-AI was developed to remove the manual friction in the job search process. By using advanced LLM routing and vector embedding alignment, the platform automates resume ATS scoring, cover letter tailoring, and mock interviews, giving candidates an all-in-one preparation suite.',
+        "CareerPilot AI is a personal career co-pilot that aggregates a candidate's resume, GitHub profile, and portfolio. Using Gemini AI, it generates real-time readiness scores, custom roadmaps, and mock interview feedback.",
       problem:
-        'Job seekers spend hours custom-tailoring resumes and writing cover letters for every application. Furthermore, practicing for interviews lacks realism, and candidates receive little to no feedback on how well their skills match the job description, resulting in high search friction and poor interview conversion rates.',
+        'Job seekers juggle separate tools for resume check, interview prep, GitHub polish, and job matching — none of which talk to each other or understand the person as a whole candidate, leading to generic feedback and fragmented tracking.',
       approach: [
-        'Built a modular React/Vite admin dashboard backed by a Node.js and Express API server.',
-        'Integrated LangChain for multi-model prompt routing, sending specific user tasks (e.g. cover letter drafting vs. mock interview follow-ups) to specialized agents.',
-        'Implemented semantic alignment algorithms using OpenAI embeddings to calculate ATS compatibility and highlight keyword gaps.',
+        'Set up Supabase (Postgres + Auth + Storage) with Row Level Security, encrypted GitHub OAuth tokens, and Zod validation.',
+        'Parsed resume PDFs via unpdf and analyzed them using Vercel AI SDK and Gemini for ATS feedback.',
+        'Connected GitHub via OAuth to fetch repos and activity, generating code-quality and contribution analysis.',
+        'Built a job-matching module, conversational AI mock interviews, and Inngest background jobs for heavy processing.',
       ],
       result:
-        'The final deployment creates a unified, local-friendly, and powerful career operating system. It significantly reduces application tailoring time and boosts candidate confidence through interactive mock interview simulators.',
+        'Successfully deployed a unified career readiness hub that replaces multiple disconnected tools, providing candidates with a clear growth path and recruiters with a live, data-backed view of candidates.',
     },
     stack: [
-      'React',
-      'Node.js',
-      'Express',
-      'Groq API',
-      'LangChain',
-      'PostgreSQL',
+      'Next.js 14',
+      'TypeScript',
       'Tailwind CSS',
+      'shadcn/ui',
+      'Supabase',
+      'Gemini API',
+      'Inngest',
+      'Recharts',
+      'Zod',
     ],
     previewTone:
       'bg-[linear-gradient(135deg,#1e1b4b_0%,#312e81_50%,#4f46e5_100%)]',

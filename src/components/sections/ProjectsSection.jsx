@@ -432,6 +432,7 @@ function renderProjectVisual(project) {
                 Integrate Chart.js graphs
               </span>
               <span className="text-[5px] font-black text-indigo-400">In Progress</span>
+            </div>
           </div>
         </div>
       )

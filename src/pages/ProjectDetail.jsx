@@ -1153,12 +1153,14 @@ function getProjectCaseStudyDetails(slug, project) {
                      : slug === 'marketpulse' ? 'Core: 3D Bin-Packing'
                      : slug === 'shopease-landing' ? 'Architecture: Zero-Dependency'
                      : slug === 'developer-workflow' ? 'Architecture: Local-First'
+                     : slug === 'careerpilot-ai' ? 'Core: LangChain Agent Routing'
                      : 'Design: Decoupled API',
       title: slug === 'studioflow' ? 'Scalable AI & Database Decoupling'
              : slug === 'portfolio' ? 'Semantic Mapping & Prompt Routing'
              : slug === 'marketpulse' ? 'Extreme Point Algorithm with Real-Time 3D Rendering'
              : slug === 'shopease-landing' ? 'Semantic-First, Zero-Dependency Frontend Architecture'
              : slug === 'developer-workflow' ? 'Local-First, Zero-Backend Productivity Architecture'
+             : slug === 'careerpilot-ai' ? 'Multi-Agent Prompt Routing & Vector Embeddings Alignment'
              : 'Flexible Services & Loose Coupling',
       summary: slug === 'marketpulse'
         ? 'Used a geometric 3D bin-packing algorithm to automatically place products inside containers without overlapping, and visualized the result live using Qt3D.'
@@ -1166,6 +1168,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'Built entirely with HTML5 and CSS3 — no frameworks, no libraries — following accessibility, SEO, and glassmorphism design standards from the ground up.'
         : slug === 'developer-workflow'
         ? 'Built entirely in the browser using localStorage as the data layer — no server, no login, no dependency.'
+        : slug === 'careerpilot-ai'
+        ? 'Utilized a multi-agent system with LangChain to route different user requests (such as interview prep versus resume analysis) to specialized generative models, using semantic alignment for skill scoring.'
         : 'Establishing strict operational boundaries, modular hooks, and atomic transactions to guarantee high system stability.',
       themeColor: 'amber',
       metricsHeading: 'STRATEGIC PILLARS',
@@ -1189,6 +1193,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Pure CSS', label: 'Zero Bloat', icon: 'Layers', color: 'amber' },
         { value: 'WCAG', label: 'Accessibility Built-in', icon: 'Shield', color: 'amber' },
         { value: 'Auto-Fit', label: 'Grid Responsiveness', icon: 'Sparkles', color: 'amber' }
+      ] : slug === 'careerpilot-ai' ? [
+        { value: 'Router', label: 'LangChain Multi-Agent', icon: 'Cpu', color: 'amber' },
+        { value: 'OpenAI', label: 'Semantic Matcher', icon: 'Search', color: 'amber' },
+        { value: 'React', label: 'Interactive Dashboard', icon: 'LayoutGrid', color: 'amber' },
+        { value: 'Guard', label: 'Hallucination Blockers', icon: 'Shield', color: 'amber' }
       ] : slug === 'developer-workflow' ? [
         { value: 'Local', label: 'localStorage DB', icon: 'Database', color: 'amber' },
         { value: 'Zero', label: 'Auth Friction', icon: 'User', color: 'amber' },
@@ -1203,6 +1212,7 @@ function getProjectCaseStudyDetails(slug, project) {
       aboutHeading: slug === 'marketpulse' ? 'How it works'
                   : slug === 'developer-workflow' ? 'How It Works'
                   : slug === 'shopease-landing' ? 'How It Works'
+                  : slug === 'careerpilot-ai' ? 'How It Works'
                   : 'System Architecture & Engineering',
       aboutText: slug === 'marketpulse'
         ? 'The core of this software is the Extreme Point Method — a 3D bin-packing algorithm that I implemented in C++. The idea is simple: we start with one empty slot at position (0, 0, 0) inside the container. When a product is placed at that point, three new candidate positions are generated — one along the X axis (to the right of the placed box), one along the Y axis (on top of it), and one along the Z axis (behind it). The next product tries each of these points one by one. Before placing, the algorithm checks two things — first, whether the product fits within the container boundaries, and second, whether it overlaps with any already placed product. If both checks pass, it gets placed and three more points are added. This continues until all products are placed or no valid position is found. The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.'
@@ -1210,10 +1220,13 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'The entire layout is built using HTML5 semantic tags — header, nav, main, section, footer — giving the page a clear document structure for both browsers and screen readers. CSS custom properties (--bg-color, --text-color, --primary-color, --card-bg, --card-border) define the entire color system, making future theming or dark mode a one-line change per variable. The navigation uses CSS Flexbox with justify-content: space-between for the logo, search form, and nav links. The category grid and product showcase use CSS Grid with auto-fit and minmax() — meaning the layout automatically adjusts from 3 columns to 1 column as the screen shrinks, with no JavaScript required. The glassmorphism effect on product cards is achieved using background: rgba(255,255,255,0.45), backdrop-filter: blur(12px), and a semi-transparent border — creating a frosted-glass look that sits on top of the gradient background. The sticky header uses position: sticky with backdrop-filter: blur(8px) so it stays at the top while remaining visually light. The newsletter form uses HTML5 type="email" and required attributes for built-in client-side validation. A .sr-only class hides form labels visually while keeping them accessible to screen readers.'
         : slug === 'developer-workflow'
         ? 'The core design decision was to make this app work completely offline in the browser using the localStorage API as a persistent data store. All tasks, resources, notes, profile data, and settings are saved as JSON strings in localStorage under named keys (devfocus-tasks, devfocus-resources, devfocus-notes, dev-profile-data, devfocus-settings). The dashboard reads from and writes to these keys on every action. For the Analytics page, Chart.js reads the task completion timestamps and builds a 7-day bar chart dynamically. The streak counter scans completion dates in reverse to find consecutive days. The date picker feature filters tasks and resources by completion date using JavaScript\'s Date comparison. For file attachments, the FileReader API converts uploaded files to base64 data URLs and stores them inside the task object — meaning files are also saved in localStorage and can be re-downloaded any time without a server.'
+        : slug === 'careerpilot-ai'
+        ? 'The system begins by parsing uploaded resume PDF files. The backend extracts the raw text blocks and transforms them into a structured JSON profile containing sections for education, experience, and skills. When a user inputs a target job description, the system calculates a semantic similarity score using vector embeddings (OpenAI text-embedding-ada-002) to map the overlap between the resume and the job requirements. Based on the calculated gap, a LangChain-powered prompt router determines the best model configuration to use for downstream tasks. For cover letter generation, the request is routed to a GPT-4o agent optimized for template alignment and professional tone. For mock interviews, the system initiates a conversational state loop where the agent asks realistic technical or behavioral questions, records user responses, and prompts context-aware follow-ups based on the user\'s answers. A separate evaluation agent rates each response, checking for accuracy, formatting, and keywords compatibility, compiling the scoring metrics into exportable PDF summaries.'
         : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
       approachDetails: slug === 'marketpulse' ? getLoadingOptimizationApproach(slug)
                        : slug === 'developer-workflow' ? getDeveloperWorkflowApproach(slug)
                        : slug === 'shopease-landing' ? getShopEaseApproach(slug)
+                       : slug === 'careerpilot-ai' ? getCareerPilotApproach(slug)
                        : null,
       techHeading: 'DESIGN PRINCIPLES',
       tags: slug === 'marketpulse'
@@ -1222,6 +1235,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? ['HTML5 Semantic Architecture', 'CSS Custom Properties (Variables)', 'Glassmorphism UI Pattern', 'CSS Grid Auto-Fit Layout', 'Flexbox Navigation', 'Mobile-First Media Queries', 'SEO Meta Tags', 'WCAG Accessibility Standards']
         : slug === 'developer-workflow'
         ? ['localStorage as Database', 'FileReader API for File Attachments', 'Chart.js Visualization', 'CSS Variables for Theming', 'Multi-page SPA Architecture', 'Date-based History Filtering']
+        : slug === 'careerpilot-ai'
+        ? ['LangChain Prompt Router', 'Multi-Agent State Orchestrator', 'Vector Embeddings Semantic Alignment', 'PDF Text Parsing & JSON Mapping', 'Conversational Feedback Loops', 'Mock Interview Simulator']
         : ['Loose Coupling', 'Typesafe Schemas', 'Atomic Processing', 'Defensive Coding']
     },
     'solution': {

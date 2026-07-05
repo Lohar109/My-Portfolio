@@ -202,10 +202,12 @@ function getSolutionPoints(slug) {
       ]
     case 'studioflow':
       return [
-        'AI-powered product data extraction from images & voice',
-        'Automated categorization & intelligent inventory mapping',
-        'Real-time dashboard for catalog & inventory operations',
-        'Scalable microservice architecture with clean API layer'
+        'OTP-based auth with JWT sessions (Express + PostgreSQL)',
+        'Separate customer storefront and admin panel (React + Vite)',
+        'Variant-aware product & design-gallery data model',
+        'Coupon and audience management APIs',
+        'Multi-step checkout flow (shipping → payment)',
+        'Transactional email delivery (Nodemailer/Resend)'
       ]
     case 'portfolio':
       return [
@@ -265,6 +267,51 @@ function getSolutionPoints(slug) {
 
 function getProblemCards(slug) {
   switch (slug) {
+    case 'studioflow':
+      return [
+        {
+          icon: Lock,
+          iconColor: 'text-rose-700',
+          iconBg: 'bg-rose-50',
+          title: 'Weak login authentication',
+          description: 'Password-only auth is weak and creates high friction; shoppers need a secure, passwordless-feeling access model.',
+        },
+        {
+          icon: Database,
+          iconColor: 'text-indigo-700',
+          iconBg: 'bg-indigo-50',
+          title: 'Rigid product content schemas',
+          description: 'Products lacked flexibility for variants (design galleries) and category specification tabs, remaining flat and basic.',
+        },
+        {
+          icon: Award,
+          iconColor: 'text-amber-700',
+          iconBg: 'bg-amber-50',
+          title: 'No promotional coupon engines',
+          description: 'Operators had no way to launch targeted discount campaigns or activate/deactivate custom coupon codes.',
+        },
+        {
+          icon: Terminal,
+          iconColor: 'text-emerald-700',
+          iconBg: 'bg-emerald-50',
+          title: 'Direct database dependency',
+          description: 'Business managers had no operational panel, forcing developers to make manual database edits to update listings.',
+        },
+        {
+          icon: LayoutGrid,
+          iconColor: 'text-sky-700',
+          iconBg: 'bg-sky-50',
+          title: 'Static catalog layouts',
+          description: 'Merchandising could not target customer segments or dynamically adapt catalog offerings based on defined user groups.',
+        },
+        {
+          icon: FileText,
+          iconColor: 'text-violet-700',
+          iconBg: 'bg-violet-50',
+          title: 'Skipped compliance boilerplates',
+          description: 'Most portfolio projects skip legal trust essentials like Privacy Policy and Terms of Use page routes.',
+        },
+      ]
     case 'developer-workflow':
       return [
         {
@@ -1051,6 +1098,150 @@ function getCareerPilotCoreCapabilities(slug) {
   ]
 }
 
+function getShopEaseFullApproach(slug) {
+  if (slug !== 'studioflow') return null
+
+  return {
+    steps: [
+      {
+        icon: Database,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Backend & Data Model',
+        description: 'Set up Express & PostgreSQL with tables for users, products, categories, coupons, audiences, wishlists, and design galleries.',
+      },
+      {
+        icon: Lock,
+        iconColor: 'text-indigo-600',
+        iconBg: 'bg-indigo-50',
+        title: 'OTP Authentication',
+        description: 'Built secure register and login flows using 6-digit OTP codes sent via Nodemailer/Resend and verified with server-side expiry.',
+      },
+      {
+        icon: LayoutGrid,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Storefront Experience',
+        description: 'Designed category filters, product detail tabs, variant-level wishlists, shopping cart, and checkout from shipping to payment.',
+      },
+      {
+        icon: Terminal,
+        iconColor: 'text-amber-600',
+        iconBg: 'bg-amber-50',
+        title: 'Admin Control Panel',
+        description: 'Built a React admin dashboard to add/edit products, toggle variant discounts, and control coupons/audiences without DB queries.',
+      },
+      {
+        icon: Sparkles,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'Design Galleries',
+        description: 'Linked per-product, per-color image and video galleries so shoppers see the exact variant assets before placing an order.',
+      },
+      {
+        icon: FileText,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
+        title: 'Trust & Legal Pages',
+        description: 'Constructed legal boilerplate like Privacy Policy, Terms of Use, and customer Profile control pages.',
+      },
+    ],
+    principles: [
+      {
+        icon: Lock,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'OTP Over Passwords',
+        description: 'Removes credential-stuffing vulnerabilities by sending secure 6-digit verification codes to the user\'s inbox.',
+      },
+      {
+        icon: Layers,
+        iconColor: 'text-indigo-600',
+        iconBg: 'bg-indigo-50',
+        title: 'Separation of Concerns',
+        description: 'Storefront, admin dashboard, and Express API remain decoupled codebases sharing a strict REST API contract.',
+      },
+      {
+        icon: LayoutGrid,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Rich Product Modeling',
+        description: 'Models products around variant lists, variant discounts, specifications, inclusions, and category-level defaults.',
+      },
+      {
+        icon: Sparkles,
+        iconColor: 'text-amber-600',
+        iconBg: 'bg-amber-50',
+        title: 'Self-Service Operations',
+        description: 'Avoids operational data lock-in by keeping coupons, stock levels, and category rules fully manageable through the admin GUI.',
+      },
+    ],
+  }
+}
+
+function getShopEaseFullCoreCapabilities(slug) {
+  if (slug !== 'studioflow') return null
+
+  return [
+    {
+      title: 'OTP Email Login',
+      description: 'Passwordless register/login sending a secure 6-digit OTP code to verified customer emails, managed with server-side expiry checks.',
+      icon: Lock,
+      iconBg: 'bg-violet-50',
+      iconColor: 'text-violet-600',
+    },
+    {
+      title: 'Rich Product Pages',
+      description: 'Dynamic tabbed pages (Overview, Specs, Inclusions, How-To-Use, FAQs) showcasing product variants and dynamic design galleries.',
+      icon: Sparkles,
+      iconBg: 'bg-indigo-50',
+      iconColor: 'text-indigo-600',
+    },
+    {
+      title: 'Cart, Wishlist & Checkout',
+      description: 'Fully responsive e-commerce checkout flow supporting variant item additions, persistent wishlists, shipping details, and mock payments.',
+      icon: LayoutGrid,
+      iconBg: 'bg-emerald-50',
+      iconColor: 'text-emerald-600',
+    },
+    {
+      title: 'Admin Product Manager',
+      description: 'Self-service dashboard to create/edit products, control SKU stock statuses, and assign variant discounts.',
+      icon: Terminal,
+      iconBg: 'bg-amber-50',
+      iconColor: 'text-amber-600',
+    },
+    {
+      title: 'Coupon Creator',
+      description: 'Admin tool to generate custom promo codes, assign percentage discounts, toggle active states, and track usages.',
+      icon: FileText,
+      iconBg: 'bg-rose-50',
+      iconColor: 'text-rose-600',
+    },
+    {
+      title: 'Audience Targeting',
+      description: 'Define specific buyer personas and configure targeted merchandise collections shown on the storefront.',
+      icon: Database,
+      iconBg: 'bg-sky-50',
+      iconColor: 'text-sky-600',
+    },
+    {
+      title: 'Category Manager',
+      description: 'CRUD category controls that dynamically populate storefront filters and product config inputs.',
+      icon: Layers,
+      iconBg: 'bg-teal-50',
+      iconColor: 'text-teal-600',
+    },
+    {
+      title: 'Legal & Profile Pages',
+      description: 'Built-in customer profiles to view order status, alongside Privacy Policy and Terms of Use compliance boilerplates.',
+      icon: Shield,
+      iconBg: 'bg-pink-50',
+      iconColor: 'text-pink-600',
+    },
+  ]
+}
+
 function getMantra4ChangeApproach(slug) {
   if (slug !== 'mantra4change-pbl') return null
 
@@ -1210,10 +1401,10 @@ function getProjectCaseStudyDetails(slug, project) {
       themeColor: slug === 'developer-workflow' || slug === 'careerpilot-ai' ? 'indigo' : slug === 'mantra4change-pbl' ? 'emerald' : 'violet',
       metricsHeading: 'PROJECT IMPACT',
       metrics: slug === 'studioflow' ? [
-        { value: '40%', label: 'Faster Onboarding', icon: 'TrendingUp', color: 'violet' },
-        { value: '60%', label: 'Manual Task Reduction', icon: 'Boxes', color: 'emerald' },
-        { value: '35%', label: 'Increase in Efficiency', icon: 'LineChart', color: 'amber' },
-        { value: '25%', label: 'Better Team Collaboration', icon: 'Users', color: 'blue' }
+        { value: 'OTP', label: 'Email Login Flow', icon: 'Lock', color: 'violet' },
+        { value: '5+', label: 'Product Detail Tabs', icon: 'LayoutGrid', color: 'emerald' },
+        { value: 'Active', label: 'Variant-level Control', icon: 'Sparkles', color: 'amber' },
+        { value: '3-Part', label: 'System Architecture', icon: 'Layers', color: 'blue' }
       ] : slug === 'portfolio' ? [
         { value: '95%', label: 'Retrieval Accuracy', icon: 'Sparkles', color: 'violet' },
         { value: '<1.5s', label: 'Response Latency', icon: 'Clock', color: 'emerald' },
@@ -1258,7 +1449,7 @@ function getProjectCaseStudyDetails(slug, project) {
     'problem': {
       badge: '02 PROBLEM',
       durationLabel: 'Challenge Severity: High',
-      title: slug === 'studioflow' ? 'Manual Inventory & GenAI Pipelines'
+      title: slug === 'studioflow' ? 'Store Operations Need More Than Just a Storefront'
              : slug === 'portfolio' ? 'Static Portfolios Limit Understanding'
              : slug === 'marketpulse' ? 'Wasted Space & Manual Cargo Planning'
              : slug === 'shopease-landing' ? 'No Professional UI Foundation for E-Commerce'
@@ -1266,7 +1457,7 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'careerpilot-ai' ? 'Job Search Exhaustion & ATS Disconnects'
              : slug === 'mantra4change-pbl' ? 'Manual, Spreadsheet-driven Program Monitoring'
              : 'Operational Bottlenecks & Friction',
-      summary: slug === 'studioflow' ? 'Traditional inventory management was slow, error-prone, and required extensive manual data typing.'
+      summary: slug === 'studioflow' ? 'Most learning projects build only the customer storefront, leaving the e-commerce business without any secure authentication, variant content modeling, coupon promotion system, or operational controls.'
              : slug === 'portfolio' ? 'Static showcases fail to explain design patterns, architecture trade-offs, and custom skill matches dynamically.'
              : slug === 'marketpulse' ? 'Logistics workers manually guess how to stack cargo — wasting container space, increasing shipping trips, and making costly packing errors.'
              : slug === 'shopease-landing' ? 'Most beginner e-commerce sites are built with templates or Bootstrap — lacking clean semantic structure, accessibility, and a truly professional design.'
@@ -1277,10 +1468,10 @@ function getProjectCaseStudyDetails(slug, project) {
       themeColor: 'rose',
       metricsHeading: 'KEY PAIN POINTS',
       metrics: slug === 'studioflow' ? [
-        { value: '120h', label: 'Weekly Manual Triage', icon: 'Clock', color: 'rose' },
-        { value: '42%', label: 'Taxonomy Data Errors', icon: 'AlertTriangle', color: 'rose' },
-        { value: '5+', label: 'System Context Switches', icon: 'Layers', color: 'rose' },
-        { value: '3-5d', label: 'Listing Publication Lag', icon: 'Activity', color: 'rose' }
+        { value: 'Weak', label: 'Password-Only Login', icon: 'Lock', color: 'rose' },
+        { value: 'Flat', label: 'Product Data Model', icon: 'Database', color: 'rose' },
+        { value: 'None', label: 'Coupon Promotions', icon: 'Award', color: 'rose' },
+        { value: '0', label: 'Self-service Admin Controls', icon: 'Terminal', color: 'rose' }
       ] : slug === 'portfolio' ? [
         { value: '10+', label: 'Pages Scanned to Match', icon: 'LayoutGrid', color: 'rose' },
         { value: 'Static', label: 'Zero Dynamic Reasoning', icon: 'Activity', color: 'rose' },
@@ -1321,7 +1512,7 @@ function getProjectCaseStudyDetails(slug, project) {
       aboutText: defaultProblemText,
       problemCards: getProblemCards(slug),
       techHeading: 'AFFECTED PROCESSES',
-      tags: slug === 'studioflow' ? ['Manual Merchandising', 'Variant Configuration', 'Catalog Taxonomy', 'Media Processing']
+      tags: slug === 'studioflow' ? ['Customer Authentication', 'Product Data Modeling', 'Promotions & Discounts', 'Store Operations', 'Audience Targeting', 'Legal/Trust Pages']
             : slug === 'portfolio' ? ['Passive Reading', 'Information Retrieval', 'Context Fragmentation', 'Candidate Triage']
             : slug === 'marketpulse' ? ['Container Space Utilization', 'Cargo Weight Distribution', 'Manual Packing Time', 'Shipping Trip Count', 'Loading Plan Accuracy']
             : slug === 'shopease-landing' ? ['E-Commerce UI Foundation', 'Mobile Responsiveness', 'Accessibility Compliance', 'SEO Readiness', 'Product Card Design', 'Newsletter Capture']
@@ -1332,7 +1523,7 @@ function getProjectCaseStudyDetails(slug, project) {
     },
     'approach': {
       badge: '03 APPROACH',
-      durationLabel: slug === 'studioflow' ? 'Architecture: Multimodal API'
+      durationLabel: slug === 'studioflow' ? 'Architecture: Three-Part Full-Stack'
                      : slug === 'portfolio' ? 'Search: Hybrid RAG'
                      : slug === 'marketpulse' ? 'Core: 3D Bin-Packing'
                      : slug === 'shopease-landing' ? 'Architecture: Zero-Dependency'
@@ -1340,7 +1531,7 @@ function getProjectCaseStudyDetails(slug, project) {
                      : slug === 'careerpilot-ai' ? 'Core: LangChain Agent Routing'
                      : slug === 'mantra4change-pbl' ? 'Architecture: Facts-Then-Narrative'
                      : 'Design: Decoupled API',
-      title: slug === 'studioflow' ? 'Scalable AI & Database Decoupling'
+      title: slug === 'studioflow' ? 'Decoupled Client Apps Sharing a Relational API'
              : slug === 'portfolio' ? 'Semantic Mapping & Prompt Routing'
              : slug === 'marketpulse' ? 'Extreme Point Algorithm with Real-Time 3D Rendering'
              : slug === 'shopease-landing' ? 'Semantic-First, Zero-Dependency Frontend Architecture'
@@ -1348,7 +1539,9 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'careerpilot-ai' ? 'Multi-Agent Prompt Routing & Vector Embeddings Alignment'
              : slug === 'mantra4change-pbl' ? 'Deterministic Risk Engine & Fact-Grounded Narrative Pipeline'
              : 'Flexible Services & Loose Coupling',
-      summary: slug === 'marketpulse'
+      summary: slug === 'studioflow'
+        ? 'Three independently deployable layers (Storefront React client, Admin React dashboard, Express + Postgres REST API) communicating through secure contracts.'
+        : slug === 'marketpulse'
         ? 'Used a geometric 3D bin-packing algorithm to automatically place products inside containers without overlapping, and visualized the result live using Qt3D.'
         : slug === 'shopease-landing'
         ? 'Built entirely with HTML5 and CSS3 — no frameworks, no libraries — following accessibility, SEO, and glassmorphism design standards from the ground up.'
@@ -1362,10 +1555,10 @@ function getProjectCaseStudyDetails(slug, project) {
       themeColor: 'amber',
       metricsHeading: 'STRATEGIC PILLARS',
       metrics: slug === 'studioflow' ? [
-        { value: '100%', label: 'Decoupled Server Logs', icon: 'Server', color: 'amber' },
-        { value: 'Queue', label: 'Async Task Ingestion', icon: 'Cpu', color: 'amber' },
-        { value: 'Atomic', label: 'Database Operations', icon: 'Database', color: 'amber' },
-        { value: 'Clean', label: 'System Design Patterns', icon: 'Layers', color: 'amber' }
+        { value: 'OTP', label: 'Emailed Secure Logins', icon: 'Lock', color: 'amber' },
+        { value: 'Decouple', label: 'Separate Apps Codebases', icon: 'Layers', color: 'amber' },
+        { value: 'SQL', label: 'Relational DB Models', icon: 'Database', color: 'amber' },
+        { value: 'CRUD', label: 'Operator Self-Service', icon: 'Terminal', color: 'amber' }
       ] : slug === 'portfolio' ? [
         { value: 'Vectors', label: 'Semantic Chunking Maps', icon: 'Database', color: 'amber' },
         { value: 'Hybrid', label: 'Embedding + Text Match', icon: 'Search', color: 'amber' },
@@ -1402,31 +1595,37 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Indexed', label: 'Database Access Tuning', icon: 'Database', color: 'amber' },
         { value: 'CI/CD', label: 'Test Pipeline Validation', icon: 'Cpu', color: 'amber' }
       ],
-      aboutHeading: slug === 'marketpulse' ? 'How it works'
+      aboutHeading: slug === 'studioflow' ? 'How It Works'
+                  : slug === 'marketpulse' ? 'How it works'
                   : slug === 'developer-workflow' ? 'How It Works'
                   : slug === 'shopease-landing' ? 'How It Works'
                   : slug === 'careerpilot-ai' ? 'How It Works'
                   : slug === 'mantra4change-pbl' ? 'How It Works'
                   : 'System Architecture & Engineering',
-      aboutText: slug === 'marketpulse'
+      aboutText: slug === 'studioflow'
+        ? 'ShopEase is split into three independently deployable pieces sharing one PostgreSQL database and Express API: the storefront (what shoppers use), the admin panel (what the business uses), and the backend (the single source of truth for both). Instead of password-based login, authentication uses a 6-digit OTP sent via email (Nodemailer/Resend) with a dedicated user_otps table tracking expiry — verified server-side before a JWT session is issued. Product data is modeled to support real retail needs: variants, per-color design galleries, and tabbed detail content (specifications, inclusions, how-to-use, FAQs), all managed from the admin panel rather than hardcoded.'
+        : slug === 'marketpulse'
         ? 'The core of this software is the Extreme Point Method — a 3D bin-packing algorithm that I implemented in C++. The idea is simple: we start with one empty slot at position (0, 0, 0) inside the container. When a product is placed at that point, three new candidate positions are generated — one along the X axis (to the right of the placed box), one along the Y axis (on top of it), and one along the Z axis (behind it). The next product tries each of these points one by one. Before placing, the algorithm checks two things — first, whether the product fits within the container boundaries, and second, whether it overlaps with any already placed product. If both checks pass, it gets placed and three more points are added. This continues until all products are placed or no valid position is found. The result is then rendered using Qt3D as a live 3D wireframe container filled with colored boxes, where each product type has its own unique color assigned by the user. An orbit camera controller lets you rotate and inspect the loaded container from any angle.'
         : slug === 'shopease-landing'
         ? 'The entire layout is built using HTML5 semantic tags — header, nav, main, section, footer — giving the page a clear document structure for both browsers and screen readers. CSS custom properties (--bg-color, --text-color, --primary-color, --card-bg, --card-border) define the entire color system, making future theming or dark mode a one-line change per variable. The navigation uses CSS Flexbox with justify-content: space-between for the logo, search form, and nav links. The category grid and product showcase use CSS Grid with auto-fit and minmax() — meaning the layout automatically adjusts from 3 columns to 1 column as the screen shrinks, with no JavaScript required. The glassmorphism effect on product cards is achieved using background: rgba(255,255,255,0.45), backdrop-filter: blur(12px), and a semi-transparent border — creating a frosted-glass look that sits on top of the gradient background. The sticky header uses position: sticky with backdrop-filter: blur(8px) so it stays at the top while remaining visually light. The newsletter form uses HTML5 type="email" and required attributes for built-in client-side validation. A .sr-only class hides form labels visually while keeping them accessible to screen readers.'
         : slug === 'developer-workflow'
         ? 'The core design decision was to make this app work completely offline in the browser using the localStorage API as a persistent data store. All tasks, resources, notes, profile data, and settings are saved as JSON strings in localStorage under named keys (devfocus-tasks, devfocus-resources, devfocus-notes, dev-profile-data, devfocus-settings). The dashboard reads from and writes to these keys on every action. For the Analytics page, Chart.js reads the task completion timestamps and builds a 7-day bar chart dynamically. The streak counter scans completion dates in reverse to find consecutive days. The date picker feature filters tasks and resources by completion date using JavaScript\'s Date comparison. For file attachments, the FileReader API converts uploaded files to base64 data URLs and stores them inside the task object — meaning files are also saved in localStorage and can be re-downloaded any time without a server.'
         : slug === 'careerpilot-ai'
-        ? 'The system begins by parsing uploaded resume PDF files. The backend extracts the raw text blocks and transforms them into a structured JSON profile containing sections for education, experience, and skills. When a user inputs a target job description, the system calculates a semantic similarity score using vector embeddings (OpenAI text-embedding-ada-002) to map the overlap between the resume and the job requirements. Based on the calculated gap, a LangChain-powered prompt router determines the best model configuration to use for downstream tasks. For cover letter generation, the request is routed to a GPT-4o agent optimized for template alignment and professional tone. For mock interviews, the system initiates a conversational state loop where the agent asks realistic technical or behavioral questions, records user responses, and prompts context-aware follow-ups based on the user\'s answers. A separate evaluation agent rates each response, checking for accuracy, formatting, and keywords compatibility, compiling the scoring metrics into exportable PDF summaries.'
+        ? 'The system begins by parsing uploaded resume PDF files. The backend extracts the raw text blocks and transforms them into a structured JSON profile containing sections for education, experience, and skills. When a user inputs a target job description, the system calculates a semantic similarity score using vector embeddings (OpenAI text-embedding-ada-002) to map the overlap between the resume and the job requirements. Based on the calculated gap, a LangChain-powered prompt router determines the best model configuration to use for downstream tasks. For cover letter generation, the request is routed to a GPT-4o agent optimized for template alignment and professional tone. For mock interviews, the system initiates a conversational state loop where the agent asks realistic technical or behavioral questions, records user responses, and prompts context-aware follow-up queries. A separate evaluation agent rates each response, checking for accuracy, formatting, and keywords compatibility, compiling the scoring metrics into exportable PDF summaries.'
         : slug === 'mantra4change-pbl'
         ? 'Every monthly monitoring dashboard calculation — from attendance rates to school risk flags — is computed using deterministic code from CSV data. This data is read and parsed by the backend to form structured tables before any summary or visualization is triggered. For donor grant reports, the app calls the Anthropic Claude API to generate a narrative. The request prompt is strictly grounded: the system passes only pre-calculated figures and lists (e.g. "attendance was 82.3% and 4 schools were critical") and explicitly forbids Claude from inventing or altering any metrics. If no API key is set, the pipeline degrades gracefully to a plain computed text fallback so that no feature breaks. On the frontend, custom hooks manage filter selections (district, block, subject, month) to dynamically compute and redraw bar and pie charts using Recharts.'
         : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
-      approachDetails: slug === 'marketpulse' ? getLoadingOptimizationApproach(slug)
+      approachDetails: slug === 'studioflow' ? getShopEaseFullApproach(slug)
+                       : slug === 'marketpulse' ? getLoadingOptimizationApproach(slug)
                        : slug === 'developer-workflow' ? getDeveloperWorkflowApproach(slug)
                        : slug === 'shopease-landing' ? getShopEaseApproach(slug)
                        : slug === 'careerpilot-ai' ? getCareerPilotApproach(slug)
                        : slug === 'mantra4change-pbl' ? getMantra4ChangeApproach(slug)
                        : null,
       techHeading: 'DESIGN PRINCIPLES',
-      tags: slug === 'marketpulse'
+      tags: slug === 'studioflow'
+        ? ['OTP-Based Authentication', 'JWT Sessions', 'Separate Admin Panel', 'Variant-Level Product Data', 'Coupon & Audience Management', 'Design Gallery per Product Variant']
+        : slug === 'marketpulse'
         ? ['Extreme Point Algorithm', '3D Bin Packing', 'Overlap Detection', 'Qt3D Real-Time Rendering', 'JSON Persistence', 'OTP Email Verification']
         : slug === 'shopease-landing'
         ? ['HTML5 Semantic Architecture', 'CSS Custom Properties (Variables)', 'Glassmorphism UI Pattern', 'CSS Grid Auto-Fit Layout', 'Flexbox Navigation', 'Mobile-First Media Queries', 'SEO Meta Tags', 'WCAG Accessibility Standards']
@@ -1441,7 +1640,7 @@ function getProjectCaseStudyDetails(slug, project) {
     'solution': {
       badge: '04 SOLUTION',
       durationLabel: 'Deploy State: Live Production',
-      title: slug === 'studioflow' ? 'Multimodal Parser & Real-time Console'
+      title: slug === 'studioflow' ? 'Complete E-Commerce Suite — Shop & Admin Dashboard'
              : slug === 'portfolio' ? 'Context-grounded Assistant Interface'
              : slug === 'marketpulse' ? 'Complete C++ Desktop App — From Login to 3D Loading Plan'
              : slug === 'shopease-landing' ? 'Complete E-Commerce Landing Page — From Hero to Footer'
@@ -1449,7 +1648,9 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'careerpilot-ai' ? 'Complete AI Career Companion — From Profile Parsing to Offer'
              : slug === 'mantra4change-pbl' ? 'Complete Program Monitoring Portal — From CSV to AI Narratives'
              : 'Polished Interactive Dashboard',
-      summary: slug === 'marketpulse'
+      summary: slug === 'studioflow'
+        ? 'A fully working three-part system with passwordless OTP email authentication, variant-level content rendering, shopping/checkout flows, and a self-service administration control panel.'
+        : slug === 'marketpulse'
         ? 'A fully working desktop application with user registration, email OTP, product management, container selection, live 3D packing, and PDF export — all built in C++ with Qt6.'
         : slug === 'shopease-landing'
         ? 'A fully hand-coded, zero-dependency landing page with sticky nav, glassmorphism product cards, responsive grid, newsletter validation, and SEO meta tags — built in pure HTML5 and CSS3.'
@@ -1463,10 +1664,10 @@ function getProjectCaseStudyDetails(slug, project) {
       themeColor: 'indigo',
       metricsHeading: 'CORE CAPABILITIES',
       metrics: slug === 'studioflow' ? [
-        { value: 'Vision', label: 'Automated Image Tagging', icon: 'Eye', color: 'indigo' },
-        { value: 'Voice', label: 'Audio Transcription Parser', icon: 'AudioLines', color: 'indigo' },
-        { value: 'JSON', label: 'Structured Info Extraction', icon: 'Cpu', color: 'indigo' },
-        { value: 'Live', label: 'Dashboard Activity Grid', icon: 'LayoutGrid', color: 'indigo' }
+        { value: 'OTP', label: 'Passwordless-Feeling Access', icon: 'Lock', color: 'indigo' },
+        { value: 'Specs', label: 'Tabbed Product Content', icon: 'LayoutGrid', color: 'indigo' },
+        { value: 'Visuals', label: 'Color-linked Design Gallery', icon: 'Sparkles', color: 'indigo' },
+        { value: 'CRUD', label: 'Operator Self-Service', icon: 'Terminal', color: 'indigo' }
       ] : slug === 'portfolio' ? [
         { value: 'RAG', label: 'Vector Index Lookup', icon: 'Database', color: 'indigo' },
         { value: 'Guard', label: 'Hallucination Blockers', icon: 'Lock', color: 'indigo' },
@@ -1504,7 +1705,9 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Fast', label: 'Aggressive Query Caching', icon: 'Cpu', color: 'indigo' }
       ],
       aboutHeading: 'Key Technical Implementation',
-      aboutText: slug === 'marketpulse'
+      aboutText: slug === 'studioflow'
+        ? 'The application works end-to-end to manage a complete retail lifecycle. Customers sign in using an OTP sent to their email (no password needed). Once logged in, they can browse categorised products, click into tabbed detail pages to see specifications or FAQs, and select variant options. Adding items dynamically adjusts the local cart state and wishlists. During checkout, they input shipping coordinates and complete a mock payment form. Store admins log in to a separate administrative dashboard to create and update product listings, toggle variant-level promotional discounts, define discount coupons, manage categories, and customize target audience groups. The entire experience is backed by a secure Node.js/PostgreSQL REST API.'
+        : slug === 'marketpulse'
         ? 'The software works end to end. A user first registers with their name, company name, email, mobile number, and password. Email verification uses a 6-digit OTP sent via Gmail SMTP directly from the app — built using Qt\'s SSL socket. After login, users can add and save products with name, type (box, bag, barrel, sack, pipe), dimensions in centimeters, weight in kg, and quantity — all stored in a local JSON file. Users can also save multiple trucks, containers, train bogis, and warehouses. When loading, you select a container, pick products from your saved list (or enter them directly), assign a unique color to each product type, and hit "Add in Container." The algorithm runs instantly and the 3D view updates live. Users can add or remove products one at a time and watch the container re-pack in real time. A pie chart shows filled vs empty percentage. Finally, two types of PDF reports can be exported — one showing the product summary with type icons and colors, and one showing a layer-wise 2D visual of every Z-depth layer in the container.'
         : slug === 'shopease-landing'
         ? 'The page works as a complete, professional e-commerce frontend foundation. The sticky header uses backdrop-filter: blur(8px) with rgba transparency so it looks frosted over the content as users scroll. The search form inside the nav uses pill-shaped border-radius on each side of the input and button so they join into one seamless element. The category cards use a hover translateY(-8px) transition for a smooth lift effect. The product grid uses grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) — meaning it automatically becomes 3 columns on desktop, 2 columns on tablet, and 1 column on mobile with zero media query needed for the grid itself. Each product card uses backdrop-filter: blur(12px) with a semi-transparent white background and a translucent border for the glassmorphism effect. The newsletter input uses type="email" and required attributes — the browser blocks submission and shows a native error if the email is invalid or empty. All buttons share a base style with a translateY(-3px) hover lift and box-shadow transition. The CSS uses a linear-gradient background on the body (from #f3f4f6 to #e5e7eb) that gives the glassmorphism cards their frosted contrast. The footer is minimal and centered, and the full page collapses cleanly on mobile at 768px with the nav stacking vertically, the newsletter form going full-width, and all grids reducing to a single column.'
@@ -1516,13 +1719,16 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'The system unifies automated CSV ingestion with human-in-the-loop narrative generation. It processes field-level data into normalized tables, runs deterministic risk algorithms to flag specific schools, and uses a prompt-engineered Claude API wrapper to generate professional grant reports—strictly grounded in verified data metrics.'
         : 'Our engineering strategy prioritized robust component design. We built core processing modules using loose coupling, ensuring that databases, internal queues, and client front-ends communicate through strictly defined, typesafe API schemas.\n\nThis approach eliminates runtime data corruption, provides deterministic state management, and enables seamless system expansion.',
       techHeading: 'ENGINEERING ASSETS',
-      coreCapabilities: slug === 'marketpulse' ? getCoreCapabilities(slug)
+      coreCapabilities: slug === 'studioflow' ? getShopEaseFullCoreCapabilities(slug)
+                        : slug === 'marketpulse' ? getCoreCapabilities(slug)
                         : slug === 'developer-workflow' ? getDeveloperWorkflowCoreCapabilities(slug)
                         : slug === 'shopease-landing' ? getShopEaseCoreCapabilities(slug)
                         : slug === 'careerpilot-ai' ? getCareerPilotCoreCapabilities(slug)
                         : slug === 'mantra4change-pbl' ? getMantra4ChangeCoreCapabilities(slug)
                         : null,
-      solutionBannerText: slug === 'marketpulse'
+      solutionBannerText: slug === 'studioflow'
+        ? 'ShopEase unifies custom storefront shopping layouts, variant-level content modeling, and self-service admin dashboards on a secure shared PostgreSQL backend.'
+        : slug === 'marketpulse'
         ? 'Loading Optimization Software brings automation and visual clarity to every stage of cargo planning — helping teams load smarter, faster, and with complete documentation.'
         : slug === 'developer-workflow'
         ? 'Developer Workflow brings structure and visibility to your daily developer routine — keeping tasks, attachments, reference links, and weekly consistency metrics in a single private local space.'
@@ -1537,14 +1743,17 @@ function getProjectCaseStudyDetails(slug, project) {
     },
     'result': {
       badge: '05 RESULTS',
-      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' || slug === 'careerpilot-ai' || slug === 'mantra4change-pbl' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
-      title: slug === 'marketpulse' ? 'Won Competition · Got 4.8 LPA Job Offer as a Student'
+      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' || slug === 'careerpilot-ai' || slug === 'mantra4change-pbl' || slug === 'studioflow' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
+      title: slug === 'studioflow' ? 'Live & Deployed — A Production-Ready Retail System'
+             : slug === 'marketpulse' ? 'Won Competition · Got 4.8 LPA Job Offer as a Student'
              : slug === 'shopease-landing' ? 'Live & Deployed — A Professional Frontend Foundation'
              : slug === 'developer-workflow' ? 'Deployed & Live — Used as a Personal Productivity Tool'
              : slug === 'careerpilot-ai' ? 'Live & Deployed — Helping Candidates Navigate Careers'
              : slug === 'mantra4change-pbl' ? 'Live & Deployed — Monitoring PBL Programs Across Districts'
              : 'Measurable Outcomes & Growth',
-      summary: slug === 'marketpulse'
+      summary: slug === 'studioflow'
+        ? 'ShopEase storefront is live at shop-ease-ecommerce-delta.vercel.app as a clean storefront, with its separate admin control panel allowing complete operational management of products, coupon codes, and customer audience rules.'
+        : slug === 'marketpulse'
         ? 'This project was selected as the best submission in a C++ challenge by Webtech Developers Pvt. Ltd., Pune — earning a full-time job offer which I chose to decline to complete my MCA.'
         : slug === 'shopease-landing'
         ? 'ShopEase is live at shopease-ecom-landing.onrender.com as a clean, professional e-commerce frontend — demonstrating that a modern, accessible, responsive landing page needs zero libraries or frameworks.'
@@ -1558,10 +1767,10 @@ function getProjectCaseStudyDetails(slug, project) {
       themeColor: 'emerald',
       metricsHeading: 'MEASURED OUTCOMES',
       metrics: slug === 'studioflow' ? [
-        { value: '40%', label: 'Faster Onboarding', icon: 'TrendingUp', color: 'emerald' },
-        { value: '60%', label: 'Manual Task Reduction', icon: 'Boxes', color: 'emerald' },
-        { value: '35%', label: 'Increase in Efficiency', icon: 'LineChart', color: 'emerald' },
-        { value: '25%', label: 'Better Team Collaboration', icon: 'Users', color: 'emerald' }
+        { value: '3-Part', label: 'Independently Deployable Apps', icon: 'Layers', color: 'emerald' },
+        { value: '100%', label: 'Self-Service Operations', icon: 'Shield', color: 'emerald' },
+        { value: 'OTP', label: 'Safer Low-Friction Logins', icon: 'Lock', color: 'emerald' },
+        { value: 'Promo', label: 'Coupon Campaigns Support', icon: 'Award', color: 'emerald' }
       ] : slug === 'portfolio' ? [
         { value: '95%', label: 'Retrieval Accuracy', icon: 'Sparkles', color: 'emerald' },
         { value: '<1.5s', label: 'Response Latency', icon: 'Clock', color: 'emerald' },
@@ -1600,7 +1809,12 @@ function getProjectCaseStudyDetails(slug, project) {
       ],
       aboutHeading: 'Business & Operational Impact',
       aboutText: defaultResultText,
-      businessOutcomes: slug === 'marketpulse' ? [
+      businessOutcomes: slug === 'studioflow' ? [
+        { title: 'Self-Service Admin Dashboard', description: 'Gives store operators full CRUD control over products, coupons, categories, and audiences without database queries.', icon: 'Terminal', iconColor: 'text-violet-600' },
+        { title: 'Zero Password Friction', description: 'Implements passwordless-feeling access using secure 6-digit email verification OTPs.', icon: 'Lock', iconColor: 'text-indigo-600' },
+        { title: 'Confidence to Buy', description: 'Per-variant design galleries and tabbed specifications provide detailed, high-fidelity customer product views.', icon: 'Sparkles', iconColor: 'text-emerald-500' },
+        { title: 'Promotional Campaigns Ready', description: 'Coupon creation and client-targeted audience segmentation lay the foundation for scalable merchandising.', icon: 'Award', iconColor: 'text-rose-600' }
+      ] : slug === 'marketpulse' ? [
         { title: 'Time saved', description: 'Hours of manual planning reduced to seconds.', icon: 'Clock', iconColor: 'text-amber-500' },
         { title: 'Fewer trips', description: 'Better fill rate means less trips per shipment.', icon: 'Truck', iconColor: 'text-indigo-600' },
         { title: 'Documented plans', description: 'PDF reports replace verbal instructions.', icon: 'FileDown', iconColor: 'text-violet-600' },
@@ -1626,7 +1840,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { title: 'Fact-Grounded Narratives', description: 'Claude narrates pre-computed CSV stats without hallucinations.', icon: 'Sparkles', iconColor: 'text-emerald-500' },
         { title: 'Donor Ready Reporting', description: 'Reduces manual grant reporting work by over 90%.', icon: 'FileText', iconColor: 'text-rose-600' }
       ] : null,
-      testimonial: slug === 'marketpulse' ? {
+      testimonial: slug === 'studioflow' ? {
+        quote: '“Engineered to demonstrate that a real online business needs more than just a checkout button — it requires a robust, self-service admin operations panel and strong data models.”',
+        author: 'Vaibhav Lohar, Developer',
+        link: null
+      } : slug === 'marketpulse' ? {
         quote: '“This was the best project submitted in the challenge — it solved a real problem, worked end-to-end, and showed strong technical depth in C++ and 3D rendering.”',
         author: 'Webtech Developers Pvt. Ltd., Pune',
         link: '#'
@@ -1648,7 +1866,7 @@ function getProjectCaseStudyDetails(slug, project) {
         link: null
       } : null,
       techHeading: 'IMPACT AREAS',
-      tags: slug === 'studioflow' ? ['E-Commerce Merchandising', 'Stock Management Speed', 'Catalog Taxonomy', 'Data Quality Control']
+      tags: slug === 'studioflow' ? ['Passwordless-Feeling Secure Login', 'Self-Service Admin Operations', 'Variant-Level Product Detail', 'Promotions & Coupon Support', 'Audience Segmentation', 'Three-Tier Architecture (Storefront / Admin / API)']
             : slug === 'portfolio' ? ['Recruiter Engagement', 'Developer Showcase Speed', 'Fact Grounded AI', 'Portfolio Reach']
             : slug === 'marketpulse' ? ['Won coding competition', '4.8 LPA job offer received', 'Manual loading time — seconds', 'Zero packing overlap errors', 'PDF report export', 'Industry recognized project']
             : slug === 'shopease-landing' ? ['Live deployed on Render', 'Zero external CSS frameworks', 'Glassmorphism UI with backdrop-filter', 'CSS Grid auto-fit product layout', 'WCAG-compliant accessibility patterns', 'SEO meta tags and Open Graph', 'Full mobile responsiveness via media queries', 'HTML5 email validation on newsletter form']
@@ -2074,7 +2292,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && activeSection === 'problem' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl' || project.slug === 'studioflow') && activeSection === 'problem' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -2116,7 +2334,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && activeSection === 'approach' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl' || project.slug === 'studioflow') && activeSection === 'approach' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -2195,7 +2413,7 @@ function ProjectDetail() {
                       </div>
                     </div>
                   </div>
-                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && activeSection === 'solution' ? (
+                ) : (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl' || project.slug === 'studioflow') && activeSection === 'solution' ? (
                   <div className="mt-6 flex flex-col gap-8 w-full animate-fadeIn">
                     <div className="w-full flex flex-col min-w-0">
                       <h3 className="text-xs sm:text-[13px] font-black text-slate-800 tracking-tight leading-none uppercase">
@@ -2344,7 +2562,7 @@ function ProjectDetail() {
                         {currentStep.aboutText}
                       </p>
 
-                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl') && (
+                      {activeSection === 'result' && (project.slug === 'marketpulse' || project.slug === 'developer-workflow' || project.slug === 'shopease-landing' || project.slug === 'careerpilot-ai' || project.slug === 'mantra4change-pbl' || project.slug === 'studioflow') && (
                         <div className="mt-6">
                           <h4 className="text-sm sm:text-[15px] font-black uppercase tracking-[0.06em] text-slate-700">
                             {currentStep.metricsHeading}

@@ -2,53 +2,56 @@ export const projectsData = [
   {
     slug: 'studioflow',
     isFeatured: true,
-    title: 'ShopEase Intelligent Commerce Suite',
-    category: 'SaaS Product',
-    role: 'Full Stack & AI Integration',
+    title: 'ShopEase',
+    category: 'Full Stack E-Commerce',
+    role: 'Full Stack Developer',
     year: '2026',
     summary:
-      'An AI-powered e-commerce platform built on a scalable Node.js architecture. It uses multimodal GenAI (Vision & Audio) and structured JSON extraction to automate product onboarding and streamline inventory management.',
+      'ShopEase is a full-stack e-commerce application built with a three-part architecture: a React customer-facing storefront, a separate React admin panel, and a Node.js/Express/PostgreSQL backend serving both.',
     previewText:
-      'Designed to feel calm, data-rich, and client-ready with strong hierarchy and fast scanning.',
+      'Full-stack e-commerce suite featuring secure OTP login, variant-level content control, dynamic design galleries, discount coupons, and operational controls.',
     detailIntro:
-      'ShopEase is an enterprise-ready e-commerce platform that unifies storefront, admin operations, and backend services on a scalable Node.js architecture. It incorporates multimodal GenAI to automate product categorization and intelligent inventory management.',
+      'ShopEase is a full-stack e-commerce application built with a three-part architecture: a React customer-facing storefront, a separate React admin panel, and a Node.js/Express/PostgreSQL backend serving both. It covers the full shopping journey alongside a real admin control system.',
     challenge:
-      'Automated Inventory & GenAI Pipelines',
+      "Running a store needs more than just a storefront. Managing catalogs manually is error-prone, lacking secure low-friction login, variant-level content, promotions, and operational controls.",
     outcome:
-      'Scale merchandising & eliminate manual data entry',
+      'Delivered a three-part production system with OTP authentication, dynamic variant-level design galleries, administrative CRUD controls, and customer audience segmentation.',
     topInfoCards: [
-      { label: 'Role', value: 'Full Stack & AI Integration' },
-      { label: 'Core Focus', value: 'Automated Inventory & GenAI Pipelines' },
-      { label: 'Outcome', value: 'Scale merchandising & eliminate manual data entry' },
+      { label: 'Role', value: 'Full Stack Developer' },
+      { label: 'Core Focus', value: 'Three-Part Store Architecture' },
+      { label: 'Outcome', value: 'Full control panel & low-friction OTP shopping' },
     ],
     stats: [
-      { label: 'Use Case', value: 'Enterprise commerce operations' },
-      { label: 'Audience', value: 'Retail and merchandising teams' },
-      { label: 'Primary Goal', value: 'Automate catalog onboarding' },
+      { label: 'Use Case', value: 'E-commerce storefront & admin panel' },
+      { label: 'Audience', value: 'Business owners and online shoppers' },
+      { label: 'Primary Goal', value: 'Provide secure shopping and administrative product controls' },
     ],
     caseStudy: {
       overview:
-        'ShopEase was architected to solve the manual bottlenecks in modern e-commerce operations. By unifying the storefront with an AI-powered backend, the platform enables rapid onboarding of products using multimodal models, making scalable inventory management effortless for retail teams.',
+        'ShopEase was designed to cover both sides of a real store — a polished shopping experience for customers and a functional control panel for the business — built on one shared backend rather than a storefront-only demo.',
       problem:
-        'Managing massive e-commerce catalogs is traditionally manual and error-prone. Merchants spend countless hours typing product details, categorizing items, and mapping inventory variants. This friction slows down time-to-market and leads to inconsistent data and operational exhaustion.',
+        "Running a store needs more than just a storefront. Merchants spend countless hours typing details, categorizing items, and mapping variants manually. Furthermore, password-only auth is weak, promotions are hard to run, and legal pages are skipped.",
       approach: [
-        'Developed a robust Node.js backend with Express and PostgreSQL to handle complex relational product and inventory data.',
-        'Integrated multimodal GenAI pipelines, using Vision APIs to automatically tag product images and Audio models for quick voice-based inventory updates.',
-        'Built a responsive React/Vite admin dashboard that leverages structured JSON extraction to instantly convert raw inputs into organized catalog entries.',
+        'Set up PostgreSQL with tables for users, products, categories, coupons, audiences, wishlists, and design galleries.',
+        'Built OTP registration and login with expiry checks and JWT session issuance.',
+        'Constructed storefront shopping flow, variant galleries, and multi-step checkout (shipping to payment).',
+        'Created a separate React admin panel for variant-level product CRUD, coupons, categories, and audiences.',
       ],
       result:
-        'The intelligent suite drastically reduces the time required to list new products and manage stock. By automating data entry with generative AI, the platform ensures catalog accuracy and allows operational teams to focus on strategy and sales rather than tedious manual inputs.',
+        'ShopEase demonstrates a store that can actually be run, not just browsed — the admin panel gives non-technical control over products, discounts, and audiences, while the storefront gives customers a trustworthy, low-friction login.',
     },
     stack: [
+      'React 19',
+      'React Router',
+      'Vite',
+      'Tailwind CSS',
+      'Lottie',
       'Node.js',
-      'React',
+      'Express 5',
       'PostgreSQL',
-      'Vision API',
-      'Audio Transcription',
-      'Supabase',
-      'Render',
-      'Vercel',
-      'Cloudinary',
+      'JWT',
+      'Nodemailer',
+      'Resend',
     ],
     previewTone:
       'bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_52%,#38bdf8_100%)]',

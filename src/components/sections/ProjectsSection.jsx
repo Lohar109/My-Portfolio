@@ -101,7 +101,7 @@ function getProjectLinks(slug) {
     case 'studioflow':
       return {
         github: 'https://github.com/Lohar109/ShopEase-Ecommerce',
-        demo: 'https://shop-ease-ecommerce-delta.vercel.app/'
+        demo: '/projects/studioflow'
       }
     case 'portfolio':
       return {

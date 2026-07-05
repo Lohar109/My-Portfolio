@@ -148,6 +148,11 @@ function getProjectLinks(slug) {
         github: 'https://github.com/Lohar109/CareerPilot-AI',
         demo: '/projects/careerpilot-ai'
       }
+    case 'mantra4change-pbl':
+      return {
+        github: 'https://github.com/Lohar109/Mantra4Change-PBL-Dashboard',
+        demo: '/projects/mantra4change-pbl'
+      }
     default:
       return {
         github: 'https://github.com/Lohar109',
@@ -467,6 +472,37 @@ function renderProjectVisual(project) {
           </div>
         </div>
       )
+    case 'mantra4change-pbl':
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#064e3b] to-[#022c22] flex flex-col justify-between p-3 select-none overflow-hidden border border-emerald-800/40">
+          {/* Header Panel */}
+          <div className="flex items-center justify-between border-b border-emerald-800/60 pb-1.5 gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded bg-emerald-600 text-white text-[6px] font-black flex items-center justify-center">M4C</span>
+              <span className="text-[8px] font-bold text-emerald-100">PBL Monitoring</span>
+            </div>
+            <span className="text-[6.5px] font-black bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded uppercase">On Track: 85% 📈</span>
+          </div>
+
+          {/* School Metrics */}
+          <div className="grid grid-cols-2 gap-2 my-1 flex-1">
+            <div className="bg-emerald-950/60 border border-emerald-800/40 rounded-lg p-1.5 flex flex-col justify-center gap-0.5 shadow-sm">
+              <span className="text-[5px] font-bold text-emerald-400 uppercase leading-none">Total Schools</span>
+              <span className="text-[10px] font-black text-emerald-100 leading-none">64 Schools</span>
+            </div>
+            <div className="bg-emerald-950/60 border border-emerald-800/40 rounded-lg p-1.5 flex flex-col justify-center gap-0.5 shadow-sm">
+              <span className="text-[5px] font-bold text-amber-400 uppercase leading-none">At Risk</span>
+              <span className="text-[10px] font-black text-amber-300 leading-none">4 Schools</span>
+            </div>
+          </div>
+
+          {/* AI Reporting Status */}
+          <div className="bg-emerald-950/80 border border-emerald-800/50 rounded p-1.5 text-[5.5px] font-mono text-emerald-300 flex justify-between items-center">
+            <span>[Claude] Generated grant report prose...</span>
+            <span className="text-emerald-400">READY</span>
+          </div>
+        </div>
+      )
     default:
       return (
         <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
@@ -528,7 +564,8 @@ function ProjectsSection() {
         project.slug === 'campus-connect' ||
         project.slug === 'insight-board' ||
         project.slug === 'media-ops' ||
-        project.slug === 'careerpilot-ai'
+        project.slug === 'careerpilot-ai' ||
+        project.slug === 'mantra4change-pbl'
       )
     }
     if (activeFilter === 'AI') {
@@ -537,7 +574,8 @@ function ProjectsSection() {
         (/\b(ai|genai|rag)\b/i.test(project.summary || '') ||
           project.slug === 'portfolio' ||
           project.slug === 'support-flow' ||
-          project.slug === 'careerpilot-ai')
+          project.slug === 'careerpilot-ai' ||
+          project.slug === 'mantra4change-pbl')
       )
     }
     if (activeFilter === 'Tools') {

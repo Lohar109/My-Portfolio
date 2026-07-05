@@ -1247,6 +1247,7 @@ function getProjectCaseStudyDetails(slug, project) {
              : slug === 'marketpulse' ? 'Complete C++ Desktop App — From Login to 3D Loading Plan'
              : slug === 'shopease-landing' ? 'Complete E-Commerce Landing Page — From Hero to Footer'
              : slug === 'developer-workflow' ? 'Complete Developer Dashboard — From Tasks to Analytics'
+             : slug === 'careerpilot-ai' ? 'Complete AI Career Companion — From Profile Parsing to Offer'
              : 'Polished Interactive Dashboard',
       summary: slug === 'marketpulse'
         ? 'A fully working desktop application with user registration, email OTP, product management, container selection, live 3D packing, and PDF export — all built in C++ with Qt6.'
@@ -1254,6 +1255,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'A fully hand-coded, zero-dependency landing page with sticky nav, glassmorphism product cards, responsive grid, newsletter validation, and SEO meta tags — built in pure HTML5 and CSS3.'
         : slug === 'developer-workflow'
         ? 'A fully working browser app with task tracking, file attachments, productivity charts, daily streak, theme switching, and data export — all in Vanilla JS with no backend.'
+        : slug === 'careerpilot-ai'
+        ? 'A unified career management platform featuring ATS resume scoring, personalized cover letter generation, interactive mock interviews, and visual application pipelines.'
         : 'A completely realized, production-ready system with highly responsive micro-interactions and smooth operational tools.',
       themeColor: 'indigo',
       metricsHeading: 'CORE CAPABILITIES',
@@ -1277,6 +1280,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: 'Auto-Fit', label: 'Fluid CSS Grid', icon: 'LayoutGrid', color: 'indigo' },
         { value: 'HTML5', label: 'Native Form Validation', icon: 'Shield', color: 'indigo' },
         { value: 'SEO', label: 'Open Graph Metadata', icon: 'Search', color: 'indigo' }
+      ] : slug === 'careerpilot-ai' ? [
+        { value: 'ATS', label: 'Interactive Analyzer', icon: 'Shield', color: 'indigo' },
+        { value: 'Cover', label: 'Tailored Letter Composer', icon: 'FileDown', color: 'indigo' },
+        { value: 'Mock', label: 'Live Interview simulator', icon: 'Terminal', color: 'indigo' },
+        { value: 'Roadmap', label: 'AI Study Guide planner', icon: 'BrainCircuit', color: 'indigo' }
       ] : slug === 'developer-workflow' ? [
         { value: 'Vanilla', label: 'ES6+ Implementation', icon: 'Code2', color: 'indigo' },
         { value: 'Base64', label: 'File Storage Mode', icon: 'FileDown', color: 'indigo' },
@@ -1295,11 +1303,14 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'The page works as a complete, professional e-commerce frontend foundation. The sticky header uses backdrop-filter: blur(8px) with rgba transparency so it looks frosted over the content as users scroll. The search form inside the nav uses pill-shaped border-radius on each side of the input and button so they join into one seamless element. The category cards use a hover translateY(-8px) transition for a smooth lift effect. The product grid uses grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) — meaning it automatically becomes 3 columns on desktop, 2 columns on tablet, and 1 column on mobile with zero media query needed for the grid itself. Each product card uses backdrop-filter: blur(12px) with a semi-transparent white background and a translucent border for the glassmorphism effect. The newsletter input uses type="email" and required attributes — the browser blocks submission and shows a native error if the email is invalid or empty. All buttons share a base style with a translateY(-3px) hover lift and box-shadow transition. The CSS uses a linear-gradient background on the body (from #f3f4f6 to #e5e7eb) that gives the glassmorphism cards their frosted contrast. The footer is minimal and centered, and the full page collapses cleanly on mobile at 768px with the nav stacking vertically, the newsletter form going full-width, and all grids reducing to a single column.'
         : slug === 'developer-workflow'
         ? 'The app works end to end. A developer opens the dashboard and immediately sees their personalized welcome message and profile picture (fetched from localStorage). They add tasks with an optional file attachment — the FileReader API reads the file, converts it to a base64 data URL, and stores it inside the task object in localStorage, so it persists across page refreshes and can be re-downloaded anytime. Completed tasks are timestamped with an ISO date string, which the Analytics page uses to build the weekly bar chart, calculate the current daily streak, and allow date-based history search. The Settings page uses CSS custom properties (--accent-color, --bg-color) to switch instantly between Midnight dark mode and Light mode — the theme is saved to localStorage and applied on every page load via an inline script before the body renders, preventing any flash of unstyled content. The data export feature serializes all localStorage keys into a single JSON file which the user can download as a backup.'
+        : slug === 'careerpilot-ai'
+        ? 'The platform works as a comprehensive career coach. A user uploads their current resume, and the ATS analyzer immediately displays a compatibility score alongside keyword optimization lists and layout tips. The cover letter generator creates custom documents targeted at specific job listings. The mock interview module initiates an interactive session: the AI asks a question, records the user\'s text or voice answer, and generates context-aware follow-up queries. An evaluation block scores each response, checks for ATS keyword inclusion, and outlines key talking points. Users can also generate personalized learning paths (AI Skill Roadmaps) containing links and milestones to acquire missing skills. The Kanban Board helps track progress across various interview stages, and all optimized documents and performance reports can be downloaded as clean PDFs.'
         : 'The resulting system unifies automated processing with intuitive UI dashboards. We combined lightning-fast server endpoints with clean component state loops to deliver zero-friction user feedback.\n\nThe layout includes robust exception catch boundaries, security validations, and reactive elements to provide a beautiful, seamless execution experience.',
       techHeading: 'ENGINEERING ASSETS',
       coreCapabilities: slug === 'marketpulse' ? getCoreCapabilities(slug)
                         : slug === 'developer-workflow' ? getDeveloperWorkflowCoreCapabilities(slug)
                         : slug === 'shopease-landing' ? getShopEaseCoreCapabilities(slug)
+                        : slug === 'careerpilot-ai' ? getCareerPilotCoreCapabilities(slug)
                         : null,
       solutionBannerText: slug === 'marketpulse'
         ? 'Loading Optimization Software brings automation and visual clarity to every stage of cargo planning — helping teams load smarter, faster, and with complete documentation.'
@@ -1307,6 +1318,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'Developer Workflow brings structure and visibility to your daily developer routine — keeping tasks, attachments, reference links, and weekly consistency metrics in a single private local space.'
         : slug === 'shopease-landing'
         ? 'ShopEase brings a pixel-perfect, WCAG-compliant frontend design with a frosted-glass glassmorphism aesthetic and auto-fit responsive grids — built entirely with zero external CSS frameworks.'
+        : slug === 'careerpilot-ai'
+        ? 'CareerPilot-AI brings prompt routing, ATS parsing alignment, and mock interview simulators to your job hunt — helping you prepare smarter and customize applications in seconds.'
         : '',
       tags: getSolutionPoints(slug)
     },

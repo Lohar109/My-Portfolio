@@ -371,6 +371,61 @@ export const projectsData = [
     previewTone:
       'bg-[linear-gradient(135deg,#1e1b4b_0%,#312e81_50%,#4f46e5_100%)]',
   },
+  {
+    slug: 'mantra4change-pbl',
+    isFeatured: true,
+    title: 'Mantra4Change PBL Dashboard',
+    category: 'Web App & Education Analytics',
+    role: 'Full Stack Developer',
+    year: '2026',
+    summary:
+      'A full-stack monitoring dashboard that tracks Project-Based Learning (PBL) programs across schools and districts, flags at-risk schools automatically, and generates AI-assisted donor-ready grant reports.',
+    previewText:
+      'Full-stack analytics portal enabling systemic school improvements through automatic risk scoring, district comparisons, and fact-grounded donor report generation.',
+    detailIntro:
+      'Mantra4Change PBL Dashboard is a full-stack monitoring dashboard built for an education-sector NGO context, designed to monitor Project-Based Learning programs running across dozens of schools and districts. It turns raw monthly CSV reports from field staff into live KPI dashboards, automatic risk classification per school, district-level comparisons, and AI-generated narrative reports for grant/donor reviews.',
+    challenge:
+      'Manual, spreadsheet-driven program monitoring with low district-level visibility, disconnected evidence documentation, and time-consuming manual donor grant report writing.',
+    outcome:
+      'Delivered a production-ready dashboard featuring a deterministic risk-classification engine, automated CSV parsing, and a fact-grounded Claude narrative generation pipeline with deterministic fallbacks.',
+    topInfoCards: [
+      { label: 'Role', value: 'Full Stack Developer' },
+      { label: 'Core Focus', value: 'Deterministic Risk Engines & Ingestion' },
+      { label: 'Outcome', value: 'Automated NGO program tracking & donor transparency' },
+    ],
+    stats: [
+      { label: 'Use Case', value: 'NGO program monitoring dashboard' },
+      { label: 'Audience', value: 'NGO leadership, field coordinators, and donors' },
+      { label: 'Primary Goal', value: 'Convert CSV reports into live KPIs and AI-generated summaries' },
+    ],
+    caseStudy: {
+      overview:
+        'Mantra4Change PBL Dashboard was developed to consolidate monthly monitoring data across schools. By parsing field CSV files and applying deterministic risk logic, the app generates interactive district comparisons and automated donor-ready grant narratives.',
+      problem:
+        'Education program teams collect monthly attendance and PBL activity data from many schools by hand, but have no automated way to see which schools are falling behind or to turn that data into a report leadership or donors can actually read.',
+      approach: [
+        'Built a CSV parser to ingest monthly school-level (PBL, attendance, enrollment) and grant-level (finance, performance, media) data into typed structures.',
+        'Implemented a risk classification function (classifyRisk) that maps attendance rate to On Track / Behind / At Risk / Critical.',
+        'Built Express routes/controllers for PBL summaries, district breakdowns, month comparisons, and grant reports, with query-param filtering by month, district, block, and subject.',
+        'Added a "Generate AI Report" flow where computed facts are sent to Claude to produce a donor-ready narrative, with a deterministic text fallback if no API key is configured.',
+      ],
+      result:
+        'The dashboard turns three months of raw CSV field data across 60 schools and 5 districts into instant, explainable program insight — replacing manual spreadsheet review with live dashboards, automatic risk flags, and one-click donor reporting.',
+    },
+    stack: [
+      'React',
+      'Vite',
+      'TypeScript',
+      'Tailwind CSS',
+      'Recharts',
+      'Node.js',
+      'Express',
+      'Claude API',
+      'CSV Parser',
+    ],
+    previewTone:
+      'bg-[linear-gradient(135deg,#064e3b_0%,#047857_50%,#10b981_100%)]',
+  },
 ];
 
 export const projects = projectsData;

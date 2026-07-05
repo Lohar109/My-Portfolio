@@ -843,6 +843,129 @@ function getShopEaseCoreCapabilities(slug) {
   ]
 }
 
+function getCareerPilotApproach(slug) {
+  if (slug !== 'careerpilot-ai') return null
+
+  return {
+    steps: [
+      {
+        icon: User,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Resume Parsing & Extraction',
+        description: 'Uploaded resumes are parsed using PDF extraction, transforming unstructured text blocks into a clean structured JSON schema.',
+      },
+      {
+        icon: Target,
+        iconColor: 'text-indigo-600',
+        iconBg: 'bg-indigo-50',
+        title: 'Job Description Alignment',
+        description: 'Analyzes target job descriptions against the parsed resume to map skill overlaps and generate matching keywords.',
+      },
+      {
+        icon: Sparkles,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Tailored Asset Generation',
+        description: 'Leverages generative models to compose customized resume recommendations and context-aware cover letters.',
+      },
+      {
+        icon: Terminal,
+        iconColor: 'text-amber-600',
+        iconBg: 'bg-amber-50',
+        title: 'Mock Interview Simulator',
+        description: 'Launches an interactive interview simulator that queries the candidate and asks context-aware follow-up questions.',
+      },
+      {
+        icon: Award,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'Evaluation & Feedback',
+        description: 'Compiles a performance report with scores, feedback bottlenecks, and customized learning recommendations.',
+      },
+    ],
+    principles: [
+      {
+        icon: BrainCircuit,
+        iconColor: 'text-violet-600',
+        iconBg: 'bg-violet-50',
+        title: 'Multi-Model Prompt Routing',
+        description: 'Different tasks are routed to specialized, optimized LLM configurations to maximize accuracy.',
+      },
+      {
+        icon: Search,
+        iconColor: 'text-sky-600',
+        iconBg: 'bg-sky-50',
+        title: 'Semantic Alignment',
+        description: 'Aligns skill vectors using embeddings to find matching gaps and optimize ATS keywords.',
+      },
+      {
+        icon: Shield,
+        iconColor: 'text-emerald-600',
+        iconBg: 'bg-emerald-50',
+        title: 'Interactive Feedback Loop',
+        description: 'Candidates receive real-time mock interview scoring and constructive gap analysis reports.',
+      },
+      {
+        icon: Lock,
+        iconColor: 'text-rose-600',
+        iconBg: 'bg-rose-50',
+        title: 'Strict Context Grounding',
+        description: 'Restricts the interviewer from hallucinating questions outside the scope of the target job and resume.',
+      },
+    ],
+  }
+}
+
+function getCareerPilotCoreCapabilities(slug) {
+  if (slug !== 'careerpilot-ai') return null
+
+  return [
+    {
+      icon: LayoutGrid,
+      iconColor: 'text-violet-600',
+      iconBg: 'bg-violet-50',
+      title: 'ATS Resume Analyzer',
+      description: 'Scores resumes dynamically against job descriptions and provides step-by-step keyword and formatting recommendations.',
+    },
+    {
+      icon: Code2,
+      iconColor: 'text-emerald-600',
+      iconBg: 'bg-emerald-50',
+      title: 'Tailored Cover Letter Generator',
+      description: 'Generates professional cover letters adjusted to fit the exact tone, requirements, and keywords of the target job.',
+    },
+    {
+      icon: Terminal,
+      iconColor: 'text-amber-600',
+      iconBg: 'bg-amber-50',
+      title: 'AI Mock Interview Simulator',
+      description: 'Simulates live technical or behavioral interviews, generating follow-up questions dynamically based on applicant answers.',
+    },
+    {
+      icon: BrainCircuit,
+      iconColor: 'text-rose-600',
+      iconBg: 'bg-rose-50',
+      title: 'AI Skill Roadmap Generator',
+      description: 'Identifies missing skills for a desired job title and generates a step-by-step custom learning path.',
+    },
+    {
+      icon: Layers,
+      iconColor: 'text-sky-600',
+      iconBg: 'bg-sky-50',
+      title: 'Job Search Kanban Tracker',
+      description: 'Keeps candidate applications organized with a visual pipeline showing application states and next interview steps.',
+    },
+    {
+      icon: FileDown,
+      iconColor: 'text-indigo-600',
+      iconBg: 'bg-indigo-50',
+      title: 'Performance Report Exporter',
+      description: 'Saves and exports resume feedback and mock interview performance reviews into clean PDF reports.',
+    },
+  ]
+}
+
 function getProjectCaseStudyDetails(slug, project) {
   const duration = slug === 'studioflow' ? '4 Months'
                  : slug === 'portfolio' ? '3 Months'

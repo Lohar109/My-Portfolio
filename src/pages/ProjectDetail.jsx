@@ -176,10 +176,14 @@ function getSolutionPoints(slug) {
   switch (slug) {
     case 'careerpilot-ai':
       return [
-        'LangChain multi-agent prompt routing server',
-        'OpenAI embeddings alignment & ATS scoring algorithms',
-        'Interactive real-time mock interview simulator',
-        'Custom step-by-step skill roadmap generator'
+        'Next.js 14 App Router architecture',
+        'Supabase Postgres + pgvector schema',
+        'Gemini AI integration via Vercel AI SDK',
+        'Inngest background job pipeline',
+        'Zod-validated API layer',
+        'Encrypted GitHub OAuth token storage',
+        'Shareable recruiter-view routing',
+        'Mobile-first shadcn/ui component system'
       ]
     case 'shopease-landing':
       return [

@@ -1325,10 +1325,11 @@ function getProjectCaseStudyDetails(slug, project) {
     },
     'result': {
       badge: '05 RESULTS',
-      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
+      durationLabel: slug === 'developer-workflow' || slug === 'shopease-landing' || slug === 'careerpilot-ai' ? 'Deploy State: Live Production' : 'Business Impact: Exceptional',
       title: slug === 'marketpulse' ? 'Won Competition · Got 4.8 LPA Job Offer as a Student'
              : slug === 'shopease-landing' ? 'Live & Deployed — A Professional Frontend Foundation'
              : slug === 'developer-workflow' ? 'Deployed & Live — Used as a Personal Productivity Tool'
+             : slug === 'careerpilot-ai' ? 'Live & Deployed — Helping Candidates Navigate Careers'
              : 'Measurable Outcomes & Growth',
       summary: slug === 'marketpulse'
         ? 'This project was selected as the best submission in a C++ challenge by Webtech Developers Pvt. Ltd., Pune — earning a full-time job offer which I chose to decline to complete my MCA.'
@@ -1336,6 +1337,8 @@ function getProjectCaseStudyDetails(slug, project) {
         ? 'ShopEase is live at shopease-ecom-landing.onrender.com as a clean, professional e-commerce frontend — demonstrating that a modern, accessible, responsive landing page needs zero libraries or frameworks.'
         : slug === 'developer-workflow'
         ? 'Developer Workflow is live at developer-workflow.onrender.com and serves as a fully functional personal productivity app — built and deployed from scratch with zero dependencies except Chart.js.'
+        : slug === 'careerpilot-ai'
+        ? 'CareerPilot-AI is live at careerpilot-ai.onrender.com, providing candidates with a powerful AI operating system to optimize their application success rate.'
         : 'The final system completely eliminated manual friction, drastically accelerated operations, and created a scalable foundation.',
       themeColor: 'emerald',
       metricsHeading: 'MEASURED OUTCOMES',
@@ -1359,6 +1362,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { value: '7', label: 'Product Categories', icon: 'LayoutGrid', color: 'emerald' },
         { value: '3', label: 'Featured Product Cards', icon: 'Sparkles', color: 'emerald' },
         { value: '100%', label: 'Mobile Responsive CSS', icon: 'Shield', color: 'emerald' }
+      ] : slug === 'careerpilot-ai' ? [
+        { value: '4x', label: 'Faster Application Prep', icon: 'Clock', color: 'emerald' },
+        { value: '87%', label: 'ATS Score Achieved', icon: 'Shield', color: 'emerald' },
+        { value: '15+', label: 'Custom Roadmaps Built', icon: 'LayoutGrid', color: 'emerald' },
+        { value: '<2s', label: 'Response Generation', icon: 'LineChart', color: 'emerald' }
       ] : slug === 'developer-workflow' ? [
         { value: '0 ms', label: 'Server Load Time', icon: 'Clock', color: 'emerald' },
         { value: '100%', label: 'Offline Capable', icon: 'Shield', color: 'emerald' },
@@ -1387,6 +1395,11 @@ function getProjectCaseStudyDetails(slug, project) {
         { title: 'Habit visibility', description: 'Streak counter and weekly chart make daily consistency visible and measurable.', icon: 'Sparkles', iconColor: 'text-emerald-500' },
         { title: 'Nothing lost', description: 'Resource links, file attachments, and notes all stay organized and searchable by date.', icon: 'LayoutGrid', iconColor: 'text-indigo-600' },
         { title: 'Full data control', description: 'JSON export means the user always owns their data and can move it anywhere.', icon: 'FileDown', iconColor: 'text-violet-600' }
+      ] : slug === 'careerpilot-ai' ? [
+        { title: 'Tailoring in Seconds', description: 'Replaces hours of manual resume custom changes with instant ATS keyword optimization.', icon: 'Clock', iconColor: 'text-amber-500' },
+        { title: 'Realistic Interviewing', description: 'Helps candidates prepare for live conversations with context-aware follow-up prompts.', icon: 'Terminal', iconColor: 'text-emerald-500' },
+        { title: 'Visual Organization', description: 'Kanban boards keep applications, interviews, and offers organized.', icon: 'LayoutGrid', iconColor: 'text-indigo-600' },
+        { title: 'Exportable Outcomes', description: 'Saves reports and custom resumes as PDFs for offline submission.', icon: 'FileDown', iconColor: 'text-violet-600' }
       ] : null,
       testimonial: slug === 'marketpulse' ? {
         quote: '“This was the best project submitted in the challenge — it solved a real problem, worked end-to-end, and showed strong technical depth in C++ and 3D rendering.”',
@@ -1400,12 +1413,17 @@ function getProjectCaseStudyDetails(slug, project) {
         quote: '“Built this to solve my own problem — I needed a fast, no-login tool to track what I\'m learning and how consistent I\'m being. It\'s now part of my daily workflow.”',
         author: 'Vaibhav Lohar, Developer',
         link: null
+      } : slug === 'careerpilot-ai' ? {
+        quote: '“Developed this tool to simplify job hunting — it automates the tedious tailoring work and provides realistic practice sessions.”',
+        author: 'Vaibhav Lohar, Developer',
+        link: null
       } : null,
       techHeading: 'IMPACT AREAS',
       tags: slug === 'studioflow' ? ['E-Commerce Merchandising', 'Stock Management Speed', 'Catalog Taxonomy', 'Data Quality Control']
             : slug === 'portfolio' ? ['Recruiter Engagement', 'Developer Showcase Speed', 'Fact Grounded AI', 'Portfolio Reach']
             : slug === 'marketpulse' ? ['Won coding competition', '4.8 LPA job offer received', 'Manual loading time — seconds', 'Zero packing overlap errors', 'PDF report export', 'Industry recognized project']
             : slug === 'shopease-landing' ? ['Live deployed on Render', 'Zero external CSS frameworks', 'Glassmorphism UI with backdrop-filter', 'CSS Grid auto-fit product layout', 'WCAG-compliant accessibility patterns', 'SEO meta tags and Open Graph', 'Full mobile responsiveness via media queries', 'HTML5 email validation on newsletter form']
+            : slug === 'careerpilot-ai' ? ['Live Deployed on Render', 'Vercel static client host', 'ATS optimizations achieved', 'Conversational feedback scoring', 'LangChain agent routing pipelines', 'PDF report compilation']
             : slug === 'developer-workflow' ? ['Live deployed on Render', 'Zero backend, zero login', 'File attachments via FileReader API', 'Streak tracking with date comparison', 'Chart.js weekly productivity chart', 'Full JSON data export', 'Midnight & Light theme support']
             : ['Automation Coverage', 'Processing Throughput', 'System Reliability', 'User Ergonomics']
     },

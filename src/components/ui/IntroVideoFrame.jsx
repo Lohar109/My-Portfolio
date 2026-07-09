@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Play, Pause, Volume2, VolumeX, Settings, Maximize } from 'lucide-react'
+import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
 
 
 function IntroVideoFrame() {
@@ -165,12 +165,6 @@ function IntroVideoFrame() {
                 {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
               </button>
 
-              <button
-                className="text-white hover:text-indigo-400 transition focus:outline-none cursor-pointer"
-                aria-label="Settings"
-              >
-                <Settings size={18} />
-              </button>
 
               <button
                 onClick={handleFullscreen}

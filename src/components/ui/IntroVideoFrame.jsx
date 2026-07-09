@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
-import vaibhavThumbnail from '../../assets/vaibhav_thumbnail.png'
+
 
 
 function IntroVideoFrame() {
@@ -119,7 +119,7 @@ function IntroVideoFrame() {
               {currentTime === 0 && (
                 <>
                   <img 
-                    src={vaibhavThumbnail} 
+                    src="/thumbnail.png" 
                     alt="Vaibhav Lohar" 
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

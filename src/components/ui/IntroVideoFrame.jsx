@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react'
+import vaibhavThumbnail from '../../assets/vaibhav_thumbnail.png'
 
 
 function IntroVideoFrame() {
@@ -105,7 +106,7 @@ function IntroVideoFrame() {
           onClick={togglePlay}
         />
 
-        {/* Custom Play Button Overlay (when not playing) */}
+        {/* Custom Poster / Thumbnail Overlay */}
         <AnimatePresence>
           {!isPlaying && (
             <motion.div
@@ -115,6 +116,18 @@ function IntroVideoFrame() {
               className="absolute inset-0 z-10 cursor-pointer flex items-center justify-center"
               onClick={togglePlay}
             >
+              {currentTime === 0 && (
+                <>
+                  <img 
+                    src={vaibhavThumbnail} 
+                    alt="Vaibhav Lohar" 
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Overlay shadow gradient to make controls pop */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+                </>
+              )}
+              
               {/* Center Play Button like the screenshot */}
               <div className="relative flex h-18 w-18 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
                 {/* Outer glowing pulsing circle */}

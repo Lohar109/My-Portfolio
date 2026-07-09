@@ -25,6 +25,7 @@ function IntroVideoFrame() {
       videoRef.current.pause()
       setIsPlaying(false)
     } else {
+      setIsMuted(false)
       videoRef.current.play().then(() => {
         setIsPlaying(true)
       }).catch(err => console.log("Play failed: ", err))

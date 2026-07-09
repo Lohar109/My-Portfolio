@@ -44,6 +44,14 @@ function IntroVideoFrame() {
     }
   }
 
+  const handleVideoEnded = () => {
+    setIsPlaying(false)
+    setCurrentTime(0)
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+    }
+  }
+
   const handleSeekChange = (e) => {
     const time = parseFloat(e.target.value)
     if (videoRef.current) {
@@ -89,10 +97,10 @@ function IntroVideoFrame() {
         <video
           ref={videoRef}
           src={videoUrl}
-          loop
           playsInline
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
+          onEnded={handleVideoEnded}
           className="h-full w-full object-cover cursor-pointer"
           onClick={togglePlay}
         />

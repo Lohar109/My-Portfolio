@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Play, Pause, Volume2, VolumeX, Settings, Maximize } from 'lucide-react'
-import vaibhavPortrait from '../../assets/vaibhav_portrait.png'
+
 
 function IntroVideoFrame() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -96,34 +96,24 @@ function IntroVideoFrame() {
           onClick={togglePlay}
         />
 
-        {/* Custom Poster / Thumbnail Overlay (when not playing) */}
+        {/* Custom Play Button Overlay (when not playing) */}
         <AnimatePresence>
-          {!isPlaying && currentTime === 0 && (
+          {!isPlaying && (
             <motion.div
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="absolute inset-0 z-10 cursor-pointer"
+              className="absolute inset-0 z-10 cursor-pointer flex items-center justify-center"
               onClick={togglePlay}
             >
-              <img 
-                src={vaibhavPortrait} 
-                alt="Vaibhav Lohar" 
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Overlay shadow gradient to make controls pop */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
-              
               {/* Center Play Button like the screenshot */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative flex h-18 w-18 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
-                  {/* Outer glowing pulsing circle */}
-                  <div className="absolute inset-0 rounded-full bg-indigo-500/20 animate-ping opacity-75" />
-                  
-                  {/* Custom Play Inner Button - matches screenshot shape but using established indigo */}
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-white shadow-md hover:bg-indigo-700 transition">
-                    <Play className="ml-1 h-5.5 w-5.5 fill-current text-white" />
-                  </div>
+              <div className="relative flex h-18 w-18 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
+                {/* Outer glowing pulsing circle */}
+                <div className="absolute inset-0 rounded-full bg-indigo-500/20 animate-ping opacity-75" />
+                
+                {/* Custom Play Inner Button - matches screenshot shape but using established indigo */}
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-white shadow-md hover:bg-indigo-700 transition">
+                  <Play className="ml-1 h-5.5 w-5.5 fill-current text-white" />
                 </div>
               </div>
             </motion.div>

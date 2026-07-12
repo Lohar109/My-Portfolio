@@ -221,7 +221,7 @@ export default function CTASection() {
                   onClick={() => navigate('/projects')}
                   className="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[10px] bg-white hover:bg-slate-50 px-[22px] py-[10px] text-sm sm:text-base font-semibold text-gray-700 hover:text-violet-600 transition-all duration-300 cursor-pointer select-none group"
                 >
-                  <span>Explore Portfolio</span>
+                  <span>Explore Projects</span>
                 </button>
               </div>
             </div>

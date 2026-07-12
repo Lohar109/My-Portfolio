@@ -76,6 +76,7 @@ export const skills = [
       { name: 'Antigravity', icon: 'antigravity' },
       { name: 'Claude', icon: 'claude' },
       { name: 'Cursor', icon: 'cursor' },
+      { name: 'Jira', icon: 'jira' },
     ],
   },
 ]

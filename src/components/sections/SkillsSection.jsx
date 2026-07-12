@@ -54,6 +54,7 @@ import {
   SiGraphql,
   SiGithubactions,
   SiAnthropic,
+  SiJira,
 } from 'react-icons/si'
 import { TbBrandVscode } from 'react-icons/tb'
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion'
@@ -133,6 +134,7 @@ const techIcons = {
   antigravity: { icon: Bot, className: 'text-[#6366F1]' },
   claude: { icon: SiAnthropic, className: 'text-[#CC9966]' },
   cursor: { icon: MousePointerClick, className: 'text-[#3B82F6]' },
+  jira: { icon: SiJira, className: 'text-[#0052CC]' },
 }
 
 function TechIcon({ icon }) {

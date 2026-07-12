@@ -203,7 +203,6 @@ function FooterSection() {
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight size={16} className="text-gray-300" />
               </div>
 
               {/* Availability Card */}

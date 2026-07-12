@@ -635,7 +635,7 @@ function SkillsSection() {
   const metrics = [
     { value: '10+', text: 'Technologies', subtext: 'Worked With', icon: Code2, bg: 'bg-blue-50 border border-blue-100 text-blue-600 shadow-[0_2px_8px_rgba(37,99,235,0.06)]' },
     { value: '5+', text: 'Years of', subtext: 'Learning', icon: Briefcase, bg: 'bg-emerald-50 border border-emerald-100 text-emerald-600 shadow-[0_2px_8px_rgba(16,185,129,0.06)]' },
-    { value: '20+', text: 'Projects', subtext: 'Completed', icon: Rocket, bg: 'bg-rose-50 border border-rose-100 text-rose-600 shadow-[0_2px_8px_rgba(225,29,72,0.06)]' },
+    { value: '8+', text: 'Projects', subtext: 'Completed', icon: Rocket, bg: 'bg-rose-50 border border-rose-100 text-rose-600 shadow-[0_2px_8px_rgba(225,29,72,0.06)]' },
     { value: '100%', text: 'Commitment to', subtext: 'Quality', icon: Star, bg: 'bg-amber-50 border border-amber-100 text-amber-600 shadow-[0_2px_8px_rgba(245,158,11,0.06)]' }
   ]
 

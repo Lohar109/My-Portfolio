@@ -77,6 +77,7 @@ export const skills = [
       { name: 'Claude', icon: 'claude' },
       { name: 'Cursor', icon: 'cursor' },
       { name: 'Jira', icon: 'jira' },
+      { name: 'Vitest', icon: 'vitest' },
     ],
   },
 ]

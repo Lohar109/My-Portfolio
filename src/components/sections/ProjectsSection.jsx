@@ -632,7 +632,7 @@ function ProjectsSection() {
 
         {/* Right Column (Metrics Panel Card) */}
         <div className="lg:col-span-5 w-full lg:translate-y-8">
-          <div className="border border-gray-200/80 bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex items-center justify-between gap-2.5">
+          <div className="border border-gray-200/80 bg-white rounded-3xl p-4 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex items-center justify-between gap-1.5 sm:gap-2.5">
             {/* 1. Projects Metric */}
             <div className="flex flex-col items-center text-center flex-1">
               <span className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-3 shadow-[0_2px_8px_rgba(37,99,235,0.06)]">
@@ -683,14 +683,14 @@ function ProjectsSection() {
 
       {/* Interactive Filters Row as Premium Pill Tabs */}
       <div className="mt-12 select-none">
-        <div className="inline-flex items-center gap-1.5 p-1.5 bg-gray-50/90 border border-gray-200/50 rounded-2xl shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] relative z-10 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1.5 bg-gray-50/90 border border-gray-200/50 rounded-2xl shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] relative z-10 backdrop-blur-sm max-w-full flex-wrap">
           {filters.map((filter) => {
             const isSelected = activeFilter === filter.value
             return (
               <button
                 key={filter.value}
                 onClick={() => handleFilterChange(filter.value)}
-                className={`relative px-4.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 cursor-pointer select-none ${
+                className={`relative px-3 py-2 sm:px-4.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 cursor-pointer select-none ${
                   isSelected
                     ? 'text-white'
                     : 'text-gray-500 hover:text-gray-800 hover:bg-white/40'

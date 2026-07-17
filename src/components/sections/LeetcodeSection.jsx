@@ -500,9 +500,9 @@ function LeetcodeSection() {
                   fill="transparent"
                 />
                 <motion.circle
-                  cx="64"
-                  cy="64"
-                  r="52"
+                  cx={64}
+                  cy={64}
+                  r={52}
                   className="stroke-amber-500"
                   strokeWidth="8"
                   fill="transparent"

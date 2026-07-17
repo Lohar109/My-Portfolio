@@ -603,7 +603,7 @@ const FloatingAssistant = () => {
       {/* Transparent icon with hover scale only */}
       {!isOpen && (
         <div
-          className="cursor-pointer overflow-visible transition-transform duration-500 hover:scale-110 active:scale-95"
+          className="cursor-pointer overflow-visible transition-transform duration-500 hover:scale-110 active:scale-95 h-12 w-12 sm:h-[100px] sm:w-[100px]"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onClick={handleToggleChat}
@@ -611,7 +611,7 @@ const FloatingAssistant = () => {
           <LottieComponent
             animationData={animationData}
             loop={true}
-            style={{ width: 100, height: 100 }}
+            style={{ width: '100%', height: '100%' }}
           />
         </div>
       )}

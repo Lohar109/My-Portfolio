@@ -358,7 +358,7 @@ const FloatingAssistant = () => {
               </div>
             </aside>
 
-            <div className={`flex h-full min-h-0 flex-1 flex-col transition-colors duration-300 ${
+            <div className={`flex h-full min-h-0 min-w-0 flex-1 flex-col transition-colors duration-300 ${
               isDarkMode
                 ? 'bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950'
                 : 'bg-gradient-to-b from-white via-slate-50/50 to-white'

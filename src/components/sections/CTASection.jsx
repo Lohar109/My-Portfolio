@@ -232,7 +232,7 @@ export default function CTASection() {
             <div className="relative w-full max-w-[400px] aspect-[400/340] bg-[#f5f5f7] rounded-3xl border border-slate-200 p-4 overflow-hidden shadow-inner">
               
               {/* Starry glowing SVGs connecting floating nodes to core */}
-              <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
+              <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none" viewBox="0 0 400 340" preserveAspectRatio="none">
                 {/* Defs for neon gradients */}
                 <defs>
                   <linearGradient id="glow-grad-ai" x1="73" y1="63" x2="200" y2="170" gradientUnits="userSpaceOnUse">
@@ -326,7 +326,7 @@ export default function CTASection() {
                   <motion.div
                     key={node.id}
                     className={`absolute flex flex-col items-center gap-1.5 cursor-pointer z-20 group`}
-                    style={{ left: node.x, top: node.y }}
+                    style={{ left: `${(node.x / 400) * 100}%`, top: `${(node.y / 340) * 100}%` }}
                     animate={{
                       y: [0, -8, 0],
                     }}
@@ -355,7 +355,7 @@ export default function CTASection() {
               {/* Central Glowing YOUR IDEA Core */}
               <motion.div
                 className="absolute z-10 flex flex-col items-center gap-2 cursor-pointer"
-                style={{ left: centerNode.x, top: centerNode.y }}
+                style={{ left: `${(centerNode.x / 400) * 100}%`, top: `${(centerNode.y / 340) * 100}%` }}
                 animate={{
                   scale: hoveredNode ? 1.08 : 1
                 }}

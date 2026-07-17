@@ -377,8 +377,8 @@ function DynamicSkillsIllustration() {
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 460 460" fill="none">
         {/* Inner Track */}
         <circle cx="230" cy="230" r="85" stroke="rgba(139, 92, 246, 0.12)" strokeWidth="1" strokeDasharray="3 6" />
-        <motion.circle 
-          cx="230" cy="230" r="85" 
+        <motion.circle
+          cx={230} cy={230} r={85}
           stroke="url(#comet-inner)" strokeWidth="2.5" strokeLinecap="round"
           strokeDasharray="25 510"
           animate={{ strokeDashoffset: [0, -535] }}
@@ -387,8 +387,8 @@ function DynamicSkillsIllustration() {
 
         {/* Middle Track */}
         <circle cx="230" cy="230" r="145" stroke="rgba(6, 182, 212, 0.08)" strokeWidth="1" strokeDasharray="4 8" />
-        <motion.circle 
-          cx="230" cy="230" r="145" 
+        <motion.circle
+          cx={230} cy={230} r={145}
           stroke="url(#comet-middle)" strokeWidth="2.5" strokeLinecap="round"
           strokeDasharray="35 876"
           animate={{ strokeDashoffset: [0, 911] }}
@@ -397,8 +397,8 @@ function DynamicSkillsIllustration() {
 
         {/* Outer Track */}
         <circle cx="230" cy="230" r="205" stroke="rgba(236, 72, 153, 0.06)" strokeWidth="1" strokeDasharray="5 10" />
-        <motion.circle 
-          cx="230" cy="230" r="205" 
+        <motion.circle
+          cx={230} cy={230} r={205}
           stroke="url(#comet-outer)" strokeWidth="2.5" strokeLinecap="round"
           strokeDasharray="45 1243"
           animate={{ strokeDashoffset: [0, -1288] }}

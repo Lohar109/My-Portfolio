@@ -293,6 +293,7 @@ export default function CTASection() {
                         : node.id === 'fullstack' ? '#8b5cf6'
                         : '#10b981'
                       }
+                      initial={{ cx: node.x + 28, cy: node.y + 28 }}
                       animate={{
                         cx: [node.x + 28, centerNode.x + 40],
                         cy: [node.y + 28, centerNode.y + 40],

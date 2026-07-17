@@ -2106,7 +2106,7 @@ function ProjectDetail() {
       <SiteHeader isDetailPage />
 
       {/* Container matching mockup page sizing */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-25">
 
         {/* Top bar back link outside layout grid (Mobile only) */}
         <div className="mb-6 lg:hidden">

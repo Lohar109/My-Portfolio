@@ -228,6 +228,17 @@ button:focus, button:active, button:focus-visible {
   animation: pulseSoft 2.5s ease-in-out infinite;
 }
 
+/* Thin blinking text cursor for the AI assistant's chunked typing effect */
+@keyframes typing-caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.typing-cursor {
+  animation: typing-caret-blink 0.9s step-end infinite;
+}
+
 .anim-delay-100 { animation-delay: 100ms; }
 .anim-delay-200 { animation-delay: 200ms; }
 .anim-delay-300 { animation-delay: 300ms; }

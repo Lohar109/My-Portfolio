@@ -10,7 +10,7 @@ import {
   X,
 } from 'lucide-react';
 import Lottie from 'lottie-react';
-import { sendMessageToVaibhavAgent } from '../../services/aiService';
+import { streamMessageToVaibhavAgent } from '../../services/aiService';
 import animationData from '../../assets/lottie/AI Assistent.json';
 import MarkdownRenderer from './MarkdownRenderer';
 
@@ -128,6 +128,9 @@ const FloatingAssistant = () => {
     clearInterval(typingIntervalRef.current);
   };
 
+  // Reveals `responseText` in small chunks rather than one character at a time.
+  // Chunk size adapts to the response length so long replies still finish in ~2-2.5s
+  // instead of ballooning past 10s, while short replies don't feel needlessly slow.
   const typeAssistantResponse = (responseText) => {
     clearAssistantTimers();
 
@@ -138,9 +141,13 @@ const FloatingAssistant = () => {
       { id: messageId, role: 'assistant', text: '', typing: true },
     ]);
 
+    const TICK_MS = 15;
+    const TARGET_TICKS = 150;
+    const chunkSize = Math.max(3, Math.ceil(responseText.length / TARGET_TICKS));
+
     let charIndex = 0;
     typingIntervalRef.current = setInterval(() => {
-      charIndex += 1;
+      charIndex = Math.min(charIndex + chunkSize, responseText.length);
 
       setMessages((currentMessages) =>
         currentMessages.map((message) =>
@@ -158,7 +165,72 @@ const FloatingAssistant = () => {
         clearInterval(typingIntervalRef.current);
         setTypingMessageId(null);
       }
-    }, 24);
+    }, TICK_MS);
+  };
+
+  // Streams a live agent reply: appends each chunk as it arrives from the model so
+  // the message grows in real time instead of being revealed after the fact.
+  const streamAssistantResponse = async (userMessage) => {
+    clearAssistantTimers();
+
+    const messageId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    setTypingMessageId(messageId);
+    setMessages((currentMessages) => [
+      ...currentMessages,
+      { id: messageId, role: 'assistant', text: '', typing: true },
+    ]);
+
+    const appendChunk = (chunkText) => {
+      setMessages((currentMessages) =>
+        currentMessages.map((message) =>
+          message.id === messageId
+            ? { ...message, text: message.text + chunkText }
+            : message
+        )
+      );
+    };
+
+    const { text, streamed } = await streamMessageToVaibhavAgent(userMessage, appendChunk);
+
+    if (streamed) {
+      setMessages((currentMessages) =>
+        currentMessages.map((message) =>
+          message.id === messageId ? { ...message, text, typing: false } : message
+        )
+      );
+      setTypingMessageId(null);
+      return;
+    }
+
+    // No (or only partial) real streaming happened — reveal the final text with the
+    // fast chunked typewriter instead of an abrupt swap.
+    setMessages((currentMessages) =>
+      currentMessages.map((message) =>
+        message.id === messageId ? { ...message, text: '', typing: true } : message
+      )
+    );
+
+    const TICK_MS = 15;
+    const TARGET_TICKS = 150;
+    const chunkSize = Math.max(3, Math.ceil(text.length / TARGET_TICKS));
+
+    let charIndex = 0;
+    typingIntervalRef.current = setInterval(() => {
+      charIndex = Math.min(charIndex + chunkSize, text.length);
+
+      setMessages((currentMessages) =>
+        currentMessages.map((message) =>
+          message.id === messageId
+            ? { ...message, text: text.slice(0, charIndex), typing: charIndex < text.length }
+            : message
+        )
+      );
+
+      if (charIndex >= text.length) {
+        clearInterval(typingIntervalRef.current);
+        setTypingMessageId(null);
+      }
+    }, TICK_MS);
   };
 
   const handleToggleChat = () => {
@@ -202,9 +274,8 @@ const FloatingAssistant = () => {
     });
 
     try {
-      const replyPromise = sendMessageToVaibhavAgent(trimmedInput);
-      const [replyText] = await Promise.all([replyPromise, minimumLoadingDelay]);
-      typeAssistantResponse(replyText);
+      await minimumLoadingDelay;
+      await streamAssistantResponse(trimmedInput);
     } catch (error) {
       console.error('Floating assistant send error:', error);
       typeAssistantResponse(fallbackReply);
@@ -351,13 +422,19 @@ const FloatingAssistant = () => {
                         </span>
                       ) : (
                         <div className="w-full select-text">
-                          <MarkdownRenderer text={message.text} isDarkMode={isDarkMode} />
-                          {message.typing && (
-                            <span
-                              className={`inline-block h-3.5 w-1.5 ml-1 animate-pulse align-middle rounded-full ${
-                                isDarkMode ? 'bg-violet-400' : 'bg-violet-600'
-                              }`}
-                            />
+                          {message.typing ? (
+                            <p className={`whitespace-pre-wrap mb-0 leading-7 text-[14px] sm:text-[14.5px] font-medium ${
+                              isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                            }`}>
+                              {message.text}
+                              <span
+                                className={`typing-cursor inline-block w-[2px] h-[1em] -mb-[2px] ml-0.5 align-text-bottom ${
+                                  isDarkMode ? 'bg-violet-400' : 'bg-violet-600'
+                                }`}
+                              />
+                            </p>
+                          ) : (
+                            <MarkdownRenderer text={message.text} isDarkMode={isDarkMode} />
                           )}
                         </div>
                       )}

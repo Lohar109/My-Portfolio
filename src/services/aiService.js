@@ -207,67 +207,87 @@ function generateLocalSmartResponse(userMessage, retrievedContext) {
   ].join('\n');
 }
 
-export async function sendMessageToVaibhavAgent(userMessage) {
-  if (!userMessage || typeof userMessage !== 'string') {
-    return 'Please provide a short question about Vaibhav — projects, skills, or education.';
-  }
-
-  if (isGreetingMessage(userMessage)) {
-    return buildGreetingReply();
-  }
-
-  // Retrieve RAG context (may be empty string)
-  const retrievedContext = await retrievePortfolioContext(userMessage).catch((err) => {
-    console.error('retrievePortfolioContext error:', err);
-    return '';
-  });
-
-  const intent = detectIntent(userMessage);
-  const intentInstruction = {
-    project: 'The user is asking about a project. Prioritize concrete outcomes, technical stack, and problem-solving details.',
-    education: 'The user is asking about education. Prioritize verified academic facts, institutions, and achievements.',
-    skills: 'The user is asking about skills or technologies. Focus on listing technologies, tools, libraries, and practical experience. If the retrieved context contains project descriptions, extract and list the technologies used in those projects rather than summarizing the project narrative. Provide versions or experience level if available.',
-    achievements: 'The user is asking about academic, technical, or project achievements. Highlight his outstanding MCA 9.30 CGPA (Winter 2025 Semester 3 9.30 SGPA), BSc 9.08 CGPA, and top system architectures (ShopEase SaaS, GenAI Portfolio). Format as a beautiful clean list.',
-    whyHire: 'The user is asking why they should hire Vaibhav. Give a highly persuasive, elite full-stack developer pitch focusing on his AI/RAG expertise, database mastery (PostgreSQL, Supabase, Redis), high academic success (9.30 MCA CGPA), and functional builder mindset. Include call-to-actions pointing to LinkedIn/GitHub.',
-    general: 'The user is asking a general question. Keep the answer concise, natural, and helpful.',
-  }[intent];
-
-  // Try calling the live Generative AI (Gemini) model
-  try {
-    const apiKey = getGeminiApiKey();
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-3.5-flash' });
-
-    const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. 
-    Answer the user's question dynamically, warmly, and in a clean conversational structure (using paragraph explanations, bold highlights, bullet points, and clear list formatting). 
+const buildAgentPrompt = (userMessage, retrievedContext, intent, intentInstruction) => `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner.
+    Answer the user's question dynamically, warmly, and in a clean conversational structure (using paragraph explanations, bold highlights, bullet points, and clear list formatting).
     Never output raw unstructured context keys directly (like "Project Title:", "Role:", "Summary:", "Core Challenge:"). Always summarize them naturally as a real human developer would in a professional interview.
     Make sure all links (e.g. LinkedIn, GitHub) are returned as proper clickable markdown links (e.g. [LinkedIn Profile](https://www.linkedin.com/in/vaibhavlohar109/)).
-    
+
     Verified Background Context:
     ${retrievedContext || 'No specific project matching this query.'}
-    
+
     Static Knowledge Base Reference:
     - Name: ${VAIBHAV_KNOWLEDGE.personal.name}
     - Role: ${VAIBHAV_KNOWLEDGE.personal.role}
     - Academics: MCA ${VAIBHAV_KNOWLEDGE.academics.postGraduation.currentCGPA} CGPA (latest Sem 3 9.30 SGPA), BSc ${VAIBHAV_KNOWLEDGE.academics.graduation.finalCGPA} CGPA.
     - Achievements: ${VAIBHAV_KNOWLEDGE.achievements.map(a => `${a.title}: ${a.description}`).join(' ')}
     - Hiring Pitch: ${VAIBHAV_KNOWLEDGE.whyHirePitch.headline} ${VAIBHAV_KNOWLEDGE.whyHirePitch.points.join(' ')}
-    
+
     Intent: ${intent}
     ${intentInstruction}
-    
+
     User Question: ${userMessage}`;
 
-    const result = await model.generateContent(prompt);
-    const text = result?.response?.text?.()?.trim();
+const INTENT_INSTRUCTIONS = {
+  project: 'The user is asking about a project. Prioritize concrete outcomes, technical stack, and problem-solving details.',
+  education: 'The user is asking about education. Prioritize verified academic facts, institutions, and achievements.',
+  skills: 'The user is asking about skills or technologies. Focus on listing technologies, tools, libraries, and practical experience. If the retrieved context contains project descriptions, extract and list the technologies used in those projects rather than summarizing the project narrative. Provide versions or experience level if available.',
+  achievements: 'The user is asking about academic, technical, or project achievements. Highlight his outstanding MCA 9.30 CGPA (Winter 2025 Semester 3 9.30 SGPA), BSc 9.08 CGPA, and top system architectures (ShopEase SaaS, GenAI Portfolio). Format as a beautiful clean list.',
+  whyHire: 'The user is asking why they should hire Vaibhav. Give a highly persuasive, elite full-stack developer pitch focusing on his AI/RAG expertise, database mastery (PostgreSQL, Supabase, Redis), high academic success (9.30 MCA CGPA), and functional builder mindset. Include call-to-actions pointing to LinkedIn/GitHub.',
+  general: 'The user is asking a general question. Keep the answer concise, natural, and helpful.',
+};
 
-    if (text && !looksTooGeneric(text)) return text;
+/**
+ * Streams the agent's reply. `onChunk` is invoked with each incremental piece of text
+ * as it arrives from the model, enabling real progressive rendering in the UI.
+ * Resolves to { text, streamed } — streamed is false whenever the final text was not
+ * (fully) delivered via onChunk (greeting/validation shortcuts, or a local-heuristics
+ * fallback triggered after the stream turned out to be empty/too generic).
+ */
+export async function streamMessageToVaibhavAgent(userMessage, onChunk) {
+  if (!userMessage || typeof userMessage !== 'string') {
+    return { text: 'Please provide a short question about Vaibhav — projects, skills, or education.', streamed: false };
+  }
+
+  if (isGreetingMessage(userMessage)) {
+    return { text: buildGreetingReply(), streamed: false };
+  }
+
+  const retrievedContext = await retrievePortfolioContext(userMessage).catch((err) => {
+    console.error('retrievePortfolioContext error:', err);
+    return '';
+  });
+
+  const intent = detectIntent(userMessage);
+  const prompt = buildAgentPrompt(userMessage, retrievedContext, intent, INTENT_INSTRUCTIONS[intent]);
+
+  try {
+    const apiKey = getGeminiApiKey();
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.5-flash' });
+
+    const result = await model.generateContentStream(prompt);
+
+    let fullText = '';
+    for await (const chunk of result.stream) {
+      const chunkText = chunk?.text?.();
+      if (chunkText) {
+        fullText += chunkText;
+        onChunk?.(chunkText);
+      }
+    }
+
+    const text = fullText.trim();
+    if (text && !looksTooGeneric(text)) return { text, streamed: true };
 
     console.warn('Generative model returned weak or empty text — falling back to smart local heuristics.');
   } catch (err) {
     console.error('Generative model error:', err);
   }
 
-  // Trigger our Smart Local Heuristics Fallback Engine
-  return generateLocalSmartResponse(userMessage, retrievedContext);
+  return { text: generateLocalSmartResponse(userMessage, retrievedContext), streamed: false };
+}
+
+export async function sendMessageToVaibhavAgent(userMessage) {
+  const { text } = await streamMessageToVaibhavAgent(userMessage, null);
+  return text;
 }

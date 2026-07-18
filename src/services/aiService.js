@@ -236,7 +236,7 @@ export async function sendMessageToVaibhavAgent(userMessage) {
   try {
     const apiKey = getGeminiApiKey();
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.5-flash' });
 
     const prompt = `You are VL-Agent, an elite full-stack engineer and Vaibhav's witty virtual partner. 
     Answer the user's question dynamically, warmly, and in a clean conversational structure (using paragraph explanations, bold highlights, bullet points, and clear list formatting). 

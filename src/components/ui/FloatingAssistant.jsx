@@ -44,11 +44,13 @@ const FloatingAssistant = () => {
   const [messages, setMessages] = useState(loadStoredMessages);
   const [inputValue, setInputValue] = useState('');
   const [isThinking, setIsThinking] = useState(false);
+  const [thinkingWordIndex, setThinkingWordIndex] = useState(0);
   const [typingMessageId, setTypingMessageId] = useState(null);
   const [typedText, setTypedText] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const fullText = 'Hello';
+  const thinkingWords = ['Thinking', 'Considering', 'Crystallizing'];
 
   const quickPrompts = [
     'What technologies does Vaibhav work with?',
@@ -84,6 +86,20 @@ const FloatingAssistant = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isThinking]);
+
+  useEffect(() => {
+    if (!isThinking) {
+      setThinkingWordIndex(0);
+      return;
+    }
+
+    const rotation = setInterval(() => {
+      setThinkingWordIndex((current) => (current + 1) % thinkingWords.length);
+    }, 900);
+
+    return () => clearInterval(rotation);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isThinking]);
 
   useEffect(() => {
     try {
@@ -128,9 +144,36 @@ const FloatingAssistant = () => {
     clearInterval(typingIntervalRef.current);
   };
 
-  // Reveals `responseText` in small chunks rather than one character at a time.
-  // Chunk size adapts to the response length so long replies still finish in ~2-2.5s
-  // instead of ballooning past 10s, while short replies don't feel needlessly slow.
+  // Reveals `responseText` a few words at a time (not one character at a time) at a
+  // natural reading pace. Used for the canned greeting/error text and as a fallback
+  // when real API streaming didn't happen — never for genuine streamed replies, which
+  // are appended chunk-by-chunk as they actually arrive (see streamAssistantResponse).
+  const WORDS_PER_TICK = 3;
+  const WORD_TICK_MS = 70;
+
+  const revealTextInWords = (responseText, messageId) => {
+    const tokens = responseText.match(/\S+\s*/g) || [responseText];
+
+    let tokenIndex = 0;
+    typingIntervalRef.current = setInterval(() => {
+      tokenIndex = Math.min(tokenIndex + WORDS_PER_TICK, tokens.length);
+      const revealedText = tokens.slice(0, tokenIndex).join('');
+
+      setMessages((currentMessages) =>
+        currentMessages.map((message) =>
+          message.id === messageId
+            ? { ...message, text: revealedText, typing: tokenIndex < tokens.length }
+            : message
+        )
+      );
+
+      if (tokenIndex >= tokens.length) {
+        clearInterval(typingIntervalRef.current);
+        setTypingMessageId(null);
+      }
+    }, WORD_TICK_MS);
+  };
+
   const typeAssistantResponse = (responseText) => {
     clearAssistantTimers();
 
@@ -141,31 +184,7 @@ const FloatingAssistant = () => {
       { id: messageId, role: 'assistant', text: '', typing: true },
     ]);
 
-    const TICK_MS = 15;
-    const TARGET_TICKS = 150;
-    const chunkSize = Math.max(3, Math.ceil(responseText.length / TARGET_TICKS));
-
-    let charIndex = 0;
-    typingIntervalRef.current = setInterval(() => {
-      charIndex = Math.min(charIndex + chunkSize, responseText.length);
-
-      setMessages((currentMessages) =>
-        currentMessages.map((message) =>
-          message.id === messageId
-            ? {
-                ...message,
-                text: responseText.slice(0, charIndex),
-                typing: charIndex < responseText.length,
-              }
-            : message
-        )
-      );
-
-      if (charIndex >= responseText.length) {
-        clearInterval(typingIntervalRef.current);
-        setTypingMessageId(null);
-      }
-    }, TICK_MS);
+    revealTextInWords(responseText, messageId);
   };
 
   // Streams a live agent reply: appends each chunk as it arrives from the model so
@@ -202,35 +221,15 @@ const FloatingAssistant = () => {
       return;
     }
 
-    // No (or only partial) real streaming happened — reveal the final text with the
-    // fast chunked typewriter instead of an abrupt swap.
+    // No (or only partial) real streaming happened — reveal the final text a few
+    // words at a time instead of an abrupt swap.
     setMessages((currentMessages) =>
       currentMessages.map((message) =>
         message.id === messageId ? { ...message, text: '', typing: true } : message
       )
     );
 
-    const TICK_MS = 15;
-    const TARGET_TICKS = 150;
-    const chunkSize = Math.max(3, Math.ceil(text.length / TARGET_TICKS));
-
-    let charIndex = 0;
-    typingIntervalRef.current = setInterval(() => {
-      charIndex = Math.min(charIndex + chunkSize, text.length);
-
-      setMessages((currentMessages) =>
-        currentMessages.map((message) =>
-          message.id === messageId
-            ? { ...message, text: text.slice(0, charIndex), typing: charIndex < text.length }
-            : message
-        )
-      );
-
-      if (charIndex >= text.length) {
-        clearInterval(typingIntervalRef.current);
-        setTypingMessageId(null);
-      }
-    }, TICK_MS);
+    revealTextInWords(text, messageId);
   };
 
   const handleToggleChat = () => {
@@ -295,9 +294,9 @@ const FloatingAssistant = () => {
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
           >
-            <div className="flex w-max items-center gap-2 rounded-full border border-black/5 bg-white/90 px-3 py-1.5 shadow-lg shadow-black/10 backdrop-blur-2xl">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" aria-hidden="true" />
-              <p className="text-[12px] font-medium text-slate-900 whitespace-nowrap">{typedText}</p>
+            <div className="flex w-max items-center gap-2 rounded-full border border-black/5 bg-[#F0EEE6]/95 px-3 py-1.5 shadow-lg shadow-black/10 backdrop-blur-2xl">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#DA7756] animate-pulse" aria-hidden="true" />
+              <p className="text-[12px] font-medium text-[#3D3929] whitespace-nowrap">{typedText}</p>
             </div>
           </motion.div>
         )}
@@ -308,8 +307,8 @@ const FloatingAssistant = () => {
           <motion.div
             className={`fixed inset-y-4 right-4 left-4 sm:inset-y-6 sm:right-6 sm:left-auto sm:w-[min(720px,calc(100vw-3rem))] lg:w-[720px] flex flex-col overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border transition-colors duration-300 backdrop-blur-2xl ${
               isDarkMode
-                ? 'border-slate-800 bg-slate-950/96 text-slate-100 shadow-[0_30px_100px_rgba(0,0,0,0.55)]'
-                : 'border-slate-200/70 bg-white/95 text-slate-800 shadow-[0_30px_100px_rgba(15,23,42,0.18)]'
+                ? 'border-[#F0EEE6]/10 bg-[#262624]/98 text-[#F0EEE6] shadow-[0_30px_100px_rgba(0,0,0,0.55)]'
+                : 'border-[#3D3929]/10 bg-[#F0EEE6]/98 text-[#3D3929] shadow-[0_30px_100px_rgba(61,57,41,0.18)]'
             }`}
             initial={{ opacity: 0, x: 90, scale: 0.98 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -318,12 +317,12 @@ const FloatingAssistant = () => {
           >
             {/* Header */}
             <div className={`flex shrink-0 items-center justify-between gap-4 border-b px-6 py-4 transition-colors duration-300 ${
-              isDarkMode ? 'border-slate-800 bg-slate-950/80' : 'border-slate-200/70 bg-white/80'
+              isDarkMode ? 'border-[#F0EEE6]/10 bg-[#262624]/90' : 'border-[#3D3929]/10 bg-[#F0EEE6]/90'
             }`}>
               <div className="flex min-w-0 items-center gap-2.5">
-                <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+                <span className="h-2 w-2 shrink-0 rounded-full bg-[#DA7756]" aria-hidden="true" />
                 <h2 className={`truncate text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-300 ${
-                  isDarkMode ? 'text-slate-50' : 'text-slate-950'
+                  isDarkMode ? 'text-[#F0EEE6]' : 'text-[#3D3929]'
                 }`}>
                   Vaibhav&apos;s AI Assistant
                 </h2>
@@ -331,15 +330,15 @@ const FloatingAssistant = () => {
 
               <div className="flex shrink-0 items-center gap-1.5">
                 <div className={`flex items-center justify-center gap-0.5 rounded-full border p-0.5 shadow-sm transition-colors duration-300 ${
-                  isDarkMode ? 'border-slate-800 bg-slate-950' : 'border-slate-200 bg-white'
+                  isDarkMode ? 'border-[#F0EEE6]/10 bg-[#262624]' : 'border-[#3D3929]/10 bg-[#F0EEE6]'
                 }`}>
                   <button
                     type="button"
                     onClick={() => setIsDarkMode(false)}
                     className={`flex h-7 w-7 items-center justify-center rounded-full transition cursor-pointer ${
                       !isDarkMode
-                        ? 'bg-violet-50 text-violet-600 shadow-sm font-semibold'
-                        : 'bg-transparent text-slate-500 hover:bg-slate-800 hover:text-slate-300'
+                        ? 'bg-[#DA7756]/15 text-[#DA7756] shadow-sm font-semibold'
+                        : 'bg-transparent text-[#A8A296] hover:bg-[#F0EEE6]/10 hover:text-[#D9D6C9]'
                     }`}
                     title="Light mode"
                     aria-label="Switch to light mode"
@@ -351,8 +350,8 @@ const FloatingAssistant = () => {
                     onClick={() => setIsDarkMode(true)}
                     className={`flex h-7 w-7 items-center justify-center rounded-full transition cursor-pointer ${
                       isDarkMode
-                        ? 'bg-violet-950 text-violet-300 shadow-sm border border-violet-800/30'
-                        : 'bg-transparent text-slate-400 hover:bg-slate-100 hover:text-slate-700'
+                        ? 'bg-[#DA7756]/20 text-[#DA7756] shadow-sm border border-[#DA7756]/30'
+                        : 'bg-transparent text-[#6B6656] hover:bg-[#3D3929]/8 hover:text-[#3D3929]'
                     }`}
                     title="Dark mode"
                     aria-label="Switch to dark mode"
@@ -367,8 +366,8 @@ const FloatingAssistant = () => {
                   disabled={messages.length === 0}
                   className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 ${
                     isDarkMode
-                      ? 'border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-slate-50'
-                      : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-950'
+                      ? 'border-[#F0EEE6]/10 bg-[#2F2F2C] text-[#D9D6C9] hover:bg-[#3A3A36] hover:text-[#F0EEE6]'
+                      : 'border-[#3D3929]/10 bg-[#F0EEE6] text-[#5B5647] hover:bg-[#E8E4D9] hover:text-[#3D3929]'
                   }`}
                   aria-label="Clear conversation"
                   title="Clear conversation"
@@ -381,8 +380,8 @@ const FloatingAssistant = () => {
                   onClick={() => setIsOpen(false)}
                   className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition cursor-pointer ${
                     isDarkMode
-                      ? 'border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-slate-50'
-                      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-950'
+                      ? 'border-[#F0EEE6]/10 bg-[#2F2F2C] text-[#D9D6C9] hover:bg-[#3A3A36] hover:text-[#F0EEE6]'
+                      : 'border-[#3D3929]/10 bg-[#F0EEE6] text-[#5B5647] hover:bg-[#E8E4D9] hover:text-[#3D3929]'
                   }`}
                   aria-label="Close chat"
                 >
@@ -393,13 +392,11 @@ const FloatingAssistant = () => {
 
             {/* Messages */}
             <div className={`flex-1 min-h-0 overflow-y-auto px-5 py-7 sm:px-8 transition-colors duration-300 ${
-              isDarkMode ? 'bg-slate-950' : 'bg-white'
+              isDarkMode ? 'bg-[#262624]' : 'bg-[#F0EEE6]'
             }`}>
               {messages.length === 0 && !isThinking && (
-                <div className={`mb-5 max-w-[560px] rounded-[1.25rem] border px-5 py-4 text-[15px] leading-7 shadow-sm transition-colors duration-300 ${
-                  isDarkMode
-                    ? 'border-slate-800 bg-slate-900/60 text-slate-300'
-                    : 'border-slate-200/70 bg-slate-50 text-slate-600'
+                <div className={`mb-5 max-w-[560px] text-[15px] leading-7 transition-colors duration-300 ${
+                  isDarkMode ? 'text-[#D9D6C9]' : 'text-[#3D3929]'
                 }`}>
                   {greetingText}
                 </div>
@@ -407,52 +404,43 @@ const FloatingAssistant = () => {
               <div className="space-y-5">
                 {messages.map((message) => (
                   <div key={message.id} className={`flex items-start ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[min(100%,560px)] rounded-[1.35rem] px-5 py-3.5 shadow-sm transition-all duration-300 ${
-                      message.role === 'user'
-                        ? isDarkMode
-                          ? 'rounded-br-md bg-gradient-to-br from-violet-700 to-indigo-600 text-white'
-                          : 'rounded-br-md bg-gradient-to-br from-violet-600 to-indigo-500 text-white'
-                        : isDarkMode
-                          ? 'rounded-bl-md bg-slate-900/80 text-slate-100'
-                          : 'rounded-bl-md bg-slate-100 text-slate-800'
-                    }`}>
-                      {message.role === 'user' ? (
+                    {message.role === 'user' ? (
+                      <div className={`max-w-[min(100%,560px)] rounded-[1.35rem] rounded-br-md px-5 py-3.5 shadow-sm transition-all duration-300 ${
+                        isDarkMode ? 'bg-[#40403D] text-[#F5F4EE]' : 'bg-[#30302E] text-[#F5F4EE]'
+                      }`}>
                         <span className="whitespace-pre-wrap text-[15px] leading-7 font-medium">
                           {message.text}
                         </span>
-                      ) : (
-                        <div className="w-full select-text">
-                          {message.typing ? (
-                            <p className={`whitespace-pre-wrap mb-0 leading-7 text-[14px] sm:text-[14.5px] font-medium ${
-                              isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                            }`}>
-                              {message.text}
-                              <span
-                                className={`typing-cursor inline-block w-[2px] h-[1em] -mb-[2px] ml-0.5 align-text-bottom ${
-                                  isDarkMode ? 'bg-violet-400' : 'bg-violet-600'
-                                }`}
-                              />
-                            </p>
-                          ) : (
-                            <MarkdownRenderer text={message.text} isDarkMode={isDarkMode} />
-                          )}
-                        </div>
-                      )}
-                    </div>
+                      </div>
+                    ) : (
+                      <div className="w-full max-w-[min(100%,560px)] select-text">
+                        {message.typing ? (
+                          <p className={`whitespace-pre-wrap mb-0 leading-7 text-[14px] sm:text-[14.5px] font-medium ${
+                            isDarkMode ? 'text-[#D9D6C9]' : 'text-[#3D3929]'
+                          }`}>
+                            {message.text}
+                            <span
+                              className={`typing-cursor inline-block w-[2px] h-[1em] -mb-[2px] ml-0.5 align-text-bottom ${
+                                isDarkMode ? 'bg-[#E38A66]' : 'bg-[#DA7756]'
+                              }`}
+                            />
+                          </p>
+                        ) : (
+                          <MarkdownRenderer text={message.text} isDarkMode={isDarkMode} />
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
 
                 {isThinking && (
                   <div className="flex items-start">
-                    <div className={`rounded-[1.35rem] rounded-bl-md px-5 py-3.5 text-[15px] font-medium shadow-sm transition-colors duration-300 ${
-                      isDarkMode
-                        ? 'bg-slate-900/80 text-slate-300'
-                        : 'bg-slate-100 text-slate-600'
-                    }`}>
-                      <span className="inline-flex items-center gap-1">
-                        <span className={`h-1.5 w-1.5 animate-bounce rounded-full ${isDarkMode ? 'bg-slate-500' : 'bg-slate-400'}`} style={{ animationDelay: '0ms' }} />
-                        <span className={`h-1.5 w-1.5 animate-bounce rounded-full ${isDarkMode ? 'bg-slate-500' : 'bg-slate-400'}`} style={{ animationDelay: '120ms' }} />
-                        <span className={`h-1.5 w-1.5 animate-bounce rounded-full ${isDarkMode ? 'bg-slate-500' : 'bg-slate-400'}`} style={{ animationDelay: '240ms' }} />
+                    <div className="flex items-center gap-2.5 py-1">
+                      <span className="thinking-dot inline-block h-2 w-2 shrink-0 rounded-full bg-[#DA7756]" aria-hidden="true" />
+                      <span className={`text-[14.5px] font-medium transition-colors duration-300 ${
+                        isDarkMode ? 'text-[#D9D6C9]' : 'text-[#5B5647]'
+                      }`}>
+                        {thinkingWords[thinkingWordIndex]}
                       </span>
                     </div>
                   </div>
@@ -464,10 +452,10 @@ const FloatingAssistant = () => {
 
             {/* Composer */}
             <div className={`shrink-0 border-t px-5 py-5 sm:px-8 transition-colors duration-300 ${
-              isDarkMode ? 'border-slate-800 bg-slate-950/95' : 'border-slate-200/80 bg-white/95'
+              isDarkMode ? 'border-[#F0EEE6]/10 bg-[#262624]/95' : 'border-[#3D3929]/10 bg-[#F0EEE6]/95'
             }`}>
               <div className="mb-4 flex flex-col gap-2 shrink-0">
-                <div className="flex items-center gap-2 text-violet-600">
+                <div className="flex items-center gap-2 text-[#DA7756]">
                   <Sparkles className="h-3.5 w-3.5 shrink-0" />
                   <p className="text-[13px] font-medium">You can also ask</p>
                 </div>
@@ -479,8 +467,8 @@ const FloatingAssistant = () => {
                       onClick={() => handleQuickPrompt(prompt)}
                       className={`shrink-0 rounded-full border px-4 py-2 text-[13px] font-medium transition whitespace-nowrap cursor-pointer ${
                         isDarkMode
-                          ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-violet-800/50 hover:bg-violet-950/40 hover:text-violet-300'
-                          : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700'
+                          ? 'border-[#F0EEE6]/10 bg-[#2F2F2C] text-[#D9D6C9] hover:border-[#DA7756]/40 hover:bg-[#DA7756]/10 hover:text-[#E38A66]'
+                          : 'border-[#3D3929]/10 bg-[#E8E4D9] text-[#5B5647] hover:border-[#DA7756]/40 hover:bg-[#DA7756]/10 hover:text-[#C1633F]'
                       }`}
                     >
                       {prompt}
@@ -491,7 +479,7 @@ const FloatingAssistant = () => {
 
               <form
                 className={`flex items-center gap-2 rounded-full border pl-4 pr-1.5 py-1.5 shadow-sm transition-colors duration-300 ${
-                  isDarkMode ? 'border-slate-800 bg-slate-900/60' : 'border-slate-200 bg-slate-50'
+                  isDarkMode ? 'border-[#F0EEE6]/10 bg-[#2F2F2C]' : 'border-[#3D3929]/10 bg-[#E8E4D9]'
                 }`}
                 onSubmit={async (event) => {
                   event.preventDefault();
@@ -503,7 +491,7 @@ const FloatingAssistant = () => {
                     type="text"
                     placeholder="Ask me anything..."
                     className={`w-full bg-transparent text-base font-medium outline-none transition-colors duration-300 ${
-                      isDarkMode ? 'text-slate-50 placeholder:text-slate-500' : 'text-slate-950 placeholder:text-slate-400'
+                      isDarkMode ? 'text-[#F0EEE6] placeholder:text-[#8A8579]' : 'text-[#3D3929] placeholder:text-[#8A8579]'
                     }`}
                     value={inputValue}
                     onChange={(event) => setInputValue(event.target.value)}
@@ -515,7 +503,7 @@ const FloatingAssistant = () => {
                   onClick={async () => {
                     await sendMessageFromText();
                   }}
-                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-500 text-white shadow-md transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#DA7756] text-white shadow-md transition-transform hover:scale-[1.02] hover:bg-[#C1633F] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
                   aria-label="Send message"
                   disabled={isThinking || Boolean(typingMessageId) || !inputValue.trim()}
                 >
@@ -524,7 +512,7 @@ const FloatingAssistant = () => {
               </form>
 
               <div className={`mt-3 flex items-center justify-between gap-3 px-1 text-[11px] font-medium transition-colors duration-300 ${
-                isDarkMode ? 'text-slate-500' : 'text-slate-400'
+                isDarkMode ? 'text-[#8A8579]' : 'text-[#8A8579]'
               }`}>
                 <span>AI responses may vary. Please verify important information.</span>
                 <span className="hidden items-center gap-1 sm:inline-flex">

@@ -25,14 +25,14 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
     html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
     // 3. Inline code: `code`
-    const codeClass = isDarkMode 
-      ? 'bg-slate-800/80 text-violet-300 font-mono text-[13px] px-1.5 py-0.5 rounded border border-slate-700/50'
-      : 'bg-violet-50 text-violet-700 font-mono text-[13px] px-1.5 py-0.5 rounded border border-violet-100/70';
+    const codeClass = isDarkMode
+      ? 'bg-[#3A3733] text-[#E8A184] font-mono text-[13px] px-1.5 py-0.5 rounded border border-[#F0EEE6]/10'
+      : 'bg-[#E8E4D9] text-[#B65C3D] font-mono text-[13px] px-1.5 py-0.5 rounded border border-[#3D3929]/10';
     html = html.replace(/`([^`]+)`/g, `<code class="${codeClass}">$1</code>`);
 
     const linkClass = isDarkMode
-      ? 'text-violet-400 font-semibold underline hover:text-violet-300 transition-colors cursor-pointer'
-      : 'text-violet-600 font-semibold underline hover:text-violet-700 transition-colors cursor-pointer';
+      ? 'text-[#E38A66] font-semibold underline hover:text-[#EFA484] transition-colors cursor-pointer'
+      : 'text-[#DA7756] font-semibold underline hover:text-[#C1633F] transition-colors cursor-pointer';
 
     // 4. Markdown Links: [text](url) -> temporarily replace with placeholders to avoid matching their URLs as bare URLs
     const placeholders = [];
@@ -79,7 +79,7 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
           {currentListItems.map((item, idx) => (
             <li 
               key={`li-${idx}`} 
-              className={`pl-1 text-[14px] sm:text-[14.5px] font-medium leading-6 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}
+              className={`pl-1 text-[14px] sm:text-[14.5px] font-medium leading-6 ${isDarkMode ? 'text-[#D9D6C9]' : 'text-[#3D3929]'}`}
               dangerouslySetInnerHTML={{ __html: parseInline(item) }}
             />
           ))}
@@ -91,7 +91,7 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
           {currentListItems.map((item, idx) => (
             <li 
               key={`li-${idx}`} 
-              className={`pl-1 text-[14px] sm:text-[14.5px] font-medium leading-6 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}
+              className={`pl-1 text-[14px] sm:text-[14.5px] font-medium leading-6 ${isDarkMode ? 'text-[#D9D6C9]' : 'text-[#3D3929]'}`}
               dangerouslySetInnerHTML={{ __html: parseInline(item) }}
             />
           ))}
@@ -119,7 +119,7 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
       elements.push(
         <hr 
           key={`hr-${i}`} 
-          className={`my-5 border-t ${isDarkMode ? 'border-slate-800' : 'border-slate-200'}`} 
+          className={`my-5 border-t ${isDarkMode ? 'border-[#F0EEE6]/10' : 'border-[#3D3929]/10'}`}
         />
       );
       continue;
@@ -132,7 +132,7 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
       const level = headingMatch[1].length;
       const headingText = headingMatch[2];
       
-      const headingStyle = isDarkMode ? 'text-slate-100 font-bold tracking-tight' : 'text-slate-900 font-bold tracking-tight';
+      const headingStyle = isDarkMode ? 'text-[#F0EEE6] font-bold tracking-tight' : 'text-[#2B2820] font-bold tracking-tight';
       
       if (level === 1) {
         elements.push(
@@ -181,7 +181,7 @@ export const MarkdownRenderer = ({ text, isDarkMode }) => {
     elements.push(
       <p 
         key={`p-${i}`} 
-        className={`mb-4.5 leading-7 text-[14px] sm:text-[14.5px] font-medium last:mb-0 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}
+        className={`mb-4.5 leading-7 text-[14px] sm:text-[14.5px] font-medium last:mb-0 ${isDarkMode ? 'text-[#D9D6C9]' : 'text-[#3D3929]'}`}
         dangerouslySetInnerHTML={{ __html: parseInline(line) }}
       />
     );

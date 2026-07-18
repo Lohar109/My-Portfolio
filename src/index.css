@@ -44,7 +44,7 @@ button:focus, button:active, button:focus-visible {
 
 /* AI Assistant Markdown Links specific overrides */
 .markdown-body.light-links a {
-  color: #6d28d9 !important; /* Premium rich violet-700 */
+  color: #DA7756 !important; /* Claude-style terracotta accent */
   text-decoration: underline !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -52,12 +52,12 @@ button:focus, button:active, button:focus-visible {
 }
 
 .markdown-body.light-links a:hover {
-  color: #4f46e5 !important; /* Indigo-600 */
+  color: #C1633F !important; /* Darker terracotta */
   opacity: 0.85;
 }
 
 .markdown-body.dark-links a {
-  color: #a78bfa !important; /* Soft violet-400 */
+  color: #E38A66 !important; /* Softer terracotta for dark backgrounds */
   text-decoration: underline !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -65,7 +65,7 @@ button:focus, button:active, button:focus-visible {
 }
 
 .markdown-body.dark-links a:hover {
-  color: #c084fc !important; /* Purple-400 */
+  color: #EFA484 !important; /* Lighter terracotta */
   opacity: 0.85;
 }
 
@@ -237,6 +237,16 @@ button:focus, button:active, button:focus-visible {
 
 .typing-cursor {
   animation: typing-caret-blink 0.9s step-end infinite;
+}
+
+/* Pulsing accent dot for the AI assistant's "Thinking..." indicator */
+@keyframes thinking-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.thinking-dot {
+  animation: thinking-pulse 1.1s ease-in-out infinite;
 }
 
 .anim-delay-100 { animation-delay: 100ms; }

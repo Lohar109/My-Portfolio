@@ -41,7 +41,7 @@ function SiteHeader() {
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-lg">
-      <div className="mx-auto w-full max-w-7xl px-16 py-4 md:px-24">
+      <div className="mx-auto w-full max-w-7xl px-6 py-4 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between gap-8">
           {/* Logo */}
           <motion.div

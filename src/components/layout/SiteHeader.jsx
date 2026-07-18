@@ -87,7 +87,7 @@ function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             onClick={() => setIsOpen(!isOpen)}
-            className="flex flex-col gap-1.5 md:hidden"
+            className="flex flex-col gap-1.5 p-3.5 -m-3.5 md:hidden"
             aria-label="Toggle menu"
           >
             <motion.span
